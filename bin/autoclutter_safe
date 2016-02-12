@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PID=$(pgrep -x autoclutter)
+
+[[ "$PID" -ne "" ]] && kill $PID
+exec autoclutter

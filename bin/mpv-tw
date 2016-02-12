@@ -1,0 +1,14 @@
+#!/bin/bash
+
+player=mpv
+
+if [[ "$#" -lt 1 ]]; then
+    echo "Usage: ${0##*/} url [player]"
+    exit 1
+fi
+
+if [[ "$#" -ge 2 ]]; then
+    player="$3"
+fi
+
+livestreamer "http://www.twitch.tv/$1" best -p "$player"

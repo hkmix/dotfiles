@@ -1,0 +1,43 @@
+#!/bin/bash
+
+backup="$HOME/.backup"
+backup_loc="$HOME/Drive/Backup/dotfiles"
+
+do_sort="yes"
+do_backup="no"
+
+if [[ "$#" -lt 1 || "$1" == "--help" ]]; then
+    echo "Usage: ${0##*/} [-g] [-n] [FILE]..."
+    echo "  -g: Perform backup copying after adding"
+    echo "  -n: Do not sort/uniq backup file after adding"
+    echo "  -s: Sort/uniq backup file"
+    [[ "$#" -lt 1 ]] && exit 1 || exit 0
+fi
+
+for file in "$@"; do
+    case "$file" in
+        "-n")
+            do_sort="no"
+            ;;
+        "-g")
+            do_backup="yes"
+            ;;
+        "-s")
+            do_sort="yes"
+            ;;
+        *)
+            fileloc=$(readlink -e "$file")
+            echo "Adding ""$fileloc"
+            echo $fileloc >> "$backup"
+    esac
+done
+
+if [[ "$do_sort" == "yes" ]]; then
+    echo "Sorting backup files"
+    sort "$backup" -u -o "$backup"
+fi
+
+if [[ "$do_backup" == "yes" && -f "$backup" ]]; then
+    backup_file=$(date +"%Y%m%d-%H%M%S.tar.gz")
+    xargs --arg-file="$backup" tar -cvpzf "$backup_loc/$backup_file" "$backup" 2>"/tmp/backup.${RANDOM}.log"
+fi

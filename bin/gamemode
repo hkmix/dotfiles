@@ -1,0 +1,9 @@
+#!/bin/bash
+
+killall -e redshift-scheduler
+killall -e compton
+
+read -n1 -p "Hit any key to finish up."
+
+redshift-scheduler &
+compton &

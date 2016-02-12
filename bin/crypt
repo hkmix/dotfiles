@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mv -v ~/.thumbnails ~/.thumbnails.bak
+mv -v ~/.cache/thumbnails ~/.cache/thumbnails.bak
+ln -vs /dev/null ~/.thumbnails
+ln -vs /dev/null ~/.local/share/thumbnails
+ln -vs /dev/null ~/.cache/thumbnails
+
+truecrypt
+
+rm -v ~/.cache/thumbnails
+rm -v ~/.local/share/thumbnails
+rm -v ~/.thumbnails
+mv -v ~/.thumbnails.bak ~/.thumbnails
+mv -v ~/.cache/thumbnails.bak ~/.cache/thumbnails

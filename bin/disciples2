@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export WINEPREFIX=$HOME/.wine-disciples
+cd "/home/jackzhou/.wine-disciples/drive_c/GOG Games/Disciples 2 Gold/Disciples 2 - Dark Prophecy and Gallean's Return"
+wine Discipl2.exe

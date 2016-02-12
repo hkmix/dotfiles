@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ "$#" -lt 1 || "$#" -gt 2 ||  "$1" == "--help" ]]; then
+    echo "Usage: ${0##*/} INPUT [OUTPUT]"
+    echo "If output file not specified, input name is used."
+    [[ "$1" == "--help" ]] && exit 0 || exit 1
+fi
+
+if [[ "$#" -eq 1 ]]; then
+    vim -c "hardcopy > $1.ps" -c quit "$1"
+    ps2pdf "$1.ps"
+else
+    vim -c "hardcopy > $2" -c quit "$1"
+    ps2pdf "$2"
+fi

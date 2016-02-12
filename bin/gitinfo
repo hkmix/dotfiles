@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git_branch=$(git status 2>/dev/null | grep 'On branch' | sed 's/On branch //')
+
+if [[ $git_branch != "" ]]; then
+    modified=$(git status 2>/dev/null | grep '^Changes' | head -n1 | sed 's/.*/*/')
+    echo " ($git_branch$modified)"
+fi

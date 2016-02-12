@@ -1,0 +1,7 @@
+#!/bin/bash
+
+files=$(find ~/.tmux/resurrect -iname "tmux_resurrect*" | sort -rh | tail -n+2 | xargs)
+
+[[ "$files" != "" ]] && rm -v $files || echo "No cleanup needed"
+
+echo "Last is $(realpath ~/.tmux/resurrect/last)"

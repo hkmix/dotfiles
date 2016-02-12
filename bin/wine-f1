@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export WINEARCH=win32
+export WINEPREFIX=$HOME/.wine-d2
+cd $WINEPREFIX/drive_c/GOG\ Games/Fallout
+wine "falloutwHR.exe"

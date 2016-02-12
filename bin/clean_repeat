@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Set appropriate alias handling scheme
+shopt -s expand_aliases
+
+# Load necessary aliases
+source $HOME/.primate_aliases.zsh
+. $HOME/.primate_aliases.zsh
+
+if [[ "$#" -le 3 ]]; then
+  echo "Usage: ${0##*/} repetitions command"
+  exit 1
+fi
+
+output=""
+for ((n = 0; n < $1; n++)); do
+  echo "$(${@:2})"
+done
+
+# echo $output

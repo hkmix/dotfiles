@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xbacklight -inc 5
+xbacklight > ~/.xbacklight

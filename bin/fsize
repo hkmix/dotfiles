@@ -1,0 +1,11 @@
+#!/bin/bash
+
+font="InputMonoCondensed"
+
+if [[ "$#" -ne 1 ]]; then
+    echo "Usage: ${0##*/} font-size"
+    exit 1
+fi
+printf '\33]50;%s\007' "xft:$font:size=$1"
+sleep 1
+echo "New dimensions: $(tput cols)x$(tput lines)"
