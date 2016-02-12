@@ -10,18 +10,16 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --omnisharp-completer --gocode-completer'}
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --system-boost --gocode-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
 Plug 'bling/vim-airline'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
-Plug 'hkmix/vim-george'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kassio/neoterm'
@@ -39,8 +37,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 
 call plug#end()
 
@@ -52,13 +49,14 @@ syntax on
 set autoindent
 set expandtab
 set smarttab
-" set sts=4
-" set sw=4
-" set ts=4
+set sts=4
+set sw=4
+set ts=4
 
 set backspace=indent,eol,start
 set breakindent
 set complete-=1
+set completeopt-=preview
 set cursorline
 set foldmethod=marker
 set ignorecase
@@ -100,13 +98,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType george nnoremap <Leader>gc :GeorgeCheck<CR>
 autocmd FileType markdown setlocal spell
-autocmd! BufWritePost * Neomake
-autocmd! BufRead * Neomake
+autocmd BufWritePost * Neomake
+autocmd BufRead * Neomake
 autocmd BufReadPost quickfix nnoremap <space> :ccl<CR>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 autocmd BufRead,BufNewFile *.cal call SetupCal()
-function SetupCal()
+function! SetupCal()
     nnoremap <Leader>eq 0yf=Iprint "<C-R>"", <Esc>
     :Tnew
     :Tmap clear; calcprint <C-R>=expand("%")<CR>
@@ -151,13 +149,24 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Other settings
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
 let g:airline#extensions#wordcount#enabled = 0
+let g:airline_left_sep = ''
+let g:airline_powerline_fonts = 1
+let g:airline_right_sep = ''
+let g:delimitMate_expand_cr = 2
+let g:delimitMate_expand_space = 1
+let g:delimitMate_matchpairs = "(:),[:],{:}"
+let g:easytags_async = 1
+let g:easytags_auto_highlight = 0
+let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
+let g:neomake_verbose = 0
+let g:neoterm_automap_keys = '<Leader>tt'
+let g:neoterm_position = 'vertical'
 let g:vimtex_fold_enabled = 0
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
-let g:neomake_verbose = 0
+
+" Neomake settings
 let g:neomake_error_sign = {
     \ 'text': 'E>',
     \ 'texthl': 'ErrorMsg',
@@ -166,17 +175,6 @@ let g:neomake_warning_sign = {
     \ 'text': 'W>',
     \ 'texthl': 'WarningMsg',
     \ }
-let g:neoterm_position = 'vertical'
-let g:neoterm_automap_keys = '<Leader>tt'
-let g:delimitMate_expand_cr = 2
-let g:delimitMate_expand_space = 1
-let g:EclimScalaValidate = 0
-let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimValidateSortResults = 'severity'
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
-let g:delimitMate_matchpairs = "(:),[:],{:}"
-let g:easytags_async = 1
 
 " Fixes for C-h
 if has ('nvim')

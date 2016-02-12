@@ -48,10 +48,6 @@ alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; 
 # Classes
 # none
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fortune -so | cowsay -f bunny
-
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
 }
