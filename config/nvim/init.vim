@@ -10,7 +10,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --system-boost --gocode-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
 Plug 'bling/vim-airline'
