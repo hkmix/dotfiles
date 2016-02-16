@@ -6,7 +6,7 @@ promptinit
 colors
 
 # For OS X to get default bindings
-PATH="/usr/local/Cellar:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:$HOME/.bin:$PATH"
+PATH="/usr/local/Cellar:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:$HOME/.local/bin:$HOME/.bin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
@@ -56,3 +56,5 @@ precmd() {
 }
 
 NEWLINE=$'\n'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

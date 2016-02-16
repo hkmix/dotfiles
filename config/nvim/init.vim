@@ -1,3 +1,4 @@
+" Auto-install vim-plug if needed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,13 +10,15 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/vimproc'
+Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
 Plug 'bling/vim-airline'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
+Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
+Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
@@ -97,6 +100,7 @@ endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
 autocmd FileType george nnoremap <Leader>gc :GeorgeCheck<CR>
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType markdown setlocal spell
 autocmd BufWritePost * Neomake
 autocmd BufRead * Neomake
@@ -165,6 +169,7 @@ let g:neoterm_automap_keys = '<Leader>tt'
 let g:neoterm_position = 'vertical'
 let g:vimtex_fold_enabled = 0
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Neomake settings
 let g:neomake_error_sign = {
