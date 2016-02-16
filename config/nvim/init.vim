@@ -185,7 +185,7 @@ let g:vimtex_fold_enabled = 0
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
 let g:ycm_confirm_extra_conf = 0
 
 " Neomake settings
