@@ -57,4 +57,5 @@ precmd() {
 
 NEWLINE=$'\n'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -e "~/.fzf.zsh" ]] && source ~/.fzf.zsh
+[[ -e "~/.primate_aliases.zsh" ]] && . ~/.primate_aliases.zsh
