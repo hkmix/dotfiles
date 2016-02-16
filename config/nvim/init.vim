@@ -26,12 +26,16 @@ Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kassio/neoterm'
-Plug 'lervag/vimtex'
+Plug 'kentaroi/cocoa.vim', {'for': ['objc', 'objcpp']}
+Plug 'lervag/vimtex', {'for': ['plaintex', 'latex', 'tex']}
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'petRUShka/vim-opencl', {'for': ['opencl', 'cl']}
+Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -40,7 +44,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
 call plug#end()
 
@@ -61,7 +65,7 @@ set breakindent
 set complete-=1
 set completeopt-=preview
 set cursorline
-set foldmethod=marker
+set foldmethod=manual
 set ignorecase
 set incsearch
 set laststatus=2
@@ -107,7 +111,9 @@ autocmd BufRead * Neomake
 autocmd BufReadPost quickfix nnoremap <space> :ccl<CR>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
+autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
 autocmd BufRead,BufNewFile *.cal call SetupCal()
+autocmd CompleteDone * silent! pclose
 function! SetupCal()
     nnoremap <Leader>eq 0yf=Iprint "<C-R>"", <Esc>
     :Tnew
@@ -125,11 +131,16 @@ nnoremap <silent> k gk
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
 nnoremap <silent> <space> :nohlsearch<CR>zz
+nnoremap <silent> <Leader><space> :nohlsearch<CR>
 nnoremap Q <Nop>
 nnoremap N Nzz
 nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
+
+" difftool mappings
+nnoremap <Leader>lo :diffget LOCAL<CR>
+nnoremap <Leader>re :diffget REMOTE<CR>
 
 " Other mappings
 nnoremap <Leader>ccp :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
@@ -144,11 +155,9 @@ nnoremap <Leader>gor :GoRun<CR>
 nnoremap <Leader>god :GoDef<CR>
 nnoremap <Leader>got :GoTest<CR>
 nnoremap <Leader>g? :GoDoc<CR>
-nnoremap <F8> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 nnoremap <Leader>s :TREPLSend<CR>
 nnoremap <Leader>v :Validate<CR>
-nnoremap <Leader>tt :TREPLSend<CR>
-vnoremap <Leader>tt :TREPLSend<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
@@ -164,12 +173,20 @@ let g:easytags_async = 1
 let g:easytags_auto_highlight = 0
 let g:gitgutter_eager = 0
 let g:gitgutter_realtime = 0
+let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
+let g:neomake_cpp_enabled_makers = []
 let g:neomake_verbose = 0
 let g:neoterm_automap_keys = '<Leader>tt'
 let g:neoterm_position = 'vertical'
+let g:tagbar_compact = 1
+let g:tagbar_iconchars = ['▸', '▾']
+let g:tagbar_show_visibility = 1
 let g:vimtex_fold_enabled = 0
+let g:ycm_open_loclist_on_ycm_diags = 1
+let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_confirm_extra_conf = 0
 
 " Neomake settings
 let g:neomake_error_sign = {
