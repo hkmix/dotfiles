@@ -102,27 +102,17 @@ if has('gui_running')
 endif
 
 " Autocommands
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-autocmd FileType george nnoremap <Leader>gc :GeorgeCheck<CR>
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd FileType markdown setlocal spell
-autocmd BufWritePost * Neomake
-autocmd BufRead * Neomake
-autocmd BufReadPost quickfix nnoremap <space> :ccl<CR>
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
-autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
-autocmd BufRead,BufNewFile *.cal call SetupCal()
-autocmd CompleteDone * silent! pclose
-function! SetupCal()
-    nnoremap <Leader>eq 0yf=Iprint "<C-R>"", <Esc>
-    :Tnew
-    :Tmap clear; calcprint <C-R>=expand("%")<CR>
-    autocmd BufWritePost <buffer> execute("normal ,tt")
-endfunction
+augroup general
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd BufWritePost * Neomake
+    autocmd BufRead * Neomake
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+    autocmd CompleteDone * silent! pclose
+augroup END
 
-" Mappings
+" General mappings
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
@@ -139,23 +129,75 @@ nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 
+" Language-specific groups
+augroup filetype_c
+    autocmd!
+    autocmd FileType c nnoremap <Leader>cc :!clear && compile c % "-Wall -std=c99" "-o $(basename % .c)" && ./"$(basename % .c)"<CR>
+augroup END
+
+augroup filetype_cal
+    autocmd!
+    autocmd BufRead,BufNewFile *.cal call SetupCal()
+augroup END
+function! SetupCal()
+    nnoremap <buffer> <Leader>eq 0yf=Iprint "<C-R>"", <Esc>
+    :Tnew
+    :Tmap clear; calcprint <C-R>=expand("%")<CR>
+    autocmd BufWritePost <buffer> execute("normal ,tt")
+endfunction
+
+augroup filetype_cpp
+    autocmd!
+    autocmd FileType cpp nnoremap <buffer> <Leader>cc :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cpp<CR>
+augroup END
+
+augroup filetype_objcpp
+    autocmd!
+    autocmd FileType objcpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
+    autocmd FileType objcpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
+    autocmd FileType objcpp nnoremap <buffer> <Leader>vc :vsp %<.cpp<CR>
+    autocmd FileType objcpp nnoremap <buffer> <Leader>xc :sp %<.cpp<CR>
+    autocmd FileType george nnoremap <buffer> <Leader>gc :GeorgeCheck<CR>
+    autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl<CR>
+augroup END
+
+augroup filetype_go
+    autocmd!
+    autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
+    autocmd FileType go nnoremap <Leader>gor :GoRun<CR>
+    autocmd FileType go nnoremap <Leader>god :GoDef<CR>
+    autocmd FileType go nnoremap <Leader>got :GoTest<CR>
+    autocmd FileType go nnoremap <Leader>g? :GoDoc<CR>
+augroup END
+
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup END
+
+augroup filetype_markdown
+    autocmd!
+    autocmd FileType markdown setlocal spell
+augroup END
+
+augroup filetype_metal
+    autocmd!
+    autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
+augroup END
+
 " difftool mappings
 nnoremap <Leader>lo :diffget LOCAL<CR>
 nnoremap <Leader>re :diffget REMOTE<CR>
-
-" Other mappings
-nnoremap <Leader>ccp :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
-nnoremap <Leader>ccc :!clear && compile c % "-Wall -std=c99" "-o $(basename % .c)" && ./"$(basename % .c)"<CR>
 
 " Plugin mappings
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
-nnoremap <Leader>gor :GoRun<CR>
-nnoremap <Leader>god :GoDef<CR>
-nnoremap <Leader>got :GoTest<CR>
-nnoremap <Leader>g? :GoDoc<CR>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <Leader>s :TREPLSend<CR>
 nnoremap <Leader>v :Validate<CR>
@@ -191,13 +233,13 @@ let g:ycm_confirm_extra_conf = 0
 
 " Neomake settings
 let g:neomake_error_sign = {
-    \ 'text': 'E>',
-    \ 'texthl': 'ErrorMsg',
-    \ }
+            \ 'text': 'E>',
+            \ 'texthl': 'ErrorMsg',
+            \ }
 let g:neomake_warning_sign = {
-    \ 'text': 'W>',
-    \ 'texthl': 'WarningMsg',
-    \ }
+            \ 'text': 'W>',
+            \ 'texthl': 'WarningMsg',
+            \ }
 
 " Fixes for C-h
 if has ('nvim')
