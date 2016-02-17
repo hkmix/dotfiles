@@ -23,6 +23,7 @@ Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
+Plug 'google/vim-searchindex'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kassio/neoterm'
