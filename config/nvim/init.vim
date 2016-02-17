@@ -121,8 +121,8 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
-nnoremap <silent> <space> :nohlsearch<CR>zz
-nnoremap <silent> <Leader><space> :nohlsearch<CR>
+nnoremap <silent> <space> :nohlsearch<CR>
+nnoremap <silent> <Leader><space> :nohlsearch<CR>zz
 nnoremap Q <Nop>
 nnoremap N Nzz
 nnoremap n nzz
@@ -168,10 +168,11 @@ augroup END
 augroup filetype_go
     autocmd!
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
-    autocmd FileType go nnoremap <Leader>gor :GoRun<CR>
-    autocmd FileType go nnoremap <Leader>god :GoDef<CR>
-    autocmd FileType go nnoremap <Leader>got :GoTest<CR>
-    autocmd FileType go nnoremap <Leader>g? :GoDoc<CR>
+    autocmd FileType go nnoremap <buffer> <Leader>gor :GoRun<CR>
+    autocmd FileType go nnoremap <buffer> <Leader>god :GoDef<CR>
+    autocmd FileType go nnoremap <buffer> <Leader>got :GoTest<CR>
+    autocmd FileType go nnoremap <buffer> <Leader>g? :GoDoc<CR>
+    autocmd BufWritePost <buffer> :GoFmt<CR>
 augroup END
 
 augroup filetype_haskell
