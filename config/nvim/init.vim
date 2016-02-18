@@ -14,7 +14,6 @@ Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
-Plug 'bling/vim-airline'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
@@ -24,6 +23,7 @@ Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kassio/neoterm'
@@ -206,10 +206,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Other settings
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline_left_sep = ''
-let g:airline_powerline_fonts = 1
-let g:airline_right_sep = ''
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_matchpairs = "(:),[:],{:}"
@@ -241,6 +237,55 @@ let g:neomake_warning_sign = {
             \ 'text': 'W>',
             \ 'texthl': 'WarningMsg',
             \ }
+
+" LightLine settings
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightLineFugitive',
+      \   'readonly': 'LightLineReadonly',
+      \   'modified': 'LightLineModified',
+      \   'filename': 'LightLineFilename'
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ }
+
+function! LightLineModified()
+  if &modified
+    return "+"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "RO"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
 
 " Fixes for C-h
 if has ('nvim')
