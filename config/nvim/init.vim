@@ -172,7 +172,7 @@ augroup filetype_go
     autocmd FileType go nnoremap <buffer> <Leader>god :GoDef<CR>
     autocmd FileType go nnoremap <buffer> <Leader>got :GoTest<CR>
     autocmd FileType go nnoremap <buffer> <Leader>g? :GoDoc<CR>
-    autocmd BufWritePost <buffer> :GoFmt<CR>
+    autocmd BufWritePost *.go <buffer> :GoFmt<CR>
 augroup END
 
 augroup filetype_haskell
