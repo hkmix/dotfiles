@@ -9,3 +9,5 @@
 	tool = vimdiff
 [mergetool]
 	path = nvim -d
+[alias]
+	prettylog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %s - %an%C(reset)%C(yellow)%d%C(reset)' --all
