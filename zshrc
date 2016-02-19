@@ -45,6 +45,9 @@ alias df="df -h"
 alias du="du -h"
 alias bc="bc -l"
 alias tmux-new="tmux -2 new-session -s"
+ccd() {
+    cd ~/Projects/"$1"
+}
 
 # Other aliases
 alias gitcd="cd $(git rev-parse --show-toplevel)"
