@@ -1,0 +1,11 @@
+[user]
+	name = Jack Zhou
+	email = cybersach@gmail.com
+[push]
+	default = simple
+[git-up "rebase"]
+	auto = false
+[merge]
+	tool = vimdiff
+[mergetool]
+	path = nvim -d
