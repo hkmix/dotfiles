@@ -1,4 +1,5 @@
 bindkey -e
+unalias -a
 
 autoload -U compinit promptinit colors zkbd
 compinit

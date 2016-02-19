@@ -41,10 +41,7 @@ lldbwd() {
     fi
     lldebug --${1}-device $2 --section $3 --workload $4 --verbose "${@:5}"
 }
-alias stest32="./build.x86_64/geekbench"
 alias sdebug32="./debug.x86_64/geekbench"
-alias sstat="./build.x86_64/geekbench_x86_64 --ministat --iterations"
-alias sstat32="./build.x86_64/geekbench --ministat --iterations"
 alias dasm="otool -vt"
 alias cleanscores='grep "^  " | sed -e "s/.* \([0-9]\+\) .*/\1/g"'
 
