@@ -107,9 +107,13 @@ augroup general
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
     autocmd BufWritePost * Neomake
     autocmd BufRead * Neomake
+    autocmd CompleteDone * silent! pclose
+augroup END
+
+augroup terminal
+    autocmd!
     autocmd BufWinEnter,WinEnter term://* startinsert
     autocmd BufLeave term://* stopinsert
-    autocmd CompleteDone * silent! pclose
 augroup END
 
 " General mappings
@@ -128,6 +132,12 @@ nnoremap N Nzz
 nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
+
+" Terminal bindings
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Language-specific groups
 augroup filetype_c
@@ -201,6 +211,7 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <Leader>s :TREPLSend<CR>
+xnoremap <Leader>s :TREPLSend<CR>
 nnoremap <Leader>v :Validate<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -254,34 +265,34 @@ let g:lightline = {
       \ }
 
 function! LightLineModified()
-  if &modified
-    return "+"
-  else
-    return ""
-  endif
+    if &modified
+        return "+"
+    else
+        return ""
+    endif
 endfunction
 
 function! LightLineReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "RO"
-  else
-    return ""
-  endif
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "RO"
+    else
+        return ""
+    endif
 endfunction
 
 function! LightLineFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
+    return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
 function! LightLineFilename()
-  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-" Fixes for C-h
-if has ('nvim')
+" Neovim fix
+if has('nvim')
     nmap <BS> <C-w>h
 endif
