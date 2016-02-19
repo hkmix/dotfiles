@@ -1,0 +1,210 @@
+#!/usr/bin/env bash
+
+bin32="./build.x86_64/geekbench"
+bin64="./build.x86_64/geekbench_x86_64"
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    echo "Usage: ${0##*/} [32|64] [v|verbose] [section|s <section id>] [list] [device|<d device id>] [workload|w <workload id>] [it <iterations>] [stat <iterations>] [ms|ministat]"
+    echo "  Run from anywhere within the git tree"
+    echo
+    echo "  32/64 sets the executable (default is 64)"
+    echo
+    echo "  \"stat <iterations>\" is an alias for \"ms it <iterations>\""
+    echo
+    echo "  Valid section values:"
+    echo "    1, 2, 4, 5, 7, single, singlecore, multi, multicore,"
+    echo "    cl, opencl, cu, cuda, metal"
+    echo
+    echo "  Valid GPGPU workload values:"
+    echo "    gray, grayscale, csc, color, colour, sobel, histo, histogram, he,"
+    echo "    fft, sfft, gauss, gaussian, face, detection, fd, raw,"
+    echo "    lens, lensblur, depth, dof, particle"
+    echo
+    echo "  Valid device values:"
+    echo "    gt, ir, amd"
+    echo
+    echo "  All values not recognized (e.g. other numbers) are considered workload IDs"
+    exit 0
+fi
+
+use_32_bit=false
+verbose=false
+list=false
+section=0
+section_name=""
+device=""
+workload=0
+iterations=0
+ministat=false
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        '32')
+            use_32_bit=true
+            ;;
+        '64')
+            use_32_bit=false
+            ;;
+        'v' | 'verbose')
+            verbose=true
+            ;;
+        'l' | 'list')
+            list=true
+            ;;
+        '1' | 'single' | 'singlecore')
+            section=1
+            ;;
+        '2' | 'multi' | 'multicore')
+            section=2
+            ;;
+        '4' | 'cl' | 'opencl')
+            section=4
+            section_name="opencl"
+            ;;
+        '5' | 'cu' | 'cuda')
+            section=5
+            section_name="cuda"
+            ;;
+        '7' | 'metal')
+            section=7
+            section_name="metal"
+            ;;
+        's')
+            shift
+            section=$1
+            ;;
+        'w')
+            shift
+            workload=$1
+            ;;
+        'gt')
+            device="gt"
+            ;;
+        'ir')
+            device="ir"
+            ;;
+        'd')
+            shift
+            device=$1
+            ;;
+        'amd')
+            device="amd"
+            ;;
+        'it')
+            shift
+            iterations=$1
+            ;;
+        'ms')
+            ministat=true
+            ;;
+        'stat')
+            shift
+            ministat=true
+            iterations=$1
+            ;;
+        'gray' | 'grayscale')
+            workload=1201
+            ;;
+        'csc' | 'color' | 'colour')
+            workload=1202
+            ;;
+        'sobel')
+            workload=1205
+            ;;
+        'histo' | 'histogram' | 'he')
+            workload=1212
+            ;;
+        'fft' | 'sfft')
+            workload=1304
+            ;;
+        'gauss' | 'gaussian' | 'gb')
+            workload=1310
+            ;;
+        'face' | 'detection' | 'fd')
+            workload=1312
+            ;;
+        'raw')
+            workload=1313
+            ;;
+        'lens' | 'lensblur' | 'lb' | 'depth' | 'dof')
+            workload=1314
+            ;;
+        'particle' | 'pf')
+            workload=1315
+            ;;
+        '*')
+            workload=$1
+            ;;
+    esac
+    shift
+done
+
+bin=""
+
+# Set bits
+if $use_32_bit; then
+    bin="$bin32"
+else
+    bin="$bin64"
+fi
+
+# Make sure the file exists
+if [[ ! -f "$bin" ]]; then
+    if [[ $(command -v git > /dev/null 2>&1) ]]; then
+        >&2 echo "Could not find executable and git is not installed"
+        exit 1
+    fi
+    bin="$(git rev-parse --show-toplevel)/$bin"
+    if [[ ! -f "$bin" ]]; then
+        >&2 echo "Could not find executable $bin"
+        exit 1
+    fi
+fi
+
+cmd="$bin"
+not_done=true
+
+# List
+# - If list is enabled, the command is finished
+if $list; then
+    if [[ $section -ne 0 ]]; then
+        cmd="$cmd --${section_name}-list"
+    else
+        cmd="$cmd --workload-list"
+    fi
+    not_done=false
+fi
+
+# Section, workload
+if $not_done && [[ $section -ne 0 ]]; then
+    cmd="$cmd --section $section"
+    # For OpenCL, use platform instead of device for AMD
+    if [[ "$device" == "amd" ]] && [[ $section -eq 4 ]]; then
+        cmd="$cmd --${section_name}-platform $device"
+    elif [[ "$device" != "" ]]; then
+        cmd="$cmd --${section_name}-device $device"
+    fi
+    if [[ $workload -ne 0 ]]; then
+        cmd="$cmd --workload $workload"
+    fi
+fi
+
+# Verbose
+if $not_done && $verbose; then
+    cmd="$cmd --verbose"
+fi
+
+# Iterations
+if $not_done && [[ $iterations -gt 0 ]]; then
+    cmd="$cmd --iterations $iterations"
+fi
+
+# Ministat
+if $not_done && $ministat; then
+    cmd="$cmd --ministat"
+fi
+
+echo "${cmd##*/}"
+echo
+
+$cmd

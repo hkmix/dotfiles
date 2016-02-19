@@ -13,59 +13,10 @@ scw() {
 }
 alias sca="scw build_metal build_cuda build_opencl"
 alias scd="scw debug"
-alias stest="./build.x86_64/geekbench_x86_64"
 alias sdebug="./debug.x86_64/geekbench_x86_64"
 alias sios="./scripts/xcode.py ios"
 alias sioso="open src/interface/iphone/Geekbench.xcodeproj"
 alias lldebug="lldb -- debug.x86_64/geekbench_x86_64"
-stests() {
-    if [ "$#" -lt 1 ]; then
-        echo "Usage: $0 [section-id]"
-    fi
-    stest --section $1 "${@:2}"
-}
-stestsv() {
-    if [ "$#" -lt 1 ]; then
-        echo "Usage: $0 [section-id]"
-    fi
-    stest --section $1 --verbose "${@:2}"
-}
-stestw() {
-    if [ "$#" -lt 2 ]; then
-        echo "Usage: $0 [section-id]"
-    fi
-    stest --section $1 --workload $2 "${@:3}"
-}
-stestwv() {
-    if [ "$#" -lt 2 ]; then
-        echo "Usage: $0 [section-id]"
-    fi
-    stest --section $1  --workload $2 --verbose "${@:3}"
-}
-stestsd() {
-    if [ "$#" -lt 3 ]; then
-        echo "Usage: $0 [section-name] [device] [section-id]"
-    fi
-    stest --${1}-device $2 --section $3 "${@:4}"
-}
-stestsdv() {
-    if [ "$#" -lt 3 ]; then
-        echo "Usage: $0 [section-name] [device] [section-id]"
-    fi
-    stest --${1}-device $2 --section $3 --verbose "${@:4}"
-}
-stestwd() {
-    if [ "$#" -lt 4 ]; then
-        echo "Usage: $0 [section-name] [device] [section-id] [workload-id]"
-    fi
-    stest --${1}-device $2 --section $3 --workload $4 "${@:5}"
-}
-stestwdv() {
-    if [ "$#" -lt 4 ]; then
-        echo "Usage: $0 [section-name] [device] [section-id] [workload-id]"
-    fi
-    stest --${1}-device $2 --section $3 --workload $4 --verbose "${@:5}"
-}
 lldbs() {
     if [ "$#" -lt 1 ]; then
         echo "Usage: $0 [section-id]"
