@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 
+cwd="$(pwd)"
 bin32="./build.x86_64/geekbench"
 bin64="./build.x86_64/geekbench_x86_64"
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    echo "Usage: ${0##*/} [32|64] [v|verbose] [section|s <section id>] [list] [device|<d device id>] [workload|w <workload id>] [it <iterations>] [stat <iterations>] [ms|ministat]"
+    echo "Usage: ${0##*/} [32|64] [v|verbose] [section|s <section id>] [list]"
+    echo "       [device|<d device id>] [workload|w <workload id>] [it <iterations>]"
+    echo "       [stat <iterations> <output name>] [ms|ministat] [o <output name>]"
+    echo
     echo "  Run from anywhere within the git tree"
     echo
     echo "  32/64 sets the executable (default is 64)"
     echo
-    echo "  \"stat <iterations>\" is an alias for \"ms it <iterations>\""
+    echo "  \"stat <iterations> <output name>\" is an alias for"
+    echo "  \"ms it <iterations> o <output name>\""
     echo
     echo "  Valid section values:"
     echo "    1, 2, 4, 5, 7, single, singlecore, multi, multicore,"
@@ -36,6 +41,7 @@ device=""
 workload=0
 iterations=0
 ministat=false
+output=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -97,10 +103,16 @@ while [[ $# -gt 0 ]]; do
         'ms')
             ministat=true
             ;;
-        'stat')
+        'o')
             shift
+            output="$1"
+            ;;
+        'stat')
             ministat=true
+            shift
             iterations=$1
+            shift
+            output=""
             ;;
         'gray' | 'grayscale')
             workload=1201
@@ -132,7 +144,7 @@ while [[ $# -gt 0 ]]; do
         'particle' | 'pf')
             workload=1315
             ;;
-        '*')
+        *)
             workload=$1
             ;;
     esac
@@ -204,7 +216,15 @@ if $not_done && $ministat; then
     cmd="$cmd --ministat"
 fi
 
-echo "${cmd##*/}"
-echo
 
-$cmd
+if [[ "$output" != "" ]]; then
+    echo "${cmd##*/} > $output"
+    echo
+    $cmd | tee > "$cwd/$output"
+    echo
+    echo "Your file is at: $cwd/$output"
+else
+    echo "${cmd##*/}"
+    echo
+    $cmd
+fi
