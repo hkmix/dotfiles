@@ -44,6 +44,11 @@ alias df="df -h"
 alias du="du -h"
 alias bc="bc -l"
 alias tmux-new="tmux -2 new-session -s"
+
+# Other aliases
+alias gitcd="cd $(git rev-parse --show-toplevel)"
+
+# OS X-specific aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
 
 # Classes
@@ -58,5 +63,5 @@ precmd() {
 
 NEWLINE=$'\n'
 
-[[ -e "~/.fzf.zsh" ]] && source ~/.fzf.zsh
-[[ -e "~/.primate_aliases.zsh" ]] && . ~/.primate_aliases.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -f ~/.primate_aliases.zsh ]] && . ~/.primate_aliases.zsh
