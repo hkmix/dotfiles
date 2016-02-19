@@ -36,7 +36,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
-alias ls="ls --color=auto"
+alias ls="ls -bh --color=auto"
 alias grep="grep --color=auto"
 alias la="ls -a"
 alias ll="ls -la"
