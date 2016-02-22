@@ -3,6 +3,7 @@ alias sclean="scons --clean"
 alias sunit="scons unittest"
 alias sios="./scripts/xcode.py ios && open ./src/interface/iphone/Geekbench.xcodeproj"
 scw() {
+    cd $(git rev-parse --show-toplevel)
     tempcmd="scons"
     for var in "$@"; do
         var=$(tr '[:lower:]' '[:upper:]' <<< $var)
