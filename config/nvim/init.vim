@@ -134,6 +134,7 @@ nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 
 " Terminal bindings
+tnoremap <Esc> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-l> <C-\><C-n><C-w>l
 
@@ -208,6 +209,7 @@ nnoremap <Leader>gp :Gpush<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
 nmap <F8> :TagbarToggle<CR>
+nnoremap <Leader>S ggVG:TREPLSend<CR>
 nnoremap <Leader>s :TREPLSend<CR>
 xnoremap <Leader>s :TREPLSend<CR>
 nnoremap <Leader>v :Validate<CR>
