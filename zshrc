@@ -11,9 +11,10 @@ export ANDROID_HOME="$HOME/Android/android-sdk-macosx"
 export GOPATH="$HOME/.go"
 export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
 export HOMEBREW_NO_EMOJI=1
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PATH="$HOME/NVPACK/apache-ant-1.8.2/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform_tools:$PATH"
 export PATH="/usr/local/Cellar:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="$HOME/NVPACK/apache-ant-1.8.2/bin:$HOME/Android/android-ndk-r10e:$ANDROID_HOME/tools:$ANDROID_HOME/platform_tools:$PATH"
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
