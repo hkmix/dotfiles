@@ -77,3 +77,8 @@ repeat_test_stats() {
         (clean_repeat $1 ${@:2} 2>&1) | cleanscores | sum_numbers
     fi
 }
+diff-img() {
+    if [ "$#" -ge 2 ]; then
+        compare "$1" "$2" -compose src ${3:-diff.png}
+    fi
+}
