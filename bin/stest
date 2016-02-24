@@ -5,11 +5,11 @@ bin32="./build.x86_64/geekbench"
 bin64="./build.x86_64/geekbench_x86_64"
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    echo "Usage: ${0##*/} [32|64] [v|verbose] [section|s <section id>] [list]"
+    echo "Usage: ${0##*/} [32|64] [p|print] [v|verbose] [section|s <section id>] [list]"
     echo "       [device|<d device id>] [workload|w <workload id>] [it <iterations>]"
     echo "       [stat <iterations> <output name>] [ms|ministat] [o <output name>]"
     echo
-    echo "  Run from anywhere within the git tree"
+    echo "  Run from anywhere within the git tree; p/print just outputs the command"
     echo
     echo "  32/64 sets the executable (default is 64)"
     echo
@@ -32,6 +32,7 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     exit 0
 fi
 
+print_only=false
 use_32_bit=false
 verbose=false
 list=false
@@ -45,6 +46,9 @@ output=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
+        'p' | 'print')
+            print_only=true
+            ;;
         '32')
             use_32_bit=true
             ;;
@@ -217,14 +221,15 @@ if $not_done && $ministat; then
 fi
 
 
-if [[ "$output" != "" ]]; then
+if $print_only; then
+    echo "$cmd"
+elif [[ "$output" != "" ]]; then
     echo "${cmd##*/} > $output"
     echo
     $cmd | tee > "$cwd/$output"
     echo
     echo "Your file is at: $cwd/$output"
 else
-    echo "${cmd##*/}"
     echo
     $cmd
 fi
