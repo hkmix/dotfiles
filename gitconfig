@@ -11,3 +11,4 @@
 	path = nvim -d
 [alias]
 	prettylog = log --color --graph --abbrev-commit --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold yellow) (%an)%Creset'
+	s = status -uno
