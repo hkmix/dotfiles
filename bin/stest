@@ -230,6 +230,7 @@ elif [[ "$output" != "" ]]; then
     echo
     echo "Your file is at: $cwd/$output"
 else
+    echo "$cmd"
     echo
     $cmd
 fi
