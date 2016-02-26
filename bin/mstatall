@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ "$#" -lt 2 ]]; then
+    echo "Usage: ${0##*/} file1 file2"
+    exit 0
+fi
+
+if [[ $(command -v ministat > /dev/null 2>&1) ]]; then
+    >&2 echo "Could not find ministat executable"
+    exit 1
+fi
+
+for ci in 80 90 95 99 99.5; do
+    ministat -c${ci} -w80 "$1" "$2"
+done
