@@ -11,5 +11,5 @@ if [[ $(command -v ministat > /dev/null 2>&1) ]]; then
 fi
 
 for ci in 80 90 95 99 99.5; do
-    ministat -c${ci} -w80 "$1" "$2"
+    ministat -c${ci} -w80 "$1" "$2" | grep -i "difference"
 done
