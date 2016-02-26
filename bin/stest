@@ -116,7 +116,7 @@ while [[ $# -gt 0 ]]; do
             shift
             iterations=$1
             shift
-            output=""
+            output=$1
             ;;
         'gray' | 'grayscale')
             workload=1201
