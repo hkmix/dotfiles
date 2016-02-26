@@ -214,6 +214,8 @@ xnoremap <Leader>s :TREPLSend<CR>
 nnoremap <Leader>v :Validate<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+nnoremap <Leader>gr :GitGutterRevertHunk<CR>
+nnoremap <Leader>gsh :GitGutterStageHunk<CR>
 
 " Other settings
 let g:delimitMate_expand_cr = 2
