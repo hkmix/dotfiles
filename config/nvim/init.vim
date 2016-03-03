@@ -86,8 +86,11 @@ set ttimeoutlen=100
 set wildmenu
 
 " Appearance
-colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_signs = 1
+let g:gruvbox_invert_indent_guides = 1
 set background=dark
+colorscheme gruvbox
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 
@@ -296,4 +299,5 @@ endfunction
 " Neovim fix
 if has('nvim')
     nmap <BS> <C-w>h
+    let $NVIM_TUI_ENABLE_TRUE_COLORS=1
 endif
