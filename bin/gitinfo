@@ -1,10 +1,11 @@
 #!/bin/bash
 
-git_branch=$(git status 2>/dev/null | grep 'On branch' | sed 's/On branch //')
+git_status=$(git status 2>/dev/null | perl -pe 's/\n/\\n/g')
+git_branch=$(echo -e $git_status | grep 'On branch' | head -n1 | sed 's/On branch //')
 
 if [[ $git_branch != "" ]]; then
-    modified=$(git status 2>/dev/null | grep '^Changes' | head -n1 | sed 's/.*/*/')
-    behind=$(git status 2>/dev/null | grep 'behind' | head -n1 | sed 's/.*/-/')
-    aheadof=$(git status 2>/dev/null | grep 'ahead of' | head -n1 | sed 's/.*/+/')
-    echo " ($git_branch$modified$uptodate$aheadof)"
+    modified=$(echo -e $git_status | grep '^Changes' | head -n1 | sed 's/.*/*/')
+    behind=$(echo -e $git_status | grep 'behind' | head -n1 | sed 's/.*/-/')
+    aheadof=$(echo -e $git_status | grep 'ahead of' | head -n1 | sed 's/.*/+/')
+    echo " (${git_branch}${modified}${behind}${aheadof})"
 fi
