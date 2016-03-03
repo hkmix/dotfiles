@@ -73,3 +73,4 @@ NEWLINE=$'\n'
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.primate_aliases.zsh ]] && . ~/.primate_aliases.zsh
+[[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
