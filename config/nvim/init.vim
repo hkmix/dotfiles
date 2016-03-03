@@ -13,6 +13,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer'}
 Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
 Plug 'benekastah/neomake'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
@@ -86,11 +87,11 @@ set ttimeoutlen=100
 set wildmenu
 
 " Appearance
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_invert_signs = 1
-let g:gruvbox_invert_indent_guides = 1
+let g:solarized_underline = 0
 set background=dark
-colorscheme gruvbox
+colorscheme solarized
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 
@@ -255,7 +256,7 @@ let g:neomake_warning_sign = {
 
 " LightLine settings
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'filename' ] ]
