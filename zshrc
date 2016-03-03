@@ -16,6 +16,13 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/Cellar:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:$HOME/.local/bin:$HOME/.bin:$PATH"
 export PATH="$HOME/NVPACK/apache-ant-1.8.2/bin:$HOME/Android/android-ndk-r10e:$ANDROID_HOME/tools:$ANDROID_HOME/platform_tools:$PATH"
 
+# Misc appearance settings
+export FZF_DEFAULT_OPTS='
+    --bind ctrl-f:page-down,ctrl-b:page-up
+    --color dark,hl:33,hl+:33,fg+:235,bg+:0,fg+:7
+    --color info:254,prompt:37,spinner:108,pointer:14,marker:14
+'
+
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 zstyle ':completion:*' menu select

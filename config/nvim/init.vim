@@ -300,5 +300,4 @@ endfunction
 " Neovim fix
 if has('nvim')
     nmap <BS> <C-w>h
-    let $NVIM_TUI_ENABLE_TRUE_COLORS=1
 endif
