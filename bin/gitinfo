@@ -4,5 +4,7 @@ git_branch=$(git status 2>/dev/null | grep 'On branch' | sed 's/On branch //')
 
 if [[ $git_branch != "" ]]; then
     modified=$(git status 2>/dev/null | grep '^Changes' | head -n1 | sed 's/.*/*/')
-    echo " ($git_branch$modified)"
+    behind=$(git status 2>/dev/null | grep 'behind' | head -n1 | sed 's/.*/-/')
+    aheadof=$(git status 2>/dev/null | grep 'ahead of' | head -n1 | sed 's/.*/+/')
+    echo " ($git_branch$modified$uptodate$aheadof)"
 fi
