@@ -8,6 +8,7 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     echo "Usage: ${0##*/} [32|64] [p|print] [v|verbose] [section|s <section id>] [list]"
     echo "       [device|<d device id>] [workload|w <workload id>] [it <iterations>]"
     echo "       [stat <iterations> <output name>] [ms|ministat] [o <output name>]"
+    echo "       [-- <regular args>..]"
     echo
     echo "  Run from anywhere within the git tree; p/print just outputs the command"
     echo
@@ -29,6 +30,8 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     echo "    gt, ir, amd"
     echo
     echo "  All values not recognized (e.g. other numbers) are considered workload IDs"
+    echo
+    echo "  Use -- to terminate parsing and allow regular switches to be used"
     exit 0
 fi
 
@@ -42,6 +45,7 @@ device=""
 workload=0
 iterations=0
 ministat=false
+standard=""
 output=""
 
 while [[ $# -gt 0 ]]; do
@@ -148,6 +152,11 @@ while [[ $# -gt 0 ]]; do
         'particle' | 'pf')
             workload=1315
             ;;
+        '--')
+            shift
+            standard="$@"
+            break
+            ;;
         *)
             workload=$1
             ;;
@@ -220,6 +229,8 @@ if $not_done && $ministat; then
     cmd="$cmd --ministat"
 fi
 
+# Append any standard switches
+cmd="$cmd $standard"
 
 if $print_only; then
     echo "$cmd"
