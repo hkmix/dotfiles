@@ -43,6 +43,21 @@ lldbwd() {
     lldebug --${1}-device $2 --section $3 --workload $4 --verbose "${@:5}"
 }
 alias sdebug32="./debug.x86_64/geekbench"
+alias sandr="./scripts/package.py android"
+sandrp() {
+    cd "$(git rev-parse --show-toplevel)"
+    if [[ ! -d "dist/Geekbench-4.0.0-Android" ]]; then
+        >&2 echo "Build Android first, using ./scripts/package.py android"
+        return 1
+    fi
+    cd "dist/Geekbench-4.0.0-Android"
+    for file in geekbench{.plar,_armv7}; do
+        echo "Pushing $file"
+        adb push -p $file /data/local/tmp/
+    done
+    adb shell chmod 755 /data/local/tmp/geekbench_armv7
+    cd -
+}
 alias dasm="otool -vt"
 alias cleanscores='grep "^  " | sed -e "s/.* \([0-9]\+\) .*/\1/g"'
 
