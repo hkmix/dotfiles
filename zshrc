@@ -62,7 +62,6 @@ ccd() {
 
 # Other aliases
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
-command -v thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 # OS X-specific aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
