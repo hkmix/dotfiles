@@ -38,7 +38,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'petRUShka/vim-opencl', {'for': ['opencl', 'cl']}
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
