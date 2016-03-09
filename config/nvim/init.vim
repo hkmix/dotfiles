@@ -145,6 +145,10 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <Leader>cc :!clear && compile c % "-Wall -std=c99" "-o $(basename % .c)" && ./"$(basename % .c)"<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>xh :sp %<.h<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>vc :vsp %<.c<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>xc :sp %<.c<CR>
 augroup END
 
 augroup filetype_cal
@@ -215,7 +219,6 @@ nmap <F8> :TagbarToggle<CR>
 nnoremap <Leader>S ggVG:TREPLSend<CR>
 nnoremap <Leader>s :TREPLSend<CR>
 xnoremap <Leader>s :TREPLSend<CR>
-nnoremap <Leader>v :Validate<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>ggr :GitGutterRevertHunk<CR>
