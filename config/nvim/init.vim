@@ -23,6 +23,7 @@ Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
+Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'google/vim-searchindex'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -234,6 +235,7 @@ let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_html_enabled_makers = []
 let g:neomake_verbose = 0
 let g:neoterm_automap_keys = '<Leader>tt'
 let g:neoterm_position = 'vertical'
