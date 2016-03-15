@@ -73,7 +73,11 @@ prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
 }
 precmd() {
-    PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
+    venv=""
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        venv=" (${VIRTUAL_ENV##*/})"
+    fi
+    PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)$venv%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
 }
 
 NEWLINE=$'\n'
