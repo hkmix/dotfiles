@@ -8,6 +8,7 @@ colors
 
 # For OS X to get default bindings
 export ANDROID_HOME="$HOME/Android/android-sdk-macosx"
+export ANDROID_NDK_HOME="$HOME/Android/android-ndk-r10e"
 export GOPATH="$HOME/.go"
 export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
 export HOMEBREW_NO_EMOJI=1
