@@ -252,8 +252,10 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents</string>
+	<string>~/Google Drive</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -287,13 +289,17 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>664 502 1057 524 0 0 2560 1417 </string>
+	<string>638 161 445 256 0 0 1280 777 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>715 829 606 456 0 0 2560 1417 </string>
+	<string>157 321 606 456 0 0 1280 777 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>201 508 384 129 0 0 1440 877 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>330 289 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 25 2557 1392 0 0 2560 1417 </string>
+	<string>352 158 650 531 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 83 1440 780 0 0 1440 877 </string>
+	<string>358 91 650 531 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_3703B432-9AF8-444E-ABD9-130E2D3933DF</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -897,7 +903,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InputMonoCondensed-Regular 16</string>
+			<string>PragmataPro 16</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1078,14 +1084,32 @@
 			<string>/Users/jackzhou</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
+	<key>NoSyncLastTipTime</key>
+	<real>482006456.072855</real>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>477583294.62596798</real>
+	<real>477542062.60274303</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>473699542.92740202</real>
+	<real>477541903.17099202</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>477425363.75754601</real>
+	<real>477541893.29136997</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1114,7 +1138,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/jzhou/.config/iterm2</string>
+	<string>/Users/jackzhou/.config/iterm2</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1132,7 +1156,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-03-03T19:40:07Z</date>
+	<date>2016-04-10T18:40:54Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1184,7 +1208,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20160206</string>
+	<string>2.9.20160313</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
