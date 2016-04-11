@@ -84,6 +84,7 @@ precmd() {
 
 NEWLINE=$'\n'
 
+[[ -f ~/.platform.sh ]] && source ~/.platform.sh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.primate_aliases.zsh ]] && . ~/.primate_aliases.zsh
 [[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
