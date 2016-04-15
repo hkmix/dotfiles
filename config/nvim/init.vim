@@ -5,8 +5,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-filetype off
 call plug#begin('~/.config/nvim/plugged')
+let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
@@ -29,6 +29,7 @@ Plug 'google/vim-searchindex'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-dirvish'
 Plug 'kassio/neoterm'
 Plug 'kentaroi/cocoa.vim', {'for': ['objc', 'objcpp']}
 Plug 'lervag/vimtex', {'for': ['plaintex', 'latex', 'tex']}
@@ -46,16 +47,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
 call plug#end()
-
-filetype plugin indent on
-
-" Settings
-syntax on
 
 set autoindent
 set expandtab
@@ -236,6 +231,7 @@ let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_java_enabled_makers = []
 let g:neomake_html_enabled_makers = []
 let g:neomake_verbose = 0
 let g:neoterm_automap_keys = '<Leader>tt'
