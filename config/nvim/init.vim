@@ -11,7 +11,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc', {'do': 'make'}
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer --omnisharp-completer'}
+Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'benekastah/neomake'
@@ -239,6 +240,8 @@ let g:neomake_html_enabled_makers = []
 let g:neomake_verbose = 0
 let g:neoterm_automap_keys = '<Leader>tt'
 let g:neoterm_position = 'vertical'
+let g:rooter_manual_only = 1
+let g:rooter_disable_map = 1
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
