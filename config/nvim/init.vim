@@ -241,7 +241,6 @@ let g:neomake_verbose = 0
 let g:neoterm_automap_keys = '<Leader>tt'
 let g:neoterm_position = 'vertical'
 let g:rooter_manual_only = 1
-let g:rooter_disable_map = 1
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
