@@ -1,2 +1,2 @@
-:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\" | tac"
 :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
