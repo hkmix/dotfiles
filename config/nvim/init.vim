@@ -11,7 +11,7 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc', {'do': 'make'}
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang --gocode-completer --omnisharp-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --gocode-completer --omnisharp-completer'}
 Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
