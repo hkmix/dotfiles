@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo Copying base config to $PWD
+cp /Users/jackzhou/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py $PWD
