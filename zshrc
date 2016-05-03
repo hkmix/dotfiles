@@ -46,6 +46,14 @@ zstyle ':completion:*' menu select
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
+# Classes
+alias cs240="cd ~/Classes/CS\ 240"
+alias cs247="cd ~/Classes/CS\ 247"
+alias engl109="cd ~/Classes/ENGL\ 109"
+alias math213="cd ~/Classes/MATH\ 213"
+alias math239="cd ~/Classes/MATH\ 239"
+alias msci261="cd ~/Classes/MSCI\ 261"
+
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
