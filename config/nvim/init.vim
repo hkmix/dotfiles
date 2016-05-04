@@ -1,8 +1,8 @@
 " Auto-install vim-plug if needed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -140,8 +140,8 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Neovim fixes
 if has('nvim')
-  nmap <BS> <C-w>h
-  tmap <BS> <C-\><C-n><C-w>h
+    nmap <BS> <C-w>h
+    tmap <BS> <C-\><C-n><C-w>h
 endif
 
 " Language-specific groups
@@ -209,6 +209,12 @@ augroup filetype_metal
     autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
 augroup END
 
+augroup filetype_tex
+    autocmd!
+    autocmd FileType tex setlocal colorcolumn=80 tw=80 spell
+    autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
+augroup END
+
 " difftool mappings
 nnoremap <Leader>lo :diffget LOCAL<CR>
 nnoremap <Leader>re :diffget REMOTE<CR>
@@ -255,13 +261,13 @@ let g:ycm_confirm_extra_conf = 0
 
 " Neomake settings
 let g:neomake_error_sign = {
-            \ 'text': 'E>',
-            \ 'texthl': 'ErrorMsg',
-            \ }
+      \ 'text': 'E>',
+      \ 'texthl': 'ErrorMsg',
+      \ }
 let g:neomake_warning_sign = {
-            \ 'text': 'W>',
-            \ 'texthl': 'WarningMsg',
-            \ }
+      \ 'text': 'W>',
+      \ 'texthl': 'WarningMsg',
+      \ }
 
 " LightLine settings
 let g:lightline = {
