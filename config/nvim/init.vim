@@ -8,12 +8,13 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
+Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --gocode-completer --omnisharp-completer'}
-Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'benekastah/neomake'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
@@ -24,7 +25,6 @@ Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
-Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'google/vim-searchindex'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -137,6 +137,12 @@ nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 " Terminal bindings
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-l> <C-\><C-n><C-w>l
+
+" Neovim fixes
+if has('nvim')
+  nmap <BS> <C-w>h
+  tmap <BS> <C-\><C-n><C-w>h
+endif
 
 " Language-specific groups
 augroup filetype_c
@@ -299,8 +305,3 @@ function! LightLineFilename()
         \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-
-" Neovim fix
-if has('nvim')
-    nmap <BS> <C-w>h
-endif
