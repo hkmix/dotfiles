@@ -141,7 +141,6 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 " Neovim fixes
 if has('nvim')
     nmap <BS> <C-w>h
-    tmap <BS> <C-\><C-n><C-w>h
 endif
 
 " Language-specific groups
