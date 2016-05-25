@@ -54,29 +54,28 @@ alias math239="cd ~/Classes/MATH\ 239"
 alias msci261="cd ~/Classes/MSCI\ 261"
 
 # Aliases
-alias vi="nvim"
-alias vim="nvim"
-alias ls="ls -bh --color=auto"
+alias bc="bc -l"
+alias df="df -h"
+alias du="du -h"
 alias grep="grep --color=auto"
 alias l="ls -a"
 alias la="ls -a"
 alias ll="ls -la"
-alias df="df -h"
-alias du="du -h"
-alias bc="bc -l"
+alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
+alias vi="nvim"
+alias vim="nvim"
 ccd() {
     cd ~/Projects/"$1"
 }
 
 # Other aliases
+alias dog="vimcat"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
+alias venvme=". ./venv/bin/activate"
 
 # OS X-specific aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
-
-# Classes
-# none
 
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
