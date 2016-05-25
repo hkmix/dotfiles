@@ -12,7 +12,7 @@ Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc', {'do': 'make'}
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --gocode-completer --omnisharp-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
@@ -240,6 +240,7 @@ let g:easytags_async = 1
 let g:easytags_auto_highlight = 0
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
+let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:neomake_cpp_enabled_makers = []
 let g:neomake_java_enabled_makers = []
