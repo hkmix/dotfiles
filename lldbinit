@@ -1,0 +1,1 @@
+settings set frame-format "frame #${frame.index}: ${frame.pc}{ \x1b\x5b36m${module.file.basename}\x1b\x5b39m{` \x1b\x5b33m${function.name-with-args} \x1b\x5b39m${function.pc-offset}}}{ at ${line.file.basename}:${line.number}}\n"
