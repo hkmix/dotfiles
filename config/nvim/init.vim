@@ -55,9 +55,9 @@ call plug#end()
 set autoindent
 set expandtab
 set smarttab
-set sts=4
-set sw=4
-set ts=4
+set sts=2
+set sw=2
+set ts=2
 
 set backspace=indent,eol,start
 set breakindent
@@ -72,6 +72,7 @@ set linebreak
 set mouse=a
 set nofoldenable
 set nohidden
+set nohlsearch
 set number
 set ruler
 set scrolloff=8
@@ -89,6 +90,7 @@ let g:gruvbox_invert_signs = 1
 let g:solarized_underline = 0
 set background=dark
 colorscheme solarized
+set colorcolumn=80,120
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 
@@ -126,7 +128,7 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
-nnoremap <silent> <space> :nohlsearch<CR>
+nnoremap <silent> <space> zz
 nnoremap <silent> <Leader><space> :nohlsearch<CR>zz
 nnoremap Q <Nop>
 nnoremap N Nzz
@@ -169,16 +171,18 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>cc :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cpp<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cc<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cc<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
 augroup END
 
 augroup filetype_objcpp
     autocmd!
     autocmd FileType objcpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
     autocmd FileType objcpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
-    autocmd FileType objcpp nnoremap <buffer> <Leader>vc :vsp %<.cpp<CR>
-    autocmd FileType objcpp nnoremap <buffer> <Leader>xc :sp %<.cpp<CR>
+    autocmd FileType objcpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
+    autocmd FileType objcpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
     autocmd FileType george nnoremap <buffer> <Leader>gc :GeorgeCheck<CR>
     autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl<CR>
 augroup END
@@ -210,7 +214,7 @@ augroup END
 
 augroup filetype_tex
     autocmd!
-    autocmd FileType tex setlocal colorcolumn=80 tw=80 spell
+    autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
 augroup END
 
