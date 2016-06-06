@@ -13,7 +13,7 @@ export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
 export HOMEBREW_NO_EMOJI=1
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:/usr/local/bin:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # Misc appearance settings
 export FZF_DEFAULT_OPTS='
