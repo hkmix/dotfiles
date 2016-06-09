@@ -63,8 +63,7 @@ alias la="ls -a"
 alias ll="ls -la"
 alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
-alias vi="nvim"
-alias vim="nvim"
+alias vi="vim"
 ccd() {
     cd ~/Projects/"$1"
 }
@@ -92,5 +91,4 @@ NEWLINE=$'\n'
 
 [[ -f ~/.platform.sh ]] && source ~/.platform.sh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-[[ -f ~/.primate_aliases.zsh ]] && . ~/.primate_aliases.zsh
 [[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
