@@ -141,9 +141,7 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Neovim fixes
-if has('nvim')
-    nmap <BS> <C-w>h
-endif
+nmap <BS> <C-w>h
 
 " Language-specific groups
 augroup filetype_c

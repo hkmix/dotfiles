@@ -11,8 +11,9 @@ call plug#begin('~/.vim/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Lokaltog/vim-easymotion'
+Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -99,7 +100,7 @@ if has('gui_running')
     set guioptions-=l
     set guioptions-=b
     set guioptions-=m
-    set guifont=PragmataPro:h14
+    set guifont=PragmataPro:h16
 endif
 
 " Autocommands
