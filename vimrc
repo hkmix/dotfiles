@@ -1,8 +1,8 @@
 set nocompatible
 filetype off
 
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
@@ -96,7 +96,7 @@ if has('gui_running')
     set guioptions-=l
     set guioptions-=b
     set guioptions-=m
-    set guifont=InputMonoCondensed:h14
+    set guifont=PragmataPro:h14
 endif
 
 " Autocommands
