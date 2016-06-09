@@ -8,6 +8,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Shougo/vimproc'
