@@ -56,6 +56,10 @@ set sw=2
 set ts=2
 
 set backspace=indent,eol,start
+if has('linebreak')
+    set breakindent
+    set linebreak
+endif
 set complete-=1
 set completeopt-=preview
 set cursorline
@@ -63,7 +67,6 @@ set foldmethod=manual
 set ignorecase
 set incsearch
 set laststatus=2
-set linebreak
 set mouse=a
 set nofoldenable
 set nohidden
