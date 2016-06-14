@@ -198,6 +198,8 @@ augroup filetype_tex
     autocmd!
     autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
+    autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
+    autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
 augroup END
 
 " difftool mappings
@@ -210,9 +212,6 @@ nnoremap <Leader>gp :Gpush<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
 nmap <F8> :TagbarToggle<CR>
-nnoremap <Leader>S ggVG:TREPLSend<CR>
-nnoremap <Leader>s :TREPLSend<CR>
-xnoremap <Leader>s :TREPLSend<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>ggr :GitGutterRevertHunk<CR>
