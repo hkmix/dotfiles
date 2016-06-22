@@ -75,6 +75,7 @@ alias venvme=". ./venv/bin/activate"
 
 # OS X-specific aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
+alias brewup="brew update && brew upgrade"
 
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
