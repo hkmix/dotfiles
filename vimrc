@@ -13,7 +13,7 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -24,6 +24,7 @@ Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
+Plug 'google/vim-searchindex'
 Plug 'fatih/vim-go'
 Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
@@ -41,6 +42,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
 call plug#end()
 
@@ -127,6 +129,105 @@ nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 
+" difftool mappings
+nnoremap <Leader>lo :diffget LOCAL<CR>
+nnoremap <Leader>re :diffget REMOTE<CR>
+
+" Plugin mappings
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <C-p> :FZF<CR>
+nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
+nmap <F8> :TagbarToggle<CR>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+nnoremap <Leader>ggr :GitGutterRevertHunk<CR>
+nnoremap <Leader>ggs :GitGutterStageHunk<CR>
+
+" Other settings
+let g:delimitMate_expand_cr = 2
+let g:delimitMate_expand_space = 1
+let g:delimitMate_matchpairs = "(:),[:],{:}"
+let g:easytags_auto_highlight = 0
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+let g:jedi#force_py_version = 3
+let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
+let g:neomake_cpp_enabled_makers = []
+let g:neomake_java_enabled_makers = []
+let g:neomake_html_enabled_makers = []
+let g:neomake_verbose = 0
+let g:neoterm_automap_keys = '<Leader>tt'
+let g:neoterm_position = 'vertical'
+let g:rooter_manual_only = 1
+let g:tagbar_compact = 1
+let g:tagbar_iconchars = ['▸', '▾']
+let g:tagbar_show_visibility = 1
+let g:vimtex_fold_enabled = 0
+let g:vimtex_imaps_enabled = 0
+let g:ycm_open_loclist_on_ycm_diags = 1
+let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
+let g:ycm_confirm_extra_conf = 0
+
+" Neomake settings
+let g:neomake_error_sign = {
+      \ 'text': 'E>',
+      \ 'texthl': 'ErrorMsg',
+      \ }
+let g:neomake_warning_sign = {
+      \ 'text': 'W>',
+      \ 'texthl': 'WarningMsg',
+      \ }
+
+" LightLine settings
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightLineFugitive',
+      \   'readonly': 'LightLineReadonly',
+      \   'modified': 'LightLineModified',
+      \   'filename': 'LightLineFilename'
+      \ },
+      \ }
+
+function! LightLineModified()
+    if &modified
+        return "+"
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "RO"
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugitive()
+    return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+" Show non-ASCII characters
+highlight nonascii guibg=Red ctermbg=1 term=standout
+autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
+
 " Language-specific groups
 augroup filetype_c
     autocmd!
@@ -200,97 +301,6 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
     autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
     autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
+    autocmd FileType tex let delimitMate_matchpairs="(:),[:],{:},`:'"
+    autocmd Filetype tex let delimitMate_quotes = "\" '"
 augroup END
-
-" difftool mappings
-nnoremap <Leader>lo :diffget LOCAL<CR>
-nnoremap <Leader>re :diffget REMOTE<CR>
-
-" Plugin mappings
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gp :Gpush<CR>
-nnoremap <C-p> :FZF<CR>
-nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
-nmap <F8> :TagbarToggle<CR>
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-nnoremap <Leader>ggr :GitGutterRevertHunk<CR>
-nnoremap <Leader>ggs :GitGutterStageHunk<CR>
-
-" Other settings
-let g:delimitMate_expand_cr = 2
-let g:delimitMate_expand_space = 1
-let g:delimitMate_matchpairs = "(:),[:],{:}"
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
-let g:jedi#force_py_version = 3
-let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
-let g:neomake_cpp_enabled_makers = []
-let g:neomake_java_enabled_makers = []
-let g:neomake_html_enabled_makers = []
-let g:neomake_verbose = 0
-let g:neoterm_automap_keys = '<Leader>tt'
-let g:neoterm_position = 'vertical'
-let g:rooter_manual_only = 1
-let g:tagbar_compact = 1
-let g:tagbar_iconchars = ['▸', '▾']
-let g:tagbar_show_visibility = 1
-let g:vimtex_fold_enabled = 0
-let g:ycm_open_loclist_on_ycm_diags = 1
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
-let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
-let g:ycm_confirm_extra_conf = 0
-
-" Neomake settings
-let g:neomake_error_sign = {
-      \ 'text': 'E>',
-      \ 'texthl': 'ErrorMsg',
-      \ }
-let g:neomake_warning_sign = {
-      \ 'text': 'W>',
-      \ 'texthl': 'WarningMsg',
-      \ }
-
-" LightLine settings
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightLineFugitive',
-      \   'readonly': 'LightLineReadonly',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename'
-      \ },
-      \ }
-
-function! LightLineModified()
-    if &modified
-        return "+"
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineReadonly()
-    if &filetype == "help"
-        return ""
-    elseif &readonly
-        return "RO"
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineFugitive()
-    return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
