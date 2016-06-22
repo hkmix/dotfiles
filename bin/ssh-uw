@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ssh z43zhou@linux.student.cs.uwaterloo.ca
