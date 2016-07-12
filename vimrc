@@ -35,6 +35,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
@@ -238,17 +239,6 @@ augroup filetype_c
     autocmd FileType c nnoremap <buffer> <Leader>xc :sp %<.c<CR>
 augroup END
 
-augroup filetype_cal
-    autocmd!
-    autocmd BufRead,BufNewFile *.cal call SetupCal()
-augroup END
-function! SetupCal()
-    nnoremap <buffer> <Leader>eq 0yf=Iprint "<C-R>"", <Esc>
-    :Tnew
-    :Tmap clear; calcprint <C-R>=expand("%")<CR>
-    autocmd BufWritePost <buffer> execute("normal ,tt")
-endfunction
-
 augroup filetype_cpp
     autocmd!
     autocmd FileType cpp nnoremap <buffer> <Leader>cc :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
@@ -288,6 +278,7 @@ augroup END
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell
+    autocmd FileType markdown setlocal set sts=2 sw=2 ts=2
 augroup END
 
 augroup filetype_metal
@@ -302,5 +293,5 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
     autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
     autocmd FileType tex let delimitMate_matchpairs="(:),[:],{:},`:'"
-    autocmd Filetype tex let delimitMate_quotes = "\" '"
+    autocmd Filetype tex let delimitMate_quotes="\" '"
 augroup END
