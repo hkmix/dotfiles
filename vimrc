@@ -150,16 +150,11 @@ let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_matchpairs = "(:),[:],{:}"
 let g:easytags_auto_highlight = 0
+let g:easytags_suppress_report = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
-let g:neomake_cpp_enabled_makers = []
-let g:neomake_java_enabled_makers = []
-let g:neomake_html_enabled_makers = []
-let g:neomake_verbose = 0
-let g:neoterm_automap_keys = '<Leader>tt'
-let g:neoterm_position = 'vertical'
 let g:rooter_manual_only = 1
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
@@ -168,19 +163,9 @@ let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
 let g:ycm_confirm_extra_conf = 0
-
-" Neomake settings
-let g:neomake_error_sign = {
-      \ 'text': 'E>',
-      \ 'texthl': 'ErrorMsg',
-      \ }
-let g:neomake_warning_sign = {
-      \ 'text': 'W>',
-      \ 'texthl': 'WarningMsg',
-      \ }
 
 " LightLine settings
 let g:lightline = {
