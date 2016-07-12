@@ -88,6 +88,14 @@ precmd() {
     PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)$venv%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
 }
 
+mkcd() {
+    if [ $# -ge 1 ]; then
+        mkdir -p "$1" && cd "$1"
+    else
+        echo "Usage: $0 dir-name"
+    fi
+}
+
 NEWLINE=$'\n'
 
 [[ -f ~/.platform.sh ]] && source ~/.platform.sh
