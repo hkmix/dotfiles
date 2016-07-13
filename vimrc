@@ -37,6 +37,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -263,7 +264,7 @@ augroup END
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell
-    autocmd FileType markdown setlocal set sts=2 sw=2 ts=2
+    autocmd FileType markdown setlocal sts=2 sw=2 ts=2
 augroup END
 
 augroup filetype_metal
