@@ -54,6 +54,7 @@ filetype plugin indent on
 syntax on
 
 set autoindent
+set cino+=(0,:0,l1,g0,N-s,m1,j1
 set expandtab
 set smarttab
 set sts=2
