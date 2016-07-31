@@ -162,6 +162,7 @@ let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
 let g:vimtex_fold_enabled = 0
+let g:vimtex_latexmk_callback = 0
 let g:vimtex_imaps_enabled = 0
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
