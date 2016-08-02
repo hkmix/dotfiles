@@ -36,9 +36,13 @@ bindsym $mod+shift+q exec --no-startup-id killall -9 compton
 bindsym $mod+shift-l exec lockscreen
 bindsym $mod+F1 exec thunar
 
+# media
 bindsym XF86AudioLowerVolume exec --no-startup-id pavol minus
 bindsym XF86AudioRaiseVolume exec --no-startup-id pavol plus
 bindsym XF86AudioMute exec --no-startup-id pavol mute
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_runner
