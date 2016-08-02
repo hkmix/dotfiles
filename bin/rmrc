@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 file"
+  exit
+fi
+
+cp --remove-destination $(readlink "$1") "$1"
