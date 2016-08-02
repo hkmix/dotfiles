@@ -11,10 +11,12 @@ class Py3status:
         char = ''
 
         format = syscmd.run(['mpc', 'current'])
+        if format:
+            format = format.replace(';', '/')
 
         return {
             'markup': 'pango',
-            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.blue, char, format) if format else '',
+            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.violet, char, format) if format else '',
             'cached_until': 0,
         }
 

@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec termite
 bindsym $mod+q kill
 bindsym $mod+shift+q exec --no-startup-id killall -9 compton
-bindsym $mod+shift-l exec lockscreen
+bindsym $mod+shift+ctrl+l exec lockscreen
 bindsym $mod+F1 exec thunar
 
 # media
@@ -186,12 +186,11 @@ bar {
         height 32
         tray_output none
         tray_padding 8
-        status_command py3status -i ~/.config/i3/py3status
+        status_command py3status
         strip_workspace_numbers yes
         separator_symbol "  "
 
         colors {
-                #background #002b36
                 background #000000
                 statusline #93a1a1
 

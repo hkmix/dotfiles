@@ -15,6 +15,8 @@ class Py3status:
 
         if status == 'share':
             out = ''
+        elif status == 'paused':
+            out = 'paused'
         else:
             count_text = syscmd.run(['insync-headless', 'get_sync_progress'])
             result = re.search(count_re, count_text)
