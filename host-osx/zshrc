@@ -6,11 +6,14 @@ compinit
 promptinit
 colors
 
+# For OS X to get default bindings
+export ANDROID_HOME="$HOME/Android/android-sdk-macosx"
 export GOPATH="$HOME/.go"
 export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
+export HOMEBREW_NO_EMOJI=1
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$PATH"
-export EDITOR=vim
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # Misc appearance settings
 export FZF_DEFAULT_OPTS='
@@ -44,7 +47,12 @@ export INFINALITY_FT_FILTER_PARAMS="06 55 84 55 06"
 export INFINALITY_FT_FRINGE_FILTER_STRENGTH=0
 export INFINALITY_FT_AUTOHINT_HORIZONTAL_STEM_DARKEN_STRENGTH=10
 export INFINALITY_FT_AUTOHINT_VERTICAL_STEM_DARKEN_STRENGTH=15
+# export INFINALITY_FT_BRIGHTNESS="20"
 export INFINALITY_FT_CONTRAST="0"
+# export INFINALITY_FT_AUTOHINT_INCREASE_GLYPH_HEIGHTS=false
+# export INFINALITY_FT_AUTOHINT_SNAP_STEM_HEIGHT=100
+# export INFINALITY_FT_STEM_FITTING_STRENGTH=100
+# export INFINALITY_FT_STEM_SNAPPING_SLIDING_SCALE=0
 export INFINALITY_FT_USE_KNOWN_SETTINGS_ON_SELECTED_FONTS=true
 
 # OS X-specific settings
@@ -76,14 +84,16 @@ ccd() {
 
 # Other aliases
 alias dog="vimcat"
-alias mkrcl="mkrc -B linux"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
 alias venvme=". ./venv/bin/activate"
+
+# OS X-specific aliases
+alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
+alias brewup="brew update && brew upgrade"
 
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
 }
-
 precmd() {
     venv=""
     if [[ "$VIRTUAL_ENV" != "" ]]; then
