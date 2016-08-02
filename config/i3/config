@@ -43,6 +43,7 @@ bindsym XF86AudioMute exec --no-startup-id pavol mute
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86PowerOff exec --no-startup-id mpc stop
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_runner
