@@ -1,16 +1,13 @@
 BoldAsFont=no
-FontSmoothing=partial
-ClipShortcuts=no
-WindowShortcuts=no
-Columns=120
-Rows=40
-Term=xterm-256color
 Font=PragmataPro
-FontHeight=12
+FontHeight=14
+FontSmoothing=slight
 Locale=C
 Charset=UTF-8
 CursorType=block
 CursorBlinks=no
+Scrollbar=none
+Term=xterm-256color
 
 ForegroundColour=131, 148, 150
 BackgroundColour=  0,  43,  54
