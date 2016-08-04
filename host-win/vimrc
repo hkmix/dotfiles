@@ -13,11 +13,11 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
@@ -28,7 +28,6 @@ Plug 'google/vim-searchindex'
 Plug 'fatih/vim-go'
 Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'lervag/vimtex'
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'

@@ -14,13 +14,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$H
 export PATH="/mingw64/bin:$PATH"
 export EDITOR=vim
 
-# Misc appearance settings
-export FZF_DEFAULT_OPTS='
-    --bind ctrl-f:page-down,ctrl-b:page-up
-    --color dark,hl:33,hl+:33,fg+:235,bg+:0,fg+:7
-    --color info:254,prompt:37,spinner:108,pointer:14,marker:14
-'
-
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 zstyle ':completion:*' menu select
