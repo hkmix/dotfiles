@@ -1,6 +1,8 @@
 bindkey -e
 unalias -a
 
+export TERM=xterm-256color
+
 autoload -U compinit promptinit colors zkbd
 compinit
 promptinit
@@ -9,6 +11,7 @@ colors
 export GOPATH="$HOME/.go"
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
+export PATH="/mingw64/bin:$PATH"
 export EDITOR=vim
 
 # Misc appearance settings
@@ -99,4 +102,4 @@ mkcd() {
 
 [[ -f ~/.platform.sh ]] && source ~/.platform.sh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-[[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
+[[ -f ~/.dircolors ]] && eval $(dircolors --sh ~/.dircolors)
