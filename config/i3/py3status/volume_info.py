@@ -26,7 +26,9 @@ class Py3status:
             mute_status = ''
 
         device = syscmd.run(['pavol', 'device']).lower()
-        if 'dell' in device:
+        if not device:
+            device_name = ''
+        elif 'dell' in device:
             device_name = 'Speakers'
         elif 'uac' in device:
             device_name = 'ODAC'
