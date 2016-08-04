@@ -41,20 +41,6 @@ zstyle ':completion:*' menu select
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
-# Infinality
-export INFINALITY_FT_AUTOFIT_FORCE_SLIGHT_HINTING=true
-export INFINALITY_FT_FILTER_PARAMS="06 55 84 55 06"
-export INFINALITY_FT_FRINGE_FILTER_STRENGTH=0
-export INFINALITY_FT_AUTOHINT_HORIZONTAL_STEM_DARKEN_STRENGTH=10
-export INFINALITY_FT_AUTOHINT_VERTICAL_STEM_DARKEN_STRENGTH=15
-# export INFINALITY_FT_BRIGHTNESS="20"
-export INFINALITY_FT_CONTRAST="0"
-# export INFINALITY_FT_AUTOHINT_INCREASE_GLYPH_HEIGHTS=false
-# export INFINALITY_FT_AUTOHINT_SNAP_STEM_HEIGHT=100
-# export INFINALITY_FT_STEM_FITTING_STRENGTH=100
-# export INFINALITY_FT_STEM_SNAPPING_SLIDING_SCALE=0
-export INFINALITY_FT_USE_KNOWN_SETTINGS_ON_SELECTED_FONTS=true
-
 # OS X-specific settings
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -82,6 +68,11 @@ ccd() {
     cd ~/Projects/"$1"
 }
 
+# RCM aliases
+alias lsrcl="lsrc -B osx -vv"
+alias mkrcl="mkrc -B osx -vv"
+alias rcupl="rcup -B osx -vv"
+
 # Other aliases
 alias dog="vimcat"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
@@ -94,6 +85,7 @@ alias brewup="brew update && brew upgrade"
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
 }
+
 precmd() {
     venv=""
     if [[ "$VIRTUAL_ENV" != "" ]]; then
@@ -115,6 +107,3 @@ NEWLINE=$'\n'
 [[ -f ~/.platform.sh ]] && source ~/.platform.sh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
-
-# Start X
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
