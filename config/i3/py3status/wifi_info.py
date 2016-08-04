@@ -17,6 +17,6 @@ class Py3status:
 
         return {
             'markup': 'pango',
-            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours, '', wifi_name),
+            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colour, '', wifi_name),
             'cached_until': 0,
         }
