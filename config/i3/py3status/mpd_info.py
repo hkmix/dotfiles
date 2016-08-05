@@ -9,7 +9,10 @@ from syscmd import syscmd
 
 class Py3status:
     def mpd_info(self):
-        char = ''
+        if '[paused]' in syscmd.run(['mpc']):
+            char = ''
+        else:
+            char = ''
 
         format = syscmd.run(['mpc', 'current'])
         if format:
