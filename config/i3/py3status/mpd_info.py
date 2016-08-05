@@ -1,5 +1,6 @@
 import subprocess
 import os, sys
+import html
 
 # get Solarized colours
 sys.path.append(os.path.dirname(__file__))
@@ -16,7 +17,7 @@ class Py3status:
 
         return {
             'markup': 'pango',
-            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.blue, char, format) if format else '',
+            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.blue, char, html.escape(format)) if format else '',
             'cached_until': 0,
         }
 
