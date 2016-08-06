@@ -214,3 +214,4 @@ exec --no-startup-id compton -b &
 exec --no-startup-id insync-headless start &
 exec --no-startup-id redshift-scheduler &
 exec --no-startup-id autoclutter_safe &
+exec --no-startup-id zeal &
