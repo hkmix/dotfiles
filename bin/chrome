@@ -2,4 +2,4 @@
 
 chrome_executable=google-chrome-stable
 
-exec $chrome_executable --force-device-scale-factor=1.3
+exec $chrome_executable --force-device-scale-factor=1.2
