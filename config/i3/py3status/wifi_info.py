@@ -20,3 +20,6 @@ class Py3status:
             'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colour, '', wifi_name),
             'cached_until': 0,
         }
+
+    def on_click(self, event):
+        subprocess.call(['termite', '-e', 'sudo wifi-menu'])
