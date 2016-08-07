@@ -1,0 +1,32 @@
+snippet if
+if (${1:${VISUAL:true}}) {
+	$0
+}
+endsnippet
+
+snippet ife
+if (${1:${VISUAL:true}}) {
+	$1
+} else {
+	$0
+}
+endsnippet
+
+snippet while
+while (${1:${VISUAL:true}}) {
+	$0
+}
+endsnippet
+
+snippet struct
+struct ${1:StructName} {
+	$1($2);
+};
+endsnippet
+
+snippet class
+class ${1:ClassName} {
+public:
+	$1($2);
+};
+endsnippet

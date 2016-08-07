@@ -22,7 +22,7 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'edsono/vim-matchit'
-Plug 'ervandew/supertab'
+Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'fatih/vim-go'
@@ -170,6 +170,14 @@ let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
 let g:ycm_confirm_extra_conf = 0
+
+" UltiSnips + YCM compat
+let g:ycm_key_list_select_completion = ['<c-n>', '<down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<up>']
+let g:SuperTabDefaultCompletionType = '<c-n>'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " LightLine settings
 let g:lightline = {
