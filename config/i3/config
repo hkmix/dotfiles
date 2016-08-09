@@ -176,6 +176,7 @@ focus_follows_mouse no
 # Application-specific settings
 for_window [class="google-chrome*"] border none
 for_window [class="jetbrains-*"] border none
+for_window [class="Pavucontrol"] floating enable
 
 # i3-gaps settings
 # smart_gaps on
