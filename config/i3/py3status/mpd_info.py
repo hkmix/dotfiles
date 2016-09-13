@@ -9,14 +9,20 @@ from syscmd import syscmd
 
 class Py3status:
     def mpd_info(self):
-        if '[paused]' in syscmd.run(['mpc']):
+        cmd_out = syscmd.run(['mpc'])
+        if not cmd_out:
+            char = ''
+        elif '[paused]' in cmd_out:
             char = ''
         else:
             char = ''
 
-        format = syscmd.run(['mpc', 'current'])
-        if format:
-            format = format.replace(';', '/')
+        if char:
+            format = syscmd.run(['mpc', 'current'])
+            if format:
+                format = format.replace(';', '/')
+        else:
+            format = ''
 
         return {
             'markup': 'pango',
