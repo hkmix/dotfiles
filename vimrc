@@ -3,7 +3,7 @@ filetype off
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -58,9 +58,9 @@ set autoindent
 set cino+=(0,:0,l1,g0,N-s,m1,j1
 set expandtab
 set smarttab
-set sts=2
-set sw=2
-set ts=2
+set sts=4
+set sw=4
+set ts=4
 
 set backspace=indent,eol,start
 if has('linebreak')
@@ -95,7 +95,7 @@ let g:gruvbox_invert_signs = 1
 let g:solarized_underline = 0
 set background=dark
 colorscheme solarized
-set colorcolumn=80,120
+set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 
@@ -181,18 +181,18 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " LightLine settings
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightLineFugitive',
-      \   'readonly': 'LightLineReadonly',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename'
-      \ },
-      \ }
+            \ 'colorscheme': 'solarized',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename'
+            \ },
+            \ }
 
 function! LightLineModified()
     if &modified
@@ -218,8 +218,8 @@ endfunction
 
 function! LightLineFilename()
     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 " Show non-ASCII characters
