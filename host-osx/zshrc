@@ -107,3 +107,5 @@ NEWLINE=$'\n'
 [[ -f ~/.platform.sh ]] && source ~/.platform.sh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
