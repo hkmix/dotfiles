@@ -3,7 +3,7 @@ filetype off
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -13,22 +13,21 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
-Plug 'editorconfig/editorconfig-vim'
 Plug 'edsono/vim-matchit'
-Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
+Plug 'fatih/vim-go'
 Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'lervag/vimtex'
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
@@ -44,7 +43,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
 call plug#end()
@@ -58,9 +56,9 @@ set autoindent
 set cino+=(0,:0,l1,g0,N-s,m1,j1
 set expandtab
 set smarttab
-set sts=4
-set sw=4
-set ts=4
+set sts=2
+set sw=2
+set ts=2
 
 set backspace=indent,eol,start
 if has('linebreak')
@@ -95,7 +93,7 @@ let g:gruvbox_invert_signs = 1
 let g:solarized_underline = 0
 set background=dark
 colorscheme solarized
-set colorcolumn=80,100
+set colorcolumn=80,120
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 
@@ -171,28 +169,20 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.p
 let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
 let g:ycm_confirm_extra_conf = 0
 
-" UltiSnips + YCM compat
-let g:ycm_key_list_select_completion = ['<c-n>', '<down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<up>']
-let g:SuperTabDefaultCompletionType = '<c-n>'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 " LightLine settings
 let g:lightline = {
-            \ 'colorscheme': 'solarized',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename' ] ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
-            \   'readonly': 'LightLineReadonly',
-            \   'modified': 'LightLineModified',
-            \   'filename': 'LightLineFilename'
-            \ },
-            \ }
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightLineFugitive',
+      \   'readonly': 'LightLineReadonly',
+      \   'modified': 'LightLineModified',
+      \   'filename': 'LightLineFilename'
+      \ },
+      \ }
 
 function! LightLineModified()
     if &modified
@@ -218,8 +208,8 @@ endfunction
 
 function! LightLineFilename()
     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 " Show non-ASCII characters

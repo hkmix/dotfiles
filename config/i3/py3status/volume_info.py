@@ -5,6 +5,7 @@ import os, sys
 sys.path.append(os.path.dirname(__file__))
 from colours import colours
 from syscmd import syscmd
+from subprocess import Popen
 
 class Py3status:
     def volume_info(self):
@@ -24,6 +25,16 @@ class Py3status:
         if not 'mute' in mute_status:
             mute_status = ''
 
+        device = syscmd.run(['pavol', 'device']).lower()
+        if not device:
+            device_name = ''
+        elif 'dell' in device:
+            device_name = 'Speakers'
+        elif 'uac' in device:
+            device_name = 'ODAC'
+        else:
+            device_name = ''
+
         base_colour = colours.green
         if int(volume) == 0 or mute_status:
             colour = colours.base00
@@ -35,8 +46,14 @@ class Py3status:
             else:
                 vol_char = vol_chars['high']
 
-        if mute_status:
+        if mute_status and device_name:
+            mute_status = ' ({}, {})'.format(device_name, mute_status)
+        elif device_name:
+            mute_status = ' ({})'.format(device_name)
+        elif mute_status:
             mute_status = ' ({})'.format(mute_status)
+        else:
+            mute_status = ''
 
         return {
             'markup': 'pango',

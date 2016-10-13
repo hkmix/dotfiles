@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # dmenu_run -i -f -fn "PragmataPro-Bold:size=14:bold" -nb "#002b36" -nf "#657b83" -sb "#b58900" -sf "#002b36"
-rofi -show run -font "PragmataPro 16"
+rofi -show run -font "Iosevka Regular 16"

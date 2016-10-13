@@ -15,3 +15,6 @@ class Py3status:
             'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.base1, '', date_status),
             'cached_until': 0,
         }
+
+    def on_click(self, event):
+        subprocess.call(['gnome-calendar'])

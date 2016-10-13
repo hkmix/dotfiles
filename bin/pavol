@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # CHANGES, RE-VIEWS/WRITES, IMPROVEMENTS:
-# mhasko: functions; VOL-steps; 
+# mhasko: functions; VOL-steps;
 # gashapon: autodectect default sink
 # konrad: more reliable way to autodetect default sink
 
@@ -72,6 +72,10 @@ function percent() {
     echo "$(( $VOL_NOW * 100 / $VOL_MAX ))"
 }
 
+function device() {
+    echo "$(pacmd list-sinks | grep -e '* index' -A1 | tail -n1 | sed -e 's/^.*<\(.*\)>.*$/\1/')"
+}
+
 case "$1" in
     plus)
         plus
@@ -87,4 +91,7 @@ case "$1" in
         ;;
     percent)
         percent
+        ;;
+    device)
+        device
 esac

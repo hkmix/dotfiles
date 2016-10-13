@@ -9,12 +9,16 @@ from syscmd import syscmd
 
 class Py3status:
     def insync_info(self):
-        status = syscmd.run(['insync-headless', 'get_status']).lower()
+        status = syscmd.run(['insync-headless', 'get_status'])
+        if status:
+            status = status.lower()
 
         count_re = re.compile(r'(\d+) files queued');
 
         if status == 'share':
             out = ''
+        elif status == 'offline':
+            out = 'down'
         elif status == 'paused':
             out = 'paused'
         else:

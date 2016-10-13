@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:PragmataPro Bold 12
+font pango:Iosevka Bold 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -35,6 +35,8 @@ bindsym $mod+q kill
 bindsym $mod+shift+q exec --no-startup-id killall -9 compton
 bindsym $mod+shift+ctrl+l exec lockscreen
 bindsym $mod+F1 exec thunar
+bindsym Print exec scrot-full
+bindsym Shift+Print exec scrot-win
 
 # media
 bindsym XF86AudioLowerVolume exec --no-startup-id pavol minus
@@ -161,10 +163,10 @@ bindsym $mod+r mode "resize"
 
 # Colours
 # class                 border  backgr. text    indicator
-client.focused          #268bd2 #268bd2 #fdf6e3 #859900
-client.focused_inactive #073642 #073642 #eee8d5 #859900
-client.unfocused        #073642 #073642 #93a1a1 #073642
-client.urgent           #b58900 #b58900 #fdf6e3 #b58900
+client.focused          #268bd2 #268bd2 #eee8d5 #859900
+client.focused_inactive #073642 #073642 #586e75 #073642
+client.unfocused        #073642 #073642 #586e75 #073642
+client.urgent           #b58900 #b58900 #eee8d5 #b58900
 
 # Other settings
 new_window pixel 5
@@ -172,17 +174,21 @@ new_float normal
 focus_follows_mouse no
 
 # Application-specific settings
-for_window [class="google-chrome"] border none
+for_window [class="google-chrome*"] border none
+for_window [class="jetbrains-*"] border none
+for_window [class="Pavucontrol"] floating enable
 
 # i3-gaps settings
 # smart_gaps on
 # smart_borders on
 gaps inner 24
+bindsym $mod+g gaps inner current set 24
+bindsym $mod+shift+g gaps inner current set 0
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango:PragmataPro, Icon Bold 12
+        font pango:Iosevka, Icon Bold 12
         height 32
         tray_output none
         tray_padding 8
@@ -195,7 +201,7 @@ bar {
                 statusline #93a1a1
 
                 # class            border  backgr. text
-                focused_workspace  #000000 #000000 #eee8d5
+                focused_workspace  #000000 #000000 #93a1a1
                 active_workspace   #000000 #000000 #93a1a1
                 inactive_workspace #000000 #000000 #586e75
                 urgent_workspace   #000000 #000000 #b58900
@@ -206,7 +212,8 @@ bar {
 # Start-up
 exec --no-startup-id start-pulseaudio-x11 &
 exec --no-startup-id ~/.fehbg &
-exec --no-startup-id compton &
+exec --no-startup-id compton -b &
 exec --no-startup-id insync-headless start &
 exec --no-startup-id redshift-scheduler &
 exec --no-startup-id autoclutter_safe &
+exec --no-startup-id zeal &
