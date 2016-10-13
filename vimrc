@@ -21,11 +21,12 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
+Plug 'editorconfig/editorconfig-vim'
 Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
-Plug 'fatih/vim-go'
 Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -57,9 +58,9 @@ set autoindent
 set cino+=(0,:0,l1,g0,N-s,m1,j1
 set expandtab
 set smarttab
-set sts=2
-set sw=2
-set ts=2
+set sts=4
+set sw=4
+set ts=4
 
 set backspace=indent,eol,start
 if has('linebreak')
