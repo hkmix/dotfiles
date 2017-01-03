@@ -106,7 +106,7 @@ if has('gui_running')
     set guioptions-=l
     set guioptions-=b
     set guioptions-=m
-    set guifont=PragmataPro\ 14
+    set guifont=Iosevka\ Slab:h14
 endif
 
 " Autocommands
