@@ -5,3 +5,6 @@ alias cs370="cd ~/Waterloo/CS\ 370"
 alias ece358="cd ~/Waterloo/ECE\ 358"
 alias se350="cd ~/Waterloo/SE\ 350"
 alias se465="cd ~/Waterloo/SE\ 465"
+
+# Other
+alias octave="octave --no-gui"
