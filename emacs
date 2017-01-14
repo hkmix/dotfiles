@@ -79,13 +79,19 @@
                 solarized-scale-org-headlines nil)
           (load-theme 'solarized-dark t)))
 
-;;; Org-mode languages
+;;; Org-mode options
+;; Set languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((C . t)
    (haskell . t)
    (latex . t)
    (python . t)))
+
+;; Enable persistent clocking
+(defvar org-clock-persist)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 
 ;;; Mode hooks
 (add-hook 'c-mode-common-hook
@@ -134,7 +140,7 @@
  '(initial-buffer-choice t)
  '(package-selected-packages
    (quote
-    (git-gutter helm-projectile dtrt-indent evil-surround magit company-irony exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode))))
+    (solarized-theme evil-magit evil-commentary delight flycheck-ghcmod flycheck-irony git-gutter helm-projectile dtrt-indent evil-surround magit company-irony exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
