@@ -15,17 +15,33 @@
 
 (eval-when-compile (require 'use-package))
 
+;;; Key bindings
+(global-set-key (kbd "<escape>") 'keyboard-quit)
+
 ;;; Package list
 (use-package company-irony :ensure t)
 (use-package dtrt-indent :ensure t)
 (use-package evil :ensure t)
 (use-package evil-surround :ensure t)
 (use-package exec-path-from-shell :ensure t)
+(use-package git-gutter
+  :bind (("C-c g s" . git-gutter:stage-hunk)
+         ("C-c g r" . git-gutter:revert-hunk)
+         ("C-c g n" . git-gutter:next-hunk)
+         ("C-c g p" . git-gutter:previous-hunk))
+  :ensure t)
 (use-package helm
-  :bind ("M-x" . helm-M-x)
+  :bind (("M-x" . helm-M-x)
+         ("C-c h" . helm-mini))
+  :ensure t)
+(use-package helm-projectile
+  :bind ("C-c p" . helm-projectile)
   :ensure t)
 (use-package isend-mode :ensure t)
-(use-package magit :ensure t)
+(use-package magit
+  :bind ("C-c m" . magit-status)
+  :ensure t)
+(use-package projectile :ensure t)
 (use-package solarized-theme :ensure t)
 
 ;; Activate packages
@@ -53,8 +69,9 @@
 (add-to-list 'evil-emacs-state-modes 'term-mode)
 
 ;;; Plugin settings
-;; Fix $PATH for org mode
-(exec-path-from-shell-initialize)
+(exec-path-from-shell-initialize) ; Fix $PATH for Org mode
+(global-git-gutter-mode +1)       ; Enable git-gutter
+(git-gutter:linum-setup)          ; Allow git-gutter to work with linum-mode
 
 ;;; Org-mode languages
 (org-babel-do-load-languages
@@ -66,7 +83,6 @@
    ))
 
 ;;; Mode hooks
-;; Filetype-specific
 (add-hook 'c++-mode
 	  (lambda ()
             (company-mode)
@@ -125,7 +141,7 @@
  '(initial-buffer-choice t)
  '(package-selected-packages
    (quote
-    (dtrt-indent evil-surround magit company-irony exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode))))
+    (git-gutter helm-projectile dtrt-indent evil-surround magit company-irony exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
