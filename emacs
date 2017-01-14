@@ -20,58 +20,64 @@
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 
 ;;; Package list
-(use-package company-irony
-  :config (eval-after-load 'company
-            '(add-to-list 'company-backends 'company-irony)))
+(use-package company
+  :config (use-package company-irony
+            :config (add-to-list 'company-backends 'company-irony)))
+(use-package delight
+  :init (delight '((auto-revert-mode nil autorevert)
+                   (emacs-lisp-mode "Elisp" :major)
+                   (undo-tree-mode nil undo-tree))))
 (use-package dtrt-indent)
 (use-package evil
-  :config (progn
-            (use-package evil-commentary
-              :diminish evil-commentary-mode
-              :config (evil-commentary-mode))
-            (use-package evil-surround
-              :config (global-evil-surround-mode 1))
-            (use-package evil-magit)
-            (evil-set-initial-state 'info-mode 'normal)
-            (setq evil-normal-state-modes
-                  (append evil-motion-state-modes evil-normal-state-modes))
-            (setq evil-motion-state-modes nil)
-            (evil-define-key 'normal dired-mode-map
-              "h" 'dired-up-directory
-              "j" 'dired-next-line
-              "k" 'dired-previous-line
-              "l" 'dired-find-alternate-file)
-            (delete 'term-mode evil-insert-state-modes)
-            (add-to-list 'evil-emacs-state-modes 'term-mode))
-  :init (evil-mode t))
+  :init (progn
+          (evil-mode t)
+          (use-package evil-commentary
+            :diminish evil-commentary-mode
+            :config (evil-commentary-mode))
+          (use-package evil-surround
+            :config (global-evil-surround-mode 1))
+          (use-package evil-magit)
+          (evil-set-initial-state 'info-mode 'normal)
+          (setq evil-normal-state-modes
+                (append evil-motion-state-modes evil-normal-state-modes))
+          (setq evil-motion-state-modes nil)
+          (evil-define-key 'normal dired-mode-map
+            "h" 'dired-up-directory
+            "j" 'dired-next-line
+            "k" 'dired-previous-line
+            "l" 'dired-find-alternate-file)
+          (delete 'term-mode evil-insert-state-modes)
+          (add-to-list 'evil-emacs-state-modes 'term-mode)))
 (use-package exec-path-from-shell
-  :config (exec-path-from-shell-initialize))
+  :init (exec-path-from-shell-initialize))
 (use-package flycheck
-  :config (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 (use-package git-gutter
   :bind (("C-c g s" . git-gutter:stage-hunk)
          ("C-c g r" . git-gutter:revert-hunk)
          ("C-c g n" . git-gutter:next-hunk)
          ("C-c g p" . git-gutter:previous-hunk))
-  :diminish git-gutter-mode
-  :config (progn
-            (global-git-gutter-mode +1)
-            (git-gutter:linum-setup)))
+  :init (progn
+          (global-git-gutter-mode t)
+          (git-gutter:linum-setup))
+  :diminish git-gutter-mode)
 (use-package helm
   :bind (("M-x" . helm-M-x)
          ("C-c h" . helm-mini))
-  :config (use-package helm-projectile
-            :bind ("C-c p" . helm-projectile)))
+  :init (use-package helm-projectile
+          :bind ("C-c p" . helm-projectile)))
 (use-package isend-mode)
 (use-package magit
   :bind ("C-c m" . magit-status))
 (use-package projectile)
 (use-package solarized-theme
   :init (progn
+          (defvar solarized-use-variable-pitch)
+          (defvar solarized-scale-org-headlines)
           (setq solarized-use-variable-pitch nil
                 solarized-scale-org-headlines nil)
-           (load-theme 'solarized-dark t))
-  :config (load-theme 'solarized-dark t))
+          (load-theme 'solarized-dark t)))
 
 ;;; Org-mode languages
 (org-babel-do-load-languages
@@ -113,10 +119,6 @@
 (setq select-enable-primary t)
 (setq mouse-drag-copy-region t)
 
-;; Diminish some mode-line items
-(diminish auto-revert-mode)
-(diminish undo-tree-mode)
-
 ;;; Misc options
 (setq ad-redefinition-action 'accept) ; Silence some warnings
 
@@ -139,3 +141,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'dired-find-alternate-file 'disabled nil)
