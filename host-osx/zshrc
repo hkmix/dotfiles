@@ -61,9 +61,9 @@ ccd() {
 }
 
 # RCM aliases
-alias lsrcl="lsrc -B osx -vv"
-alias mkrcl="mkrc -B osx -vv"
-alias rcupl="rcup -B osx -vv"
+alias lsrcl="lsrc -B osx -v"
+alias mkrcl="mkrc -B osx -v"
+alias rcupl="rcup -B osx -v"
 
 # Other aliases
 alias dog="vimcat"
