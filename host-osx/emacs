@@ -67,7 +67,10 @@
     (add-to-list 'evil-emacs-state-modes 'term-mode)))
 (use-package exec-path-from-shell
   :init
-  (exec-path-from-shell-initialize))
+  (progn
+    (defvar exec-path-from-shell-check-startup-files)
+    (setq exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize)))
 (use-package fill-column-indicator)
 (use-package flycheck
   :init
@@ -93,10 +96,10 @@
   :bind
   (("M-x" . helm-M-x)
    ("C-c h" . helm-mini))
-  :config
+  :init
   (use-package helm-projectile
-    :bind
-    ("C-c p" . helm-projectile)))
+    :init
+    (projectile-mode)))
 (use-package isend-mode)
 (use-package magit
   :bind
@@ -139,7 +142,8 @@
 
 ;;; Mode hooks
 (add-hook 'c-mode-common-hook
-          (progn
+          (lambda ()
+            (local-set-key (kbd "C-c o") 'ff-find-other-file)
             (company-mode)
             (dtrt-indent-mode 1)
             (setq fci-rule-column 80)
@@ -168,6 +172,7 @@
 (global-linum-mode t)
 (show-paren-mode t)
 (global-hl-line-mode t)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq scroll-margin 8)
 
@@ -191,7 +196,7 @@
  '(initial-buffer-choice t)
  '(package-selected-packages
    (quote
-    (fill-column-indicator column-marker haskell-mode solarized-theme evil-magit evil-commentary delight flycheck-ghcmod git-gutter helm-projectile dtrt-indent evil-surround magit exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode)))
+    (doxymacs column-marker haskell-mode solarized-theme evil-magit evil-commentary delight flycheck-ghcmod git-gutter helm-projectile dtrt-indent evil-surround magit exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode)))
  '(safe-local-variable-values
    (quote
     ((flycheck-gcc-language-standard . c++14)
