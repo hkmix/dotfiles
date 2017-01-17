@@ -188,8 +188,8 @@ bindsym $mod+shift+g gaps inner current set 0
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango:Iosevka, Icon Bold 12
-        height 32
+        font pango:Iosevka Slab, Icon Bold 12
+        height 28
         tray_output none
         tray_padding 8
         status_command py3status
@@ -210,6 +210,7 @@ bar {
 }
 
 # Start-up
+exec --no-startup-id xset r rate 300 30 &
 exec --no-startup-id start-pulseaudio-x11 &
 exec --no-startup-id ~/.fehbg &
 exec --no-startup-id compton -b &

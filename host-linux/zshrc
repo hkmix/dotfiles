@@ -68,9 +68,9 @@ alias tmux-new="tmux -2 new-session -s"
 alias vi="vim"
 
 # RCM aliases
-alias lsrcl="lsrc -B linux -vv"
-alias mkrcl="mkrc -B linux -vv"
-alias rcupl="rcup -B linux -vv"
+alias lsrcl="lsrc -B linux -v"
+alias mkrcl="mkrc -B linux -v"
+alias rcupl="rcup -B linux -v"
 
 # Other aliases
 alias dog="vimcat"

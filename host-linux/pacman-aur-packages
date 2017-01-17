@@ -1,37 +1,14 @@
-adapta-gtk-theme-git 3.21.4.97.r2.57a6596-1
-arc-icon-theme-git 20160605.r5.g664c05e-1
-broadcom-wl-dkms-248 6.30.223.248-1
-brother-dcp7030 2.0.2-3
-cli-visualizer 1.2-3
-cling-git r3148.cd5784b-1
-clion 1:2016.2-1
-cower 16-1
-dmenu-xft-mouse-height-fuzzy-history 4.5-5
-fondu 060102-4
-google-chrome 52.0.2743.116-1
-grip-git 20120917-1
-gtk-engine-unico 1.0.2-1
-gtk-theme-arc-git 564.9478b8d-1
-gtk-theme-flatstudio 1.03-2
-htop-vim-solarized-git 907.3cd0339-1
-i3-gaps-git 4.12-1
-insync 1.3.9-1
-lemonbar-xft-git 254.a43b801-1
-libcurl-compat 7.50.0-1
-libspotify 12.1.51-3
-mopidy-spotify 3.0.0-1
-ncurses5-compat-libs 6.0-4
-numix-icon-theme-git 0.r1837.72c00cb-1
-pacaur 4.6.7-1
-py3status-git 3.0.r146.g340886b-1
-python2-pyspotify 2.0.5-1
-qpdfview-qt4 0.4.16-3
-qt5-styleplugins 5.0.0-1
-rcm 1.3.0-1
-redshift-scheduler 1.1.2-1
-skype 4.3.0.37-7
-spotify 1.0.34.146-1
-ttf-font-icons 1.1-1
-ttf-roboto 5:131072-1
-xboxdrv 0.8.8-2
-zeal 1:0.2.1-3
+cower
+gtk-theme-arc-git
+htop-vim-solarized-git
+i3-gaps-git
+insync
+pacaur
+py3status-git
+rcm
+redshift-scheduler
+ttf-font-icons
+ttf-iosevka
+ttf-iosevka-slab
+ttf-iosevka-term
+ttf-iosevka-term-slab
