@@ -99,7 +99,7 @@
       "k" 'dired-previous-line
       "l" 'dired-find-alternate-file)
     (delete 'term-mode evil-insert-state-modes)
-    (evil-set-initial-state 'info-mode 'normal)
+    (evil-set-initial-state 'info-mode 'emacs)
     (add-to-list 'evil-emacs-state-modes 'term-mode)))
 (use-package exec-path-from-shell
   :init
