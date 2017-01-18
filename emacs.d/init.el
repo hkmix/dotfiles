@@ -9,7 +9,7 @@
 (add-to-list 'load-path "~/.emacs.d/cfg/")
 (defun config-library (library)
   "If LIBRARY is found, load it."
-  (if (locate-library library)
+  (when (locate-library library)
       (load-library library)))
 
 ;; Load packages first
@@ -37,13 +37,9 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
- '(package-selected-packages
-   (quote
-    (evil-leader doxymacs column-marker haskell-mode solarized-theme evil-magit evil-commentary delight flycheck-ghcmod git-gutter helm-projectile dtrt-indent evil-surround magit exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode)))
  '(safe-local-variable-values
    (quote
-    ((flycheck-gcc-language-standard . c++14)
-     (insert-tabs-mode)))))
+    (insert-tabs-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
