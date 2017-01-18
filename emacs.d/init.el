@@ -50,9 +50,6 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
- '(package-selected-packages
-   (quote
-    (telephone-line use-package solarized-theme smart-mode-line-powerline-theme powerline-evil isend-mode helm-projectile git-gutter ggtags flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-surround evil-magit evil-leader evil-commentary editorconfig dtrt-indent delight company-ycmd)))
  '(safe-local-variable-values (quote (insert-tabs-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

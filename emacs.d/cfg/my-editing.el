@@ -6,7 +6,6 @@
 
 ;; Editing options
 (setq initial-scratch-message nil)
-(setq initial-major-mode 'org-mode)
 (setq vc-follow-symlinks t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
