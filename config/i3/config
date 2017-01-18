@@ -214,8 +214,3 @@ exec --no-startup-id xset r rate 300 30 &
 exec --no-startup-id start-pulseaudio-x11 &
 exec --no-startup-id ~/.fehbg &
 exec --no-startup-id xrandr --output VGA-1 --auto
-# exec --no-startup-id compton -b &
-exec --no-startup-id insync-headless start &
-exec --no-startup-id redshift-scheduler &
-exec --no-startup-id autoclutter_safe &
-exec --no-startup-id zeal &
