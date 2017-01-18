@@ -21,6 +21,8 @@
 
 ;;; Package list
 (use-package company
+  :diminish
+  (company-mode "Cmp")
   :init
   (progn
     (global-company-mode)
@@ -41,10 +43,37 @@
   editorconfig-mode
   :init
   (editorconfig-mode 1))
+(use-package eldoc
+  :diminish
+  eldoc-mode
+  :init
+  (global-eldoc-mode 1))
 (use-package evil
   :init
   (progn
     (evil-mode t)
+    (use-package evil-leader
+      :init
+      (global-evil-leader-mode)
+      :config
+      (progn
+        (evil-leader/set-leader "<SPC>")
+        (evil-leader/set-key
+          "SPC" 'helm-M-x
+          "."   'ggtags-find-definition
+          ","   'ggtags-prev-mark
+          "b"   'list-buffers
+          "f"   'find-file
+          "g s" 'git-gutter:stage-hunk
+          "g r" 'git-gutter:revert-hunk
+          "g n" 'git-gutter:next-hunk
+          "g p" 'git-gutter:previous-hunk
+          "h"   'helm-mini
+          "k b" 'kill-buffer
+          "m m" 'magit-status
+          "p"   'helm-projectile
+          "w w" 'window-configuration-to-register
+          "w r" 'jump-to-register)))
     (use-package evil-commentary
       :diminish
       evil-commentary-mode
@@ -79,6 +108,7 @@
   (progn
     (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
     (use-package flycheck-haskell)))
+(use-package ggtags)
 (use-package git-gutter
   :bind
   (("C-c g s" . git-gutter:stage-hunk)
@@ -104,7 +134,9 @@
 (use-package magit
   :bind
   ("C-c m" . magit-status))
-(use-package projectile)
+(use-package projectile
+  :diminish
+  (projectile-mode "Prj"))
 (use-package solarized-theme
   :init
   (progn
@@ -119,7 +151,8 @@
     (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
     (setq ycmd-extra-conf-handler 'load)
     (setq ycmd-force-semantic-completion t)
-    (global-ycmd-mode))
+    (global-ycmd-mode)
+    (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
   :config
   (progn
     (use-package flycheck-ycmd
@@ -146,16 +179,20 @@
             (local-set-key (kbd "C-c o") 'ff-find-other-file)
             (company-mode)
             (dtrt-indent-mode 1)
-            (setq fci-rule-column 80)
-            (fci-mode)))
+            (eldoc-mode)
+            (ggtags-mode)))
 
 ;;; Filetype preferences
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;;; Editing options
+(setq initial-scratch-message nil)
+(setq initial-major-mode 'org-mode)
 (setq vc-follow-symlinks t)
+(setq fci-rule-column 80)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(fci-mode)
 (electric-pair-mode)
 
 ;;; UI set-up
@@ -196,7 +233,7 @@
  '(initial-buffer-choice t)
  '(package-selected-packages
    (quote
-    (doxymacs column-marker haskell-mode solarized-theme evil-magit evil-commentary delight flycheck-ghcmod git-gutter helm-projectile dtrt-indent evil-surround magit exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode)))
+    (evil-leader doxymacs column-marker haskell-mode solarized-theme evil-magit evil-commentary delight flycheck-ghcmod git-gutter helm-projectile dtrt-indent evil-surround magit exec-path-from-shell isend-mode evil-mode use-package evil-visual-mark-mode)))
  '(safe-local-variable-values
    (quote
     ((flycheck-gcc-language-standard . c++14)
