@@ -5,27 +5,38 @@
 ;;; Code:
 
 ;; Load all other settings
-
 (add-to-list 'load-path "~/.emacs.d/cfg/")
-(defun config-library (library)
+
+(defun load-config-library (library)
   "If LIBRARY is found, load it."
   (when (locate-library library)
-      (load-library library)))
+    (load-library library)))
+
+(defun my/edit-config ()
+  "Edit the Emacs configuration file."
+  (find-file user-init-file))
+
+(defun my/edit-library (library)
+  "If LIBRARY is found, open that file."
+  (interactive "sEnter the library name: ")
+  (let ((library-path (locate-library library)))
+    (unless (null library-path)
+      (find-file library-path))))
 
 ;; Load packages first
-(config-library "my-packages")
+(load-config-library "my-packages")
 
 ;; Load everything else in no particular order
-(config-library "my-appearance")
-(config-library "my-bindings")
-(config-library "my-editing")
-(config-library "my-filetypes")
-(config-library "my-hooks")
-(config-library "my-misc")
-(config-library "my-org-mode")
+(load-config-library "my-appearance")
+(load-config-library "my-bindings")
+(load-config-library "my-editing")
+(load-config-library "my-filetypes")
+(load-config-library "my-hooks")
+(load-config-library "my-misc")
+(load-config-library "my-org-mode")
 
 ;; Check for platform-specific settings
-(config-library "my-platform")
+(load-config-library "my-platform")
 
 ;; Built-in options
 (setq package-enable-at-startup nil)

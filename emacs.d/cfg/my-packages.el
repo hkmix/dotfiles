@@ -19,6 +19,10 @@
   (package-install 'use-package))
 
 (eval-when-compile (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
+;; Always download packages if needed
 (setq use-package-always-ensure t)
 
 ;; Package list
@@ -73,7 +77,7 @@
           "g p" 'git-gutter:previous-hunk
           "h"   'helm-mini
           "k b" 'kill-buffer
-          "m m" 'magit-status
+          "m"   'magit-status
           "p"   'helm-projectile
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
