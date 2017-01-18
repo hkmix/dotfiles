@@ -1,4 +1,4 @@
-;;; packages.el -- Set up packages
+;;; my-packages.el -- Set up packages
 
 ;;; Commentary:
 
@@ -35,6 +35,7 @@
     (use-package company-ycmd
       :init
       (company-ycmd-setup))))
+
 (use-package delight
   :init
   (delight '((auto-revert-mode nil autorevert)
@@ -43,17 +44,21 @@
              (lisp-interaction-mode "Elisp-I" :major)
              (undo-tree-mode nil undo-tree)
              (abbrev-mode nil abbrev))))
+
 (use-package dtrt-indent)
+
 (use-package editorconfig
   :diminish
   editorconfig-mode
   :init
   (editorconfig-mode 1))
+
 (use-package eldoc
   :diminish
   eldoc-mode
   :init
   (global-eldoc-mode 1))
+
 (use-package evil
   :init
   (evil-mode t)
@@ -101,13 +106,16 @@
     (delete 'term-mode evil-insert-state-modes)
     (evil-set-initial-state 'info-mode 'emacs)
     (add-to-list 'evil-emacs-state-modes 'term-mode)))
+
 (use-package exec-path-from-shell
   :init
   (progn
     (defvar exec-path-from-shell-check-startup-files)
     (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize)))
+
 (use-package fill-column-indicator)
+
 (use-package flycheck
   :init
   (global-flycheck-mode)
@@ -115,7 +123,9 @@
   (progn
     ;; (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
     (use-package flycheck-haskell)))
+
 (use-package ggtags)
+
 (use-package git-gutter
   :bind
   (("C-c g s" . git-gutter:stage-hunk)
@@ -128,7 +138,9 @@
     (git-gutter:linum-setup))
   :diminish
   git-gutter-mode)
+
 (use-package haskell-mode)
+
 (use-package helm
   :bind
   (("M-x" . helm-M-x)
@@ -137,13 +149,17 @@
   (use-package helm-projectile
     :init
     (projectile-mode)))
+
 (use-package isend-mode)
+
 (use-package magit
   :bind
   ("C-c m" . magit-status))
+
 (use-package projectile
   :diminish
   (projectile-mode "Prj"))
+
 (use-package solarized-theme
   :init
   (progn
@@ -152,6 +168,7 @@
     (setq solarized-use-variable-pitch nil
           solarized-scale-org-headlines nil)
     (load-theme 'solarized-dark t)))
+
 (use-package ycmd
   :init
   (progn
