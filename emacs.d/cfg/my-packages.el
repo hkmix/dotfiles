@@ -68,6 +68,8 @@
     (setq evil-normal-state-modes
           (append evil-motion-state-modes evil-normal-state-modes))
     (setq evil-motion-state-modes nil)
+    (define-key evil-normal-state-map "j" 'evil-next-visual-line)
+    (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
     (evil-define-key 'normal dired-mode-map
       "h" 'dired-up-directory
       "j" 'dired-next-line

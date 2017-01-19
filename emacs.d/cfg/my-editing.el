@@ -11,6 +11,7 @@
 (setq-default tab-width 4)
 (setq-default fill-column 80)
 (electric-pair-mode)
+(global-visual-line-mode)
 
 ;; Prevent killing to clipboard
 (setq select-enable-clipboard nil)
