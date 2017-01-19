@@ -20,7 +20,7 @@
 (defun my/edit-config (config)
   "If CONFIG is found, open that file."
   (interactive "sEnter the config name: ")
-  (let ((library-path (locate-library config)))
+  (let ((library-path (locate-library (concat "my-" config))))
     (if (null library-path)
         (message (concat "File \"" config ".el\" not found."))
       (find-file library-path))))

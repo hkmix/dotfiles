@@ -65,6 +65,18 @@
   :config
   (progn
     (defalias #'forward-evil-word #'forward-evil-symbol)
+    (setq evil-normal-state-modes
+          (append evil-motion-state-modes evil-normal-state-modes))
+    (setq evil-motion-state-modes nil)
+    (evil-define-key 'normal dired-mode-map
+      "h" 'dired-up-directory
+      "j" 'dired-next-line
+      "k" 'dired-previous-line
+      "l" 'dired-find-alternate-file)
+    (delete 'term-mode evil-insert-state-modes)
+    (delete 'help-mode evil-insert-state-modes)
+    (add-to-list 'evil-emacs-state-modes 'term-mode)
+    (add-to-list 'evil-emacs-state-modes 'help-mode)
     (use-package evil-leader
       :init
       (global-evil-leader-mode)
@@ -94,22 +106,11 @@
       :diminish
       evil-commentary-mode
       :init
-      (evil-commentary-mode))
+      (evil-commentary-mode 1))
     (use-package evil-surround
       :init
       (global-evil-surround-mode 1))
-    (use-package evil-magit)
-    (setq evil-normal-state-modes
-          (append evil-motion-state-modes evil-normal-state-modes))
-    (setq evil-motion-state-modes nil)
-    (evil-define-key 'normal dired-mode-map
-      "h" 'dired-up-directory
-      "j" 'dired-next-line
-      "k" 'dired-previous-line
-      "l" 'dired-find-alternate-file)
-    (delete 'term-mode evil-insert-state-modes)
-    (evil-set-initial-state 'info-mode 'emacs)
-    (add-to-list 'evil-emacs-state-modes 'term-mode)))
+    (use-package evil-magit)))
 
 (use-package exec-path-from-shell
   :init
@@ -118,14 +119,20 @@
     (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize)))
 
-(use-package fill-column-indicator)
+(use-package fill-column-indicator
+  :init
+  (progn
+    (setq fci-rule-column 80)
+    (define-globalized-minor-mode global-fci-mode fci-mode
+      (lambda ()
+        (fci-mode t)))
+    (global-fci-mode t)))
 
 (use-package flycheck
   :init
   (global-flycheck-mode)
   :config
   (progn
-    ;; (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
     (use-package flycheck-haskell)))
 
 (use-package ggtags)
@@ -152,9 +159,13 @@
   :init
   (use-package helm-projectile
     :init
-    (projectile-mode)))
+    (projectile-mode 1)))
 
 (use-package isend-mode)
+
+(use-package latex-preview-pane
+  :init
+  (latex-preview-pane-enable))
 
 (use-package magit
   :bind
@@ -190,10 +201,6 @@
     (use-package flycheck-ycmd
       :init
       (flycheck-ycmd-setup))))
-
-;; Global package settings
-(setq fci-rule-column 80)
-(fci-mode)
 
 (provide 'my-packages)
 ;;; my-packages.el ends here

@@ -15,10 +15,9 @@
 
 ;; Editing area settings
 (column-number-mode t)
-(global-linum-mode t)
 (show-paren-mode t)
 (global-hl-line-mode t)
-(setq scroll-margin 8)
+(setq scroll-margin 6)
 
 (provide 'my-appearance)
 ;;; my-appearance.el ends here

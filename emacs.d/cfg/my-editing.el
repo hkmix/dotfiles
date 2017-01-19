@@ -9,6 +9,7 @@
 (setq vc-follow-symlinks t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq-default fill-column 80)
 (electric-pair-mode)
 
 ;; Prevent killing to clipboard
