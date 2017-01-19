@@ -12,20 +12,10 @@
   (when (locate-library library)
     (load-library library)))
 
-(defun my/edit-init ()
-  "Edit the Emacs configuration file."
-  (interactive)
-  (find-file user-init-file))
+;; Define some functions
+(load-config-library "my-functions")
 
-(defun my/edit-config (config)
-  "If CONFIG is found, open that file."
-  (interactive "sEnter the config name: ")
-  (let ((library-path (locate-library (concat "my-" config))))
-    (if (null library-path)
-        (message (concat "File \"" config ".el\" not found."))
-      (find-file library-path))))
-
-;; Load packages first
+;; Load packages
 (load-config-library "my-packages")
 
 ;; Load everything else in no particular order

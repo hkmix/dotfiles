@@ -61,13 +61,13 @@
 
 (use-package evil
   :init
-  (evil-mode t)
+  (progn
+    (setq evil-vsplit-window-right t)
+    (setq evil-split-window-below t)
+    (evil-mode t))
   :config
   (progn
     (defalias #'forward-evil-word #'forward-evil-symbol)
-    (setq evil-normal-state-modes
-          (append evil-motion-state-modes evil-normal-state-modes))
-    (setq evil-motion-state-modes nil)
     (define-key evil-normal-state-map "j" 'evil-next-visual-line)
     (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
     (evil-define-key 'normal dired-mode-map
@@ -75,10 +75,6 @@
       "j" 'dired-next-line
       "k" 'dired-previous-line
       "l" 'dired-find-alternate-file)
-    (delete 'term-mode evil-insert-state-modes)
-    (delete 'help-mode evil-insert-state-modes)
-    (add-to-list 'evil-emacs-state-modes 'term-mode)
-    (add-to-list 'evil-emacs-state-modes 'help-mode)
     (use-package evil-leader
       :init
       (global-evil-leader-mode)
