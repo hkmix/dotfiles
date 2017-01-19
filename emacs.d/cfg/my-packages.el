@@ -32,18 +32,18 @@
   :init
   (progn
     (global-company-mode)
-    (use-package company-ycmd
-      :init
-      (company-ycmd-setup))))
+    (use-package company-ycmd)))
 
 (use-package delight
   :init
-  (delight '((auto-revert-mode nil autorevert)
-             (emacs-lisp-mode "Elisp" :major)
-
+  (delight '((emacs-lisp-mode "Elisp" :major)
              (lisp-interaction-mode "Elisp-I" :major)
+             ;; Minor modes
+             (abbrev-mode nil abbrev)
+             (auto-revert-mode nil autorevert)
+             (flyspell-mode "FlyS" flyspell)
              (undo-tree-mode nil undo-tree)
-             (abbrev-mode nil abbrev))))
+             (visual-line-mode nil simple))))
 
 (use-package dtrt-indent)
 
@@ -82,7 +82,7 @@
       (progn
         (evil-leader/set-leader "<SPC>")
         (evil-leader/set-key
-          "SPC" 'helm-M-x
+          "SPC" 'smex
           "."   'ggtags-find-definition
           ","   'ggtags-prev-mark
           "]"   'latex-close-block
@@ -93,11 +93,11 @@
           "g r" 'git-gutter:revert-hunk
           "g n" 'git-gutter:next-hunk
           "g p" 'git-gutter:previous-hunk
-          "h"   'helm-mini
+          "h"   'recentf-open-files
           "k b" 'kill-buffer
           "m"   'magit-status
           "o"   'ff-find-alternate-file
-          "p"   'helm-projectile
+          "p"   'projectile-find-file
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
     (use-package evil-commentary
@@ -150,18 +150,40 @@
 
 (use-package haskell-mode)
 
-(use-package helm
-  :bind
-  (("M-x" . helm-M-x)
-   ("C-c h" . helm-mini))
+(use-package ido
   :init
-  (use-package helm-projectile
-    :init
-    (projectile-mode 1)))
+  (ido-mode 1)
+  (ido-everywhere 1)
+  :config
+  (progn
+    (use-package flx-ido
+      :init
+      (flx-ido-mode 1)
+      :config
+      (progn
+        (setq ido-enable-flex-matching t)
+        (setq ido-use-faces nil)))
+    (use-package ido-ubiquitous
+      :init
+      (ido-ubiquitous-mode 1))
+    (use-package ido-vertical-mode
+      :init
+      (ido-vertical-mode 1)
+      :config
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+    (use-package smex
+      :bind
+      (("M-x" . smex)
+       ("M-X" . smex-major-mode-commands)
+       ("C-c M-x" . execute-extended-command))
+      :init
+      (smex-initialize))))
 
 (use-package isend-mode)
 
 (use-package latex-preview-pane
+  :diminish
+  latex-preview-pane-mode
   :init
   (latex-preview-pane-enable))
 
@@ -176,6 +198,10 @@
 (use-package projectile
   :diminish
   (projectile-mode "Prj"))
+
+(use-package recentf
+  :init
+  (recentf-mode 1))
 
 (use-package solarized-theme
   :init
@@ -192,7 +218,6 @@
     (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
     (setq ycmd-extra-conf-handler 'load)
     (setq ycmd-force-semantic-completion t)
-    (global-ycmd-mode)
     (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
   :config
   (progn

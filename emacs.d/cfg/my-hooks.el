@@ -20,9 +20,11 @@
           (lambda ()
             (local-set-key (kbd "C-c o") 'ff-find-other-file)
             (company-mode 1)
+            (company-ycmd-setup)
             (dtrt-indent-mode 1)
             (eldoc-mode 1)
-            (ggtags-mode 1)))
+            (ggtags-mode 1)
+            (ycmd-mode 1)))
 
 ;; DocView
 ;; Not quite a hook, but acts sort of like one

@@ -42,7 +42,7 @@
  '(initial-buffer-choice t)
  '(package-selected-packages
    (quote
-    (markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
+    (ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
  '(safe-local-variable-values (quote (insert-tabs-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
