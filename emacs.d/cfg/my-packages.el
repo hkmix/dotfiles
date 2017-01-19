@@ -41,7 +41,7 @@
              ;; Minor modes
              (abbrev-mode nil abbrev)
              (auto-revert-mode nil autorevert)
-             (flyspell-mode "FlyS" flyspell)
+             (flyspell-mode " FlyS" flyspell)
              (undo-tree-mode nil undo-tree)
              (visual-line-mode nil simple))))
 
@@ -149,6 +149,13 @@
   git-gutter-mode)
 
 (use-package haskell-mode)
+
+(use-package highlight-chars
+  :init
+  (add-hook 'font-lock-mode-hook
+            (progn
+              'hc-highlight-tabs
+              'hc-highlight-trailing-whitespace)))
 
 (use-package ido
   :init
