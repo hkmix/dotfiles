@@ -212,6 +212,16 @@
           solarized-scale-org-headlines nil)
     (load-theme 'solarized-dark t)))
 
+(use-package ws-butler
+  :diminish
+  ws-butler-mode
+  :init
+  (progn
+    (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
+      (lambda ()
+        (ws-butler-mode t)))
+    (global-ws-butler-mode t)))
+
 (use-package ycmd
   :init
   (progn
