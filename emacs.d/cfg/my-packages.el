@@ -64,6 +64,7 @@
   (evil-mode t)
   :config
   (progn
+    (defalias #'forward-evil-word #'forward-evil-symbol)
     (use-package evil-leader
       :init
       (global-evil-leader-mode)
@@ -74,6 +75,8 @@
           "SPC" 'helm-M-x
           "."   'ggtags-find-definition
           ","   'ggtags-prev-mark
+          "]"   'latex-close-block
+          "a"   'align-regexp
           "b"   'switch-to-buffer
           "f"   'find-file
           "g s" 'git-gutter:stage-hunk
@@ -83,6 +86,7 @@
           "h"   'helm-mini
           "k b" 'kill-buffer
           "m"   'magit-status
+          "o"   'ff-find-alternate-file
           "p"   'helm-projectile
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
@@ -155,6 +159,10 @@
 (use-package magit
   :bind
   ("C-c m" . magit-status))
+
+(use-package markdown-mode
+  :config
+  (use-package markdown-preview-eww))
 
 (use-package projectile
   :diminish
