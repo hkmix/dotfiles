@@ -150,13 +150,6 @@
 
 (use-package haskell-mode)
 
-(use-package highlight-chars
-  :init
-  (add-hook 'font-lock-mode-hook
-            (progn
-              'hc-highlight-tabs
-              'hc-highlight-trailing-whitespace)))
-
 (use-package ido
   :init
   (ido-mode 1)

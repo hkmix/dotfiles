@@ -16,7 +16,7 @@
   (interactive "sEnter the config name: ")
   (let ((library-path (locate-library (concat "my-" config))))
     (if (null library-path)
-        (message (concat "File \"" config ".el\" not found."))
+        (message (concat "File \"my-" config ".el\" not found."))
       (find-file library-path))))
 
 (defun split-window-left ()
