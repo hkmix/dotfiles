@@ -26,6 +26,8 @@
 (setq use-package-always-ensure t)
 
 ;; Package list
+(use-package column-marker)
+
 (use-package company
   :diminish
   (company-mode "Cmp")
@@ -116,15 +118,6 @@
     (defvar exec-path-from-shell-check-startup-files)
     (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize)))
-
-(use-package fill-column-indicator
-  :init
-  (progn
-    (setq fci-rule-column 80)
-    (define-globalized-minor-mode global-fci-mode fci-mode
-      (lambda ()
-        (fci-mode t)))
-    (global-fci-mode t)))
 
 (use-package flycheck
   :init

@@ -10,6 +10,8 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default fill-column 80)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
 (electric-pair-mode)
 (global-visual-line-mode)
 

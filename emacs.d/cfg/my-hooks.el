@@ -7,12 +7,15 @@
 ;; All coding modes
 (add-hook 'prog-mode-hook
           (lambda()
+            (column-marker-1 80)
+            (column-marker-2 100)
             (linum-mode 1)
             (company-mode 1)))
 
 ;; All text-editing modes
 (add-hook 'text-mode-hook
           (lambda()
+            (column-marker-1 80)
             (flyspell-mode 1)))
 
 ;; C/C++
