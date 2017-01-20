@@ -40,10 +40,12 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
+ '(org-agenda-files (quote ("~/Drive/planner.org")))
  '(package-selected-packages
    (quote
     (highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
- '(safe-local-variable-values (quote (insert-tabs-mode))))
+ '(safe-local-variable-values (quote (insert-tabs-mode)))
+ '(shell-escape-mode "-shell-escape"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

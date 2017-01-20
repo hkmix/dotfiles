@@ -88,17 +88,34 @@
           "."   'ggtags-find-definition
           ","   'ggtags-prev-mark
           "]"   'latex-close-block
+          "A"   'ff-find-alternate-file
           "a"   'align-regexp
           "b"   'switch-to-buffer
           "f"   'find-file
+
+          ;; Git-Gutter
           "g s" 'git-gutter:stage-hunk
           "g r" 'git-gutter:revert-hunk
           "g n" 'git-gutter:next-hunk
           "g p" 'git-gutter:previous-hunk
+
           "h"   'recentf-open-files
           "k b" 'kill-buffer
           "m"   'magit-status
-          "o"   'ff-find-alternate-file
+
+          ;; Org-mode
+          "o TAB" 'outline-show-all
+          "o <backtab>" 'org-shifttab
+          "o '" 'org-edit-special
+          "o a" 'org-agenda
+          "o c" 'org-ctrl-c-ctrl-c
+          "o e" 'org-export-dispatch
+          "o n" 'org-next-block
+          "o o" 'org-open-at-point
+          "o p" 'org-previous-block
+          "o P" 'org-latex-export-to-pdf
+          "o r" 'org-reveal
+
           "p"   'projectile-find-file
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
@@ -200,9 +217,7 @@
   :init
   (progn
     (defvar solarized-use-variable-pitch)
-    (defvar solarized-scale-org-headlines)
-    (setq solarized-use-variable-pitch nil
-          solarized-scale-org-headlines nil)
+    (setq solarized-use-variable-pitch nil)
     (load-theme 'solarized-dark t)))
 
 (use-package ws-butler
