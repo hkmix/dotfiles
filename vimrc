@@ -145,7 +145,7 @@ nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
 nmap <F8> :TagbarToggle<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-nnoremap <Leader>ggr :GitGutterRevertHunk<CR>
+nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 
 " Other settings
