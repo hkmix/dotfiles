@@ -11,6 +11,7 @@ general {
         interval = 5
 }
 
+order += "insync_info"
 order += "volume_info"
 order += "eth_info"
 order += "date_info"

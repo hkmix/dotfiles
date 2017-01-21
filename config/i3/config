@@ -190,7 +190,7 @@ bindsym $mod+shift+g gaps inner current set 0
 bar {
         font pango:Iosevka Slab, Icon Bold 12
         height 28
-        tray_output none
+        # tray_output none
         tray_padding 8
         status_command py3status
         strip_workspace_numbers yes
