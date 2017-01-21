@@ -34,7 +34,10 @@
   :init
   (progn
     (global-company-mode)
-    (use-package company-ycmd)))
+    (use-package company-ycmd)
+    (use-package company-jedi
+      :config
+      (add-to-list 'company-backends 'company-jedi))))
 
 (use-package delight
   :init

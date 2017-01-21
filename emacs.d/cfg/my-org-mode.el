@@ -5,6 +5,7 @@
 ;;; Code:
 
 ;; Appearance
+(defvar org-src-fontify-natively)
 (setq org-src-fontify-natively t)
 
 ;; Set languages
@@ -19,6 +20,11 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (linum-mode 1)))
+
+;; Agenda settings
+;; Start on Sunday
+(defvar org-agenda-start-on-weekday)
+(setq org-agenda-start-on-weekday 0)
 
 ;; Enable persistent clocking
 (defvar org-clock-persist)
