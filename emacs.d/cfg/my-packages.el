@@ -120,6 +120,8 @@
           "o r" 'org-reveal
 
           "p"   'projectile-find-file
+          "q q" 'fill-region
+          "q p" 'fill-paragraph
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
     (use-package evil-commentary
@@ -207,6 +209,11 @@
 (use-package markdown-mode
   :config
   (use-package markdown-preview-eww))
+
+(use-package pdf-tools
+  :init
+  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
+  (pdf-tools-install))
 
 (use-package projectile
   :diminish
