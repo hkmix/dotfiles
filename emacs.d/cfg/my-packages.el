@@ -118,7 +118,9 @@
           "o '" 'org-edit-special
           "o a" 'org-agenda
           "o c" 'org-ctrl-c-ctrl-c
+          "o d" 'org-deadline
           "o e" 'org-export-dispatch
+          "o l" 'org-preview-latex-fragment
           "o n" 'org-next-block
           "o o" 'org-open-at-point
           "o p" 'org-previous-block

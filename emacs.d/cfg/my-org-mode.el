@@ -29,6 +29,10 @@
 ;; Start on Sunday
 (setq org-agenda-start-on-weekday 0)
 
+;; States
+(setq org-todo-keywords
+      '((sequence "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")))
+
 ;; Enable persistent clocking
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
