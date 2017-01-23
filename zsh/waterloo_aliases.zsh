@@ -8,3 +8,7 @@ alias se465="cd ~/Waterloo/SE\ 465"
 
 # Other
 alias octave="octave --no-gui"
+
+function wcd() {
+    cd "$HOME/Waterloo Projects/$@"
+}
