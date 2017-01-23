@@ -244,10 +244,6 @@
     (setq solarized-use-variable-pitch nil)
     (load-theme 'solarized-dark t)))
 
-(use-package tex
-  :defer t
-  :ensure auctex)
-
 (use-package ws-butler
   :diminish
   ws-butler-mode
