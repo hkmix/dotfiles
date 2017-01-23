@@ -32,10 +32,9 @@
             (ycmd-mode 1)))
 
 ;; DocView
-;; Not quite a hook, but acts sort of like one
-(defadvice doc-view-display (after fit-width activate)
-  "Automatically fit the DocView document to the window."
-  (doc-view-fit-width-to-window))
+;; Resolution
+(require 'doc-view)
+(setq doc-view-resolution 300)
 
 ;; LaTeX
 ;; Prevent pairing for $
@@ -46,6 +45,9 @@
                             (if (eq "$" c)
                               (electric-pair-default-inhibit c)
                               t)))))
+
+;; Allow revert of PDF files without confirmation
+(setq revert-without-query (quote (".*\.pdf")))
 
 (provide 'my-hooks)
 ;;; my-hooks.el ends here

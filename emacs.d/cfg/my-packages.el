@@ -53,12 +53,14 @@
 (use-package dtrt-indent)
 
 (use-package editorconfig
+  :defer t
   :diminish
   editorconfig-mode
   :init
   (editorconfig-mode 1))
 
 (use-package eldoc
+  :defer t
   :diminish
   eldoc-mode
   :init
@@ -106,6 +108,10 @@
           "k b" 'kill-buffer
           "m"   'magit-status
 
+          ;; LaTeX
+          "L"   'latex-preview-pane-mode
+          "l"   'my/update-latex-preview
+
           ;; Org-mode
           "o TAB" 'outline-show-all
           "o <backtab>" 'org-shifttab
@@ -120,8 +126,7 @@
           "o r" 'org-reveal
 
           "p"   'projectile-find-file
-          "q q" 'fill-region
-          "q p" 'fill-paragraph
+          "q q" 'fill-paragraph
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
     (use-package evil-commentary
@@ -142,15 +147,19 @@
     (exec-path-from-shell-initialize)))
 
 (use-package flycheck
+  :defer t
   :init
   (global-flycheck-mode)
   :config
   (progn
-    (use-package flycheck-haskell)))
+    (use-package flycheck-haskell
+      :defer t)))
 
-(use-package ggtags)
+(use-package ggtags
+  :defer t)
 
 (use-package git-gutter
+  :defer t
   :bind
   (("C-c g s" . git-gutter:stage-hunk)
    ("C-c g r" . git-gutter:revert-hunk)
@@ -163,7 +172,8 @@
   :diminish
   git-gutter-mode)
 
-(use-package haskell-mode)
+(use-package haskell-mode
+  :defer t)
 
 (use-package ido
   :init
@@ -194,26 +204,30 @@
       :init
       (smex-initialize))))
 
-(use-package isend-mode)
+(use-package isend-mode
+    :defer t)
 
 (use-package latex-preview-pane
+  :defer t
   :diminish
   latex-preview-pane-mode
   :init
   (latex-preview-pane-enable))
 
 (use-package magit
+  :defer t
   :bind
   ("C-c m" . magit-status))
 
 (use-package markdown-mode
+  :defer t
   :config
   (use-package markdown-preview-eww))
 
 (use-package pdf-tools
+  :defer t
   :init
-  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
-  (pdf-tools-install))
+  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
 
 (use-package projectile
   :diminish
@@ -230,6 +244,10 @@
     (setq solarized-use-variable-pitch nil)
     (load-theme 'solarized-dark t)))
 
+(use-package tex
+  :defer t
+  :ensure auctex)
+
 (use-package ws-butler
   :diminish
   ws-butler-mode
@@ -241,6 +259,7 @@
     (global-ws-butler-mode t)))
 
 (use-package ycmd
+  :defer t
   :init
   (progn
     (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
@@ -250,6 +269,7 @@
   :config
   (progn
     (use-package flycheck-ycmd
+      :defer t
       :init
       (flycheck-ycmd-setup))))
 

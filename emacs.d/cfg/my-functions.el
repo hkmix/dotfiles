@@ -19,6 +19,14 @@
         (message (concat "File \"my-" config ".el\" not found."))
       (find-file library-path))))
 
+;; Refresh LaTeX preview pane
+(defun my/update-latex-preview ()
+  "Update LaTeX preview pane."
+  (interactive)
+  (other-window 1)
+  (revert-buffer)
+  (other-window -1))
+
 (defun split-window-left ()
   "Split the window to the right and move to it."
   (interactive)
@@ -30,12 +38,6 @@
   (interactive)
   (split-window-below)
   (evil-window-below 1))
-
-;; DocView
-;; Not quite a hook, but acts sort of like one
-(defadvice doc-view-display (after fit-width activate)
-  "Automatically fit the DocView document to the window."
-  (doc-view-fit-width-to-window))
 
 (provide 'my-functions)
 ;;; my-functions ends here
