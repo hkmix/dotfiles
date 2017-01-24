@@ -8,7 +8,6 @@ colors
 
 # For OS X to get default bindings
 export GOPATH="$HOME/.go"
-export HOMEBREW_GITHUB_API_TOKEN="d47ecf83d89e7d4e7fe141f1634a26a2daffed6a"
 export HOMEBREW_NO_EMOJI=1
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -72,7 +71,7 @@ alias venvme=". ./venv/bin/activate"
 
 # OS X-specific aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
-alias brewup="brew update && brew upgrade"
+alias brewup="brew update && brew upgrade && brew cleanup"
 
 prompt_char() {
     if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
