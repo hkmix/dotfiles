@@ -34,10 +34,34 @@
   :init
   (progn
     (global-company-mode)
-    (use-package company-ycmd)
+    (use-package company-flx
+      :init
+      (company-flx-mode +1))
     (use-package company-jedi
+      :defer t
+      :init
+      (add-to-list 'company-backends 'company-jedi))
+    (use-package company-math
+      :defer t
+      :init
+      (add-to-list 'company-backends 'company-math-symbols-unicode)
       :config
-      (add-to-list 'company-backends 'company-jedi))))
+      (progn
+        (setq company-tooltip-align-annotations t)))
+    (use-package company-tern
+      :defer t
+      :init
+      (progn
+        (setq company-tern-property-marker nil)
+        (add-to-list 'company-backends 'company-tern)))
+    (use-package company-ycmd
+      :defer t)
+    (use-package company-web
+      :defer t))
+  :config
+  (progn
+    (setq company-idle-delay 0.3)
+    (setq company-tooltip-limit 10)))
 
 (use-package delight
   :init
@@ -65,6 +89,9 @@
   eldoc-mode
   :init
   (global-eldoc-mode 1))
+
+(use-package emmet-mode
+  :defer t)
 
 (use-package evil
   :init
@@ -122,7 +149,7 @@
           "o e" 'org-export-dispatch
           "o l" 'org-preview-latex-fragment
           "o n" 'org-next-block
-          "o o" 'org-open-at-point
+          "o o" '(org-open-at-point t)
           "o p" 'org-previous-block
           "o P" 'org-latex-export-to-pdf
           "o r" 'org-reveal

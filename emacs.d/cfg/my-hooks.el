@@ -34,7 +34,7 @@
 ;; DocView
 ;; Resolution
 (require 'doc-view)
-(setq doc-view-resolution 300)
+(setq doc-view-resolution 200)
 
 ;; LaTeX
 ;; Prevent pairing for $
@@ -45,9 +45,13 @@
                             (if (eq "$" c)
                               (electric-pair-default-inhibit c)
                               t)))))
-
 ;; Allow revert of PDF files without confirmation
 (setq revert-without-query (quote (".*\.pdf")))
+
+;; Web
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'js-mode-hook 'tern-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
 
 (provide 'my-hooks)
 ;;; my-hooks.el ends here
