@@ -1,0 +1,22 @@
+# +-------------------+
+# | Editor temp files |
+# +-------------------+
+
+# Emacs
+**/*~
+**/#*#
+
+# Vim
+**/*.swp
+**/*.swo
+
+# +------------------------+
+# | Operating system files |
+# +------------------------+
+
+# Windows
+**/Desktop.ini
+
+# macOS
+**/.DS_Store
+**/.Trashes
