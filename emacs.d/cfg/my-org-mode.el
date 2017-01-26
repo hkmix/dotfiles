@@ -15,9 +15,13 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((C . t)
+   (emacs-lisp . t)
+   (java . t)
+   (js . t)
    (haskell . t)
    (latex . t)
-   (python . t)))
+   (python . t)
+   (sh . t)))
 
 ;; Hooks
 (add-hook 'org-mode-hook
