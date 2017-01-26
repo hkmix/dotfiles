@@ -19,21 +19,38 @@
         (message (concat "File \"my-" config ".el\" not found."))
       (find-file library-path))))
 
+;; Invoke projectile-find-file if we are in a project, or start the switcher
+(defun my/projectile-find-file-or-switch-project ()
+  "Invoke Projectile file finder if in a project, else start project switcher."
+  (interactive)
+  (if (projectile-project-p)
+      (projectile-find-file)
+    (projectile-switch-project)))
+
 ;; Refresh LaTeX preview pane
 (defun my/update-latex-preview ()
   "Update LaTeX preview pane."
   (interactive)
-  (other-window 1)
+  (evil-window-right 1)
   (revert-buffer)
-  (other-window -1))
+  (evil-window-left 1))
 
-(defun split-window-left ()
+;; Refresh Org-mode latex
+(defun my/update-latex-preview-org ()
+  "Update LaTeX preview pane in Org-mode."
+  (interactive)
+  (org-latex-export-to-pdf)
+  ;; The function below is only needed if we are using PDF-tools
+  ;; (my/update-latex-preview)
+  )
+
+(defun my/split-window-left ()
   "Split the window to the right and move to it."
   (interactive)
   (split-window-right)
   (evil-window-right 1))
 
-(defun split-window-above ()
+(defun my/split-window-above ()
   "Split the window below and move to it."
   (interactive)
   (split-window-below)

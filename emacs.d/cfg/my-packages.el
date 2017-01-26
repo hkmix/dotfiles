@@ -44,7 +44,7 @@
     (use-package company-math
       :defer t
       :init
-      (add-to-list 'company-backends 'company-math-symbols-unicode)
+      (add-to-list 'company-backends 'company-math-symbols-latex)
       :config
       (progn
         (setq company-tooltip-align-annotations t)))
@@ -147,14 +147,18 @@
           "o c" 'org-ctrl-c-ctrl-c
           "o d" 'org-deadline
           "o e" 'org-export-dispatch
-          "o l" 'org-preview-latex-fragment
+          "o l" 'my/update-latex-preview-org
           "o n" 'org-next-block
           "o o" '(org-open-at-point t)
           "o p" 'org-previous-block
-          "o P" 'org-latex-export-to-pdf
           "o r" 'org-reveal
 
-          "p"   'projectile-find-file
+          "p g" 'projectile-grep
+          "p h" 'projectile-recentf
+          "p b" 'projectile-switch-to-buffer
+          "p p" 'my/projectile-find-file-or-switch-project
+          "p P" 'projectile-known-projects-on-file
+          "p s" 'projectile-run-shell
           "q q" 'fill-paragraph
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))
@@ -253,10 +257,12 @@
   :config
   (use-package markdown-preview-eww))
 
-(use-package pdf-tools
-  :defer t
-  :init
-  (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo"))
+;; (use-package pdf-tools
+;;   :defer t
+;;   :init
+;;   (progn
+;;     (pdf-tools-install)
+;;     (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")))
 
 (use-package projectile
   :diminish

@@ -16,19 +16,19 @@
 (setq frame-title-format '("%b"))
 
 ;; Clipboard
-(defun pasteboard-copy()
+(defun pasteboard-copy ()
   "Copy region to OS X system pasteboard."
   (interactive)
   (shell-command-on-region
     (region-beginning) (region-end) "pbcopy"))
 
-(defun pasteboard-paste()
+(defun pasteboard-paste ()
   "Paste from OS X system pasteboard via `pbpaste' to point."
   (interactive)
   (shell-command-on-region
     (point) (if mark-active (mark) (point)) "pbpaste" nil t))
 
-(defun pasteboard-cut()
+(defun pasteboard-cut ()
   "Cut region and put on OS X system pasteboard."
   (interactive)
   (pasteboard-copy)
