@@ -8,7 +8,7 @@
 (when (window-system)
   (set-face-attribute 'default nil :font "Iosevka Slab-14")
   (add-to-list 'default-frame-alist '(height . 24))
-  (add-to-list 'default-frame-alist '(width . 120))
+  (add-to-list 'default-frame-alist '(width . 80))
   (menu-bar-mode -1)
   (toggle-scroll-bar -1)
   (tool-bar-mode -1))

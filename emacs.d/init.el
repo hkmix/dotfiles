@@ -43,7 +43,9 @@
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
- '(org-agenda-files (quote ("~/Drive/planner.org")))
+ '(org-agenda-files
+   (quote
+    ("~/Drive/Waterloo/interview_prep.org" "~/Drive/planner.org")))
  '(package-selected-packages
    (quote
     (emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
