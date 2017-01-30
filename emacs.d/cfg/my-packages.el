@@ -243,9 +243,7 @@
 (use-package latex-preview-pane
   :defer t
   :diminish
-  latex-preview-pane-mode
-  :init
-  (latex-preview-pane-enable))
+  latex-preview-pane-mode)
 
 (use-package magit
   :defer t
@@ -294,6 +292,7 @@
   :init
   (progn
     (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
+    (setq ycmd-global-config "~/.emacs.d/cfg/ycm_extra_conf.py")
     (setq ycmd-extra-conf-handler 'load)
     (setq ycmd-force-semantic-completion t)
     (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
