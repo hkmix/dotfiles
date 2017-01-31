@@ -169,10 +169,13 @@
       evil-commentary-mode
       :init
       (evil-commentary-mode 1))
+    (use-package evil-magit)
+    (use-package evil-matchit
+      :init
+      (global-matchit-mode 1))
     (use-package evil-surround
       :init
-      (global-evil-surround-mode 1))
-    (use-package evil-magit)))
+      (global-evil-surround-mode 1))))
 
 (use-package exec-path-from-shell
   :init
