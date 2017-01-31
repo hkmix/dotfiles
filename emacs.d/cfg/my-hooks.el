@@ -40,6 +40,7 @@
 ;; Prevent pairing for $
 (add-hook 'latex-mode-hook
           (lambda ()
+            (linum-mode 1)
             (setq-default electric-pair-inhibit-predicate
                           (lambda (c)
                             (if (eq "$" c)
