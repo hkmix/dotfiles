@@ -172,7 +172,7 @@
     (use-package evil-magit)
     (use-package evil-matchit
       :init
-      (global-matchit-mode 1))
+      (global-evil-matchit-mode 1))
     (use-package evil-surround
       :init
       (global-evil-surround-mode 1))))
