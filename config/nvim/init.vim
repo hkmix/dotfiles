@@ -21,7 +21,6 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
-Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'godlygeek/tabular'
@@ -41,6 +40,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'petRUShka/vim-opencl', {'for': ['opencl', 'cl']}
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'sheerun/vim-polyglot'
+Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
