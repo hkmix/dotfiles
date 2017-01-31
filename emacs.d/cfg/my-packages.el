@@ -37,19 +37,18 @@
     (use-package company-flx
       :init
       (company-flx-mode +1))
-    (use-package company-jedi
-      :defer t
+    (use-package jedi-core
       :init
-      (add-to-list 'company-backends 'company-jedi))
+      (use-package company-jedi
+        :init
+        (add-to-list 'company-backends 'company-jedi)))
     (use-package company-math
-      :defer t
       :init
       (add-to-list 'company-backends 'company-math-symbols-latex)
       :config
       (progn
         (setq company-tooltip-align-annotations t)))
     (use-package company-tern
-      :defer t
       :init
       (progn
         (setq company-tern-property-marker nil)
@@ -148,8 +147,10 @@
           "o d" 'org-deadline
           "o e" 'org-export-dispatch
           "o l" 'my/update-latex-preview-org
+          "o N" 'org-babel-next-src-block
           "o n" 'org-next-block
           "o o" '(org-open-at-point t)
+          "o P" 'org-babel-previous-src-block
           "o p" 'org-previous-block
           "o r" 'org-reveal
 
@@ -159,6 +160,7 @@
           "p p" 'my/projectile-find-file-or-switch-project
           "p P" 'projectile-known-projects-on-file
           "p s" 'projectile-run-shell
+          "R"   'ruler-mode
           "q q" 'fill-paragraph
           "w w" 'window-configuration-to-register
           "w r" 'jump-to-register)))

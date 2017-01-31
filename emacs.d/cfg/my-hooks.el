@@ -17,7 +17,6 @@
 ;; All text-editing modes
 (add-hook 'text-mode-hook
           (lambda()
-            (ruler-mode 1)
             (column-marker-1 80)
             (flyspell-mode 1)))
 
