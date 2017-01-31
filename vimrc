@@ -22,7 +22,6 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'editorconfig/editorconfig-vim'
-Plug 'edsono/vim-matchit'
 Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
@@ -38,6 +37,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
+Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
