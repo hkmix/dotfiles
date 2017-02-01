@@ -101,7 +101,6 @@ if has('gui_running')
     set guioptions-=l
     set guioptions-=b
     set guioptions-=m
-    set guifont=InputMonoCondensed:h14
 endif
 
 " Autocommands
