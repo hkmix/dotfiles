@@ -59,9 +59,6 @@
       :defer t))
   :config
   (progn
-    ;; Fix company-mode use of return as completion
-    (define-key company-active-map (kbd "<return>") nil)
-    (define-key company-active-map (kbd "RET") nil)
     (setq company-idle-delay 0.3)
     (setq company-tooltip-limit 10)))
 
@@ -119,10 +116,6 @@
         (evil-leader/set-leader "<SPC>")
         (evil-leader/set-key
           "SPC" 'smex
-          "."   'ggtags-find-definition
-          ","   'ggtags-prev-mark
-          "]"   'latex-close-block
-          "A"   'ff-find-alternate-file
           "a"   'align-regexp
           "b"   'switch-to-buffer
           "f"   'find-file
@@ -137,11 +130,27 @@
           "k b" 'kill-buffer
           "m"   'magit-status
 
-          ;; LaTeX
-          "L"   'latex-preview-pane-mode
-          "l"   'my/update-latex-preview
+          ;; Projectile
+          "p g" 'projectile-grep
+          "p h" 'projectile-recentf
+          "p b" 'projectile-switch-to-buffer
+          "p p" 'my/projectile-find-file-or-switch-project
+          "p P" 'projectile-known-projects-on-file
+          "p s" 'projectile-run-shell
 
-          ;; Org-mode
+          "R"   'ruler-mode
+          "q q" 'fill-paragraph
+          "w w" 'window-configuration-to-register
+          "w r" 'jump-to-register)
+        (evil-leader/set-key-for-mode 'c++-mode
+          "."   'ggtags-find-definition
+          ","   'ggtags-prev-mark
+          "A"   'ff-find-alternate-file)
+        (evil-leader/set-key-for-mode 'latex-mode
+          "]"   'latex-close-block
+          "L"   'latex-preview-pane-mode
+          "l"   'my/update-latex-preview)
+        (evil-leader/set-key-for-mode 'org-mode
           "o TAB" 'outline-show-all
           "o <backtab>" 'org-shifttab
           "o '" 'org-edit-special
@@ -156,18 +165,10 @@
           "o o" '(org-open-at-point t)
           "o P" 'org-babel-previous-src-block
           "o p" 'org-previous-block
-          "o r" 'org-reveal
-
-          "p g" 'projectile-grep
-          "p h" 'projectile-recentf
-          "p b" 'projectile-switch-to-buffer
-          "p p" 'my/projectile-find-file-or-switch-project
-          "p P" 'projectile-known-projects-on-file
-          "p s" 'projectile-run-shell
-          "R"   'ruler-mode
-          "q q" 'fill-paragraph
-          "w w" 'window-configuration-to-register
-          "w r" 'jump-to-register)))
+          "o r" 'org-reveal)
+        (evil-leader/set-key-for-mode 'rust-mode
+          "F"   'rust-enable-format-on-save
+          "f"   'rust-format-buffer)))
     (use-package evil-commentary
       :diminish
       evil-commentary-mode
@@ -283,7 +284,9 @@
   :init
   (progn
     (use-package cargo)
-    (use-package flycheck-rust)
+    (use-package flycheck-rust
+      :init
+      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
     (use-package racer
       :bind
       (:map rust-mode-map
