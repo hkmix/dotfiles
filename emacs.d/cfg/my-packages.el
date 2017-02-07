@@ -142,6 +142,7 @@
           "o TAB" 'outline-show-all
           "o <backtab>" 'org-shifttab
           "o '" 'org-edit-special
+          "o A" 'my/open-planner
           "o a" 'org-agenda
           "o c" 'org-ctrl-c-ctrl-c
           "o d" 'org-deadline
@@ -274,6 +275,21 @@
 (use-package recentf
   :init
   (recentf-mode 1))
+
+(use-package rust-mode
+  :init
+  (progn
+    (use-package cargo)
+    (use-package flycheck-rust)
+    (use-package racer
+      :bind
+      (:map rust-mode-map
+            ("TAB" . company-indent-or-complete-common))
+      :init
+      (progn
+        (add-hook 'rust-mode-hook #'racer-mode)
+        (add-hook 'racer-mode-hook #'eldoc-mode)
+        (add-hook 'racer-mode-hook #'company-mode)))))
 
 (use-package solarized-theme
   :init

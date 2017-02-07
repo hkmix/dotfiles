@@ -48,5 +48,8 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+;; Set link opening defaults
+(setq browse-url-browser-function 'eww-browse-url)
+
 (provide 'my-org-mode)
 ;;; my-org-mode.el ends here

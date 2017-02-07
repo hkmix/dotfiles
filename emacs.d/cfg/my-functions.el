@@ -56,5 +56,11 @@
   (split-window-below)
   (evil-window-below 1))
 
+;; Edit the init file
+(defun my/open-planner ()
+  "Edit the planner file."
+  (interactive)
+  (find-file "~/Drive/planner.org"))
+
 (provide 'my-functions)
 ;;; my-functions ends here

@@ -11,7 +11,7 @@ export GOPATH="$HOME/.go"
 export HOMEBREW_NO_EMOJI=1
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:/usr/local/bin:$HOME/.cabal/bin:$HOME/Applications/cling/bin/actual:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/Applications/Eclipse.app/Contents/Eclipse:/usr/local/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$HOME/.local/bin:$HOME/.bin:$PATH"
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 # Misc appearance settings
@@ -67,10 +67,10 @@ alias rcupl="rcup -B osx -v"
 # Other aliases
 alias dog="vimcat"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
-alias todo="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda "n")' 2>/dev/null"
+alias todo="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null"
 alias venvme=". ./venv/bin/activate"
 
-# Aliases
+# More aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
 alias brewup="brew update && brew upgrade && brew cleanup"
 

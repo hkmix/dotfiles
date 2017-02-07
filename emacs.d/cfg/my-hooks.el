@@ -46,6 +46,7 @@
                             (if (eq "$" c)
                               (electric-pair-default-inhibit c)
                               t)))))
+
 ;; Allow revert of PDF files without confirmation
 (setq revert-without-query (quote (".*\.pdf")))
 

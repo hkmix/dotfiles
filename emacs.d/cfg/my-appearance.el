@@ -10,7 +10,7 @@
   (add-to-list 'default-frame-alist '(height . 24))
   (add-to-list 'default-frame-alist '(width . 80))
   (menu-bar-mode -1)
-  (toggle-scroll-bar -1)
+  (scroll-bar-mode -1)
   (tool-bar-mode -1))
 
 ;; Editing area settings
