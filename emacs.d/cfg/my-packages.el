@@ -59,6 +59,9 @@
       :defer t))
   :config
   (progn
+    ;; Fix company-mode use of return as completion
+    (define-key company-active-map (kbd "<return>") nil)
+    (define-key company-active-map (kbd "RET") nil)
     (setq company-idle-delay 0.3)
     (setq company-tooltip-limit 10)))
 
