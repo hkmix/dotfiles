@@ -137,7 +137,6 @@
           "p h" 'projectile-recentf
           "p b" 'projectile-switch-to-buffer
           "p p" 'my/projectile-find-file-or-switch-project
-          "p P" 'projectile-known-projects-on-file
           "p s" 'projectile-run-shell
 
           "R"   'ruler-mode
