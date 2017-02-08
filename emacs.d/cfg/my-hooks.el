@@ -50,6 +50,11 @@
 ;; Allow revert of PDF files without confirmation
 (setq revert-without-query (quote (".*\.pdf")))
 
+;; Rust
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command) "cargo run")))
+
 ;; Web
 (add-hook 'css-mode-hook  'emmet-mode)
 (add-hook 'js-mode-hook 'tern-mode)

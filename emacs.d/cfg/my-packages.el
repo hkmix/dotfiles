@@ -118,6 +118,8 @@
           "SPC" 'smex
           "a"   'align-regexp
           "b"   'switch-to-buffer
+          "C"   'compile
+          "c"   'recompile
           "f"   'find-file
 
           ;; Git-Gutter
@@ -295,7 +297,8 @@
       (progn
         (add-hook 'rust-mode-hook #'racer-mode)
         (add-hook 'racer-mode-hook #'eldoc-mode)
-        (add-hook 'racer-mode-hook #'company-mode)))))
+        (add-hook 'racer-mode-hook #'company-mode)))
+    (use-package toml-mode)))
 
 (use-package solarized-theme
   :init
