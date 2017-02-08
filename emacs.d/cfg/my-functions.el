@@ -19,6 +19,12 @@
         (message (concat "File \"my-" config ".el\" not found."))
       (find-file library-path))))
 
+;; Force open file in Emacs
+(defun my/open-at-point ()
+  "Force open file at point in Emacs."
+  (interactive)
+  (org-open-at-point t))
+
 ;; Invoke projectile-find-file if we are in a project, or start the switcher
 (defun my/projectile-find-file-or-switch-project ()
   "Invoke Projectile file finder if in a project, else start project switcher."

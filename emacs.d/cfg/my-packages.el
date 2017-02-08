@@ -131,6 +131,7 @@
           "h"   'recentf-open-files
           "k b" 'kill-buffer
           "m"   'magit-status
+          "o A" 'my/open-planner
 
           ;; Projectile
           "p g" 'projectile-grep
@@ -155,7 +156,6 @@
           "o TAB" 'outline-show-all
           "o <backtab>" 'org-shifttab
           "o '" 'org-edit-special
-          "o A" 'my/open-planner
           "o a" 'org-agenda
           "o c" 'org-ctrl-c-ctrl-c
           "o d" 'org-deadline
@@ -163,7 +163,7 @@
           "o l" 'my/update-latex-preview-org
           "o N" 'org-babel-next-src-block
           "o n" 'org-next-block
-          "o o" '(org-open-at-point t)
+          "o o" 'my/open-at-point
           "o P" 'org-babel-previous-src-block
           "o p" 'org-previous-block
           "o r" 'org-reveal)
