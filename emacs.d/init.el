@@ -43,7 +43,7 @@
  '(org-agenda-files (quote ("~/Drive/planner.org")))
  '(package-selected-packages
    (quote
-    (toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
+    (markdown-preview-eww toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-ycmd flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight company-ycmd column-marker)))
  '(safe-local-variable-values (quote (insert-tabs-mode)))
  '(shell-escape-mode "-shell-escape"))
 (custom-set-faces
