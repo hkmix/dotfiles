@@ -3,7 +3,7 @@
 # <sequence> ST, and for all ESCs in <sequence> to be replaced with ESC ESC. It
 # only accepts ESC backslash for ST.
 function print_osc() {
-    if [ x"$TERM" = "xscreen" ] ; then
+    if [ x"$TERM" = "screen-256colors" ] ; then
         printf "\033Ptmux;\033\033]"
     else
         printf "\033]"
@@ -12,7 +12,7 @@ function print_osc() {
 
 # More of the tmux workaround described above.
 function print_st() {
-    if [ x"$TERM" = "xscreen" ] ; then
+    if [ x"$TERM" = "screen-256colors" ] ; then
         printf "\a\033\\"
     else
         printf "\a"
@@ -27,7 +27,7 @@ function list_file() {
     print_osc
     printf '1337;File=name='`echo -n "$fn" | base64`";"
     wc -c "$fn" | awk '{printf "size=%d",$1}'
-    printf ";inline=1;height=3;width=3;preserveAspectRatio=true"
+    printf ";inline=1;height=5;width=5;preserveAspectRatio=true"
     printf ":"
     base64 < "$fn"
     print_st
