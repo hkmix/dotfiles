@@ -103,6 +103,7 @@
     (defalias #'forward-evil-word #'forward-evil-symbol)
     (define-key evil-normal-state-map "j" 'evil-next-visual-line)
     (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+    (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
     (evil-define-key 'normal dired-mode-map
       "h" 'dired-up-directory
       "j" 'dired-next-line
@@ -140,6 +141,7 @@
           "p p" 'my/projectile-find-file-or-switch-project
           "p s" 'projectile-run-shell
 
+          "r"   'revert-buffer
           "R"   'ruler-mode
           "q q" 'fill-paragraph
           "w w" 'window-configuration-to-register
