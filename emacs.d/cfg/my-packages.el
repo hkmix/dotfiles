@@ -37,6 +37,9 @@
     (use-package company-flx
       :init
       (company-flx-mode +1))
+    (use-package company-ghc
+      :init
+      (add-to-list 'company-backends 'company-ghc))
     (use-package jedi-core
       :init
       (use-package company-jedi
@@ -198,7 +201,7 @@
   (global-flycheck-mode)
   :config
   (progn
-    (use-package flycheck-haskell
+    (use-package flycheck-ghcmod
       :defer t)))
 
 (use-package ggtags
@@ -267,13 +270,6 @@
   :defer t
   :config
   (use-package markdown-preview-eww))
-
-;; (use-package pdf-tools
-;;   :defer t
-;;   :init
-;;   (progn
-;;     (pdf-tools-install)
-;;     (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")))
 
 (use-package projectile
   :diminish
