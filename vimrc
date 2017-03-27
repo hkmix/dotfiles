@@ -24,7 +24,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
-Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'lervag/vimtex'
@@ -34,6 +33,7 @@ Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/matchit'
@@ -69,7 +69,7 @@ endif
 set complete-=1
 set completeopt-=preview
 set cursorline
-set foldmethod=manual
+set foldmethod=syntax
 set ignorecase
 set incsearch
 set laststatus=2
@@ -158,12 +158,14 @@ let g:gitgutter_realtime = 1
 let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:rooter_manual_only = 1
+let g:rustfmt_autosave = 1
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
 let g:vimtex_fold_enabled = 0
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_imaps_enabled = 1
+let g:vimtex_imaps_leader = '<tab>'
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
