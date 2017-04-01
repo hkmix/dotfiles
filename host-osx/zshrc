@@ -14,6 +14,7 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$HOME/.local/bin:$HOME/.bin:$PATH"
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 export RUST_SRC_PATH=$HOME/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src
+export EDITOR=nvim
 
 # Misc appearance settings
 export FZF_DEFAULT_OPTS='
