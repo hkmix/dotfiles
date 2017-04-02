@@ -69,7 +69,7 @@ endif
 set complete-=1
 set completeopt-=preview
 set cursorline
-set foldmethod=syntax
+set foldmethod=manual
 set ignorecase
 set incsearch
 set laststatus=2
