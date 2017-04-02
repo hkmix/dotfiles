@@ -68,7 +68,7 @@ alias rcupl="rcup -B osx -v"
 
 # Other aliases
 alias dog="vimcat"
-alias gitcd="cd \$(git rev-parse --show-toplevel)"
+alias gitcd="cd \"\$(git rev-parse --show-toplevel)\""
 if command -v rust-term-colourizer >/dev/null 2>&1 && test -f "$HOME/Documents/org-agenda.regex"; then
     alias todo="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null | rust-term-colourizer ~/Documents/org-agenda.regex"
     alias todo_regular="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null"
