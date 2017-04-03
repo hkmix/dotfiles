@@ -70,6 +70,7 @@ set complete-=1
 set completeopt-=preview
 set cursorline
 set foldmethod=manual
+set foldmarker={{{{{,}}}}}
 set ignorecase
 set incsearch
 set laststatus=2
