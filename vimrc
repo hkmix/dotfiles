@@ -165,8 +165,7 @@ let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
 let g:vimtex_fold_enabled = 0
 let g:vimtex_latexmk_callback = 0
-let g:vimtex_imaps_enabled = 1
-let g:vimtex_imaps_leader = '<tab>'
+let g:vimtex_imaps_enabled = 0
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
@@ -287,10 +286,18 @@ augroup END
 
 augroup filetype_tex
     autocmd!
+    autocmd FileType tex setlocal foldmethod=marker
     autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
     autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
     autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
     autocmd FileType tex let delimitMate_matchpairs="(:),[:],{:},`:'"
     autocmd Filetype tex let delimitMate_quotes="\" '"
+    autocmd FileType tex imap <buffer> ]] <Plug>(vimtex-delim-close)
+    autocmd FileType tex nnoremap <buffer> )) <Plug>(vimtex-delim-toggle-modifier)
+    autocmd FileType tex nnoremap <buffer> cE <Plug>(vimtex-env-change)
+    autocmd FileType tex nnoremap <buffer> ]] <Plug>(vimtex-]])
+    autocmd FileType tex nnoremap <buffer> ][ <Plug>(vimtex-][)
+    autocmd FileType tex nnoremap <buffer> [] <Plug>(vimtex-[])
+    autocmd FileType tex nnoremap <buffer> [[ <Plug>(vimtex-[[)
 augroup END
