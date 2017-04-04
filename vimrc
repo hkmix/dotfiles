@@ -288,6 +288,7 @@ augroup filetype_tex
     autocmd!
     autocmd FileType tex setlocal foldmethod=marker
     autocmd FileType tex setlocal colorcolumn=80 spell
+    autocmd FileType tex nnoremap <buffer> <F8> :VimtexTocToggle<CR>
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
     autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
     autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
