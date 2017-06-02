@@ -8,7 +8,7 @@ from syscmd import syscmd
 
 class Py3status:
     def eth_info(self):
-        network_name = 'em1'
+        network_name = 'enp0s3'
         status = 'up'
         eth_status = syscmd.run(['ip', 'link', 'show', network_name])
         colour = colours.green
@@ -19,7 +19,6 @@ class Py3status:
 
         return {
             'markup': 'pango',
-            'color': colour,
-            'full_text': '    {}  {}'.format('', status),
+            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colour, '', status),
             'cached_until': 0,
         }

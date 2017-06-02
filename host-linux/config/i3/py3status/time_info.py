@@ -12,10 +12,6 @@ class Py3status:
 
         return {
             'markup': 'pango',
-            'color': colours.base1,
-            'full_text': '    {} {}'.format('', time_status),
+            'full_text': '<span color="{}"><span gravity="west">{}</span> {}</span>'.format(colours.base1, '', time_status),
             'cached_until': 0,
         }
-
-    def on_click(self, event):
-        subprocess.call(['gnome-clocks'])
