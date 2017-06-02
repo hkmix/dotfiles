@@ -57,7 +57,8 @@ class Py3status:
 
         return {
             'markup': 'pango',
-            'full_text': '<span color="{}"><span gravity="west">{}</span> {}%{}</span>'.format(colour, vol_char, volume, mute_status),
+            'color': colour,
+            'full_text': '    {}  {}%{}'.format(vol_char, volume, mute_status),
             'cached_until': 0,
         }
 
