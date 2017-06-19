@@ -15,8 +15,8 @@ export GOPATH="$HOME/.go"
 export EDITOR=vim
 export TERMINFO=/usr/share/terminfo
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export PATH="$HOME/.linuxbrew/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
 source $HOME/.cargo/env
 typeset -U PATH
 
@@ -74,14 +74,15 @@ calc() {
 }
 
 # RCM aliases
-alias lsrcl="lsrc -B linux -v"
-alias mkrcl="mkrc -B linux -v"
-alias rcupl="rcup -B linux -v"
+alias lsrcl="lsrc -B linux-legacy -v"
+alias mkrcl="mkrc -B linux-legacy -v"
+alias rcupl="rcup -B linux-legacy -v"
 
 # Other aliases
 alias dog="vimcat"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"
 alias venvme=". ./venv/bin/activate"
+alias buildpath="export PATH=/usr/local/bin:/usr/bin:$PATH"
 
 # Prompt
 
@@ -107,10 +108,18 @@ ccd() {
 }
 
 mkcd() {
-    if [ $# -ge 1 ]; then
+    if [ "$#" -ge 1 ]; then
         mkdir -p "$1" && cd "$1"
     else
         echo "Usage: $0 dir-name"
+    fi
+}
+
+vimwhich() {
+    if [ "$#" -ge 1 ]; then
+        vim $(which "$1")
+    else
+        echo "Usage: $0 executable-name"
     fi
 }
 
@@ -120,3 +129,6 @@ mkcd() {
 
 # Start X
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+# Start xbindkeys otherwise
+pgrep -x 'xbindkeys' >/dev/null 2>&1 || xbindkeys &
