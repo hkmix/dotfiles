@@ -32,6 +32,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'racer-rust/vim-racer'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
@@ -81,7 +82,8 @@ set nohidden
 set nohlsearch
 set number
 set ruler
-set scrolloff=8
+set scrolloff=4
+set scrolljump=-50
 set showcmd
 set smartcase
 set splitbelow
@@ -159,6 +161,8 @@ let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
+let g:racer_cmd = "~/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
 let g:rooter_manual_only = 1
 let g:rustfmt_autosave = 1
 let g:tagbar_compact = 1
@@ -283,6 +287,14 @@ augroup END
 augroup filetype_metal
     autocmd!
     autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
+augroup END
+
+augroup filetype_rust
+    autocmd!
+    autocmd FileType rust nnoremap <buffer> gD <Plug>(rust-def)
+    autocmd FileType rust nnoremap <buffer> gs <Plug>(rust-def-split)
+    autocmd FileType rust nnoremap <buffer> gx <Plug>(rust-def-vertical)
+    autocmd FileType rust nnoremap <buffer> gd <Plug>(rust-doc)
 augroup END
 
 augroup filetype_tex
