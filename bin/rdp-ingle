@@ -1,3 +1,0 @@
-#!/bin/sh
-
-rdesktop -u 'jzhou@ingleinsurance.com' -f -g ${1:-1920x1080} -K -r sound:local INTW460WN-CC04

@@ -1,11 +1,12 @@
 #!/bin/bash
 
-font="InputMonoCondensed"
+font="iosevka slab"
 
 if [[ "$#" -ne 1 ]]; then
     echo "Usage: ${0##*/} font-size"
     exit 1
 fi
-printf '\33]50;%s\007' "xft:$font:size=$1"
-sleep 1
-echo "New dimensions: $(tput cols)x$(tput lines)"
+printf '\33]50;%s\007' "xft:$font:regular:size=$1"
+printf '\33]711;%s\007' "xft:$font:bold:size=$1"
+printf '\33]712;%s\007' "xft:$font:italic:size=$1"
+printf '\33]713;%s\007' "xft:$font:bold:italic:size=$1"

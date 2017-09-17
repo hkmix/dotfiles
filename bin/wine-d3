@@ -1,4 +1,0 @@
-#!/bin/sh
-
-export WINEPREFIX=$HOME/.wine-d3
-setarch i386 -L -B -R -3 wine "/run/media/jackzhou/zhouExternalHD/Games/Diablo III/Diablo III/Diablo III.exe"
