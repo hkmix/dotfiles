@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ssh -Y z43zhou@linux.student.cs.uwaterloo.ca
+ssh z43zhou@linux.student.cs.uwaterloo.ca $@

@@ -1,10 +1,11 @@
 # Classes
-alias cs341="cd ~/Waterloo/CS\ 341"
-alias cs349="cd ~/Waterloo/CS\ 349"
-alias cs370="cd ~/Waterloo/CS\ 370"
-alias ece358="cd ~/Waterloo/ECE\ 358"
-alias se350="cd ~/Waterloo/SE\ 350"
-alias se465="cd ~/Waterloo/SE\ 465"
+alias cs343="cd ~/Waterloo/CS\ 343"
+alias cs348="cd ~/Waterloo/CS\ 348"
+alias cs488="cd ~/Waterloo/CS\ 488"
+alias phil226="cd ~/Waterloo/PHIL\ 226"
+alias se380="cd ~/Waterloo/SE\ 380"
+alias se390="cd ~/Waterloo/SE\ 390"
+alias se464="cd ~/Waterloo/SE\ 464"
 
 # Other
 alias octave="octave --no-gui"
