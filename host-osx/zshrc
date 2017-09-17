@@ -50,6 +50,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 alias bc="bc -l"
 alias df="df -h"
 alias du="du -h"
+alias dus="du -d1h | sort -h"
 alias grep="grep --color=auto"
 alias l="ls -a"
 alias la="ls -a"
