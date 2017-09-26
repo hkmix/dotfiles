@@ -13,17 +13,19 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
+Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'lervag/vimtex'
@@ -32,8 +34,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'racer-rust/vim-racer'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
@@ -56,12 +58,12 @@ filetype plugin indent on
 syntax on
 
 set autoindent
-set cino+=(0,:0,l1,g0,N-s,m1,j1
+set cino+=:0,l1,g0,N-s,m1,j1,(s
 set expandtab
 set smarttab
-set sts=4
-set sw=4
-set ts=4
+set sts=2
+set sw=2
+set ts=2
 
 set backspace=indent,eol,start
 if has('linebreak')
@@ -150,6 +152,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
+nnoremap <Leader>d :Dash<CR>
+nnoremap <Leader>D :Dash!<CR>
 
 " Other settings
 let g:delimitMate_expand_cr = 2
@@ -161,21 +165,21 @@ let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
-let g:racer_cmd = "~/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
 let g:rooter_manual_only = 1
 let g:rustfmt_autosave = 1
+let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
 let g:vimtex_fold_enabled = 0
-let g:vimtex_latexmk_callback = 0
+let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_imaps_enabled = 0
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src'
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
-let g:ycm_confirm_extra_conf = 0
 
 " UltiSnips + YCM compat
 let g:ycm_key_list_select_completion = ['<c-n>', '<down>']
@@ -259,7 +263,6 @@ augroup filetype_objcpp
     autocmd FileType objcpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
     autocmd FileType objcpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType objcpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
-    autocmd FileType george nnoremap <buffer> <Leader>gc :GeorgeCheck<CR>
     autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl<CR>
 augroup END
 
@@ -287,14 +290,6 @@ augroup END
 augroup filetype_metal
     autocmd!
     autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
-augroup END
-
-augroup filetype_rust
-    autocmd!
-    autocmd FileType rust nnoremap <buffer> gD <Plug>(rust-def)
-    autocmd FileType rust nnoremap <buffer> gs <Plug>(rust-def-split)
-    autocmd FileType rust nnoremap <buffer> gx <Plug>(rust-def-vertical)
-    autocmd FileType rust nnoremap <buffer> gd <Plug>(rust-doc)
 augroup END
 
 augroup filetype_tex
