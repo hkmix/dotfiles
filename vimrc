@@ -8,36 +8,36 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-let g:plug_url_format = 'git@github.com:%s.git'
+" let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
+Plug 'Rip-Rip/clang_complete'
 Plug 'Shougo/vimproc'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer'}
+Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'ajh17/VimCompletesMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab' | Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex'
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
@@ -58,7 +58,7 @@ filetype plugin indent on
 syntax on
 
 set autoindent
-set cino+=:0,l1,g0,N-s,m1,j1,(s
+set cino+=:0,l1,g0,N-s,m1,j1
 set expandtab
 set smarttab
 set sts=2
@@ -92,6 +92,11 @@ set splitbelow
 set splitright
 set timeoutlen=3000
 set ttimeoutlen=100
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 set wildmenu
 
 " Appearance
@@ -156,6 +161,10 @@ nnoremap <Leader>d :Dash<CR>
 nnoremap <Leader>D :Dash!<CR>
 
 " Other settings
+let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'ultisnips'
+let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_matchpairs = "(:),[:],{:}"
@@ -171,23 +180,11 @@ let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_imaps_enabled = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_open_loclist_on_ycm_diags = 1
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src'
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
-let g:ycm_semantic_triggers = {'haskell': ['.'], 'objcpp': ['.', '->', '::']}
-
-" UltiSnips + YCM compat
-let g:ycm_key_list_select_completion = ['<c-n>', '<down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<up>']
-let g:SuperTabDefaultCompletionType = '<c-n>'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " LightLine settings
 let g:lightline = {
@@ -239,7 +236,6 @@ autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 " Language-specific groups
 augroup filetype_c
     autocmd!
-    autocmd FileType c nnoremap <Leader>cc :!clear && compile c % "-Wall -std=c99" "-o $(basename % .c)" && ./"$(basename % .c)"<CR>
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
     autocmd FileType c nnoremap <buffer> <Leader>xh :sp %<.h<CR>
     autocmd FileType c nnoremap <buffer> <Leader>vc :vsp %<.c<CR>
@@ -248,13 +244,13 @@ augroup END
 
 augroup filetype_cpp
     autocmd!
-    autocmd FileType cpp nnoremap <buffer> <Leader>cc :!clear && compile cpp % "-Wall -std=c++14" "-o $(basename % .cc)" && ./"$(basename % .cc)"<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2p0wcwdefine<ESC>jciwendif //<ESC>O<CR><ESC>O<ESC>
 augroup END
 
 augroup filetype_objcpp
@@ -284,7 +280,7 @@ augroup END
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell
-    autocmd FileType markdown setlocal sts=2 sw=2 ts=2
+    autocmd FileType markdown setlocal sts=4 sw=4 ts=4
 augroup END
 
 augroup filetype_metal
