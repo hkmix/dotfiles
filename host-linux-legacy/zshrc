@@ -17,7 +17,7 @@ export TERMINFO=/usr/share/terminfo
 
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
-source $HOME/.cargo/env
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env" 
 typeset -U PATH
 
 # Misc appearance settings
@@ -131,4 +131,4 @@ vimwhich() {
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
 # Start xbindkeys otherwise
-pgrep -x 'xbindkeys' >/dev/null 2>&1 || xbindkeys &
+command -v xbindkeys >/dev/null 2>&1 && (pgrep -x 'xbindkeys' >/dev/null 2>&1 || xbindkeys &)
