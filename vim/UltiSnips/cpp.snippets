@@ -1,3 +1,9 @@
+snippet for
+for (${1:${VISUAL:const }}auto&& $2 : $3) {
+	$0
+}
+endsnippet
+
 snippet if
 if (${1:${VISUAL:true}}) {
 	$0
@@ -6,8 +12,9 @@ endsnippet
 
 snippet ife
 if (${1:${VISUAL:true}}) {
-	$1
-} else {
+	$2
+}
+else {
 	$0
 }
 endsnippet
