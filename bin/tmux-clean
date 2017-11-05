@@ -2,6 +2,12 @@
 
 files=$(find ~/.tmux/resurrect -iname "tmux_resurrect*" | sort -rh | tail -n+2 | xargs)
 
-[[ "$files" != "" ]] && rm -v $files || echo "No cleanup needed"
+if [[ "$files" != "" ]]; then
+  for file in $files; do
+    rm -v "$file"
+  done
+else
+  echo "No cleanup needed"
+fi
 
 echo "Last is $(realpath ~/.tmux/resurrect/last)"
