@@ -12,12 +12,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'Rip-Rip/clang_complete'
 Plug 'Shougo/vimproc'
 Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-libclang'}
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'ajh17/VimCompletesMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'dhruvasagar/vim-table-mode'
@@ -36,6 +35,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+Plug 'rhysd/vim-clang-format'
 Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'sheerun/vim-polyglot'
@@ -46,7 +47,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/Printer-Dialog'
 Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
@@ -60,6 +60,7 @@ syntax on
 set autoindent
 set cino+=:0,l1,g0,N-s,m1,j1
 set expandtab
+set exrc
 set smarttab
 set sts=2
 set sw=2
@@ -72,7 +73,6 @@ if has('linebreak')
 endif
 set complete-=1
 set completeopt-=preview
-set cursorline
 set foldmethod=manual
 set foldmarker={{{{{,}}}}}
 set ignorecase
@@ -142,6 +142,7 @@ nnoremap N Nzz
 nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
+nnoremap <silent> <C-e> 1z=
 
 " difftool mappings
 nnoremap <Leader>lo :diffget LOCAL<CR>
@@ -161,9 +162,9 @@ nnoremap <Leader>d :Dash<CR>
 nnoremap <Leader>D :Dash!<CR>
 
 " Other settings
-let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
+let g:clang_format#code_style = 'Mozilla'
+let g:clang_format#detect_style_file = 1
+let g:clang_format#style_options = {'BreakBeforeBraces': 'Stroustrup'}
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
@@ -180,11 +181,14 @@ let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_imaps_enabled = 0
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 " LightLine settings
 let g:lightline = {
@@ -199,6 +203,11 @@ let g:lightline = {
             \   'modified': 'LightLineModified',
             \   'filename': 'LightLineFilename'
             \ },
+            \ }
+let g:lightline.tabline = {
+            \ 'colorscheme': 'solarized',
+            \ 'left': [ [ 'tabs' ] ],
+            \ 'right': [ [] ],
             \ }
 
 function! LightLineModified()
@@ -248,9 +257,13 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cc<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vH :vsp %<.hpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xH :sp %<.hpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2p0wcwdefine<ESC>jciwendif //<ESC>O<CR><ESC>O<ESC>
+    autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>cF :ClangFormatAutoToggle<CR>
 augroup END
 
 augroup filetype_objcpp
