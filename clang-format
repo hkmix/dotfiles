@@ -1,0 +1,12 @@
+---
+BasedOnStyle: Mozilla
+
+Standard: Cpp11
+Cpp11BracedListStyle: true
+AlignAfterOpenBracket: AlwaysBreak
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BreakBeforeBraces: Stroustrup
