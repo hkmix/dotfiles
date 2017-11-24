@@ -40,11 +40,9 @@
     (use-package company-ghc
       :init
       (add-to-list 'company-backends 'company-ghc))
-    (use-package jedi-core
+    (use-package company-irony
       :init
-      (use-package company-jedi
-        :init
-        (add-to-list 'company-backends 'company-jedi)))
+      (add-to-list 'company-backends 'company-irony))
     (use-package company-math
       :init
       (add-to-list 'company-backends 'company-math-symbols-latex)
@@ -56,10 +54,13 @@
       (progn
         (setq company-tern-property-marker nil)
         (add-to-list 'company-backends 'company-tern)))
-    (use-package company-ycmd
-      :defer t)
     (use-package company-web
-      :defer t))
+      :defer t)
+    (use-package jedi-core
+      :init
+      (use-package company-jedi
+        :init
+        (add-to-list 'company-backends 'company-jedi))))
   :config
   (progn
     (setq company-idle-delay 0.3)
@@ -188,6 +189,13 @@
       :init
       (global-evil-surround-mode 1))))
 
+(use-package eyebrowse
+  :ensure t
+  :init
+  (progn
+    (eyebrowse-mode t)
+    (eyebrowse-setup-opinionated-keys)))
+
 (use-package exec-path-from-shell
   :init
   (progn
@@ -202,6 +210,8 @@
   :config
   (progn
     (use-package flycheck-ghcmod
+      :defer t)
+    (use-package flycheck-irony
       :defer t)))
 
 (use-package ggtags
@@ -237,7 +247,7 @@
       (progn
         (setq ido-enable-flex-matching t)
         (setq ido-use-faces nil)))
-    (use-package ido-ubiquitous
+    (use-package ido-completing-read+
       :init
       (ido-ubiquitous-mode 1))
     (use-package ido-vertical-mode
@@ -252,6 +262,8 @@
        ("C-c M-x" . execute-extended-command))
       :init
       (smex-initialize))))
+
+(use-package irony)
 
 (use-package isend-mode
     :defer t)
@@ -297,12 +309,11 @@
         (add-hook 'racer-mode-hook #'company-mode)))
     (use-package toml-mode)))
 
-(use-package solarized-theme
+(use-package color-theme-solarized
   :init
   (progn
-    (defvar solarized-use-variable-pitch)
-    (setq solarized-use-variable-pitch nil)
-    (load-theme 'solarized-dark t)))
+    (set-frame-parameter nil 'background-mode 'dark)
+    (set-terminal-parameter nil 'background-mode 'dark)))
 
 (use-package ws-butler
   :diminish
@@ -313,22 +324,6 @@
       (lambda ()
         (ws-butler-mode t)))
     (global-ws-butler-mode t)))
-
-(use-package ycmd
-  :defer t
-  :init
-  (progn
-    (setq ycmd-server-command '("python" "/opt/ycmd/ycmd"))
-    (setq ycmd-global-config "~/.emacs.d/cfg/ycm_extra_conf.py")
-    (setq ycmd-extra-conf-handler 'load)
-    (setq ycmd-force-semantic-completion t)
-    (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
-  :config
-  (progn
-    (use-package flycheck-ycmd
-      :defer t
-      :init
-      (flycheck-ycmd-setup))))
 
 (provide 'my-packages)
 ;;; my-packages.el ends here

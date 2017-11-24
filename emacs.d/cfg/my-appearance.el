@@ -5,13 +5,23 @@
 ;;; Code:
 
 ;; GUI settings
-(when (window-system)
-  (set-face-attribute 'default nil :font "Iosevka Slab-14")
-  (add-to-list 'default-frame-alist '(height . 24))
-  (add-to-list 'default-frame-alist '(width . 80))
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1))
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+(if (window-system)
+    (progn
+      (set-face-attribute 'default nil :font "Iosevka Slab-14:light")
+      (add-to-list 'default-frame-alist '(height . 24))
+      (add-to-list 'default-frame-alist '(width . 80))
+      (add-to-list 'default-frame-alist '(background-mode . dark))
+      (add-to-list 'initial-frame-alist '(height . 24))
+      (add-to-list 'initial-frame-alist '(width . 80))
+      (add-to-list 'initial-frame-alist '(background-mode . dark)))
+  (progn
+    (xterm-mouse-mode)))
+
+(load-theme 'solarized t)
 
 ;; Editing area settings
 (column-number-mode t)
