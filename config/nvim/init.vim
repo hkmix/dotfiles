@@ -1,13 +1,13 @@
 set nocompatible
 filetype off
 
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 " let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Lokaltog/vim-easymotion'
@@ -27,7 +27,6 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
-Plug 'iCyMind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
@@ -35,7 +34,6 @@ Plug 'lervag/vimtex'
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
-Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'rhysd/vim-clang-format'
@@ -99,8 +97,6 @@ set timeoutlen=3000
 set wildmenu
 
 " Appearance
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_invert_signs = 1
 let g:solarized_underline = 0
 set background=dark
 colorscheme solarized
