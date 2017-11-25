@@ -96,13 +96,37 @@ set splitright
 set timeoutlen=3000
 set wildmenu
 
+" Fix issues with tmux
+set t_8f=^[[38;2;%lu;%lu;%lum
+set t_8b=^[[48;2;%lu;%lu;%lum
+
 " Appearance
-let g:solarized_underline = 0
 set background=dark
-colorscheme solarized
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
+
+" LightLine settings
+let g:lightline = {
+            \ 'colorscheme': 'solarized',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename'
+            \ },
+            \ }
+let g:lightline.tabline = {
+            \ 'colorscheme': 'solarized',
+            \ 'left': [ [ 'tabs' ] ],
+            \ 'right': [ [] ],
+            \ }
+
+colorscheme solarized
 
 if has('gui_running')
     set guioptions-=T
@@ -184,26 +208,6 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_imaps_enabled = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-
-" LightLine settings
-let g:lightline = {
-            \ 'colorscheme': 'solarized',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename' ] ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
-            \   'readonly': 'LightLineReadonly',
-            \   'modified': 'LightLineModified',
-            \   'filename': 'LightLineFilename'
-            \ },
-            \ }
-let g:lightline.tabline = {
-            \ 'colorscheme': 'solarized',
-            \ 'left': [ [ 'tabs' ] ],
-            \ 'right': [ [] ],
-            \ }
 
 function! LightLineModified()
     if &modified
