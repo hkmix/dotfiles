@@ -101,6 +101,7 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Appearance
+set termguicolors
 let g:neosolarized_bold = 1
 let g:neosolarized_underline = 1
 let g:neosolarized_italic = 0
@@ -108,47 +109,6 @@ set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
-
-" LightLine settings
-let g:lightline = {
-            \ 'colorscheme': 'solarized',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename' ] ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
-            \   'readonly': 'LightLineReadonly',
-            \   'modified': 'LightLineModified',
-            \   'filename': 'LightLineFilename'
-            \ },
-            \ }
-let g:lightline.tabline = {
-            \ 'colorscheme': 'solarized',
-            \ 'left': [ [ 'tabs' ] ],
-            \ 'right': [ [] ],
-            \ }
-
-augroup LightlineColorscheme
-    autocmd!
-    autocmd ColorScheme * call s:lightline_update()
-augroup END
-function! s:lightline_update()
-    if !exists('g:loaded_lightline')
-        return
-    endif
-    try
-        if g:colors_name =~# 'wombat\|solarized\|NeoSolarized\|landscape\|jellybeans\|seoul256\|Tomorrow'
-            let g:lightline.colorscheme =
-                        \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '')
-            call lightline#init()
-            call lightline#colorscheme()
-            call lightline#update()
-        endif
-    catch
-    endtry
-endfunction
-
 colorscheme NeoSolarized
 
 if has('gui_running')
@@ -234,6 +194,26 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_imaps_enabled = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
+
+" LightLine settings
+let g:lightline = {
+            \ 'colorscheme': 'solarized',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename'
+            \ },
+            \ }
+let g:lightline.tabline = {
+            \ 'colorscheme': 'solarized',
+            \ 'left': [ [ 'tabs' ] ],
+            \ 'right': [ [] ],
+            \ }
 
 function! LightLineModified()
     if &modified
