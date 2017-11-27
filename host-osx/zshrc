@@ -61,6 +61,7 @@ alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
 alias vi="nvim"
 alias vim="nvim"
+alias fixterm="vim -c q"
 ccd() {
     cd ~/Projects/"$1"
 }
