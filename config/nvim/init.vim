@@ -2,7 +2,7 @@ set nocompatible
 filetype off
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
@@ -17,7 +17,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-libclang'}
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'altercation/vim-colors-solarized'
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
@@ -27,6 +26,7 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
+Plug 'icymind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
@@ -101,6 +101,9 @@ set t_8f=^[[38;2;%lu;%lu;%lum
 set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Appearance
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
@@ -126,7 +129,27 @@ let g:lightline.tabline = {
             \ 'right': [ [] ],
             \ }
 
-colorscheme solarized
+augroup LightlineColorscheme
+    autocmd!
+    autocmd ColorScheme * call s:lightline_update()
+augroup END
+function! s:lightline_update()
+    if !exists('g:loaded_lightline')
+        return
+    endif
+    try
+        if g:colors_name =~# 'wombat\|solarized\|NeoSolarized\|landscape\|jellybeans\|seoul256\|Tomorrow'
+            let g:lightline.colorscheme =
+                        \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '')
+            call lightline#init()
+            call lightline#colorscheme()
+            call lightline#update()
+        endif
+    catch
+    endtry
+endfunction
+
+colorscheme NeoSolarized
 
 if has('gui_running')
     set guioptions-=T
@@ -162,6 +185,9 @@ nnoremap n nzz
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 nnoremap <silent> <C-e> 1z=
+
+" Terminal mappings
+tnoremap <silent> <Leader><esc> <C-\><C-n>
 
 " difftool mappings
 nnoremap <Leader>lo :diffget LOCAL<CR>
@@ -317,4 +343,10 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <buffer> ][ <Plug>(vimtex-][)
     autocmd FileType tex nnoremap <buffer> [] <Plug>(vimtex-[])
     autocmd FileType tex nnoremap <buffer> [[ <Plug>(vimtex-[[)
+augroup END
+
+augroup terminal
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
