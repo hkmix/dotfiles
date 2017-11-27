@@ -162,9 +162,7 @@ nnoremap <Leader>d :Dash<CR>
 nnoremap <Leader>D :Dash!<CR>
 
 " Other settings
-let g:clang_format#code_style = 'Mozilla'
 let g:clang_format#detect_style_file = 1
-let g:clang_format#style_options = {'BreakBeforeBraces': 'Stroustrup'}
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
