@@ -1,3 +1,9 @@
+"  _   _                 _
+" | \ | | ___  _____   _(_)_ __ ___
+" |  \| |/ _ \/ _ \ \ / / | '_ ` _ \
+" | |\  |  __/ (_) \ V /| | | | | | |
+" |_| \_|\___|\___/ \_/ |_|_| |_| |_|
+
 set nocompatible
 filetype off
 
@@ -26,11 +32,11 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
-Plug 'icymind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex'
+Plug 'lifepillar/vim-solarized8'
 Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
@@ -78,6 +84,7 @@ set cursorline
 set foldmarker={{{{{,}}}}}
 set foldmethod=manual
 set ignorecase
+set inccommand=nosplit
 set incsearch
 set laststatus=2
 set mouse=a
@@ -102,14 +109,13 @@ set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Appearance
 set termguicolors
-let g:neosolarized_bold = 1
-let g:neosolarized_underline = 1
-let g:neosolarized_italic = 0
+let g:solarized_termtrans = 1
+let g:solarized_extra_hi_groups = 1
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
-colorscheme NeoSolarized
+colorscheme solarized8
 
 if has('gui_running')
     set guioptions-=T
