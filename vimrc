@@ -39,7 +39,6 @@ Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'rhysd/vim-clang-format'
 Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'

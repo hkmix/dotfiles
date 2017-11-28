@@ -45,7 +45,6 @@ Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 Plug 'rhysd/vim-clang-format'
 Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
@@ -173,6 +172,9 @@ nnoremap <Leader>d :Dash<CR>
 nnoremap <Leader>D :Dash!<CR>
 
 " Other settings
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:clang_format#detect_style_file = 1
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
@@ -190,14 +192,11 @@ let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_show_visibility = 1
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:vimtex_fold_enabled = 0
 let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
 
 " LightLine settings
 let g:lightline = {
