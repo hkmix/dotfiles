@@ -116,21 +116,12 @@ set fillchars=vert:\
 let &showbreak = '↳ '
 colorscheme solarized8
 
-if has('gui_running')
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=l
-    set guioptions-=b
-    set guioptions-=m
-    set guifont=Iosevka\ Slab:h14
-endif
-
 " Autocommands
 augroup general
     autocmd!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
     autocmd CompleteDone * silent! pclose
+    autocmd GUIEnter * let g:solarized_termtrans = 0 | colorscheme solarized8
 augroup END
 
 " General mappings
@@ -269,7 +260,7 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>xH :sp %<.hpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2p0wcwdefine<ESC>jciwendif //<ESC>O<CR><ESC>O<ESC>
+    autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
     autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>cF :ClangFormatAutoToggle<CR>
 augroup END
