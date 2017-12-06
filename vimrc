@@ -1,3 +1,9 @@
+"        _              ___
+" __   _(_)_ __ ___    ( _ )
+" \ \ / / | '_ ` _ \   / _ \
+"  \ V /| | | | | | | | (_) |
+"   \_/ |_|_| |_| |_|  \___/
+
 set nocompatible
 filetype off
 
@@ -258,7 +264,7 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>xH :sp %<.hpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2p0wcwdefine<ESC>jciwendif //<ESC>O<CR><ESC>O<ESC>
+    autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
     autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>cF :ClangFormatAutoToggle<CR>
 augroup END
