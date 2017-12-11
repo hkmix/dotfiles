@@ -32,6 +32,7 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
+Plug 'icymind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
@@ -108,20 +109,27 @@ set t_8b=^[[48;2;%lu;%lu;%lum
 
 " Appearance
 set termguicolors
-let g:solarized_termtrans = 1
-let g:solarized_extra_hi_groups = 1
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
-colorscheme solarized8
+if empty($TERM)
+    let g:neosolarized_vertSplitBgTrans = 0
+    let g:neosolarized_bold = 1
+    let g:neosolarized_underline = 1
+    let g:neosolarized_italic = 1
+    colorscheme NeoSolarized
+else
+    let g:solarized_termtrans = 1
+    colorscheme solarized8
+endif
+let g:solarized_extra_hi_groups = 1
 
 " Autocommands
 augroup general
     autocmd!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
     autocmd CompleteDone * silent! pclose
-    autocmd GUIEnter * let g:solarized_termtrans = 0 | colorscheme solarized8
 augroup END
 
 " General mappings
@@ -154,13 +162,14 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
-nmap <F8> :TagbarToggle<CR>
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+nnoremap <F8> :TagbarToggle<CR>
+xnoremap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>d :Dash<CR>
 nnoremap <Leader>D :Dash!<CR>
+nnoremap <Leader>y :YcmDiags<CR>
 
 " Other settings
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -242,6 +251,11 @@ highlight nonascii guibg=Red ctermbg=1 term=standout
 autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
 " Language-specific groups
+augroup filetype_bzl
+    autocmd!
+    autocmd FileType bzl autocmd BufWritePre <buffer> :silent %!buildifier
+augroup END
+
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
@@ -271,7 +285,7 @@ augroup filetype_objcpp
     autocmd FileType objcpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
     autocmd FileType objcpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType objcpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
-    autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl<CR>
+    autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl
 augroup END
 
 augroup filetype_go
@@ -281,7 +295,7 @@ augroup filetype_go
     autocmd FileType go nnoremap <buffer> <Leader>god :GoDef<CR>
     autocmd FileType go nnoremap <buffer> <Leader>got :GoTest<CR>
     autocmd FileType go nnoremap <buffer> <Leader>g? :GoDoc<CR>
-    autocmd BufWritePost *.go <buffer> :GoFmt<CR>
+    autocmd BufWritePost *.go <buffer> :GoFmt
 augroup END
 
 augroup filetype_haskell
