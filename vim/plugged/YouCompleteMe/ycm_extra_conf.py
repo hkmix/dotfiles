@@ -41,7 +41,7 @@ flags = [
 '-Wextra',
 '-Werror',
 '-Wpedantic',
-'-std=c++17',
+'-std=c++1z',
 # THIS IS IMPORTANT! Without the '-x' flag, Clang won't know which language to
 # use when compiling headers. So it will guess. Badly. So C++ headers will be
 # compiled as C headers. You don't want that so ALWAYS specify the '-x' flag.
@@ -71,13 +71,6 @@ get_python_inc(),
 '-isystem',
 './benchmarks/benchmark/include',
 ]
-
-# Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,
-# which is required for compiling the standard library, and to 'c++11' for older
-# versions.
-if platform.system() != 'Windows':
-  flags.append( '-std=c++11' )
-
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
