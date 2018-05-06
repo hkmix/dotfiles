@@ -5,6 +5,23 @@
 # gashapon: autodectect default sink
 # konrad: more reliable way to autodetect default sink
 
+# are we even using pulseaudio?
+if ! command -v pacmd &>/dev/null; then
+    case "$1" in
+        plus)
+            amixer -q sset Master 5%+
+            ;;
+        minus)
+            amixer -q sset Master 5%-
+            ;;
+        mute)
+            amixer -q sset Master toggle
+            ;;
+    esac
+
+    exit
+fi
+
 # get default sink name
 SINK_NAME=$(pacmd dump | perl -a -n -e 'print $F[1] if /set-default-sink/')
 # try this line instead of the one above if you got problems with the detection of your default sink.
