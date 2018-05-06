@@ -1,34 +1,43 @@
-"  _   _                 _
-" | \ | | ___  _____   _(_)_ __ ___
-" |  \| |/ _ \/ _ \ \ / / | '_ ` _ \
-" | |\  |  __/ (_) \ V /| | | | | | |
-" |_| \_|\___|\___/ \_/ |_|_| |_| |_|
+"  _   _                 _                           _              ___
+" | \ | | ___  _____   _(_)_ __ ___      _    __   _(_)_ __ ___    ( _ )
+" |  \| |/ _ \/ _ \ \ / / | '_ ` _ \   _| |_  \ \ / / | '_ ` _ \   / _ \
+" | |\  |  __/ (_) \ V /| | | | | | | |_   _|  \ V /| | | | | | | | (_) |
+" |_| \_|\___|\___/ \_/ |_|_| |_| |_|   |_|     \_/ |_|_| |_| |_|  \___/
 
-set nocompatible
+let s:nvim = has('nvim')
+
+if s:nvim
+    let s:path = '~/.config/nvim'
+else
+    let s:path = '~/.vim'
+    set nocompatible
+end
+
 filetype off
 
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob(s:path . '/autoload/plug.vim'))
+    execute 'silent !curl -fLo ' . s:path . '/autoload/plug.vim --create-dirs'
+                \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin(s:path . '/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
-Plug 'Lokaltog/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/vimproc'
+if s:nvim
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-libclang'}
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'derekwyatt/vim-scala', {'for': 'scala'}
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'eagletmt/ghcmod-vim', {'for': 'haskell'}
-Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'editorconfig/editorconfig-vim'
-Plug 'equalsraf/neovim-gui-shim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
 Plug 'hkmix/vim-george'
@@ -38,14 +47,9 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex'
 Plug 'lifepillar/vim-solarized8'
-Plug 'm2mdas/phpcomplete-extended', {'for': 'php'}
 Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim', {'for': ['php', 'html', 'blade']}
+Plug 'mattn/emmet-vim', {'for': ['html']}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
-Plug 'rhysd/vim-clang-format'
-Plug 'rizzatti/dash.vim'
-Plug 'rust-lang/rust.vim'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
@@ -53,9 +57,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-shell' | Plug 'xolox/vim-easytags'
 
 call plug#end()
 
@@ -70,9 +72,9 @@ set expandtab
 set exrc
 set smarttab
 set guicursor=
-set sts=2
-set sw=2
-set ts=2
+set sts=4
+set sw=4
+set ts=4
 
 set backspace=indent,eol,start
 if has('linebreak')
@@ -85,7 +87,9 @@ set cursorline
 set foldmarker={{{{{,}}}}}
 set foldmethod=manual
 set ignorecase
-set inccommand=nosplit
+if s:nvim
+    set inccommand=nosplit
+end
 set incsearch
 set laststatus=2
 set mouse=a
@@ -104,27 +108,28 @@ set splitright
 set timeoutlen=3000
 set wildmenu
 
-" Fix issues with tmux
-set t_8f=^[[38;2;%lu;%lu;%lum
-set t_8b=^[[48;2;%lu;%lu;%lum
+" Fix true colour issues with tmux.
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
-" Appearance
+" Appearance.
 set termguicolors
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
 if empty($TERM)
+    " Some kind of GUI, assume it supports true colours.
     let g:neosolarized_vertSplitBgTrans = 0
     let g:neosolarized_bold = 1
     let g:neosolarized_underline = 1
     let g:neosolarized_italic = 1
     colorscheme NeoSolarized
 else
+    let g:solarized_extra_hi_groups = 1
     let g:solarized_termtrans = 1
     colorscheme solarized8
 endif
-let g:solarized_extra_hi_groups = 1
 
 " Autocommands
 augroup general
@@ -134,45 +139,42 @@ augroup general
 augroup END
 
 " General mappings
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-l> <C-w>l
+nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
+nnoremap <Leader>h :set hlsearch<CR>
+nnoremap <Leader>p :set invpaste<CR>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <space> zz
-nnoremap <silent> <Leader><space> :nohlsearch<CR>zz
-nnoremap Q <Nop>
-nnoremap N Nzz
 nnoremap n nzz
-nnoremap <Leader>p :set invpaste<CR>
-nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
-nnoremap <silent> <C-e> 1z=
+nnoremap N Nzz
+nnoremap Q <Nop>
 
-" Terminal mappings
-tnoremap <silent> <Leader><esc> <C-\><C-n>
+" Terminal mappings.
+if s:nvim
+    tnoremap <silent> <Leader><esc> <C-\><C-n>
+end
 
-" difftool mappings
+" difftool mappings.
 nnoremap <Leader>lo :diffget LOCAL<CR>
 nnoremap <Leader>re :diffget REMOTE<CR>
 
-" Plugin mappings
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gp :Gpush<CR>
+" Plugin mappings.
 nnoremap <C-p> :FZF<CR>
-nnoremap <Leader>t<bar> vip:Tabularize /<bar><CR>
 nnoremap <F8> :TagbarToggle<CR>
-xnoremap ga <Plug>(EasyAlign)
-nnoremap ga <Plug>(EasyAlign)
 nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
-nnoremap <Leader>d :Dash<CR>
-nnoremap <Leader>D :Dash!<CR>
-nnoremap <Leader>y :YcmDiags<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
 
-" Other settings
+" Plugin settings.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -181,14 +183,11 @@ let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_matchpairs = "(:),[:],{:}"
-let g:easytags_auto_highlight = 0
-let g:easytags_suppress_report = 1
+let g:deoplete#enable_at_startup = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
-let g:jedi#force_py_version = 3
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:rooter_manual_only = 1
-let g:rustfmt_autosave = 1
 let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
@@ -196,8 +195,12 @@ let g:tagbar_show_visibility = 1
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/ycm_extra_conf.py'
+
+" LSP settings.
+let g:LanguageClient_serverCommands = {
+      \ 'cpp': ['clangd']
+      \ }
+let g:LanguageClient_loadSettings = 1
 
 " LightLine settings
 let g:lightline = {
@@ -252,11 +255,6 @@ highlight nonascii guibg=Red ctermbg=1 term=standout
 autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
 " Language-specific groups
-augroup filetype_bzl
-    autocmd!
-    autocmd FileType bzl autocmd BufWritePre <buffer> :silent %!buildifier
-augroup END
-
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
@@ -280,15 +278,6 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>cF :ClangFormatAutoToggle<CR>
 augroup END
 
-augroup filetype_objcpp
-    autocmd!
-    autocmd FileType objcpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
-    autocmd FileType objcpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
-    autocmd FileType objcpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
-    autocmd FileType objcpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
-    autocmd BufReadPost quickfix nnoremap <buffer> <space> :ccl
-augroup END
-
 augroup filetype_go
     autocmd!
     autocmd FileType go setlocal ts=2 sts=2 sw=2 noexpandtab
@@ -299,20 +288,11 @@ augroup filetype_go
     autocmd BufWritePost *.go <buffer> :GoFmt
 augroup END
 
-augroup filetype_haskell
-    autocmd!
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
-
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell
     autocmd FileType markdown setlocal sts=4 sw=4 ts=4
-augroup END
-
-augroup filetype_metal
-    autocmd!
-    autocmd BufRead,BufNewFile *.metal setlocal ft=objcpp syntax=cpp
+    autocmd Filetype markdown let delimitMate_quotes="\" '"
 augroup END
 
 augroup filetype_tex
@@ -321,8 +301,6 @@ augroup filetype_tex
     autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <F8> :VimtexTocToggle<CR>
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
-    autocmd FileType tex nnoremap <buffer> <Leader>s bf)a}<Esc>F(i{<Esc>%a
-    autocmd FileType tex nnoremap <buffer> <Leader>[ o\[  \]<Esc>2hi
     autocmd FileType tex let delimitMate_matchpairs="(:),[:],{:},`:'"
     autocmd Filetype tex let delimitMate_quotes="\" '"
     autocmd FileType tex imap <buffer> ]] <Plug>(vimtex-delim-close)
@@ -334,13 +312,10 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <buffer> [[ <Plug>(vimtex-[[)
 augroup END
 
-augroup terminal
-    autocmd!
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-augroup END
-
-augroup vimwiki
-    autocmd!
-    autocmd FileType vimwiki nnoremap <buffer> <leader>W :Vimwiki2HTMLBrowse<CR>
-augroup END
+if s:nvim
+    augroup terminal
+        autocmd!
+        autocmd TermOpen * setlocal nonumber norelativenumber
+        autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    augroup END
+end
