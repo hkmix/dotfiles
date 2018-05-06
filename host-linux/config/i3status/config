@@ -7,12 +7,38 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 5
+    colors = true
+    interval = 5
+
+    color_good = "#859900"
+    color_degraded = "#586e75"
+    color_bad = "#dc322f"
 }
 
-order += "insync_info"
-order += "volume_info"
-order += "eth_info"
-order += "date_info"
-order += "time_info"
+order += "volume master"
+order += "battery all"
+order += "tztime date"
+order += "tztime local"
+
+volume master {
+    format = "  %volume"
+    format_muted = "  %volume (muted)"
+}
+
+battery all {
+    format = "  %percentage%status%remaining"
+    last_full_capacity = true
+    integer_battery_capacity = true
+    hide_seconds = true
+    status_chr = "+"
+    status_bat = " ~"
+    status_full = "="
+}
+
+tztime date {
+    format = "  %a, %-d %b %Y"
+}
+
+tztime local {
+    format = "  %-l:%M %p"
+}
