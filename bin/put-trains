@@ -1,0 +1,3 @@
+#!/bin/sh
+
+scp -r $@ z43zhou@ubuntu1604-002.student.cs.uwaterloo.ca:/u/cs452/tftp/ARM/z43zhou
