@@ -9,7 +9,7 @@ colors
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export GOPATH="$HOME/.go"
 export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
-export EDITOR=vim
+export EDITOR=nvim
 export WORDCHARS='_'
 
 # Misc appearance settings
