@@ -1,5 +1,5 @@
 #!/bin/sh
 
-chrome_executable=google-chrome-stable
+chrome_executable=chromium-browser
 
 exec $chrome_executable --force-device-scale-factor=1.2
