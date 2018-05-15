@@ -2,4 +2,4 @@
 
 chrome_executable=chromium-browser
 
-exec $chrome_executable --force-device-scale-factor=1.2
+exec $chrome_executable --force-device-scale-factor=1.75

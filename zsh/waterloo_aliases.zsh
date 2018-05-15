@@ -1,6 +1,6 @@
 # Classes
-alias cs452="cd ~/Waterloo/CS\ 452"
-alias cs466="cd ~/Waterloo/CS\ 466"
+alias ece455="cd ~/Waterloo/ECE\ 455"
+alias ece457a="cd ~/Waterloo/ECE\ 457A"
 alias ece458="cd ~/Waterloo/ECE\ 458"
 alias se463="cd ~/Waterloo/SE\ 463"
 alias se490="cd ~/Waterloo/SE\ 490"

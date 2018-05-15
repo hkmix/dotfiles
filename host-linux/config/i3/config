@@ -45,8 +45,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pavol plus
 bindsym XF86AudioMute exec --no-startup-id pavol mute
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
-bindsym XF86AudioNext exec --no-startup-id mpc next
-bindsym XF86PowerOff exec --no-startup-id mpc stop
+
+bindsym $mod+z exec --no-startup-id change-brightness -5
+bindsym $mod+x exec --no-startup-id change-brightness 5
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec /home/jackzhou/.bin/dmenu_runner
