@@ -12,7 +12,7 @@ compinit
 promptinit
 colors
 
-export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # zsh settings.
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -44,6 +44,7 @@ export FZF_DEFAULT_COMMAND='rg --files'
 
 # Other settings.
 export EDITOR=vim
+export WORDCHARS='_'
 
 # Aliases.
 alias bc="bc -l"
@@ -58,6 +59,7 @@ alias la="ls -a"
 alias ll="ls -la"
 alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
+alias venvme=". ./venv/bin/activate"
 alias vi="nvim"
 alias vim="nvim"
 
