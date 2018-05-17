@@ -35,7 +35,7 @@ endif
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
@@ -197,10 +197,38 @@ let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
 
 " LSP settings.
+set signcolumn="yes"
 let g:LanguageClient_serverCommands = {
       \ 'cpp': ['clangd']
       \ }
 let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_diagnosticsDisplay =
+            \ {
+            \     1: {
+            \         "name": "Error",
+            \         "texthl": "ALEError",
+            \         "signText": "E",
+            \         "signTexthl": "ALEErrorSign",
+            \     },
+            \     2: {
+            \         "name": "Warning",
+            \         "texthl": "ALEWarning",
+            \         "signText": "W",
+            \         "signTexthl": "ALEWarningSign",
+            \     },
+            \     3: {
+            \         "name": "Information",
+            \         "texthl": "ALEInfo",
+            \         "signText": "I",
+            \         "signTexthl": "ALEInfoSign",
+            \     },
+            \     4: {
+            \         "name": "Hint",
+            \         "texthl": "ALEInfo",
+            \         "signText": "H",
+            \         "signTexthl": "ALEInfoSign",
+            \     },
+            \ }
 
 " LightLine settings
 let g:lightline = {
