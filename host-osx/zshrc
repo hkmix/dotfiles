@@ -1,118 +1,41 @@
-bindkey -e
-unalias -a
+#                        ___  ____            _
+#  _ __ ___   __ _  ___ / _ \/ ___|   _______| |__  _ __ ___
+# | '_ ` _ \ / _` |/ __| | | \___ \  |_  / __| '_ \| '__/ __|
+# | | | | | | (_| | (__| |_| |___) |  / /\__ \ | | | | | (__
+# |_| |_| |_|\__,_|\___|\___/|____/  /___|___/_| |_|_|  \___|
 
-autoload -U compinit promptinit colors zkbd
-compinit
-promptinit
-colors
+[[ -f ~/.zsh/common.zsh ]] && source ~/.zsh/common.zsh
 
-# For OS X to get default bindings
+# Path modifiers.
 export GOPATH="$HOME/.go"
-export HOMEBREW_NO_EMOJI=1
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/opt/qt/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="/usr/local/Cellar:/usr/local/bin/tex:/usr/local/opt/coreutils/libexec/gnubin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$PATH"
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 export RUST_SRC_PATH=$HOME/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src
+
+# Other exports.
+export HOMEBREW_NO_EMOJI=1
 export EDITOR=nvim
-
-# Misc appearance settings
-export FZF_DEFAULT_OPTS='
-    --bind ctrl-f:page-down,ctrl-b:page-up
-    --color dark,hl:33,hl+:33,fg+:235,bg+:0,fg+:7
-    --color info:254,prompt:37,spinner:108,pointer:14,marker:14
-'
-
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
-zstyle ':completion:*' menu select
-
-[[ -f "$HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}" ]] && source $HOME/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
-
-# Fix key bindings
-[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
-
-# OS X-specific settings
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Aliases
-alias bc="bc -l"
-alias df="df -h"
-alias du="du -h"
-alias dus="du -d1h | sort -h"
-alias grep="grep --color=auto"
+# Aliases.
 alias emacsd="emacs --daemon"
 alias emacsk="emacsclient -e '(kill-emacs)'"
-alias l="ls -a"
-alias la="ls -a"
-alias ll="ls -la"
-alias ls="ls -bh --color=auto"
-alias tmux-new="tmux -2 new-session -s"
-alias vi="nvim"
-alias vim="nvim"
-alias fixterm="vim -c q"
-ccd() {
-    cd ~/Projects/"$1"
-}
 
-# RCM aliases
+# RCM aliases.
 alias lsrcl="lsrc -B osx -v"
 alias mkrcl="mkrc -B osx -v"
 alias rcupl="rcup -B osx -v"
 
-# Other aliases
-alias dog="vimcat"
-alias gitcd="cd \"\$(git rev-parse --show-toplevel)\""
-if command -v rust-term-colourizer >/dev/null 2>&1 && test -f "$HOME/Documents/org-agenda.regex"; then
-    alias todo="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null | rust-term-colourizer ~/Documents/org-agenda.regex"
-    alias todo_regular="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null"
-else
-    alias todo="emacs -batch -l ~/.emacs.d/init.el -eval '(org-batch-agenda \"n\")' 2>/dev/null"
-fi
+# Other aliases.
 alias venvme=". ./venv/bin/activate"
-
-# More aliases
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
 alias brewup="brew update && brew upgrade && brew cleanup"
 
-prompt_char() {
-    if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
-}
-
-precmd() {
-    venv=""
-    if [[ "$VIRTUAL_ENV" != "" ]]; then
-        venv=" (${VIRTUAL_ENV##*/})"
-    fi
-    PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)$venv%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
-}
-
-mkcd() {
-    if [ $# -ge 1 ]; then
-        mkdir -p "$1" && cd "$1"
-    else
-        echo "Usage: $0 dir-name"
-    fi
-}
-
-NEWLINE=$'\n'
-
-[[ -f ~/.platform.sh ]] && source ~/.platform.sh
-[[ -f ~/.zsh/waterloo_aliases.zsh ]] && source ~/.zsh/waterloo_aliases.zsh
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-[[ -f ~/.dircolors ]] && eval $(dircolors ~/.dircolors)
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
