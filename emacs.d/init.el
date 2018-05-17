@@ -46,7 +46,7 @@
  '(org-agenda-files (quote ("~/Drive/planner.org")))
  '(package-selected-packages
    (quote
-    (color-theme-solarized emacs-color-theme-solarized irony company-irony eyebrowse markdown-preview-eww toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight column-marker)))
+    (cmake-ide color-theme-solarized emacs-color-theme-solarized irony company-irony eyebrowse markdown-preview-eww toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight column-marker)))
  '(safe-local-variable-values (quote (insert-tabs-mode)))
  '(shell-escape-mode "-shell-escape"))
 (custom-set-faces

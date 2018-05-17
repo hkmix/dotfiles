@@ -28,6 +28,10 @@
 ;; Package list
 (use-package column-marker)
 
+(use-package cmake-ide
+  :config
+  (cmake-ide-setup))
+
 (use-package company
   :diminish
   (company-mode "Cmp")
