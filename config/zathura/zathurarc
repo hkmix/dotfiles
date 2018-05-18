@@ -1,0 +1,7 @@
+set font "Iosevka Slab 11"
+
+set recolor-keephue true
+set recolor-reverse-video true
+
+map F toggle_fullscreen
+map [fullscreen] F toggle_fullscreen
