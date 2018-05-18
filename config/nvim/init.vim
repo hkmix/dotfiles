@@ -96,6 +96,7 @@ set mouse=a
 set nofoldenable
 set nohidden
 set nohlsearch
+set nospell
 set nottimeout
 set number
 set ruler
