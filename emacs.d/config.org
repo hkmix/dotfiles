@@ -419,7 +419,7 @@ Functions should come after packages.
 
   (defconst default-font "Iosevka Slab-12")
   (set-face-attribute 'default nil :font default-font)
-  (add-to-frame-lists '(font . "Iosevka Slab-12"))
+  (add-to-frame-lists (cons 'font default-font))
   (add-to-frame-lists '(height . 24))
   (add-to-frame-lists '(width . 80))
   (add-to-frame-lists '(background-mode . dark))
