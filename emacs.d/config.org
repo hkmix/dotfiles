@@ -131,6 +131,7 @@ Packages must come first.
             "b"   'switch-to-buffer
             "C"   'compile
             "c"   'recompile
+            "d"   'dired
             "f"   'find-file
 
             ;; Git-Gutter.
@@ -171,7 +172,7 @@ Packages must come first.
           (evil-leader/set-key-for-mode 'org-mode
             "o TAB" 'outline-show-all
             "o <backtab>" 'org-shifttab
-            "o '" 'org-edit-special
+            "'" 'org-edit-special
             "o a" 'org-agenda
             "o c" 'org-ctrl-c-ctrl-c
             "o d" 'org-deadline
