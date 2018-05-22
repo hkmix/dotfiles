@@ -6,6 +6,7 @@
 
 ;; Load all other settings
 (require 'org)
+(setq vc-follow-symlinks t)
 (org-babel-load-file
  (expand-file-name (concat user-emacs-directory "config.org")))
 

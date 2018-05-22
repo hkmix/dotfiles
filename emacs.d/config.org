@@ -5,396 +5,459 @@
 Packages must come first.
 
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize)
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/")
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (package-initialize)
 
-;; Automatic package installation
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+  ;; Automatic package installation
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-(eval-when-compile (require 'use-package))
-(require 'bind-key)
+  (eval-when-compile (require 'use-package))
+  (require 'bind-key)
 
-;; Always download packages if needed
-(setq use-package-always-ensure t)
+  ;; Always download packages if needed
+  (setq use-package-always-ensure t)
 
-;; Package list
-(use-package cmake-ide
-  :config
-  (cmake-ide-setup))
+  ;; Package list
+  (use-package cmake-ide
+    :config
+    (cmake-ide-setup))
 
-(use-package company
-  :diminish
-  (company-mode "Cmp")
-  :init
-  (progn
-    (global-company-mode)
-    (use-package company-flx
-      :init
-      (company-flx-mode +1))
-    (use-package company-ghc
-      :init
-      (add-to-list 'company-backends 'company-ghc))
-    (use-package company-irony
-      :init
-      (add-to-list 'company-backends 'company-irony))
-    (use-package company-math
-      :init
-      (add-to-list 'company-backends 'company-math-symbols-latex)
-      :config
-      (progn
-        (setq company-tooltip-align-annotations t)))
-    (use-package company-tern
-      :init
-      (progn
-        (setq company-tern-property-marker nil)
-        (add-to-list 'company-backends 'company-tern)))
-    (use-package company-web
-      :defer t)
-    (use-package jedi-core
-      :init
-      (use-package company-jedi
+  (use-package company
+    :diminish
+    (company-mode "Cmp")
+    :init
+    (progn
+      (global-company-mode)
+      (use-package company-flx
         :init
-        (add-to-list 'company-backends 'company-jedi))))
-  :config
-  (progn
-    (setq company-idle-delay 0.3)
-    (setq company-tooltip-limit 10)))
+        (company-flx-mode +1))
+      (use-package company-ghc
+        :init
+        (add-to-list 'company-backends 'company-ghc))
+      (use-package company-irony
+        :init
+        (add-to-list 'company-backends 'company-irony))
+      (use-package company-math
+        :init
+        (add-to-list 'company-backends 'company-math-symbols-latex)
+        :config
+        (progn
+          (setq company-tooltip-align-annotations t)))
+      (use-package company-tern
+        :init
+        (progn
+          (setq company-tern-property-marker nil)
+          (add-to-list 'company-backends 'company-tern)))
+      (use-package company-web
+        :defer t)
+      (use-package jedi-core
+        :init
+        (use-package company-jedi
+          :init
+          (add-to-list 'company-backends 'company-jedi))))
+    :config
+    (progn
+      (setq company-idle-delay 0.3)
+      (setq company-tooltip-limit 10)))
 
-(use-package delight
-  :init
-  (delight '((emacs-lisp-mode "Elisp" :major)
-             (lisp-interaction-mode "Elisp-I" :major)
-             ;; Minor modes
-             (abbrev-mode nil abbrev)
-             (auto-revert-mode nil autorevert)
-             (flyspell-mode " FlyS" flyspell)
-             (undo-tree-mode nil undo-tree)
-             (visual-line-mode nil simple))))
+  (use-package delight
+    :init
+    (delight '((emacs-lisp-mode "Elisp" :major)
+               (lisp-interaction-mode "Elisp-I" :major)
+               ;; Minor modes
+               (abbrev-mode nil abbrev)
+               (auto-revert-mode nil autorevert)
+               (flyspell-mode " FlyS" flyspell)
+               (undo-tree-mode nil undo-tree)
+               (visual-line-mode nil simple))))
 
-(use-package diminish)
+  (use-package diminish)
 
-(use-package dtrt-indent)
+  (use-package dtrt-indent)
 
-(use-package editorconfig
-  :defer t
-  :diminish
-  editorconfig-mode
-  :init
-  (editorconfig-mode 1))
+  (use-package editorconfig
+    :defer t
+    :diminish
+    editorconfig-mode
+    :init
+    (editorconfig-mode 1))
 
-(use-package eldoc
-  :defer t
-  :diminish
-  eldoc-mode
-  :init
-  (global-eldoc-mode 1))
+  (use-package eldoc
+    :defer t
+    :diminish
+    eldoc-mode
+    :init
+    (global-eldoc-mode 1))
 
-(use-package emmet-mode
-  :defer t)
-
-(use-package evil
-  :init
-  (progn
-    (setq evil-vsplit-window-right t)
-    (setq evil-split-window-below t)
-    (evil-mode t))
-  :config
-  (progn
-    (defalias #'forward-evil-word #'forward-evil-symbol)
-    (define-key evil-normal-state-map "j" 'evil-next-visual-line)
-    (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
-    (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
-    (evil-define-key 'normal dired-mode-map
-      "h" 'dired-up-directory
-      "j" 'dired-next-line
-      "k" 'dired-previous-line
-      "l" 'dired-find-alternate-file)
-    (use-package evil-leader
-      :init
-      (global-evil-leader-mode)
-      :config
-      (progn
-        (evil-leader/set-leader "<SPC>")
-        (evil-leader/set-key
-          "SPC" 'smex
-          "a"   'align-regexp
-          "b"   'switch-to-buffer
-          "C"   'compile
-          "c"   'recompile
-          "f"   'find-file
-
-          ;; Git-Gutter
-          "g s" 'git-gutter:stage-hunk
-          "g r" 'git-gutter:revert-hunk
-          "g n" 'git-gutter:next-hunk
-          "g p" 'git-gutter:previous-hunk
-
-          "h"   'recentf-open-files
-          "k b" 'kill-buffer
-          "m"   'magit-status
-          "o A" 'my/open-planner
-
-          ;; Projectile
-          "p g" 'projectile-grep
-          "p h" 'projectile-recentf
-          "p b" 'projectile-switch-to-buffer
-          "p p" 'my/projectile-find-file-or-switch-project
-          "p s" 'projectile-run-shell
-
-          "r"   'revert-buffer
-          "R"   'ruler-mode
-          "q q" 'fill-paragraph
-          "w w" 'window-configuration-to-register
-          "w r" 'jump-to-register)
-        (evil-leader/set-key-for-mode 'c++-mode
-          "."   'ggtags-find-definition
-          ","   'ggtags-prev-mark
-          "A"   'ff-find-alternate-file)
-        (evil-leader/set-key-for-mode 'latex-mode
-          "]"   'latex-close-block
-          "L"   'latex-preview-pane-mode
-          "l"   'my/update-latex-preview)
-        (evil-leader/set-key-for-mode 'org-mode
-          "o TAB" 'outline-show-all
-          "o <backtab>" 'org-shifttab
-          "o '" 'org-edit-special
-          "o a" 'org-agenda
-          "o c" 'org-ctrl-c-ctrl-c
-          "o d" 'org-deadline
-          "o e" 'org-export-dispatch
-          "o l" 'my/update-latex-preview-org
-          "o N" 'org-babel-next-src-block
-          "o n" 'org-next-block
-          "o o" 'my/open-at-point
-          "o P" 'org-babel-previous-src-block
-          "o p" 'org-previous-block
-          "o r" 'org-reveal)
-        (evil-leader/set-key-for-mode 'rust-mode
-          "F"   'rust-enable-format-on-save
-          "f"   'rust-format-buffer)))
-    (use-package evil-commentary
-      :diminish
-      evil-commentary-mode
-      :init
-      (evil-commentary-mode 1))
-    (use-package evil-magit)
-    (use-package evil-matchit
-      :init
-      (global-evil-matchit-mode 1))
-    (use-package evil-surround
-      :init
-      (global-evil-surround-mode 1))))
-
-(use-package eyebrowse
-  :ensure t
-  :init
-  (progn
-    (eyebrowse-mode t)
-    (eyebrowse-setup-opinionated-keys)))
-
-(use-package exec-path-from-shell
-  :init
-  (progn
-    (defvar exec-path-from-shell-check-startup-files)
-    (setq exec-path-from-shell-check-startup-files nil)
-    (exec-path-from-shell-initialize)))
-
-(use-package flycheck
-  :defer t
-  :init
-  (global-flycheck-mode)
-  :config
-  (progn
-    (use-package flycheck-ghcmod
-      :defer t)
-    (use-package flycheck-irony
-      :defer t)))
-
-(use-package ggtags
-  :defer t)
-
-(use-package git-gutter
-  :defer t
-  :bind
-  (("C-c g s" . git-gutter:stage-hunk)
-   ("C-c g r" . git-gutter:revert-hunk)
-   ("C-c g n" . git-gutter:next-hunk)
-   ("C-c g p" . git-gutter:previous-hunk))
-  :init
-  (progn
-    (global-git-gutter-mode t)
-    (git-gutter:linum-setup))
-  :diminish
-  git-gutter-mode)
-
-(use-package haskell-mode
-  :defer t)
-
-(use-package ido
-  :init
-  (ido-mode 1)
-  (ido-everywhere 1)
-  :config
-  (progn
-    (use-package flx-ido
-      :init
-      (flx-ido-mode 1)
-      :config
-      (progn
-        (setq ido-enable-flex-matching t)
-        (setq ido-use-faces nil)))
-    (use-package ido-completing-read+
-      :init
-      (ido-ubiquitous-mode 1))
-    (use-package ido-vertical-mode
-      :init
-      (ido-vertical-mode 1)
-      :config
-      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
-    (use-package smex
-      :bind
-      (("M-x" . smex)
-       ("M-X" . smex-major-mode-commands)
-       ("C-c M-x" . execute-extended-command))
-      :init
-      (smex-initialize))))
-
-(use-package irony)
-
-(use-package isend-mode
+  (use-package emmet-mode
     :defer t)
 
-(use-package latex-preview-pane
-  :defer t
-  :diminish
-  latex-preview-pane-mode)
+  (use-package evil
+    :init
+    (progn
+      (setq evil-vsplit-window-right t)
+      (setq evil-split-window-below t)
+      (evil-mode t))
+    :config
+    (progn
+      (defalias #'forward-evil-word #'forward-evil-symbol)
+      (define-key evil-normal-state-map "j" 'evil-next-visual-line)
+      (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+      (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
+      (evil-define-key 'normal dired-mode-map
+        "h" 'dired-up-directory
+        "j" 'dired-next-line
+        "k" 'dired-previous-line
+        "l" 'dired-find-alternate-file)
+      (use-package evil-leader
+        :init
+        (global-evil-leader-mode)
+        :config
+        (progn
+          (evil-leader/set-leader "<SPC>")
+          (evil-leader/set-key
+            "SPC" 'smex
+            "a"   'align-regexp
+            "b"   'switch-to-buffer
+            "C"   'compile
+            "c"   'recompile
+            "f"   'find-file
 
-(use-package magit
-  :defer t
-  :bind
-  ("C-c m" . magit-status))
+            ;; Git-Gutter
+            "g s" 'git-gutter:stage-hunk
+            "g r" 'git-gutter:revert-hunk
+            "g n" 'git-gutter:next-hunk
+            "g p" 'git-gutter:previous-hunk
 
-(use-package markdown-mode
-  :defer t
-  :config
-  (use-package markdown-preview-eww))
+            "h"   'recentf-open-files
+            "k b" 'kill-buffer
+            "m"   'magit-status
+            "o A" 'my/open-planner
 
-(use-package projectile
-  :diminish
-  (projectile-mode "Prj"))
+            ;; Projectile
+            "p g" 'projectile-grep
+            "p h" 'projectile-recentf
+            "p b" 'projectile-switch-to-buffer
+            "p p" 'my/projectile-find-file-or-switch-project
+            "p s" 'projectile-run-shell
 
-(use-package recentf
-  :init
-  (recentf-mode 1))
+            "r"   'revert-buffer
+            "R"   'ruler-mode
+            "q q" 'fill-paragraph
+            "w w" 'window-configuration-to-register
+            "w r" 'jump-to-register)
+          (evil-leader/set-key-for-mode 'c++-mode
+            "."   'ggtags-find-definition
+            ","   'ggtags-prev-mark
+            "A"   'ff-find-alternate-file)
+          (evil-leader/set-key-for-mode 'latex-mode
+            "]"   'latex-close-block
+            "L"   'latex-preview-pane-mode
+            "l"   'my/update-latex-preview)
+          (evil-leader/set-key-for-mode 'org-mode
+            "o TAB" 'outline-show-all
+            "o <backtab>" 'org-shifttab
+            "o '" 'org-edit-special
+            "o a" 'org-agenda
+            "o c" 'org-ctrl-c-ctrl-c
+            "o d" 'org-deadline
+            "o e" 'org-export-dispatch
+            "o l" 'my/update-latex-preview-org
+            "o N" 'org-babel-next-src-block
+            "o n" 'org-next-block
+            "o o" 'my/open-at-point
+            "o P" 'org-babel-previous-src-block
+            "o p" 'org-previous-block
+            "o r" 'org-reveal)
+          (evil-leader/set-key-for-mode 'rust-mode
+            "F"   'rust-enable-format-on-save
+            "f"   'rust-format-buffer)))
+      (use-package evil-commentary
+        :diminish
+        evil-commentary-mode
+        :init
+        (evil-commentary-mode 1))
+      (use-package evil-magit)
+      (use-package evil-matchit
+        :init
+        (global-evil-matchit-mode 1))
+      (use-package evil-surround
+        :init
+        (global-evil-surround-mode 1))))
 
-(use-package rust-mode
-  :init
-  (progn
-    (use-package cargo)
-    (use-package flycheck-rust
-      :init
-      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-    (use-package racer
-      :bind
-      (:map rust-mode-map
-            ("TAB" . company-indent-or-complete-common))
-      :init
-      (progn
-        (add-hook 'rust-mode-hook #'racer-mode)
-        (add-hook 'racer-mode-hook #'eldoc-mode)
-        (add-hook 'racer-mode-hook #'company-mode)))
-    (use-package toml-mode)))
+  (use-package eyebrowse
+    :ensure t
+    :init
+    (progn
+      (eyebrowse-mode t)
+      (eyebrowse-setup-opinionated-keys)))
 
-(use-package solarized-theme
-  :init
-  (progn
-    (set-frame-parameter nil 'background-mode 'dark)
-    (set-terminal-parameter nil 'background-mode 'dark)))
+  (use-package exec-path-from-shell
+    :init
+    (progn
+      (defvar exec-path-from-shell-check-startup-files)
+      (setq exec-path-from-shell-check-startup-files nil)
+      (exec-path-from-shell-initialize)))
 
-(use-package which-key
-  :config
-  (which-key-mode))
+  (use-package flycheck
+    :defer t
+    :init
+    (global-flycheck-mode)
+    :config
+    (progn
+      (use-package flycheck-ghcmod
+        :defer t)
+      (use-package flycheck-irony
+        :defer t)))
 
-(use-package ws-butler
-  :diminish
-  ws-butler-mode
-  :init
-  (progn
-    (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
-      (lambda ()
-        (ws-butler-mode t)))
-    (global-ws-butler-mode t)))
+  (use-package ggtags
+    :defer t)
+
+  (use-package git-gutter
+    :defer t
+    :bind
+    (("C-c g s" . git-gutter:stage-hunk)
+     ("C-c g r" . git-gutter:revert-hunk)
+     ("C-c g n" . git-gutter:next-hunk)
+     ("C-c g p" . git-gutter:previous-hunk))
+    :init
+    (progn
+      (global-git-gutter-mode t)
+      (git-gutter:linum-setup))
+    :diminish
+    git-gutter-mode)
+
+  (use-package haskell-mode
+    :defer t)
+
+  (use-package ido
+    :init
+    (ido-mode 1)
+    (ido-everywhere 1)
+    :config
+    (progn
+      (use-package flx-ido
+        :init
+        (flx-ido-mode 1)
+        :config
+        (progn
+          (setq ido-enable-flex-matching t)
+          (setq ido-use-faces nil)))
+      (use-package ido-completing-read+
+        :init
+        (ido-ubiquitous-mode 1))
+      (use-package ido-vertical-mode
+        :init
+        (ido-vertical-mode 1)
+        :config
+        (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+      (use-package smex
+        :bind
+        (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ("C-c M-x" . execute-extended-command))
+        :init
+        (smex-initialize))))
+
+  (use-package irony)
+
+  (use-package isend-mode
+      :defer t)
+
+  (use-package latex-preview-pane
+    :defer t
+    :diminish
+    latex-preview-pane-mode)
+
+  (use-package magit
+    :defer t
+    :bind
+    ("C-c m" . magit-status))
+
+  (use-package markdown-mode
+    :defer t
+    :config
+    (use-package markdown-preview-eww))
+
+  (use-package projectile
+    :diminish
+    (projectile-mode "Prj"))
+
+  (use-package recentf
+    :init
+    (recentf-mode 1))
+
+  (use-package rust-mode
+    :init
+    (progn
+      (use-package cargo)
+      (use-package flycheck-rust
+        :init
+        (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+      (use-package racer
+        :bind
+        (:map rust-mode-map
+              ("TAB" . company-indent-or-complete-common))
+        :init
+        (progn
+          (add-hook 'rust-mode-hook #'racer-mode)
+          (add-hook 'racer-mode-hook #'eldoc-mode)
+          (add-hook 'racer-mode-hook #'company-mode)))
+      (use-package toml-mode)))
+
+  (use-package solarized-theme)
+
+  (use-package which-key
+    :config
+    (which-key-mode))
+
+  (use-package ws-butler
+    :diminish
+    ws-butler-mode
+    :init
+    (progn
+      (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
+        (lambda ()
+          (ws-butler-mode t)))
+      (global-ws-butler-mode t)))
 #+END_SRC
+
+* Functions
+
+Functions should come after packages.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Edit the init file
+  (defun my/edit-init ()
+    "Edit the Emacs init file."
+    (interactive)
+    (find-file user-init-file))
+
+  (defun my/edit-config ()
+    "Edit the Emacs configuration file."
+    (interactive)
+    (find-file (expand-file-name (concat user-emacs-directory "config.org"))))
+
+  ;; Force open file in Emacs
+  (defun my/open-at-point ()
+    "Force open file at point in Emacs."
+    (interactive)
+    (org-open-at-point t))
+
+  ;; Invoke projectile-find-file if we are in a project, or start the switcher
+  (defun my/projectile-find-file-or-switch-project ()
+    "Invoke Projectile file finder if in a project, else start project switcher."
+    (interactive)
+    (if (projectile-project-p)
+        (projectile-find-file)
+      (projectile-switch-project)))
+
+  ;; Refresh LaTeX preview pane
+  (defun my/update-latex-preview ()
+    "Update LaTeX preview pane."
+    (interactive)
+    (evil-window-right 1)
+    (revert-buffer)
+    (evil-window-left 1))
+
+  ;; Refresh Org-mode latex
+  (defun my/update-latex-preview-org ()
+    "Update LaTeX preview pane in Org-mode."
+    (interactive)
+    (org-latex-export-to-pdf)
+    ;; The function below is only needed if we are using PDF-tools
+    ;; (my/update-latex-preview)
+    )
+
+  (defun my/split-window-left ()
+    "Split the window to the right and move to it."
+    (interactive)
+    (split-window-right)
+    (evil-window-right 1))
+
+  (defun my/split-window-above ()
+    "Split the window below and move to it."
+    (interactive)
+    (split-window-below)
+    (evil-window-below 1))
+
+  ;; Edit the init file
+  (defun my/open-planner ()
+    "Edit the planner file."
+    (interactive)
+    (find-file "~/Drive/planner.org"))
+#+END_SRC
+
 * Appearance
 
 #+BEGIN_SRC emacs-lisp
-;; GUI settings
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+  ;; GUI settings
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
 
-(if (window-system)
-    (progn
-      (set-face-attribute 'default nil :font "Iosevka Slab-12")
-      (add-to-list 'default-frame-alist '(height . 24))
-      (add-to-list 'default-frame-alist '(width . 80))
-      (add-to-list 'default-frame-alist '(background-mode . dark))
-      (add-to-list 'initial-frame-alist '(height . 24))
-      (add-to-list 'initial-frame-alist '(width . 80))
-      (add-to-list 'initial-frame-alist '(background-mode . dark))
-      (blink-cursor-mode 0))
-  (progn
-    (xterm-mouse-mode)))
+  (set-face-attribute 'default nil :font "Iosevka Slab-12")
+  (add-to-list 'default-frame-alist '(font . "Iosevka Slab-12"))
+  (add-to-list 'default-frame-alist '(height . 24))
+  (add-to-list 'default-frame-alist '(width . 80))
+  (add-to-list 'default-frame-alist '(background-mode . dark))
+  (add-to-list 'initial-frame-alist '(font . "Iosevka Slab-12"))
+  (add-to-list 'initial-frame-alist '(height . 24))
+  (add-to-list 'initial-frame-alist '(width . 80))
+  (add-to-list 'initial-frame-alist '(background-mode . dark))
+  (xterm-mouse-mode)
 
-(load-theme 'solarized t)
+  (load-theme 'solarized t)
+  (set-frame-parameter nil 'background-mode 'dark)
+  (set-terminal-parameter nil 'background-mode 'dark)
 
-;; Editing area settings
-(show-paren-mode t)
-(global-hl-line-mode t)
-(setq scroll-margin 6)
+  ;; Editing area settings
+  (show-paren-mode t)
+  (global-hl-line-mode t)
+  (setq scroll-margin 6)
 #+END_SRC
   
 * Bindings
 
 #+BEGIN_SRC emacs-lisp
-;; General key bindings
-(global-unset-key (kbd "C-w"))
-(global-set-key (kbd "C-w h") 'windmove-left)
-(global-set-key (kbd "C-w j") 'windmove-down)
-(global-set-key (kbd "C-w k") 'windmove-up)
-(global-set-key (kbd "C-w l") 'windmove-right)
+  ;; General key bindings
+  (global-unset-key (kbd "C-w"))
+  (global-set-key (kbd "C-w h") 'windmove-left)
+  (global-set-key (kbd "C-w j") 'windmove-down)
+  (global-set-key (kbd "C-w k") 'windmove-up)
+  (global-set-key (kbd "C-w l") 'windmove-right)
 
-;; Org-mode key bindings
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
+  ;; Org-mode key bindings
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
 
-;; Fix ESC key in Evil mode
-;;; esc quits
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(global-set-key [escape] 'evil-exit-emacs-state)
+  ;; Fix ESC key in Evil mode
+  ;;; esc quits
+  (defun minibuffer-keyboard-quit ()
+    "Abort recursive edit.
+  In Delete Selection mode, if the mark is active, just deactivate it;
+  then it takes a second \\[keyboard-quit] to abort the minibuffer."
+    (interactive)
+    (if (and delete-selection-mode transient-mark-mode mark-active)
+        (setq deactivate-mark  t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (global-set-key [escape] 'evil-exit-emacs-state)
 #+END_SRC
   
 * Editing
@@ -431,65 +494,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-to-list 'auto-mode-alist '("\\.editorconfig\\'" . editorconfig-conf-mode))
 #+END_SRC
 
-* Functions
-
-#+BEGIN_SRC emacs-lisp
-;; Edit the init file
-(defun my/edit-init ()
-  "Edit the Emacs configuration file."
-  (interactive)
-  (find-file user-init-file))
-
-;; Force open file in Emacs
-(defun my/open-at-point ()
-  "Force open file at point in Emacs."
-  (interactive)
-  (org-open-at-point t))
-
-;; Invoke projectile-find-file if we are in a project, or start the switcher
-(defun my/projectile-find-file-or-switch-project ()
-  "Invoke Projectile file finder if in a project, else start project switcher."
-  (interactive)
-  (if (projectile-project-p)
-      (projectile-find-file)
-    (projectile-switch-project)))
-
-;; Refresh LaTeX preview pane
-(defun my/update-latex-preview ()
-  "Update LaTeX preview pane."
-  (interactive)
-  (evil-window-right 1)
-  (revert-buffer)
-  (evil-window-left 1))
-
-;; Refresh Org-mode latex
-(defun my/update-latex-preview-org ()
-  "Update LaTeX preview pane in Org-mode."
-  (interactive)
-  (org-latex-export-to-pdf)
-  ;; The function below is only needed if we are using PDF-tools
-  ;; (my/update-latex-preview)
-  )
-
-(defun my/split-window-left ()
-  "Split the window to the right and move to it."
-  (interactive)
-  (split-window-right)
-  (evil-window-right 1))
-
-(defun my/split-window-above ()
-  "Split the window below and move to it."
-  (interactive)
-  (split-window-below)
-  (evil-window-below 1))
-
-;; Edit the init file
-(defun my/open-planner ()
-  "Edit the planner file."
-  (interactive)
-  (find-file "~/Drive/planner.org"))
-#+END_SRC
-  
 * Hooks
 
 #+BEGIN_SRC emacs-lisp
@@ -603,4 +607,3 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Set link opening defaults
 (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
-  

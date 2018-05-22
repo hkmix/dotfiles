@@ -63,6 +63,12 @@ alias venvme=". ./venv/bin/activate"
 alias vi="nvim"
 alias vim="nvim"
 
+# Emacs aliases.
+alias emacsd="emacs --daemon"
+alias emacsk='emacsclient --eval "(kill-emacs)"'
+alias emacsc="emacsclient -c"
+alias eee="emacsclient -c"
+
 # Functions.
 ccd() {
     cd ~/Projects/"$1"
