@@ -1,9 +1,10 @@
-;;; my-packages.el -- Set up packages
+#+TITLE: Org-Babel Emacs Configuration
 
-;;; Commentary:
+* Packages
+  
+Packages must come first.
 
-;;; Code:
-;; Enable package manager
+#+BEGIN_SRC emacs-lisp
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
@@ -19,15 +20,12 @@
   (package-install 'use-package))
 
 (eval-when-compile (require 'use-package))
-(require 'diminish)
 (require 'bind-key)
 
 ;; Always download packages if needed
 (setq use-package-always-ensure t)
 
 ;; Package list
-(use-package column-marker)
-
 (use-package cmake-ide
   :config
   (cmake-ide-setup))
@@ -80,6 +78,8 @@
              (flyspell-mode " FlyS" flyspell)
              (undo-tree-mode nil undo-tree)
              (visual-line-mode nil simple))))
+
+(use-package diminish)
 
 (use-package dtrt-indent)
 
@@ -313,11 +313,15 @@
         (add-hook 'racer-mode-hook #'company-mode)))
     (use-package toml-mode)))
 
-(use-package color-theme-solarized
+(use-package solarized-theme
   :init
   (progn
     (set-frame-parameter nil 'background-mode 'dark)
     (set-terminal-parameter nil 'background-mode 'dark)))
+
+(use-package which-key
+  :config
+  (which-key-mode))
 
 (use-package ws-butler
   :diminish
@@ -328,6 +332,275 @@
       (lambda ()
         (ws-butler-mode t)))
     (global-ws-butler-mode t)))
+#+END_SRC
+* Appearance
 
-(provide 'my-packages)
-;;; my-packages.el ends here
+#+BEGIN_SRC emacs-lisp
+;; GUI settings
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+(if (window-system)
+    (progn
+      (set-face-attribute 'default nil :font "Iosevka Slab-12")
+      (add-to-list 'default-frame-alist '(height . 24))
+      (add-to-list 'default-frame-alist '(width . 80))
+      (add-to-list 'default-frame-alist '(background-mode . dark))
+      (add-to-list 'initial-frame-alist '(height . 24))
+      (add-to-list 'initial-frame-alist '(width . 80))
+      (add-to-list 'initial-frame-alist '(background-mode . dark))
+      (blink-cursor-mode 0))
+  (progn
+    (xterm-mouse-mode)))
+
+(load-theme 'solarized t)
+
+;; Editing area settings
+(show-paren-mode t)
+(global-hl-line-mode t)
+(setq scroll-margin 6)
+#+END_SRC
+  
+* Bindings
+
+#+BEGIN_SRC emacs-lisp
+;; General key bindings
+(global-unset-key (kbd "C-w"))
+(global-set-key (kbd "C-w h") 'windmove-left)
+(global-set-key (kbd "C-w j") 'windmove-down)
+(global-set-key (kbd "C-w k") 'windmove-up)
+(global-set-key (kbd "C-w l") 'windmove-right)
+
+;; Org-mode key bindings
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+;; Fix ESC key in Evil mode
+;;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(global-set-key [escape] 'evil-exit-emacs-state)
+#+END_SRC
+  
+* Editing
+
+#+BEGIN_SRC emacs-lisp
+;; Editing options
+(setq initial-scratch-message nil)
+(setq vc-follow-symlinks t)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default fill-column 80)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
+(electric-pair-mode)
+(global-visual-line-mode)
+
+;; Move backups to temp directory
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;; Prevent killing to clipboard
+(setq select-enable-clipboard nil)
+(setq select-enable-primary t)
+(setq mouse-drag-copy-region t)
+#+END_SRC
+  
+* Filetype-specific
+
+#+BEGIN_SRC emacs-lisp
+;; C++ headers
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.editorconfig\\'" . editorconfig-conf-mode))
+#+END_SRC
+
+* Functions
+
+#+BEGIN_SRC emacs-lisp
+;; Edit the init file
+(defun my/edit-init ()
+  "Edit the Emacs configuration file."
+  (interactive)
+  (find-file user-init-file))
+
+;; Force open file in Emacs
+(defun my/open-at-point ()
+  "Force open file at point in Emacs."
+  (interactive)
+  (org-open-at-point t))
+
+;; Invoke projectile-find-file if we are in a project, or start the switcher
+(defun my/projectile-find-file-or-switch-project ()
+  "Invoke Projectile file finder if in a project, else start project switcher."
+  (interactive)
+  (if (projectile-project-p)
+      (projectile-find-file)
+    (projectile-switch-project)))
+
+;; Refresh LaTeX preview pane
+(defun my/update-latex-preview ()
+  "Update LaTeX preview pane."
+  (interactive)
+  (evil-window-right 1)
+  (revert-buffer)
+  (evil-window-left 1))
+
+;; Refresh Org-mode latex
+(defun my/update-latex-preview-org ()
+  "Update LaTeX preview pane in Org-mode."
+  (interactive)
+  (org-latex-export-to-pdf)
+  ;; The function below is only needed if we are using PDF-tools
+  ;; (my/update-latex-preview)
+  )
+
+(defun my/split-window-left ()
+  "Split the window to the right and move to it."
+  (interactive)
+  (split-window-right)
+  (evil-window-right 1))
+
+(defun my/split-window-above ()
+  "Split the window below and move to it."
+  (interactive)
+  (split-window-below)
+  (evil-window-below 1))
+
+;; Edit the init file
+(defun my/open-planner ()
+  "Edit the planner file."
+  (interactive)
+  (find-file "~/Drive/planner.org"))
+#+END_SRC
+  
+* Hooks
+
+#+BEGIN_SRC emacs-lisp
+;; All coding modes
+(add-hook 'prog-mode-hook
+          (lambda()
+            (linum-mode 1)
+            (company-mode 1)))
+
+;; All text-editing modes
+(add-hook 'text-mode-hook
+          (lambda()
+            (flyspell-mode 1)))
+
+;; C/C++
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key (kbd "C-c o") 'ff-find-other-file)
+            (company-mode 1)
+            (dtrt-indent-mode 1)
+            (eldoc-mode 1)
+            (ggtags-mode 1)))
+
+;; DocView
+;; Resolution
+(require 'doc-view)
+(setq doc-view-resolution 200)
+
+;; LaTeX
+;; Prevent pairing for $
+(add-hook 'latex-mode-hook
+          (lambda ()
+            (linum-mode 1)
+            (setq-default electric-pair-inhibit-predicate
+                          (lambda (c)
+                            (if (eq "$" c)
+                              (electric-pair-default-inhibit c)
+                              t)))))
+
+;; Allow revert of PDF files without confirmation
+(setq revert-without-query (quote (".*\.pdf")))
+
+;; Rust
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command) "cargo run")))
+
+;; Web
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'js-mode-hook 'tern-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+#+END_SRC
+  
+* Miscellaneous
+
+#+BEGIN_SRC emacs-lisp
+;; Silence some warnings
+(setq ad-redefinition-action 'accept)
+
+;; Use y/n instead of yes/no
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+  
+* Org-mode
+
+#+BEGIN_SRC emacs-lisp
+;; Appearance
+(defvar org-src-fontify-natively)
+(setq org-src-fontify-natively t)
+
+;; Set languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (haskell . t)
+   (latex . t)
+   (python . t)
+   (sh . t)))
+
+;; Hooks
+(add-hook 'org-mode-hook
+          (lambda ()
+            (linum-mode 1)))
+
+;; Agenda settings
+;; Start on Sunday
+(defvar org-agenda-start-on-weekday)
+(setq org-agenda-start-on-weekday 0)
+
+;; States
+(defvar org-todo-keywords)
+(setq org-todo-keywords
+      '((sequence "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")))
+
+;; Export settings
+(defvar org-latex-listings)
+(setq org-latex-listings 'minted)
+(defvar org-latex-packages-alist)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(defvar org-latex-minted-options)
+(setq org-latex-minted-options
+      '(("linenos")
+        ("breaklines")
+        ("xleftmargin" "2em")))
+(defvar org-latex-pdf-process)
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;; Set link opening defaults
+(setq browse-url-browser-function 'eww-browse-url)
+#+END_SRC
+  

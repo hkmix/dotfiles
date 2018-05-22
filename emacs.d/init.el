@@ -5,30 +5,9 @@
 ;;; Code:
 
 ;; Load all other settings
-(add-to-list 'load-path "~/.emacs.d/cfg/")
-
-(defun load-config-library (library)
-  "If LIBRARY is found, load it."
-  (when (locate-library library)
-    (load-library library)))
-
-;; Define some functions
-(load-config-library "my-functions")
-
-;; Load packages
-(load-config-library "my-packages")
-
-;; Load everything else in no particular order
-(load-config-library "my-appearance")
-(load-config-library "my-bindings")
-(load-config-library "my-editing")
-(load-config-library "my-filetypes")
-(load-config-library "my-hooks")
-(load-config-library "my-misc")
-(load-config-library "my-org-mode")
-
-;; Check for platform-specific settings
-(load-config-library "my-platform")
+(require 'org)
+(org-babel-load-file
+ (expand-file-name (concat user-emacs-directory "config.org")))
 
 ;; Built-in options
 (setq package-enable-at-startup nil)
@@ -46,7 +25,7 @@
  '(org-agenda-files (quote ("~/Drive/planner.org")))
  '(package-selected-packages
    (quote
-    (cmake-ide color-theme-solarized emacs-color-theme-solarized irony company-irony eyebrowse markdown-preview-eww toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight column-marker)))
+    (which-key cmake-ide color-theme-solarized emacs-color-theme-solarized irony company-irony eyebrowse markdown-preview-eww toml-mode emmet-mode highlight-chars ido-ubiquitous markdown-preview-mode markdown-mode: markdown-mode ggtags evil-leader use-package solarized-theme isend-mode helm-projectile god-mode git-gutter flycheck-haskell fill-column-indicator exec-path-from-shell evil-tabs evil-surround evil-magit evil-commentary editorconfig dtrt-indent delight column-marker)))
  '(safe-local-variable-values (quote (insert-tabs-mode)))
  '(shell-escape-mode "-shell-escape"))
 (custom-set-faces
