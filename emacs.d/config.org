@@ -417,7 +417,10 @@ Functions should come after packages.
     (add-to-list 'default-frame-alist setting)
     (add-to-list 'initial-frame-alist setting))
 
-  (defconst default-font "Iosevka Slab-12")
+  (if (eq system-type 'darwin)
+      ;; Use a slightly larger size for macOS.
+      (defconst default-font "Iosevka Slab-14")
+    (defconst default-font "Iosevka Slab-12"))
   (set-face-attribute 'default nil :font default-font)
   (add-to-frame-lists (cons 'font default-font))
   (add-to-frame-lists '(height . 24))
@@ -497,8 +500,10 @@ Functions should come after packages.
         `((".*" ,temporary-file-directory t)))
 
   ;; Prevent killing to clipboard.
-  (setq select-enable-clipboard nil)
-  (setq select-enable-primary t)
+  (when (eq system-type 'darwin)
+    (setq select-enable-clipboard nil)
+    (setq select-enable-primary t))
+
   (setq mouse-drag-copy-region t)
 #+END_SRC
 
