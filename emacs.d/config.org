@@ -30,26 +30,24 @@ Packages must come first.
     :config
     (cmake-ide-setup))
 
+  (use-package column-enforce-mode)
+
   (use-package company
-    :diminish
-    (company-mode "Cmp")
     :init
     (progn
-      (global-company-mode)
       (use-package company-flx
-        :init
+        :config
         (company-flx-mode +1))
       (use-package company-ghc
-        :init
+        :config
         (add-to-list 'company-backends 'company-ghc))
       (use-package company-irony
-        :init
+        :config
         (add-to-list 'company-backends 'company-irony))
       (use-package company-math
-        :init
-        (add-to-list 'company-backends 'company-math-symbols-latex)
         :config
         (progn
+          (add-to-list 'company-backends 'company-math-symbols-latex)
           (setq company-tooltip-align-annotations t)))
       (use-package company-tern
         :init
@@ -61,39 +59,46 @@ Packages must come first.
       (use-package jedi-core
         :init
         (use-package company-jedi
-          :init
+          :config
           (add-to-list 'company-backends 'company-jedi))))
     :config
     (progn
+      (global-company-mode)
       (setq company-idle-delay 0.3)
       (setq company-tooltip-limit 10)))
 
   (use-package delight
-    :init
-    (delight '((emacs-lisp-mode "Elisp" :major)
-               (lisp-interaction-mode "Elisp-I" :major)
+    :config
+    (delight '((emacs-lisp-mode "EL" :major)
+               (lisp-interaction-mode "EL-I" :major)
                ;; Minor modes.
                (abbrev-mode nil abbrev)
                (auto-revert-mode nil autorevert)
-               (flyspell-mode " FlyS" flyspell)
+               (column-enforce-mode nil column-enforce-mode)
+               (company-mode " cp" company)
+               (defining-kbd-macro " q..." t)
+               (editorconfig-mode nil editorconfig)
+               (eldoc-mode nil eldoc)
+               (evil-commentary-mode nil evil-commentary)
+               (flycheck-mode " fc" flycheck)
+               (flyspell-mode " fs" flyspell)
+               (latex-preview-pane-mode nil latex-preview-pane)
+               (git-gutter-mode nil git-gutter)
+               (projectile-mode " pj" projectile)
                (undo-tree-mode nil undo-tree)
-               (visual-line-mode nil simple))))
-
-  (use-package diminish)
+               (visual-line-mode nil t)
+               (which-key-mode nil which-key)
+               (ws-butler-mode nil ws-butler))))
 
   (use-package dtrt-indent)
 
   (use-package editorconfig
     :defer t
-    :diminish
-    editorconfig-mode
     :init
     (editorconfig-mode 1))
 
   (use-package eldoc
     :defer t
-    :diminish
-    eldoc-mode
     :init
     (global-eldoc-mode 1))
 
@@ -101,13 +106,10 @@ Packages must come first.
     :defer t)
 
   (use-package evil
-    :init
+    :config
     (progn
       (setq evil-vsplit-window-right t)
       (setq evil-split-window-below t)
-      (evil-mode t))
-    :config
-    (progn
       (defalias #'forward-evil-word #'forward-evil-symbol)
       (define-key evil-normal-state-map "j" 'evil-next-visual-line)
       (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
@@ -119,9 +121,8 @@ Packages must come first.
         "l" 'dired-find-alternate-file)
       (use-package evil-leader
         :init
-        (global-evil-leader-mode)
-        :config
         (progn
+          (global-evil-leader-mode)
           (evil-leader/set-leader "<SPC>")
           (evil-leader/set-key
             "SPC" 'smex
@@ -181,27 +182,33 @@ Packages must come first.
             "F"   'rust-enable-format-on-save
             "f"   'rust-format-buffer)))
       (use-package evil-commentary
-        :diminish
-        evil-commentary-mode
-        :init
+        :config
         (evil-commentary-mode 1))
       (use-package evil-magit)
       (use-package evil-matchit
-        :init
+        :config
         (global-evil-matchit-mode 1))
       (use-package evil-surround
-        :init
-        (global-evil-surround-mode 1))))
+        :config
+        (global-evil-surround-mode 1))
+      (use-package evil-tabs
+        :config
+        (progn
+          (global-evil-tabs-mode t)
+          (setq elscreen-tab-display-control nil)
+          (setq elscreen-tab-display-kill-screen nil)
+          (elscreen-toggle-display-tab)))
+      (evil-mode 1)))
 
   (use-package eyebrowse
     :ensure t
-    :init
+    :config
     (progn
       (eyebrowse-mode t)
       (eyebrowse-setup-opinionated-keys)))
 
   (use-package exec-path-from-shell
-    :init
+    :config
     (progn
       (defvar exec-path-from-shell-check-startup-files)
       (setq exec-path-from-shell-check-startup-files nil)
@@ -209,10 +216,9 @@ Packages must come first.
 
   (use-package flycheck
     :defer t
-    :init
-    (global-flycheck-mode)
     :config
     (progn
+      (global-flycheck-mode)
       (use-package flycheck-ghcmod
         :defer t)
       (use-package flycheck-irony
@@ -228,57 +234,50 @@ Packages must come first.
      ("C-c g r" . git-gutter:revert-hunk)
      ("C-c g n" . git-gutter:next-hunk)
      ("C-c g p" . git-gutter:previous-hunk))
-    :init
+    :config
     (progn
       (global-git-gutter-mode t)
-      (git-gutter:linum-setup))
-    :diminish
-    git-gutter-mode)
+      (git-gutter:linum-setup)))
 
   (use-package haskell-mode
     :defer t)
 
   (use-package ido
-    :init
-    (ido-mode 1)
-    (ido-everywhere 1)
     :config
     (progn
+      (ido-mode 1)
+      (ido-everywhere 1)
       (use-package flx-ido
-        :init
-        (flx-ido-mode 1)
         :config
         (progn
+          (flx-ido-mode 1)
           (setq ido-enable-flex-matching t)
           (setq ido-use-faces nil)))
       (use-package ido-completing-read+
-        :init
+        :config
         (ido-ubiquitous-mode 1))
       (use-package ido-vertical-mode
-        :init
-        (ido-vertical-mode 1)
         :config
-        (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+        (progn
+          (ido-vertical-mode 1)
+          (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
       (use-package smex
         :bind
         (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)
          ("C-c M-x" . execute-extended-command))
-        :init
+        :config
         (smex-initialize))))
 
   (use-package irony)
 
   (use-package isend-mode
-      :defer t)
+    :defer t)
 
   (use-package latex-preview-pane
-    :defer t
-    :diminish
-    latex-preview-pane-mode)
+    :defer t)
 
   (use-package magit
-    :defer t
     :bind
     ("C-c m" . magit-status))
 
@@ -287,34 +286,15 @@ Packages must come first.
     :config
     (use-package markdown-preview-eww))
 
-  (use-package projectile
-    :diminish
-    (projectile-mode "Prj"))
+  (use-package projectile)
 
   (use-package recentf
-    :init
+    :config
     (recentf-mode 1))
-
-  (use-package rust-mode
-    :init
-    (progn
-      (use-package cargo)
-      (use-package flycheck-rust
-        :init
-        (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-      (use-package racer
-        :bind
-        (:map rust-mode-map
-              ("TAB" . company-indent-or-complete-common))
-        :init
-        (progn
-          (add-hook 'rust-mode-hook #'racer-mode)
-          (add-hook 'racer-mode-hook #'eldoc-mode)
-          (add-hook 'racer-mode-hook #'company-mode)))
-      (use-package toml-mode)))
 
   (use-package solarized-theme
     :init
+    ;; Package configurations must be pre-theme setting.
     (progn
       (setq solarized-use-variable-pitch nil)
       (setq solarized-height-minus-1 1.0)
@@ -328,14 +308,13 @@ Packages must come first.
     (which-key-mode))
 
   (use-package ws-butler
-    :diminish
-    ws-butler-mode
     :init
     (progn
       (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
         (lambda ()
-          (ws-butler-mode t)))
-      (global-ws-butler-mode t)))
+          (ws-butler-mode t))))
+    :config
+    (global-ws-butler-mode t))
 #+END_SRC
 
 * Functions
@@ -487,7 +466,7 @@ Functions should come after packages.
   (setq vc-follow-symlinks t)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (setq-default fill-column 80)
+  (setq-default fill-column 79)
   (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
   (electric-pair-mode)
@@ -523,7 +502,8 @@ Functions should come after packages.
   (add-hook 'prog-mode-hook
             (lambda()
               (linum-mode 1)
-              (company-mode 1)))
+              (company-mode 1)
+              (80-column-rule)))
 
   ;; All text-editing modes.
   (add-hook 'text-mode-hook

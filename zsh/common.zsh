@@ -66,6 +66,7 @@ alias vim="nvim"
 # Emacs aliases.
 alias emacsd="emacs --daemon"
 alias emacsk='emacsclient --eval "(kill-emacs)"'
+alias emacsr="emacsk && emacsd"
 alias emacsc="emacsclient -c"
 alias eee="emacsclient -c"
 
