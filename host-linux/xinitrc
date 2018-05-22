@@ -1,2 +1,3 @@
+numlockx on
 xrdb -merge ~/.Xresources
 exec i3
