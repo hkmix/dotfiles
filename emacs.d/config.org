@@ -429,6 +429,9 @@ Functions should come after packages.
   (set-frame-parameter nil 'background-mode 'dark)
   (set-terminal-parameter nil 'background-mode 'dark)
 
+  ;; Modeline settings.
+  (column-number-mode)
+
   ;; Editing area settings.
   (show-paren-mode t)
   (global-hl-line-mode t)
