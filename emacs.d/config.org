@@ -84,10 +84,12 @@ Packages must come first.
                (flyspell-mode " fs" flyspell)
                (latex-preview-pane-mode nil latex-preview-pane)
                (git-gutter-mode nil git-gutter)
+               (isend-mode " is" isend-mode)
                (projectile-mode " pj" projectile)
                (undo-tree-mode nil undo-tree)
                (visual-line-mode nil t)
                (which-key-mode nil which-key)
+               (with-editor-mode nil with-editor)
                (ws-butler-mode nil ws-butler))))
 
   (use-package dtrt-indent)
@@ -141,6 +143,12 @@ Packages must come first.
             "g p" 'git-gutter:previous-hunk
 
             "h"   'recentf-open-files
+
+            ;; Isend-mode.
+            "i a" 'isend-associate
+            "i s" 'isend-send
+            "i S" 'isend-send-buffer
+
             "k b" 'kill-buffer
             "m"   'magit-status
 
@@ -156,19 +164,26 @@ Packages must come first.
             "p p" 'my/projectile-find-file-or-switch-project
             "p s" 'projectile-run-shell
 
+            ;; Tabs.
+            "t n" 'elscreen-create
+            "t d" 'elscreen-kill
+
             "r"   'revert-buffer
             "R"   'ruler-mode
             "q q" 'fill-paragraph
             "w w" 'window-configuration-to-register
             "w r" 'jump-to-register)
+
           (evil-leader/set-key-for-mode 'c++-mode
             "."   'ggtags-find-definition
             ","   'ggtags-prev-mark
             "A"   'ff-find-alternate-file)
+
           (evil-leader/set-key-for-mode 'latex-mode
             "]"   'latex-close-block
             "L"   'latex-preview-pane-mode
             "l"   'my/update-latex-preview)
+
           (evil-leader/set-key-for-mode 'org-mode
             "o TAB" 'outline-show-all
             "o <backtab>" 'org-shifttab
@@ -184,6 +199,7 @@ Packages must come first.
             "o P" 'org-babel-previous-src-block
             "o p" 'org-previous-block
             "o r" 'org-reveal)
+
           (evil-leader/set-key-for-mode 'rust-mode
             "F"   'rust-enable-format-on-save
             "f"   'rust-format-buffer)))
@@ -276,8 +292,7 @@ Packages must come first.
 
   (use-package irony)
 
-  (use-package isend-mode
-    :defer t)
+  (use-package isend-mode)
 
   (use-package latex-preview-pane
     :defer t)
