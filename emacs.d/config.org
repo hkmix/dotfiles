@@ -308,6 +308,8 @@ Packages must come first.
       (setq solarized-height-plus-3 1.0)
       (setq solarized-height-plus-4 1.0)))
 
+  (use-package tuareg)
+
   (use-package which-key
     :config
     (which-key-mode))
