@@ -15,7 +15,7 @@ export EDITOR=nvim
 
 # Misc appearance settings
 export GDK_SCALE=1.75
-export QT_STYLE_OVERRIDE='gtk2'
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 # RCM aliases
 alias lsrcl="lsrc -B linux -v"
