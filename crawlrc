@@ -1,0 +1,34 @@
+# Main gameplay settings.
+auto_butcher = true
+autofight_stop = 50
+confirm_butcher = never
+default_manual_training = true
+easy_eat_chunks = true
+easy_unequip = true
+equip_unequip = true
+hp_warning = 25
+show_more = false
+show_travel_trail = true
+travel_avoid_terrain = deep water
+travel_delay = 5
+travel_key_stop = true
+
+# Tiles settings.
+tile_cell_pixels = 64
+tile_filter_scaling = false
+tile_skip_title = false
+
+# Tiles fonts.
+tile_font_ft_light = false
+
+tile_font_crt_file  = iosevka.ttf
+tile_font_lbl_file  = iosevka.ttf
+tile_font_msg_file  = iosevka.ttf
+tile_font_stat_file = iosevka.ttf
+tile_font_tip_file  = iosevka.ttf
+
+tile_font_crt_size  = 18
+tile_font_lbl_size  = 18
+tile_font_msg_size  = 18
+tile_font_stat_size = 18
+tile_font_tip_size  = 18
