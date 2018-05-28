@@ -1,3 +1,3 @@
 #!/bin/sh
 
-xinput reattach 15 3
+xinput reattach "AT Translated Set 2 keyboard" "Virtual core keyboard"

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-xinput float 15
+xinput float "AT Translated Set 2 keyboard"
