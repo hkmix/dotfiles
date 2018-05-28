@@ -26,71 +26,48 @@ Packages must come first.
   (setq use-package-always-ensure t)
 
   ;; Package list.
-  (use-package cmake-ide
-    :config
-    (cmake-ide-setup))
-
   (use-package column-enforce-mode)
 
   (use-package company
-    :init
+    :config
     (progn
       (use-package company-flx
         :config
         (company-flx-mode +1))
-      (use-package company-ghc
+      (use-package company-lsp
         :config
-        (add-to-list 'company-backends 'company-ghc))
-      (use-package company-irony
-        :config
-        (add-to-list 'company-backends 'company-irony))
-      (use-package company-math
-        :config
-        (progn
-          (add-to-list 'company-backends 'company-math-symbols-latex)
-          (setq company-tooltip-align-annotations t)))
-      (use-package company-tern
-        :init
-        (progn
-          (setq company-tern-property-marker nil)
-          (add-to-list 'company-backends 'company-tern)))
-      (use-package company-web
-        :defer t)
-      (use-package jedi-core
-        :init
-        (use-package company-jedi
-          :config
-          (add-to-list 'company-backends 'company-jedi))))
-    :config
-    (progn
-      (global-company-mode)
+        (push 'company-lsp company-backends))
+      ; (global-company-mode)
       (setq company-idle-delay 0.3)
       (setq company-tooltip-limit 10)))
 
   (use-package delight
     :config
-    (delight '((emacs-lisp-mode "EL" :major)
-               (lisp-interaction-mode "EL-I" :major)
-               ;; Minor modes.
-               (abbrev-mode nil abbrev)
-               (auto-revert-mode nil autorevert)
-               (column-enforce-mode nil column-enforce-mode)
-               (company-mode " cp" company)
-               (defining-kbd-macro " q..." t)
-               (editorconfig-mode nil editorconfig)
-               (eldoc-mode nil eldoc)
-               (evil-commentary-mode nil evil-commentary)
-               (flycheck-mode " fc" flycheck)
-               (flyspell-mode " fs" flyspell)
-               (latex-preview-pane-mode nil latex-preview-pane)
-               (git-gutter-mode nil git-gutter)
-               (isend-mode " is" isend-mode)
-               (projectile-mode " pj" projectile)
-               (undo-tree-mode nil undo-tree)
-               (visual-line-mode nil t)
-               (which-key-mode nil which-key)
-               (with-editor-mode nil with-editor)
-               (ws-butler-mode nil ws-butler))))
+    (delight
+     '((emacs-lisp-mode "EL" :major)
+       (lisp-interaction-mode "EL-I" :major)
+       ;; Minor modes.
+       (abbrev-mode nil abbrev)
+       (auto-revert-mode nil autorevert)
+       (column-enforce-mode nil column-enforce-mode)
+       (company-mode " cp" company)
+       (defining-kbd-macro " q..." t)
+       (dtrt-indent-mode nil dtrt-indent)
+       (editorconfig-mode nil editorconfig)
+       (eldoc-mode nil eldoc)
+       (evil-commentary-mode nil evil-commentary)
+       (flycheck-mode " fc" flycheck)
+       (flyspell-mode " fs" flyspell)
+       (git-gutter-mode nil git-gutter)
+       (isend-mode " is" isend-mode)
+       (latex-preview-pane-mode nil latex-preview-pane)
+       (lsp-mode " lsp" lsp-mode)
+       (projectile-mode " pj" projectile)
+       (undo-tree-mode nil undo-tree)
+       (visual-line-mode nil t)
+       (which-key-mode nil which-key)
+       (with-editor-mode nil with-editor)
+       (ws-butler-mode nil ws-butler))))
 
   (use-package dtrt-indent)
 
@@ -175,8 +152,6 @@ Packages must come first.
             "w r" 'jump-to-register)
 
           (evil-leader/set-key-for-mode 'c++-mode
-            "."   'ggtags-find-definition
-            ","   'ggtags-prev-mark
             "A"   'ff-find-alternate-file)
 
           (evil-leader/set-key-for-mode 'latex-mode
@@ -223,7 +198,6 @@ Packages must come first.
       (evil-mode 1)))
 
   (use-package eyebrowse
-    :ensure t
     :config
     (progn
       (eyebrowse-mode t)
@@ -239,14 +213,7 @@ Packages must come first.
     :defer t
     :config
     (progn
-      (global-flycheck-mode)
-      (use-package flycheck-ghcmod
-        :defer t)
-      (use-package flycheck-irony
-        :defer t)))
-
-  (use-package ggtags
-    :defer t)
+      (global-flycheck-mode)))
 
   (use-package git-gutter
     :defer t
@@ -290,12 +257,18 @@ Packages must come first.
         :config
         (smex-initialize))))
 
-  (use-package irony)
-
   (use-package isend-mode)
 
   (use-package latex-preview-pane
     :defer t)
+
+  (use-package lsp-mode
+    :config
+    (progn
+      (use-package cquery)
+      (use-package lsp-ui)
+      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      (add-hook 'lsp-mode-hook 'flycheck-mode)))
 
   (use-package magit
     :bind
@@ -508,7 +481,7 @@ Functions should come after packages.
   (setq mouse-drag-copy-region t)
 #+END_SRC
 
-* Filetype-specific
+* Filetype mappings
 
 #+BEGIN_SRC emacs-lisp
   ;; Custom filetype mappings.
@@ -536,10 +509,9 @@ Functions should come after packages.
   (add-hook 'c-mode-common-hook
             (lambda ()
               (local-set-key (kbd "C-c o") 'ff-find-other-file)
-              (company-mode 1)
+              (lsp-cquery-enable)
               (dtrt-indent-mode 1)
-              (eldoc-mode 1)
-              (ggtags-mode 1)))
+              (eldoc-mode 1)))
 
   ;; DocView.
   ;; Resolution.
