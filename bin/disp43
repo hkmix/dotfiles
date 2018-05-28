@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nvidia-settings --assign CurrentMetaMode="DFP-4: 2560x1440 { ViewPortIn=$1, ViewPortOut=1920x1440+320+0, Panning=$1 }"

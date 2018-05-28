@@ -1,4 +1,0 @@
-#!/bin/bash
-
-killall redshift-scheduler
-redshift-scheduler

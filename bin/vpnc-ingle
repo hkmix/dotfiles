@@ -1,3 +1,0 @@
-#!/bin/sh
-
-sudo vpnc --gateway ras.peakcontact.com --id vpn-tg01 --username jzhou

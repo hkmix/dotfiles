@@ -1,7 +1,0 @@
-#!/bin/bash
-
-GRIVE_DIR=$HOME/Drive
-
-echo "Google Drive directory: $GRIVE_DIR"
-echo
-cd $GRIVE_DIR && grive --dry-run
