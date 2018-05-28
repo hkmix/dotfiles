@@ -1,3 +1,6 @@
 numlockx on
+
 xrdb -merge ~/.Xresources
+setxkbmap -device $(~/.bin/get-xinput-id "AT Translated Set 2 keyboard") -variant hhkb
+
 exec i3

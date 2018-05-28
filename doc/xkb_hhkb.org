@@ -36,18 +36,18 @@
      hhkb            us: English (HHKB-like, for Chromebooks)
    #+END_SRC
 
-4. Add a Xorg configuration file to load it, e.g. [[file:/usr/share/X11/xorg.conf.d/41-keyboard-tweaks.conf]]:
+4. Call =setxkbmap= in [[file:~/.xinitrc]] as follows:
 
-   #+BEGIN_SRC conf
-     Section "InputClass"
-         Identifier "Built-in keyboard"
-         MatchProduct "AT Translated Set 2 keyboard"
-
-         Option "XkbLayout" "us"
-         Option "XkbVariant" "hhkb"
-     EndSection
+   #+BEGIN_SRC sh
+     setxkbmap -device $(~/.bin/get-xinput-id "AT Translated Set 2 keyboard") -variant hhkb
    #+END_SRC
 
-   Note that the correct item is based on the output of =xinput=.
+   where =get-xinput-id= is:
 
-5. Restart X, good to go.
+   #+BEGIN_SRC sh
+     #!/bin/sh
+
+     xinput | grep "$1" | sed -e 's/.*id=\([0-9]\+\).*/\1/'
+   #+END_SRC
+
+5. Restart X or call =setxkbmap=, good to go.
