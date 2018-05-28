@@ -1,0 +1,16 @@
+#+TITLE: How to change fonts for Chromium
+
+To change the UI font, add the following to [[file:~/.config/fontconfig/fonts.conf]]:
+
+#+BEGIN_SRC xml
+  <?xml version="1.0"?>
+  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+  <fontconfig>
+      <alias>
+          <family>sans-serif</family>
+          <prefer>
+              <family>Arial</family>
+          </prefer>
+      </alias>
+  </fontconfig>
+#+END_SRC
