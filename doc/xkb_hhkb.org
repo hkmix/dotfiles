@@ -41,7 +41,6 @@
    #+BEGIN_SRC conf
      Section "InputClass"
          Identifier "Built-in keyboard"
-         MatchIsKeyboard "on"
          MatchProduct "AT Translated Set 2 keyboard"
 
          Option "XkbLayout" "us"
