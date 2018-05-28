@@ -20,3 +20,10 @@
 # macOS
 **/.DS_Store
 **/.Trashes
+
+# +---------------------+
+# | Specific tool files |
+# +---------------------+
+
+# cquery
+**/.cquery_cached_index/
