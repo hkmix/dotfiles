@@ -37,7 +37,7 @@ Packages must come first.
       (use-package company-lsp
         :config
         (push 'company-lsp company-backends))
-      ; (global-company-mode)
+      ;; (global-company-mode)
       (setq company-idle-delay 0.3)
       (setq company-tooltip-limit 10)))
 
