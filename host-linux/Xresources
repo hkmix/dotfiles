@@ -11,6 +11,8 @@ Xft.hinting:   true
 Xft.hintstyle: hintslight
 Xft.dpi:       168
 
+Xcursor.size:  48
+
 rofi.color-enabled: true
 rofi.color-window: #002b37, #002b37, #003642
 rofi.color-normal: #002b37, #819396, #002b37, #003642, #819396
