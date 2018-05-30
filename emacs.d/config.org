@@ -2,29 +2,36 @@
 
 * Packages
 
-Packages must come first.
+Packages must come first. Initialize:
 
 #+BEGIN_SRC emacs-lisp
+  ;; Initialize packaging.
+  (package-initialize)
+
   (require 'package)
   (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/")
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
+              '("melpa" . "https://melpa.org/packages/")
+              '("marmalade" . "http://marmalade-repo.org/packages/"))
   (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib.
-    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+   ;; For important compatibility libraries like cl-lib.
+   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
   (package-initialize)
 
   ;; Automatic package installation.
   (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
+   (package-refresh-contents)
+   (package-install 'use-package))
 
   (eval-when-compile (require 'use-package))
   (require 'bind-key)
 
   ;; Always download packages if needed.
   (setq use-package-always-ensure t)
+#+END_SRC
 
+Package list:
+
+#+BEGIN_SRC emacs-lisp
   ;; Package list.
   (use-package column-enforce-mode)
 
@@ -296,6 +303,8 @@ Packages must come first.
       (setq solarized-height-plus-3 1.0)
       (setq solarized-height-plus-4 1.0)))
 
+  (use-package try)
+
   (use-package tuareg)
 
   (use-package which-key
@@ -385,6 +394,7 @@ Functions should come after packages.
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
+  (blink-cursor-mode 0)
 
   (defun add-to-frame-lists (setting)
     "Add SETTING to both `default-frame-alist` and `initial-frame-alist`."
@@ -475,8 +485,7 @@ Functions should come after packages.
 
   ;; Prevent killing to clipboard.
   (when (eq system-type 'darwin)
-    (setq select-enable-clipboard nil)
-    (setq select-enable-primary t))
+    (setq select-enable-clipboard nil))
 
   (setq mouse-drag-copy-region t)
 #+END_SRC
@@ -556,8 +565,9 @@ Functions should come after packages.
 * Org-mode
 
 #+BEGIN_SRC emacs-lisp
-  ;; Appearance.
-  (defvar org-src-fontify-natively)
+  (require 'org)
+
+  ;; Source block tweaks.
   (setq org-src-fontify-natively t)
 
   ;; Set languages.
