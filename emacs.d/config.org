@@ -2,7 +2,7 @@
 
 * Packages
 
-Packages must come first. Initialize:
+Initialize:
 
 #+BEGIN_SRC emacs-lisp
   ;; Initialize packaging.
@@ -99,7 +99,10 @@ Package list:
       (defalias #'forward-evil-word #'forward-evil-symbol)
       (define-key evil-normal-state-map "j" 'evil-next-visual-line)
       (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+
       (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
+      (add-to-list 'evil-motion-state-modes 'recentf-dialog-mode)
+
       (evil-define-key 'normal dired-mode-map
         "h" 'dired-up-directory
         "j" 'dired-next-line
@@ -234,9 +237,6 @@ Package list:
       (global-git-gutter-mode t)
       (git-gutter:linum-setup)))
 
-  (use-package haskell-mode
-    :defer t)
-
   (use-package ido
     :config
     (progn
@@ -281,15 +281,12 @@ Package list:
     :bind
     ("C-c m" . magit-status))
 
-  (use-package markdown-mode
-    :defer t
-    :config
-    (use-package markdown-preview-eww))
-
   (use-package projectile)
 
   (use-package recentf
     :config
+    (add-to-list 'recentf-exclude "/elpa/")
+    (add-to-list 'recentf-exclude "/var/folders/")
     (recentf-mode 1))
 
   (use-package solarized-theme
@@ -305,8 +302,6 @@ Package list:
 
   (use-package try)
 
-  (use-package tuareg)
-
   (use-package which-key
     :config
     (which-key-mode))
@@ -319,6 +314,20 @@ Package list:
           (ws-butler-mode t))))
     :config
     (global-ws-butler-mode t))
+#+END_SRC
+
+Packages for file types:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode)
+
+  (use-package markdown-mode
+    :config
+    (use-package markdown-preview-eww))
+
+  (use-package tuareg)
+
+  (use-package yaml-mode)
 #+END_SRC
 
 * Functions
