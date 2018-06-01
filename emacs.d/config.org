@@ -115,7 +115,6 @@ Package list:
           (evil-leader/set-leader "<SPC>")
           (evil-leader/set-key
             ;; Global.
-            "SPC" 'smex
             "a"   'align-regexp
             "b"   'switch-to-buffer
             "C"   'compile
@@ -160,6 +159,7 @@ Package list:
             "q q" 'fill-paragraph
             "w w" 'window-configuration-to-register
             "w r" 'jump-to-register)
+            "x"   'smex
 
           (evil-leader/set-key-for-mode 'c++-mode
             "A"   'ff-find-alternate-file)
@@ -170,20 +170,21 @@ Package list:
             "l"   'my/update-latex-preview)
 
           (evil-leader/set-key-for-mode 'org-mode
-            "o TAB" 'outline-show-all
-            "o <backtab>" 'org-shifttab
-            "'" 'org-edit-special
-            "o a" 'org-agenda
-            "o c" 'org-ctrl-c-ctrl-c
-            "o d" 'org-deadline
-            "o e" 'org-export-dispatch
-            "o l" 'my/update-latex-preview-org
-            "o N" 'org-babel-next-src-block
-            "o n" 'org-next-block
-            "o o" 'my/open-at-point
-            "o P" 'org-babel-previous-src-block
-            "o p" 'org-previous-block
-            "o r" 'org-reveal)
+            "<SPC> TAB" 'outline-show-all
+            "<SPC> <backtab>" 'org-shifttab
+            "<SPC> a" 'org-agenda
+            "<SPC> b" 'org-backward-heading-same-level
+            "<SPC> c" 'org-ctrl-c-ctrl-c
+            "<SPC> d" 'org-deadline
+            "<SPC> e" 'org-export-dispatch
+            "<SPC> f" 'org-forward-heading-same-level
+            "<SPC> l" 'my/update-latex-preview-org
+            "<SPC> N" 'org-babel-next-src-block
+            "<SPC> n" 'org-next-visible-heading
+            "<SPC> o" 'my/open-at-point
+            "<SPC> P" 'org-babel-previous-src-block
+            "<SPC> p" 'org-previous-visible-heading
+            "<SPC> r" 'org-reveal)
 
           (evil-leader/set-key-for-mode 'rust-mode
             "F"   'rust-enable-format-on-save
