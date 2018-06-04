@@ -1,0 +1,38 @@
+#+TITLE: Reasonable =synclient= settings
+
+#+BEGIN_SRC conf
+  Section "InputClass"
+      Identifier "touchpad"
+      Driver "synaptics"
+      MatchIsTouchpad "on"
+
+      Option "FingerLow" "5"
+      Option "FingerHigh" "10"
+
+      Option "TapButton1" "1"
+      Option "TapButton2" "3"
+      Option "TapButton3" "2"
+
+      Option "ClickButton1" "1"
+      Option "ClickButton2" "3"
+      Option "ClickButton3" "2"
+
+      Option "VertTwoFingerScroll" "1"
+      Option "HorizTwoFingerScroll" "1"
+
+      Option "MinSpeed" "0.8"
+      Option "MaxSpeed" "1.25"
+      Option "AccelFactor" "0.08"
+
+      Option "RTCornerButton" "0"
+      Option "RBCornerButton" "0"
+      Option "LTCornerButton" "0"
+      Option "LBCornerButton" "0"
+      Option "RightButtonAreaLeft" "0"
+      Option "RightButtonAreaTop" "0"
+
+      Option "PalmDetect" "1"
+      Option "HorizHysteresis" "0"
+      Option "VertHysteresis" "0"
+  EndSection
+#+END_SRC
