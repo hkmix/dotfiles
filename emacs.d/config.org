@@ -224,6 +224,7 @@ Package list:
     :defer t
     :config
     (progn
+      (use-package flycheck-mypy)
       (global-flycheck-mode)))
 
   (use-package git-gutter
