@@ -101,7 +101,7 @@ Package list:
       (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 
       (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
-      (add-to-list 'evil-motion-state-modes 'recentf-dialog-mode)
+      (add-to-list 'evil-normal-state-modes 'recentf-dialog-mode)
 
       (evil-define-key 'normal dired-mode-map
         "h" 'dired-up-directory
