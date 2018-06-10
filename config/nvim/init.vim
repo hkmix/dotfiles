@@ -33,6 +33,7 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'SirVer/ultisnips'
+Plug 'Shougo/echodoc.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
@@ -96,6 +97,7 @@ set mouse=a
 set nofoldenable
 set nohidden
 set nohlsearch
+set noshowmode
 set nospell
 set nottimeout
 set number
@@ -202,7 +204,8 @@ let g:vimtex_imaps_enabled = 0
 " LSP settings.
 set signcolumn="yes"
 let g:LanguageClient_serverCommands = {
-      \ 'cpp': ['clangd']
+      \ 'cpp': ['clangd'],
+      \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_diagnosticsDisplay =
