@@ -1,0 +1,11 @@
+OPTIONS=autopickup,pickup_types:?!/$=
+OPTIONS=extmenu
+OPTIONS=hilite_pet,hilite_pile
+OPTIONS=color,menucolors,statushilites,hitpointbar
+OPTIONS=lit_corridor
+OPTIONS=msg_window:reversed
+OPTIONS=name:player
+OPTIONS=perm_invent
+OPTIONS=showexp
+OPTIONS=mouse_support
+OPTIONS=popup_dialog
