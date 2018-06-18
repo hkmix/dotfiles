@@ -60,11 +60,16 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
+" Neovim-specific plugins.
+if s:nvim
+    Plug 'kassio/neoterm'
+end
+
 call plug#end()
 
 filetype plugin indent on
 
-" Settings
+" Settings.
 syntax on
 
 set autoindent
