@@ -181,8 +181,8 @@ nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap ga <Plug>(EasyAlign)
-xnoremap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " Plugin settings.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -209,7 +209,10 @@ let g:vimtex_imaps_enabled = 0
 " LSP settings.
 set signcolumn="yes"
 let g:LanguageClient_serverCommands = {
-      \ 'cpp': ['clangd'],
+      \ 'cpp': [
+      \      'cquery', '--log-file=/tmp/cquery.log',
+      \      '--init={"cacheDirectory": "/tmp/cquery"}'
+      \ ],
       \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_loadSettings = 1
@@ -241,7 +244,13 @@ let g:LanguageClient_diagnosticsDisplay =
             \     },
             \ }
 
-" LightLine settings
+" LSP mappings.
+nnoremap <silent> gA :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+
+" LightLine settings.
 let g:lightline = {
             \ 'colorscheme': 'solarized',
             \ 'active': {
@@ -289,11 +298,11 @@ function! LightLineFilename()
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-" Show non-ASCII characters
+" Show non-ASCII characters.
 highlight nonascii guibg=Red ctermbg=1 term=standout
 autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
-" Language-specific groups
+" Language-specific groups.
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
