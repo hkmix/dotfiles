@@ -148,6 +148,7 @@ augroup general
 augroup END
 
 " General mappings
+let mapleader = ' '
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 nnoremap <Leader>h :set hlsearch<CR>
 nnoremap <Leader>p :set invpaste<CR>
@@ -159,14 +160,14 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-l> <C-w>l
-nnoremap <silent> <space> zz
+nnoremap <silent> <Leader><space> zz
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap Q <Nop>
 
 " Terminal mappings.
 if s:nvim
-    tnoremap <silent> <Leader><esc> <C-\><C-n>
+    tnoremap <silent> <esc><esc> <C-\><C-n>
 end
 
 " difftool mappings.
