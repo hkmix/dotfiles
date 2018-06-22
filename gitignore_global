@@ -27,3 +27,6 @@
 
 # cquery
 **/.cquery_cached_index/
+
+# CMake
+compile_commands.json
