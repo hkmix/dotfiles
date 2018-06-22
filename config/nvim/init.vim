@@ -33,7 +33,6 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'SirVer/ultisnips'
-Plug 'Shougo/echodoc.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
@@ -207,7 +206,7 @@ let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
 
 " LSP settings.
-set signcolumn="yes"
+set signcolumn=yes
 let g:LanguageClient_serverCommands = {
       \ 'cpp': [
       \      'cquery', '--log-file=/tmp/cquery.log',
