@@ -206,6 +206,9 @@ let g:vimtex_imaps_enabled = 0
 
 " Deoplete settings.
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 200
+
+" Deoplete settings for plugins.
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
@@ -254,6 +257,40 @@ nnoremap <silent> gA :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+
+" Hack for LSP + deoplete + UltiSnips.
+" From https://github.com/autozimu/LanguageClient-neovim/issues/379.
+function! ExpandLspSnippet()
+    call UltiSnips#ExpandSnippetOrJump()
+    if !pumvisible() || empty(v:completed_item)
+        return ''
+    endif
+
+    " only expand Lsp if UltiSnips#ExpandSnippetOrJump not effect.
+    let l:value = v:completed_item['word']
+    let l:matched = len(l:value)
+    if l:matched <= 0
+        return ''
+    endif
+
+    " remove inserted chars before expand snippet
+    if col('.') == col('$')
+        let l:matched -= 1
+        exec 'normal! ' . l:matched . 'Xx'
+    else
+        exec 'normal! ' . l:matched . 'X'
+    endif
+
+    if col('.') == col('$') - 1
+        " move to $ if at the end of line.
+        call cursor(line('.'), col('$'))
+    endif
+
+    " expand snippet now.
+    call UltiSnips#Anon(l:value)
+    return ''
+endfunction
+imap <silent> <CR> <C-r>=ExpandLspSnippet()<CR>
 
 " LightLine settings.
 let g:lightline = {
