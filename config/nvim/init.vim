@@ -192,7 +192,6 @@ let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_matchpairs = "(:),[:],{:}"
-let g:deoplete#enable_at_startup = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
@@ -204,6 +203,13 @@ let g:tagbar_show_visibility = 1
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
+
+" Deoplete settings.
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " LSP settings.
 set signcolumn=yes
