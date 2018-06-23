@@ -50,6 +50,7 @@ export WORDCHARS='_'
 alias bc="bc -l"
 alias df="df -h"
 alias dog="vimcat"
+alias dotcd="cd ~/.dotfiles && git fetch"
 alias du="du -h"
 alias dus="du -d1h | sort -h"
 alias gitcd="cd \"\$(git rev-parse --show-toplevel)\""
