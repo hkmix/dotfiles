@@ -388,6 +388,7 @@ augroup END
 
 augroup filetype_tex
     autocmd!
+    autocmd BufEnter *.tex setlocal filetype=tex
     autocmd FileType tex setlocal foldmethod=marker
     autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <F8> :VimtexTocToggle<CR>
