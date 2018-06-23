@@ -216,7 +216,6 @@ endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " LSP settings.
-set signcolumn=yes
 let g:LanguageClient_serverCommands = {
       \ 'cpp': [
       \      'cquery', '--log-file=/tmp/cquery.log',
@@ -225,6 +224,7 @@ let g:LanguageClient_serverCommands = {
       \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_changeThrottle = 1.0
 let g:LanguageClient_diagnosticsDisplay =
             \ {
             \     1: {
@@ -242,13 +242,13 @@ let g:LanguageClient_diagnosticsDisplay =
             \     3: {
             \         "name": "Information",
             \         "texthl": "ALEInfo",
-            \         "signText": "I",
+            \         "signText": "i",
             \         "signTexthl": "ALEInfoSign",
             \     },
             \     4: {
             \         "name": "Hint",
             \         "texthl": "ALEInfo",
-            \         "signText": "H",
+            \         "signText": "h",
             \         "signTexthl": "ALEInfoSign",
             \     },
             \ }
@@ -264,7 +264,7 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 function! ExpandLspSnippet()
     call UltiSnips#ExpandSnippetOrJump()
     if !pumvisible() || empty(v:completed_item)
-        return ''
+        return ''
     endif
 
     " only expand Lsp if UltiSnips#ExpandSnippetOrJump not effect.
@@ -291,7 +291,7 @@ function! ExpandLspSnippet()
     call UltiSnips#Anon(l:value)
     return ''
 endfunction
-imap <silent> <CR> <C-r>=ExpandLspSnippet()<CR>
+imap <silent> <C-y> <C-r>=ExpandLspSnippet()<CR>
 
 " LightLine settings.
 let g:lightline = {
