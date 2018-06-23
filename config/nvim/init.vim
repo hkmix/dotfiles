@@ -253,6 +253,12 @@ let g:LanguageClient_diagnosticsDisplay =
             \     },
             \ }
 
+augroup lsp
+    autocmd!
+    autocmd User LanguageClientStarted setlocal signcolumn=yes
+    autocmd User LanguageClientStopped setlocal signcolumn=auto
+augroup END
+
 " LSP mappings.
 nnoremap <silent> gA :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
