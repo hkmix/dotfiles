@@ -167,7 +167,7 @@ nnoremap Q <Nop>
 
 " Terminal mappings.
 if s:nvim
-    tnoremap <silent> <esc><esc> <C-\><C-n>
+    tnoremap <silent> <leader><esc> <C-\><C-n>
 end
 
 " difftool mappings.
@@ -390,6 +390,11 @@ augroup filetype_markdown
     autocmd FileType markdown setlocal spell
     autocmd FileType markdown setlocal sts=4 sw=4 ts=4
     autocmd Filetype markdown let delimitMate_quotes="\" '"
+augroup END
+
+augroup filetype_python
+    autocmd!
+    autocmd Filetype python let delimitMate_quotes="'"
 augroup END
 
 augroup filetype_tex
