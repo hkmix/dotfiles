@@ -152,6 +152,7 @@ let mapleader = ' '
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
 nnoremap <Leader>h :set hlsearch<CR>
 nnoremap <Leader>p :set invpaste<CR>
+nnoremap <Leader>? :echo expand('%:p')<CR>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <Up> g<Up>
