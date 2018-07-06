@@ -7,8 +7,9 @@
 bindkey -e
 unalias -a
 
-autoload -U compinit promptinit colors zkbd
+autoload -U compinit bashcompinit promptinit colors zkbd
 compinit
+bashcompinit
 promptinit
 colors
 

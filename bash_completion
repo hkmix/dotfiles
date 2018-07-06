@@ -1,0 +1,9 @@
+#!/bin/bash
+
+COMPDIR=$HOME/.bash_completion.d
+
+[ ! -d "$COMPDIR" ] && exit 0
+
+for file in $(find "$COMPDIR" -type f); do
+    source "$file"
+done
