@@ -58,6 +58,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+Plug 'w0rp/ale'
 
 " Neovim-specific plugins.
 if s:nvim
@@ -178,6 +179,10 @@ nnoremap <Leader>re :diffget REMOTE<CR>
 " Plugin mappings.
 nnoremap <C-p> :FZF<CR>
 nnoremap <F8> :TagbarToggle<CR>
+nnoremap <silent> gc gC
+nnoremap <silent> gC gc
+xnoremap <silent> gc gC
+xnoremap <silent> gC gc
 nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>gp :Gpush<CR>
