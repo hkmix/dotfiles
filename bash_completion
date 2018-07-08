@@ -4,6 +4,6 @@ COMPDIR=$HOME/.bash_completion.d
 
 [ ! -d "$COMPDIR" ] && exit 0
 
-for file in $(find "$COMPDIR" -type f); do
+for file in "$COMPDIR"/*.bash; do
     source "$file"
 done
