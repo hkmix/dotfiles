@@ -16,6 +16,7 @@ colors
 export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # zsh settings.
+[[ -f "$HOME/.bash_completion" ]] && source $HOME/.bash_completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 zstyle ':completion:*' menu select
