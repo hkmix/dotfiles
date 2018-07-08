@@ -50,6 +50,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html']}
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'rust-lang/rust.vim'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
@@ -203,6 +204,7 @@ let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:rooter_manual_only = 1
+let g:rustfmt_autosave = 1
 let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
@@ -228,6 +230,7 @@ let g:LanguageClient_serverCommands = {
       \      '--init={"cacheDirectory": "/tmp/cquery"}'
       \ ],
       \ 'python': ['pyls'],
+      \ 'rust': ['rls'],
       \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_changeThrottle = 1.0
