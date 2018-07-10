@@ -25,13 +25,6 @@ call plug#begin(s:path . '/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Raimondi/delimitMate'
-if s:nvim
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -49,7 +42,13 @@ Plug 'lervag/vimtex'
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html']}
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-abbrfuzzy'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-ultisnips'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'roxma/nvim-yarp'
 Plug 'rust-lang/rust.vim'
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
@@ -58,8 +57,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
 Plug 'w0rp/ale'
+Plug 'wellle/targets.vim'
 
 " Neovim-specific plugins.
 if s:nvim
@@ -89,7 +88,7 @@ if has('linebreak')
     set linebreak
 endif
 set complete-=1
-set completeopt-=preview
+set completeopt=noinsert,menuone,noselect
 set cursorline
 set foldmarker={{{{{,}}}}}
 set foldmethod=manual
@@ -111,6 +110,7 @@ set ruler
 set scrolljump=-50
 set scrolloff=4
 set showcmd
+set shortmess+=mnrc
 set smartcase
 set splitbelow
 set splitright
@@ -180,16 +180,19 @@ nnoremap <Leader>re :diffget REMOTE<CR>
 " Plugin mappings.
 nnoremap <C-p> :FZF<CR>
 nnoremap <F8> :TagbarToggle<CR>
-nnoremap <silent> gc gC
-nnoremap <silent> gC gc
-xnoremap <silent> gc gC
-xnoremap <silent> gC gc
+
 nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
 nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gs :Gstatus<CR>
+
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+
+nnoremap <silent> gC gc
+nnoremap <silent> gc gC
+xnoremap <silent> gC gc
+xnoremap <silent> gc gC
 
 " Plugin settings.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -226,14 +229,15 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 " LSP settings.
 let g:LanguageClient_serverCommands = {
       \ 'cpp': [
-      \      'cquery', '--log-file=/tmp/cquery.log',
-      \      '--init={"cacheDirectory": "/tmp/cquery"}'
+      \      'cquery',
+      \      '--log-file=/tmp/cquery.log',
+      \      '--init={ "cacheDirectory": "/tmp/cquery" }'
       \ ],
       \ 'python': ['pyls'],
       \ 'rust': ['rls'],
       \ }
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_changeThrottle = 1.0
+let g:LanguageClient_changeThrottle = 0.2
 let g:LanguageClient_diagnosticsDisplay =
             \ {
             \     1: {
@@ -262,7 +266,7 @@ let g:LanguageClient_diagnosticsDisplay =
             \     },
             \ }
 
-augroup lsp
+augroup lsp_options
     autocmd!
     autocmd User LanguageClientStarted setlocal signcolumn=yes
     autocmd User LanguageClientStopped setlocal signcolumn=auto
@@ -275,38 +279,37 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 
 " Hack for LSP + deoplete + UltiSnips.
-" From https://github.com/autozimu/LanguageClient-neovim/issues/379.
-function! ExpandLspSnippet()
-    call UltiSnips#ExpandSnippetOrJump()
-    if !pumvisible() || empty(v:completed_item)
-        return ''
+let g:ulti_expand_res = 0
+function! CompleteSnippet()
+    if empty(v:completed_item)
+        return
     endif
 
-    " only expand Lsp if UltiSnips#ExpandSnippetOrJump not effect.
-    let l:value = v:completed_item['word']
-    let l:matched = len(l:value)
-    if l:matched <= 0
-        return ''
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res > 0
+        return
     endif
 
-    " remove inserted chars before expand snippet
-    if col('.') == col('$')
-        let l:matched -= 1
-        exec 'normal! ' . l:matched . 'Xx'
-    else
-        exec 'normal! ' . l:matched . 'X'
-    endif
+    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
+    let l:comp_len = len(l:complete)
 
-    if col('.') == col('$') - 1
-        " move to $ if at the end of line.
-        call cursor(line('.'), col('$'))
-    endif
+    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
+    let l:cur_line = getline('.')
 
-    " expand snippet now.
-    call UltiSnips#Anon(l:value)
-    return ''
+    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
+    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
+
+    call setline('.', l:start . l:end)
+    call cursor('.', l:cur_col - l:comp_len + 2)
+
+    call UltiSnips#Anon(l:complete)
 endfunction
-imap <silent> <C-y> <C-r>=ExpandLspSnippet()<CR>
+
+augroup completion
+    autocmd!
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    autocmd CompleteDone * call CompleteSnippet()
+augroup END
 
 " LightLine settings.
 let g:lightline = {
