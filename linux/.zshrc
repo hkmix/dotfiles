@@ -17,11 +17,6 @@ export EDITOR=nvim
 export GDK_SCALE=1.75
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
-# RCM aliases
-alias lsrcl="lsrc -B linux -v"
-alias mkrcl="mkrc -B linux -v"
-alias rcupl="rcup -B linux -v"
-
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
 
 # Start X

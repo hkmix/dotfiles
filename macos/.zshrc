@@ -26,11 +26,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 alias emacsd="emacs --daemon"
 alias emacsk="emacsclient -e '(kill-emacs)'"
 
-# RCM aliases.
-alias lsrcl="lsrc -B osx -v"
-alias mkrcl="mkrc -B osx -v"
-alias rcupl="rcup -B osx -v"
-
 # Other aliases.
 alias venvme=". ./venv/bin/activate"
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"

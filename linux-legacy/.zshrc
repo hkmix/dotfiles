@@ -69,15 +69,6 @@ alias ls="ls -bh --color=auto"
 alias tmux-new="tmux new-session -s"
 alias vi="vim"
 
-calc() {
-    IFS=" " python -c "print $*"
-}
-
-# RCM aliases
-alias lsrcl="lsrc -B linux-legacy -v"
-alias mkrcl="mkrc -B linux-legacy -v"
-alias rcupl="rcup -B linux-legacy -v"
-
 # Other aliases
 alias dog="vimcat"
 alias gitcd="cd \$(git rev-parse --show-toplevel)"

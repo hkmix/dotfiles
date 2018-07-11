@@ -33,14 +33,6 @@ zstyle ':completion:*' menu select
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
-# Classes
-alias cs240="cd ~/Classes/CS\ 240"
-alias cs247="cd ~/Classes/CS\ 247"
-alias engl109="cd ~/Classes/ENGL\ 109"
-alias math213="cd ~/Classes/MATH\ 213"
-alias math239="cd ~/Classes/MATH\ 239"
-alias msci261="cd ~/Classes/MSCI\ 261"
-
 # Aliases
 alias bc="bc -l"
 alias df="df -h"
@@ -52,11 +44,6 @@ alias ll="ls -la"
 alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
 alias vi="vim"
-
-# RCM aliases
-alias lsrcl="lsrc -B win -vv"
-alias mkrcl="mkrc -B win -vv"
-alias rcupl="rcup -B win -vv"
 
 # Other aliases
 alias dog="vimcat"
