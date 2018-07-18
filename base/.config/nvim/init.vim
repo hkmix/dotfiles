@@ -34,15 +34,14 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
-Plug 'hkmix/vim-george'
 Plug 'icymind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim', {'for': ['html']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-abbrfuzzy'
 Plug 'ncm2/ncm2-bufword'
@@ -50,7 +49,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'roxma/nvim-yarp'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
