@@ -28,6 +28,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'andymass/vim-tradewinds'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
@@ -105,7 +106,6 @@ set nohlsearch
 set noshowmode
 set nospell
 set nottimeout
-set number
 set ruler
 set scrolljump=-50
 set scrolloff=4
@@ -152,7 +152,8 @@ augroup END
 " General mappings
 let mapleader = ' '
 nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
-nnoremap <Leader>h :set hlsearch<CR>
+nnoremap <Leader>h :set invhlsearch<CR>
+nnoremap <Leader>l :set invnumber<CR>
 nnoremap <Leader>p :set invpaste<CR>
 nnoremap <Leader>? :echo expand('%:p')<CR>
 nnoremap <silent> j gj
@@ -278,37 +279,9 @@ nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 
-" Hack for LSP + deoplete + UltiSnips.
-let g:ulti_expand_res = 0
-function! CompleteSnippet()
-    if empty(v:completed_item)
-        return
-    endif
-
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res > 0
-        return
-    endif
-
-    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-    let l:comp_len = len(l:complete)
-
-    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-    let l:cur_line = getline('.')
-
-    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-
-    call setline('.', l:start . l:end)
-    call cursor('.', l:cur_col - l:comp_len + 2)
-
-    call UltiSnips#Anon(l:complete)
-endfunction
-
 augroup completion
     autocmd!
     autocmd BufEnter * call ncm2#enable_for_buffer()
-    autocmd CompleteDone * call CompleteSnippet()
 augroup END
 
 " LightLine settings.
