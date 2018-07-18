@@ -32,9 +32,7 @@ Plug 'andymass/vim-tradewinds'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'godlygeek/tabular'
 Plug 'google/vim-searchindex'
-Plug 'icymind/NeoSolarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
@@ -128,18 +126,9 @@ set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\ 
 let &showbreak = '↳ '
-if empty($TERM)
-    " Some kind of GUI, assume it supports true colours.
-    let g:neosolarized_vertSplitBgTrans = 0
-    let g:neosolarized_bold = 1
-    let g:neosolarized_underline = 1
-    let g:neosolarized_italic = 1
-    colorscheme NeoSolarized
-else
-    let g:solarized_extra_hi_groups = 1
-    let g:solarized_termtrans = 1
-    colorscheme solarized8
-endif
+let g:solarized_extra_hi_groups = 1
+let g:solarized_termtrans = 1
+colorscheme solarized8
 
 " Autocommands
 augroup general
@@ -198,7 +187,6 @@ xnoremap <silent> gc gC
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:clang_format#detect_style_file = 1
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
@@ -215,16 +203,6 @@ let g:tagbar_show_visibility = 1
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
-
-" Deoplete settings.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 200
-
-" Deoplete settings for plugins.
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " LSP settings.
 let g:LanguageClient_serverCommands = {
