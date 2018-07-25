@@ -30,3 +30,6 @@
 
 # CMake
 compile_commands.json
+
+# Python
+**/.mypy_cache/
