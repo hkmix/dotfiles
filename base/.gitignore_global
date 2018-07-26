@@ -10,6 +10,9 @@
 **/*.swp
 **/*.swo
 
+# JetBrains
+**/.idea/
+
 # +------------------------+
 # | Operating system files |
 # +------------------------+
@@ -29,7 +32,8 @@
 **/.cquery_cached_index/
 
 # CMake
-compile_commands.json
+**/compile_commands.json
+**/cmake-build-*/
 
 # Python
 **/.mypy_cache/
