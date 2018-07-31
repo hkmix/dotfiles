@@ -248,6 +248,7 @@ augroup lsp_options
     autocmd!
     autocmd User LanguageClientStarted setlocal signcolumn=yes
     autocmd User LanguageClientStopped setlocal signcolumn=auto
+    autocmd User LanguageClientStarted call ncm2#enable_for_buffer()
 augroup END
 
 " LSP mappings.
@@ -255,11 +256,6 @@ nnoremap <silent> gA :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-
-augroup completion
-    autocmd!
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
 
 " LightLine settings.
 let g:lightline = {
