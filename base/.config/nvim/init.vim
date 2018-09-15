@@ -28,8 +28,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'andymass/vim-tradewinds'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
@@ -40,11 +38,6 @@ Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-abbrfuzzy'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-ultisnips'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'roxma/nvim-yarp'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
@@ -203,59 +196,6 @@ let g:tagbar_show_visibility = 1
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:vimtex_fold_enabled = 0
 let g:vimtex_imaps_enabled = 0
-
-" LSP settings.
-let g:LanguageClient_serverCommands = {
-      \ 'cpp': [
-      \      'cquery',
-      \      '--log-file=/tmp/cquery.log',
-      \      '--init={ "cacheDirectory": "/tmp/cquery" }'
-      \ ],
-      \ 'python': ['pyls'],
-      \ 'rust': ['rls'],
-      \ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_changeThrottle = 0.2
-let g:LanguageClient_diagnosticsDisplay =
-            \ {
-            \     1: {
-            \         "name": "Error",
-            \         "texthl": "ALEError",
-            \         "signText": "E",
-            \         "signTexthl": "ALEErrorSign",
-            \     },
-            \     2: {
-            \         "name": "Warning",
-            \         "texthl": "ALEWarning",
-            \         "signText": "W",
-            \         "signTexthl": "ALEWarningSign",
-            \     },
-            \     3: {
-            \         "name": "Information",
-            \         "texthl": "ALEInfo",
-            \         "signText": "i",
-            \         "signTexthl": "ALEInfoSign",
-            \     },
-            \     4: {
-            \         "name": "Hint",
-            \         "texthl": "ALEInfo",
-            \         "signText": "h",
-            \         "signTexthl": "ALEInfoSign",
-            \     },
-            \ }
-
-augroup lsp_options
-    autocmd!
-    autocmd User LanguageClientStarted setlocal signcolumn=yes
-    autocmd User LanguageClientStopped setlocal signcolumn=auto
-    autocmd User LanguageClientStarted call ncm2#enable_for_buffer()
-augroup END
-
-" LSP mappings.
-nnoremap <silent> gA :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 
 " LightLine settings.
 let g:lightline = {
