@@ -7,9 +7,7 @@
 [[ -f ~/.zsh/common.zsh ]] && source ~/.zsh/common.zsh
 
 # Path and editor settings.
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export GOPATH="$HOME/.go"
-export PATH="$HOME/.cabal/bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
 
 export EDITOR=nvim
 

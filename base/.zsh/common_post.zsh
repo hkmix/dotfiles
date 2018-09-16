@@ -9,3 +9,5 @@
 [[ -f ~/.zsh/waterloo_aliases.zsh ]] && source ~/.zsh/waterloo_aliases.zsh
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.dircolors ]] && command -v dircolors &>/dev/null && eval $(dircolors ~/.dircolors)
+
+typeset -aU path
