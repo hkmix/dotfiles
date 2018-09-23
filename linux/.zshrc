@@ -9,7 +9,7 @@
 # Path and editor settings.
 export GOPATH="$HOME/.go"
 
-export EDITOR=nvim
+export EDITOR=vim
 
 # Misc appearance settings
 export GDK_SCALE=1.75

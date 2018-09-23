@@ -68,8 +68,7 @@ alias ll="ls -la"
 alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
 alias venvme=". ./venv/bin/activate"
-alias vi="nvim"
-alias vim="nvim"
+alias vi="vim"
 
 # Emacs aliases.
 alias emacsd="emacs --daemon"
