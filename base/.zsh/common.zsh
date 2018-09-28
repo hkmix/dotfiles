@@ -99,8 +99,10 @@ NEWLINE=$'\n'
 
 precmd() {
     venv=""
-    if [[ "$VIRTUAL_ENV" != "" ]]; then
+    if [ ! -z "$VIRTUAL_ENV" ]; then
         venv=" (${VIRTUAL_ENV##*/})"
+    elif [ ! -z "$CONDA_DEFAULT_ENV" ]; then
+        venv=" (${CONDA_DEFAULT_ENV})"
     fi
     PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)$venv%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
 }
