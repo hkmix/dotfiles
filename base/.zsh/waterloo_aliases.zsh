@@ -1,13 +1,8 @@
 # Classes
-alias ece455="cd ~/Waterloo/ECE\ 455"
-alias ece457a="cd ~/Waterloo/ECE\ 457A"
-alias ece458="cd ~/Waterloo/ECE\ 458"
-alias se463="cd ~/Waterloo/SE\ 463"
-alias se490="cd ~/Waterloo/SE\ 490"
-alias wkrt400="cd ~/Waterloo/WKRT\ 400"
-
-# Other
-alias octave="octave --no-gui"
+alias cs444="cd ~/Waterloo/CS\ 444"
+alias cs451="cd ~/Waterloo/CS\ 451"
+alias ece459="cd ~/Waterloo/ECE\ 459"
+alias ece457b="cd ~/Waterloo/ECE\ 457B"
 
 function wcd() {
     cd "$HOME/Waterloo Projects/$@"
