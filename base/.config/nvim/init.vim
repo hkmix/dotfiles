@@ -123,6 +123,12 @@ let g:solarized_extra_hi_groups = 1
 let g:solarized_termtrans = 1
 colorscheme solarized8
 
+if has('gui_running')
+    set guifont=Iosevka-Slab:h16
+    set guicursor=n-v-c:blinkon0
+    set guioptions-=mtTrRlLh
+end
+
 " Autocommands
 augroup general
     autocmd!
