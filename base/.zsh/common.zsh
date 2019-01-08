@@ -13,7 +13,7 @@ bashcompinit
 promptinit
 colors
 
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$HOME/.bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # zsh settings.
 [[ -f "$HOME/.bash_completion" ]] && source $HOME/.bash_completion
