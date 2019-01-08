@@ -413,14 +413,20 @@ Functions should come after packages.
     (add-to-list 'initial-frame-alist setting))
 
   (if (eq system-type 'darwin)
-      ;; Use a slightly larger size for macOS.
-      (defconst default-font "Iosevka Slab-16")
+      (progn
+        ;; Use a slightly larger size for macOS.
+        (defconst default-font "Iosevka Slab-16")
+        ;; Window appearance.
+        (add-to-frame-lists '(ns-transparent-titlebar . t))
+        (add-to-frame-lists '(ns-appearance . dark))
+        (defconst ns-use-proxy-icon nil))
     (defconst default-font "Iosevka Slab-12"))
   (set-face-attribute 'default nil :font default-font)
   (add-to-frame-lists (cons 'font default-font))
   (add-to-frame-lists '(height . 24))
   (add-to-frame-lists '(width . 80))
   (add-to-frame-lists '(background-mode . dark))
+  (setq frame-title-format "")
   (xterm-mouse-mode)
 
   (load-theme 'solarized-dark t)
