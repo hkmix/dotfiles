@@ -414,7 +414,7 @@ Functions should come after packages.
 
   (if (eq system-type 'darwin)
       ;; Use a slightly larger size for macOS.
-      (defconst default-font "Iosevka Slab-14")
+      (defconst default-font "Iosevka Slab-16")
     (defconst default-font "Iosevka Slab-12"))
   (set-face-attribute 'default nil :font default-font)
   (add-to-frame-lists (cons 'font default-font))
@@ -529,14 +529,14 @@ Functions should come after packages.
   (add-hook 'c-mode-common-hook
             (lambda ()
               (local-set-key (kbd "C-c o") 'ff-find-other-file)
-              (lsp-cquery-enable)
+              ; (lsp-cquery-enable)
               (dtrt-indent-mode 1)
               (eldoc-mode 1)))
 
   ;; DocView.
   ;; Resolution.
   (require 'doc-view)
-  (setq doc-view-resolution 200)
+  (setq doc-view-resolution 300)
 
   ;; LaTeX.
   ;; Prevent pairing for $.
@@ -559,7 +559,6 @@ Functions should come after packages.
 
   ;; Web.
   (add-hook 'css-mode-hook  'emmet-mode)
-  (add-hook 'js-mode-hook 'tern-mode)
   (add-hook 'sgml-mode-hook 'emmet-mode)
 #+END_SRC
 
@@ -571,12 +570,19 @@ Functions should come after packages.
 
   ;; Use y/n instead of yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; Fix MacOS meta key.
+  (setq mac-option-modifier 'meta)
+  (setq mac-right-option-modifier 'meta)
 #+END_SRC
 
 * Org-mode
 
 #+BEGIN_SRC emacs-lisp
   (require 'org)
+
+  ;; General appearance.
+  (setq org-hide-emphasis-markers t)
 
   ;; Source block tweaks.
   (setq org-src-fontify-natively t)
