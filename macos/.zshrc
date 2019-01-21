@@ -27,9 +27,8 @@ alias emacsd="emacs --daemon"
 alias emacsk="emacsclient -e '(kill-emacs)'"
 
 # Other aliases.
-alias venvme=". ./venv/bin/activate"
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
-alias brewup="brew update && brew upgrade && brew cleanup"
+alias brewup="brew update && brew upgrade && brew cask upgrade && brew cleanup"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
