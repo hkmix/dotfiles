@@ -60,6 +60,7 @@ Package list:
        (company-mode " cp" company)
        (defining-kbd-macro " q..." t)
        (dtrt-indent-mode nil dtrt-indent)
+
        (editorconfig-mode nil editorconfig)
        (eldoc-mode nil eldoc)
        (evil-commentary-mode nil evil-commentary)
@@ -120,6 +121,7 @@ Package list:
             "C"   'compile
             "c"   'recompile
             "d"   'dired
+            "e"   'evil-emacs-state
             "f"   'find-file
 
             ;; Git-Gutter.
@@ -158,8 +160,8 @@ Package list:
             "R"   'ruler-mode
             "q q" 'fill-paragraph
             "w w" 'window-configuration-to-register
-            "w r" 'jump-to-register)
-            "x"   'smex
+            "w r" 'jump-to-register
+            "x"   'smex)
 
           (evil-leader/set-key-for-mode 'c++-mode
             "A"   'ff-find-alternate-file)
@@ -184,7 +186,8 @@ Package list:
             "<SPC> o" 'my/open-at-point
             "<SPC> P" 'org-babel-previous-src-block
             "<SPC> p" 'org-previous-visible-heading
-            "<SPC> r" 'org-reveal)
+            "<SPC> r" 'org-reveal
+            "<SPC> s" 'my/org-sorter)
 
           (evil-leader/set-key-for-mode 'rust-mode
             "F"   'rust-enable-format-on-save
@@ -283,6 +286,12 @@ Package list:
     :bind
     ("C-c m" . magit-status))
 
+  (use-package pdf-tools
+    :config
+    (progn
+      (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
+      (pdf-tools-install)))
+
   (use-package projectile)
 
   (use-package recentf
@@ -353,6 +362,13 @@ Functions should come after packages.
     "Force open file at point in Emacs."
     (interactive)
     (org-open-at-point t))
+
+  ;; Custom multi-sort for Org-mode.
+  (defun my/org-sorter ()
+    "Sort Org-mode entries by deadline then state."
+    (interactive)
+    (org-sort-entries t ?d)
+    (org-sort-entries t ?o))
 
   ;; Invoke projectile-find-file if we are in a project, or start the switcher.
   (defun my/projectile-find-file-or-switch-project ()
@@ -455,10 +471,6 @@ Functions should come after packages.
   (global-set-key (kbd "C-w k") 'windmove-up)
   (global-set-key (kbd "C-w l") 'windmove-right)
 
-  ;; Org-mode key bindings.
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-
   ;; Fix ESC key in Evil mode.
   ;;; esc quits.
   (defun minibuffer-keyboard-quit ()
@@ -484,6 +496,8 @@ Functions should come after packages.
 
 #+BEGIN_SRC emacs-lisp
   ;; Editing options.
+  (setq default-buffer-file-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
   (setq initial-scratch-message nil)
   (setq vc-follow-symlinks t)
   (setq-default indent-tabs-mode nil)
@@ -521,15 +535,22 @@ Functions should come after packages.
 #+BEGIN_SRC emacs-lisp
   ;; All coding modes.
   (add-hook 'prog-mode-hook
-            (lambda()
+            (lambda ()
               (linum-mode 1)
               (company-mode 1)
               (80-column-rule)))
 
   ;; All text-editing modes.
   (add-hook 'text-mode-hook
-            (lambda()
+            (lambda ()
               (flyspell-mode 1)))
+
+  ;; Org-mode key bindings.
+  (require 'org)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c l") 'org-store-link)
+              (local-set-key (kbd "C-c a") 'org-agenda)))
 
   ;; C/C++.
   (add-hook 'c-mode-common-hook
@@ -542,7 +563,17 @@ Functions should come after packages.
   ;; DocView.
   ;; Resolution.
   (require 'doc-view)
-  (setq doc-view-resolution 300)
+  (setq doc-view-resolution 200)
+
+  ;; PDF view bindings.
+  (require 'pdf-tools)
+  (add-hook 'pdf-view-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c C-m") 'pdf-view-midnight-minor-mode)))
+
+  ;; Auto-reload changes.
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
 
   ;; LaTeX.
   ;; Prevent pairing for $.
@@ -578,14 +609,28 @@ Functions should come after packages.
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   ;; Fix MacOS meta key.
-  (setq mac-option-modifier 'meta)
-  (setq mac-right-option-modifier 'meta)
+  (when (eq system-type 'darwin)
+    (setq mac-option-modifier 'meta)
+    (setq mac-right-option-modifier 'meta))
+
+  ;; Fix MacOS paste.
+  ; (when (eq system-type 'darwin)
+  ;   (progn
+  ;     (defun my/pbpaste ()
+  ;       "Paste data from pasteboard."
+  ;       (interactive)
+  ;       (shell-command-on-region
+  ;        (point)
+  ;        (if mark-active (mark) (point))
+  ;        "pbpaste" nil t))
+  ;     (setq interprogram-paste-function 'my/pbpaste)))
 #+END_SRC
 
 * Org-mode
 
 #+BEGIN_SRC emacs-lisp
   (require 'org)
+  (require 'ox-latex)
 
   ;; General appearance.
   (setq org-hide-emphasis-markers t)
@@ -632,6 +677,19 @@ Functions should come after packages.
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (with-eval-after-load "ox-latex"
+    (add-to-list 'org-latex-classes
+                 '("koma-article"
+                   "\\documentclass[paper=letter,parskip=half,headings=standardclasses]{scrartcl}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+  (setq org-latex-default-class "koma-article")
+  (setq org-export-with-smart-quotes t)
+  (setq org-latex-default-figure-position "H")
+  (add-to-list 'org-latex-default-packages-alist '("" "float"))
 
   ;; Set link opening defaults.
   (setq browse-url-browser-function 'eww-browse-url)
