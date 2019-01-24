@@ -1,13 +1,12 @@
 ---
 BasedOnStyle: Mozilla
-
-Standard: Cpp11
-Cpp11BracedListStyle: true
+IndentWidth: 4
+---
+Language: Cpp
+AccessModifierOffset: -4
 AlignAfterOpenBracket: AlwaysBreak
-AlignTrailingComments: false
-AllowShortBlocksOnASingleLine: false
-AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
 BreakBeforeBraces: Stroustrup
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+Cpp11BracedListStyle: true
+IndentCaseLabels: false
