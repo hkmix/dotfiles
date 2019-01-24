@@ -55,7 +55,7 @@ Package list:
        (lisp-interaction-mode "EL-I" :major)
        ;; Minor modes.
        (abbrev-mode nil abbrev)
-       (auto-revert-mode nil autorevert)
+       (auto-revert-mode " ar" autorevert)
        (column-enforce-mode nil column-enforce-mode)
        (company-mode " cp" company)
        (defining-kbd-macro " q..." t)
@@ -70,6 +70,7 @@ Package list:
        (isend-mode " is" isend-mode)
        (latex-preview-pane-mode nil latex-preview-pane)
        (lsp-mode " lsp" lsp-mode)
+       (pdf-view-midnight-minor-mode nil pdf-tools)
        (projectile-mode " pj" projectile)
        (undo-tree-mode nil undo-tree)
        (visual-line-mode nil t)
@@ -390,7 +391,7 @@ Functions should come after packages.
   (defun my/update-latex-preview-org ()
     "Update LaTeX preview pane in Org-mode."
     (interactive)
-    (org-latex-export-to-pdf)
+    (org-latex-export-to-pdf t)
     ;; The function below is only needed if we are using PDF-tools.
     ;; (my/update-latex-preview).
     )
@@ -466,6 +467,11 @@ Functions should come after packages.
 #+BEGIN_SRC emacs-lisp
   ;; General key bindings.
   (global-unset-key (kbd "C-w"))
+  (global-set-key (kbd "C-w C-h") 'windmove-left)
+  (global-set-key (kbd "C-w C-j") 'windmove-down)
+  (global-set-key (kbd "C-w C-k") 'windmove-up)
+  (global-set-key (kbd "C-w C-l") 'windmove-right)
+
   (global-set-key (kbd "C-w h") 'windmove-left)
   (global-set-key (kbd "C-w j") 'windmove-down)
   (global-set-key (kbd "C-w k") 'windmove-up)
@@ -688,6 +694,7 @@ Functions should come after packages.
                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
   (setq org-latex-default-class "koma-article")
   (setq org-export-with-smart-quotes t)
+  (setq org-export-in-background t)
   (setq org-latex-default-figure-position "H")
   (add-to-list 'org-latex-default-packages-alist '("" "float"))
 
