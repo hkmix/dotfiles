@@ -39,7 +39,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'roxma/nvim-yarp'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
@@ -48,7 +47,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 
 " Neovim-specific plugins.
