@@ -27,6 +27,17 @@ Initialize:
 
   ;; Always download packages if needed.
   (setq use-package-always-ensure t)
+
+  ;; Enable Quelpa.
+  (use-package quelpa
+    :init
+    (progn
+      (setq quelpa-update-melpa-p nil)))
+  (quelpa
+   '(quelpa-use-package
+     :fetcher git
+     :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
+  (require 'quelpa-use-package)
 #+END_SRC
 
 Package list:
@@ -156,6 +167,7 @@ Package list:
             ;; Tabs.
             "t n" 'elscreen-create
             "t d" 'elscreen-kill
+            "T"   'elscreen-toggle-display-tab
 
             "r"   'revert-buffer
             "R"   'ruler-mode
@@ -204,6 +216,8 @@ Package list:
         :config
         (global-evil-surround-mode 1))
       (use-package evil-tabs
+        :quelpa
+        (evil-tabs :fetcher github :repo "hkmix/evil-tabs")
         :config
         (progn
           (global-evil-tabs-mode t)
@@ -287,8 +301,14 @@ Package list:
     :bind
     ("C-c m" . magit-status))
 
+  (quelpa
+    '(pdf-tools
+      :fetcher github
+      :repo "seanfarley/pdf-tools"
+      :branch "retina"
+      :files ("lisp/*.el")))
   (use-package pdf-tools
-    :config
+    :init
     (progn
       (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
       (pdf-tools-install)))
@@ -521,8 +541,8 @@ Functions should come after packages.
         `((".*" ,temporary-file-directory t)))
 
   ;; Prevent killing to clipboard.
-  (when (eq system-type 'darwin)
-    (setq select-enable-clipboard nil))
+  ; (when (eq system-type 'darwin)
+  ;   (setq select-enable-clipboard nil))
 
   (setq mouse-drag-copy-region t)
 #+END_SRC
@@ -577,10 +597,6 @@ Functions should come after packages.
             (lambda ()
               (local-set-key (kbd "C-c C-m") 'pdf-view-midnight-minor-mode)))
 
-  ;; Auto-reload changes.
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-
   ;; LaTeX.
   ;; Prevent pairing for $.
   (add-hook 'latex-mode-hook
@@ -610,6 +626,10 @@ Functions should come after packages.
 #+BEGIN_SRC emacs-lisp
   ;; Silence some warnings.
   (setq ad-redefinition-action 'accept)
+  (setq exec-path-from-shell-arguments '("-l"))
+
+  ;; Disable system dialogue boxes.
+  (setq use-dialog-box nil)
 
   ;; Use y/n instead of yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
