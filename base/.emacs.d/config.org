@@ -50,11 +50,11 @@ Package list:
     :config
     (progn
       (use-package company-flx
-        :config
-        (company-flx-mode +1))
+    :config
+    (company-flx-mode +1))
       (use-package company-lsp
-        :config
-        (push 'company-lsp company-backends))
+    :config
+    (push 'company-lsp company-backends))
       ;; (global-company-mode)
       (setq company-idle-delay 0.3)
       (setq company-tooltip-limit 10)))
@@ -117,112 +117,112 @@ Package list:
       (add-to-list 'evil-normal-state-modes 'recentf-dialog-mode)
 
       (evil-define-key 'normal dired-mode-map
-        "h" 'dired-up-directory
-        "j" 'dired-next-line
-        "k" 'dired-previous-line
-        "l" 'dired-find-alternate-file)
+    "h" 'dired-up-directory
+    "j" 'dired-next-line
+    "k" 'dired-previous-line
+    "l" 'dired-find-alternate-file)
       (use-package evil-leader
-        :init
-        (progn
-          (global-evil-leader-mode)
-          (evil-leader/set-leader "<SPC>")
-          (evil-leader/set-key
-            ;; Global.
-            "a"   'align-regexp
-            "b"   'switch-to-buffer
-            "C"   'compile
-            "c"   'recompile
-            "d"   'dired
-            "e"   'evil-emacs-state
-            "f"   'find-file
+    :init
+    (progn
+      (global-evil-leader-mode)
+      (evil-leader/set-leader "<SPC>")
+      (evil-leader/set-key
+        ;; Global.
+        "a"   'align-regexp
+        "b"   'switch-to-buffer
+        "C"   'compile
+        "c"   'recompile
+        "d"   'dired
+        "e"   'evil-emacs-state
+        "f"   'find-file
 
-            ;; Git-Gutter.
-            "g s" 'git-gutter:stage-hunk
-            "g r" 'git-gutter:revert-hunk
-            "g n" 'git-gutter:next-hunk
-            "g p" 'git-gutter:previous-hunk
+        ;; Git-Gutter.
+        "g s" 'git-gutter:stage-hunk
+        "g r" 'git-gutter:revert-hunk
+        "g n" 'git-gutter:next-hunk
+        "g p" 'git-gutter:previous-hunk
 
-            "h"   'recentf-open-files
+        "h"   'recentf-open-files
 
-            ;; Isend-mode.
-            "i a" 'isend-associate
-            "i s" 'isend-send
-            "i S" 'isend-send-buffer
+        ;; Isend-mode.
+        "i a" 'isend-associate
+        "i s" 'isend-send
+        "i S" 'isend-send-buffer
 
-            "k b" 'kill-buffer
-            "m"   'magit-status
+        "k b" 'kill-buffer
+        "m"   'magit-status
 
-            ;; Open files.
-            "o C" 'my/edit-config
-            "o I" 'my/edit-init
-            "o A" 'my/open-planner
+        ;; Open files.
+        "o C" 'my/edit-config
+        "o I" 'my/edit-init
+        "o A" 'my/open-planner
 
-            ;; Projectile.
-            "p g" 'projectile-grep
-            "p h" 'projectile-recentf
-            "p b" 'projectile-switch-to-buffer
-            "p p" 'my/projectile-find-file-or-switch-project
-            "p s" 'projectile-run-shell
+        ;; Projectile.
+        "p g" 'projectile-grep
+        "p h" 'projectile-recentf
+        "p b" 'projectile-switch-to-buffer
+        "p p" 'my/projectile-find-file-or-switch-project
+        "p s" 'projectile-run-shell
 
-            ;; Tabs.
-            "t n" 'elscreen-create
-            "t d" 'elscreen-kill
-            "T"   'elscreen-toggle-display-tab
+        ;; Tabs.
+        "t n" 'elscreen-create
+        "t d" 'elscreen-kill
+        "T"   'elscreen-toggle-display-tab
 
-            "r"   'revert-buffer
-            "R"   'ruler-mode
-            "q q" 'fill-paragraph
-            "w w" 'window-configuration-to-register
-            "w r" 'jump-to-register
-            "x"   'smex)
+        "r"   'revert-buffer
+        "R"   'ruler-mode
+        "q q" 'fill-paragraph
+        "w w" 'window-configuration-to-register
+        "w r" 'jump-to-register
+        "x"   'smex)
 
-          (evil-leader/set-key-for-mode 'c++-mode
-            "A"   'ff-find-alternate-file)
+      (evil-leader/set-key-for-mode 'c++-mode
+        "A"   'ff-find-alternate-file)
 
-          (evil-leader/set-key-for-mode 'latex-mode
-            "]"   'latex-close-block
-            "L"   'latex-preview-pane-mode
-            "l"   'my/update-latex-preview)
+      (evil-leader/set-key-for-mode 'latex-mode
+        "]"   'latex-close-block
+        "L"   'latex-preview-pane-mode
+        "l"   'my/update-latex-preview)
 
-          (evil-leader/set-key-for-mode 'org-mode
-            "<SPC> TAB" 'outline-show-all
-            "<SPC> <backtab>" 'org-shifttab
-            "<SPC> a" 'org-agenda
-            "<SPC> b" 'org-backward-heading-same-level
-            "<SPC> c" 'org-ctrl-c-ctrl-c
-            "<SPC> d" 'org-deadline
-            "<SPC> e" 'org-export-dispatch
-            "<SPC> f" 'org-forward-heading-same-level
-            "<SPC> l" 'my/update-latex-preview-org
-            "<SPC> N" 'org-babel-next-src-block
-            "<SPC> n" 'org-next-visible-heading
-            "<SPC> o" 'my/open-at-point
-            "<SPC> P" 'org-babel-previous-src-block
-            "<SPC> p" 'org-previous-visible-heading
-            "<SPC> r" 'org-reveal
-            "<SPC> s" 'my/org-sorter)
+      (evil-leader/set-key-for-mode 'org-mode
+        "<SPC> TAB" 'outline-show-all
+        "<SPC> <backtab>" 'org-shifttab
+        "<SPC> a" 'org-agenda
+        "<SPC> b" 'org-backward-heading-same-level
+        "<SPC> c" 'org-ctrl-c-ctrl-c
+        "<SPC> d" 'org-deadline
+        "<SPC> e" 'org-export-dispatch
+        "<SPC> f" 'org-forward-heading-same-level
+        "<SPC> l" 'my/update-latex-preview-org
+        "<SPC> N" 'org-babel-next-src-block
+        "<SPC> n" 'org-next-visible-heading
+        "<SPC> o" 'my/open-at-point
+        "<SPC> P" 'org-babel-previous-src-block
+        "<SPC> p" 'org-previous-visible-heading
+        "<SPC> r" 'org-reveal
+        "<SPC> s" 'my/org-sorter)
 
-          (evil-leader/set-key-for-mode 'rust-mode
-            "F"   'rust-enable-format-on-save
-            "f"   'rust-format-buffer)))
+      (evil-leader/set-key-for-mode 'rust-mode
+        "F"   'rust-enable-format-on-save
+        "f"   'rust-format-buffer)))
       (use-package evil-commentary
-        :config
-        (evil-commentary-mode 1))
+    :config
+    (evil-commentary-mode 1))
       (use-package evil-magit)
       (use-package evil-matchit
-        :config
-        (global-evil-matchit-mode 1))
+    :config
+    (global-evil-matchit-mode 1))
       (use-package evil-surround
-        :config
-        (global-evil-surround-mode 1))
+    :config
+    (global-evil-surround-mode 1))
       (quelpa '(evil-tabs :fetcher github :repo "hkmix/evil-tabs"))
       (use-package evil-tabs
-        :config
-        (progn
-          (global-evil-tabs-mode t)
-          (setq elscreen-tab-display-control nil)
-          (setq elscreen-tab-display-kill-screen nil)
-          (elscreen-toggle-display-tab)))
+    :config
+    (progn
+      (global-evil-tabs-mode t)
+      (setq elscreen-tab-display-control nil)
+      (setq elscreen-tab-display-kill-screen nil)
+      (elscreen-toggle-display-tab)))
       (evil-mode 1)))
 
   (use-package eyebrowse
@@ -235,6 +235,7 @@ Package list:
     :config
     (progn
       (when (memq window-system '(mac ns x))
+        (setq exec-path-from-shell-check-startup-files nil)
         (exec-path-from-shell-initialize))))
 
   (use-package flycheck
@@ -262,26 +263,26 @@ Package list:
       (ido-mode 1)
       (ido-everywhere 1)
       (use-package flx-ido
-        :config
-        (progn
-          (flx-ido-mode 1)
-          (setq ido-enable-flex-matching t)
-          (setq ido-use-faces nil)))
+    :config
+    (progn
+      (flx-ido-mode 1)
+      (setq ido-enable-flex-matching t)
+      (setq ido-use-faces nil)))
       (use-package ido-completing-read+
-        :config
-        (ido-ubiquitous-mode 1))
+    :config
+    (ido-ubiquitous-mode 1))
       (use-package ido-vertical-mode
-        :config
-        (progn
-          (ido-vertical-mode 1)
-          (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
+    :config
+    (progn
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
       (use-package smex
-        :bind
-        (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c M-x" . execute-extended-command))
-        :config
-        (smex-initialize))))
+    :bind
+    (("M-x" . smex)
+     ("M-X" . smex-major-mode-commands)
+     ("C-c M-x" . execute-extended-command))
+    :config
+    (smex-initialize))))
 
   (use-package isend-mode)
 
@@ -300,16 +301,26 @@ Package list:
     :bind
     ("C-c m" . magit-status))
 
+  (use-package org-ref)
+
   (quelpa
     '(pdf-tools
       :fetcher github
       :repo "seanfarley/pdf-tools"
       :branch "retina"
-      :files ("lisp/*.el")))
+      :files
+      ("lisp/*.el"
+       "README"
+       ("build" "Makefile")
+       ("build" "server")
+       (:exclude "lisp/tablist.el" "lisp/tablist-filter.el"))))
   (use-package pdf-tools
     :init
     (progn
-      (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
+      (setq my/pdf-tools-bin-dir
+            (substitute-in-file-name "$HOME/.emacs.d/bin"))
+      (make-directory my/pdf-tools-bin-dir t)
+      (setq pdf-info-epdfinfo-program (concat my/pdf-tools-bin-dir "/epdfinfo"))
       (pdf-tools-install)))
 
   (use-package projectile)
@@ -341,8 +352,8 @@ Package list:
     :init
     (progn
       (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
-        (lambda ()
-          (ws-butler-mode t))))
+    (lambda ()
+      (ws-butler-mode t))))
     :config
     (global-ws-butler-mode t))
 #+END_SRC
@@ -686,7 +697,7 @@ Functions should come after packages.
   ;; States.
   (defvar org-todo-keywords)
   (setq org-todo-keywords
-        '((sequence "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")))
+        '((sequence "IN-PROGRESS" "NEXT" "TODO" "|" "DONE")))
 
   ;; Export settings.
   (defvar org-latex-listings)
@@ -717,6 +728,19 @@ Functions should come after packages.
   (setq org-export-in-background t)
   (setq org-latex-default-figure-position "H")
   (add-to-list 'org-latex-default-packages-alist '("" "float"))
+
+  (require 'org-ref)
+  (org-link-set-parameters "ref" :export
+                           (lambda (label desc format)
+                             (format "\\cref{%s}" label)))
+  (setq org-ref-default-ref-type "Cref")
+  (defun org-latex-ref-to-cref (text backend info)
+    "Use \\cref instead of \\ref in latex export."
+    (when (org-export-derived-backend-p backend 'latex)
+      (replace-regexp-in-string "\\\\ref{" "\\\\cref{" text)))
+
+  (add-to-list 'org-export-filter-final-output-functions
+               'org-latex-ref-to-cref)
 
   ;; Set link opening defaults.
   (setq browse-url-browser-function 'eww-browse-url)
