@@ -54,6 +54,12 @@ if s:nvim
     Plug 'kassio/neoterm'
 end
 
+" Platform-specific.
+let s:platform_rc = '~/.platform.vim'
+if !empty(glob(s:platform_rc))
+    execute 'source ' . s:platform_rc
+endif
+
 call plug#end()
 
 filetype plugin indent on
@@ -264,8 +270,8 @@ augroup END
 
 augroup filetype_cpp
     autocmd!
-    autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.h<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.hh<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.hh<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vH :vsp %<.hpp<CR>
@@ -273,8 +279,7 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
-    autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
-    autocmd FileType cpp nnoremap <buffer> <Leader>cF :ClangFormatAutoToggle<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>cf mz:%!clang-format<CR>'z
 augroup END
 
 augroup filetype_go
