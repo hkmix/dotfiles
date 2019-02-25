@@ -264,20 +264,26 @@ augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
     autocmd FileType c nnoremap <buffer> <Leader>xh :sp %<.h<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>eh :e %<.h<CR>
     autocmd FileType c nnoremap <buffer> <Leader>vc :vsp %<.c<CR>
     autocmd FileType c nnoremap <buffer> <Leader>xc :sp %<.c<CR>
+    autocmd FileType c nnoremap <buffer> <Leader>ec :e %<.c<CR>
 augroup END
 
 augroup filetype_cpp
     autocmd!
     autocmd FileType cpp nnoremap <buffer> <Leader>vh :vsp %<.hh<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xh :sp %<.hh<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>eh :e %<.hh<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vc :vsp %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xc :sp %<.cc<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>ec :e %<.cc<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vH :vsp %<.hpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xH :sp %<.hpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>eH :e %<.hpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>vC :vsp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
+    autocmd FileType cpp nnoremap <buffer> <Leader>eC :e %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
     autocmd FileType cpp nnoremap <buffer> <Leader>cf mz:%!clang-format<CR>'z
 augroup END
