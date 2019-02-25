@@ -10,14 +10,25 @@
 export GOPATH="$HOME/.go"
 command -v /usr/libexec/java_home >/dev/null 2>&1 && /usr/libexec/java_home -v 1.8 >/dev/null 2>&1 && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)" && export PATH="$JAVA_HOME/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PATH="/usr/local/opt/qt/bin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/Cellar:$HOME/Library/Python/3.7/bin:/usr/local/bin/tex:/usr/local/opt/coreutils/libexec/gnubin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$PATH"
-export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
-export RUST_SRC_PATH=$HOME/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src
+export PATH="$HOME/Library/Python/3.7/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/Applications/cling/bin/actual:$PATH"
+
+# Homebrew.
+export PATH="$HOME/.brew/bin:$PATH"
+export PATH="$HOME/.brew/opt/llvm/bin:$PATH"
+export HOMEBREW_NO_EMOJI=1
+export HOMEBREW_NO_ANALYTICS=1
+alias brewup="brew update && brew upgrade && brew cask upgrade && brew cleanup"
+
+# MacPorts.
+export PATH="/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH"
+export MANPATH="/opt/local/share/man:$MANPATH"
+alias portup="sudo port selfupdate && sudo port upgrade outdated"
+alias ports="port search --name --regex"
+
+# Other PATH variables.
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Other exports.
-export HOMEBREW_NO_EMOJI=1
 export EDITOR=nvim
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -28,7 +39,6 @@ alias emacsk="emacsclient -e '(kill-emacs)'"
 
 # Other aliases.
 alias reset_launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
-alias brewup="brew update && brew upgrade && brew cask upgrade && brew cleanup"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
