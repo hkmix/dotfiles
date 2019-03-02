@@ -28,6 +28,9 @@
 # | Specific tool files |
 # +---------------------+
 
+# ccls
+**/.ccls-cache/
+
 # cquery
 **/.cquery_cached_index/
 
