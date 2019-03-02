@@ -703,7 +703,12 @@ Functions should come after packages.
   (defvar org-latex-listings)
   (setq org-latex-listings 'minted)
   (defvar org-latex-packages-alist)
-  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (add-to-list 'org-latex-packages-alist
+               '("" "booktabs")
+               '("labelfont=bf,labelsep=period" "caption")
+               '("" "cleveref")
+               '("" "dsfont")
+               '("" "float")
   (defvar org-latex-minted-options)
   (setq org-latex-minted-options
         '(("linenos")
@@ -714,6 +719,9 @@ Functions should come after packages.
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-tables-booktabs t)
+
+  ;; Use koma-script document classes.
   (with-eval-after-load "ox-latex"
     (add-to-list 'org-latex-classes
                  '("koma-article"
@@ -729,6 +737,7 @@ Functions should come after packages.
   (setq org-latex-default-figure-position "H")
   (add-to-list 'org-latex-default-packages-alist '("" "float"))
 
+  ;; Use cleveref package for references.
   (require 'org-ref)
   (org-link-set-parameters "ref" :export
                            (lambda (label desc format)
@@ -741,6 +750,23 @@ Functions should come after packages.
 
   (add-to-list 'org-export-filter-final-output-functions
                'org-latex-ref-to-cref)
+
+  ;; Custom header format.
+  (setq org-format-latex-header "
+  \\documentclass{article}
+  \\usepackage[usenames]{color}
+  \\usepackage{minted}
+  [PACKAGES]
+  [DEFAULT-PACKAGES]
+  \\pagestyle{empty} % do not remove
+  \\usemintedstyle{borland}
+  \\renewcommand{\\labelitemi}{{--}}
+  \\renewcommand{\\labelitemii}{{--}}
+  \\renewcommand{\\labelitemiii}{{--}}
+  \\renewcommand{\\labelitemiv}{{--}}
+  ")
+
+  (setq org-goto-interface 'outline-path-completion)
 
   ;; Set link opening defaults.
   (setq browse-url-browser-function 'eww-browse-url)
