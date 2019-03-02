@@ -32,6 +32,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
 Plug 'itchyny/lightline.vim'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex', {'for': ['tex']}
@@ -178,6 +179,10 @@ nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 
+nnoremap <silent> <Leader>bb :BufExplorer<CR>
+nnoremap <silent> <Leader>gb :BufExplorerHorizontalSplit<CR>
+nnoremap <silent> <Leader>gB :BufExplorerVerticalSplit<CR>
+
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
@@ -190,6 +195,7 @@ xnoremap <silent> gc gC
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
@@ -285,7 +291,7 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>eC :e %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
-    autocmd FileType cpp nnoremap <buffer> <Leader>cf mz:%!clang-format<CR>'z
+    autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
 augroup END
 
 augroup filetype_go
