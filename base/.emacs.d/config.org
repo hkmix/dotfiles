@@ -691,30 +691,24 @@ Functions should come after packages.
 
   ;; Agenda settings.
   ;; Start on Sunday.
-  (defvar org-agenda-start-on-weekday)
   (setq org-agenda-start-on-weekday 0)
 
   ;; States.
-  (defvar org-todo-keywords)
   (setq org-todo-keywords
         '((sequence "IN-PROGRESS" "NEXT" "TODO" "|" "DONE")))
 
   ;; Export settings.
-  (defvar org-latex-listings)
   (setq org-latex-listings 'minted)
-  (defvar org-latex-packages-alist)
-  (add-to-list 'org-latex-packages-alist
-               '("" "booktabs")
-               '("labelfont=bf,labelsep=period" "caption")
-               '("" "cleveref")
-               '("" "dsfont")
-               '("" "float")
-  (defvar org-latex-minted-options)
+  (setq org-latex-packages-alist
+        '(("" "booktabs")
+          '("labelfont=bf,labelsep=period" "caption")
+          '("" "cleveref")
+          '("" "dsfont")
+          '("" "float")))
   (setq org-latex-minted-options
         '(("linenos")
           ("breaklines")
           ("xleftmargin" "2em")))
-  (defvar org-latex-pdf-process)
   (setq org-latex-pdf-process
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
@@ -753,18 +747,18 @@ Functions should come after packages.
 
   ;; Custom header format.
   (setq org-format-latex-header "
-  \\documentclass{article}
-  \\usepackage[usenames]{color}
-  \\usepackage{minted}
-  [PACKAGES]
-  [DEFAULT-PACKAGES]
-  \\pagestyle{empty} % do not remove
-  \\usemintedstyle{borland}
-  \\renewcommand{\\labelitemi}{{--}}
-  \\renewcommand{\\labelitemii}{{--}}
-  \\renewcommand{\\labelitemiii}{{--}}
-  \\renewcommand{\\labelitemiv}{{--}}
-  ")
+    \\documentclass{article}
+    \\usepackage[usenames]{color}
+    \\usepackage{minted}
+    [PACKAGES]
+    [DEFAULT-PACKAGES]
+    \\pagestyle{empty} % do not remove
+    \\usemintedstyle{borland}
+    \\renewcommand{\\labelitemi}{{--}}
+    \\renewcommand{\\labelitemii}{{--}}
+    \\renewcommand{\\labelitemiii}{{--}}
+    \\renewcommand{\\labelitemiv}{{--}}
+    ")
 
   (setq org-goto-interface 'outline-path-completion)
 
