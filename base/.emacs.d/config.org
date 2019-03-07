@@ -701,10 +701,13 @@ Functions should come after packages.
   (setq org-latex-listings 'minted)
   (setq org-latex-packages-alist
         '(("" "booktabs")
-          '("labelfont=bf,labelsep=period" "caption")
-          '("" "cleveref")
-          '("" "dsfont")
-          '("" "float")))
+          ("labelfont=bf,labelsep=period" "caption")
+          ("" "cleveref")
+          ("" "dsfont")
+          ("" "float")
+          ("margin=1in" "geometry")
+          ("" "lastpage")
+          ("headsepline" "scrlayer-scrpage")))
   (setq org-latex-minted-options
         '(("linenos")
           ("breaklines")
@@ -719,7 +722,15 @@ Functions should come after packages.
   (with-eval-after-load "ox-latex"
     (add-to-list 'org-latex-classes
                  '("koma-article"
-                   "\\documentclass[paper=letter,parskip=half,headings=standardclasses]{scrartcl}"
+                   "\\documentclass[paper=letter,parskip=half,headings=standardclasses]{scrartcl}
+  \\usepackage{minted}
+  \\usemintedstyle{borland}
+  \\renewcommand{\\labelitemi}{{--}}
+  \\renewcommand{\\labelitemii}{{--}}
+  \\renewcommand{\\labelitemiii}{{--}}
+  \\renewcommand{\\labelitemiv}{{--}}
+  \\clearpairofpagestyles{}
+  \\setkomafont{pagehead}{\\normalfont}"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -729,7 +740,6 @@ Functions should come after packages.
   (setq org-export-with-smart-quotes t)
   (setq org-export-in-background t)
   (setq org-latex-default-figure-position "H")
-  (add-to-list 'org-latex-default-packages-alist '("" "float"))
 
   ;; Use cleveref package for references.
   (require 'org-ref)
@@ -746,19 +756,19 @@ Functions should come after packages.
                'org-latex-ref-to-cref)
 
   ;; Custom header format.
-  (setq org-format-latex-header "
-    \\documentclass{article}
-    \\usepackage[usenames]{color}
-    \\usepackage{minted}
-    [PACKAGES]
-    [DEFAULT-PACKAGES]
-    \\pagestyle{empty} % do not remove
-    \\usemintedstyle{borland}
-    \\renewcommand{\\labelitemi}{{--}}
-    \\renewcommand{\\labelitemii}{{--}}
-    \\renewcommand{\\labelitemiii}{{--}}
-    \\renewcommand{\\labelitemiv}{{--}}
-    ")
+  (setq org-format-latex-header
+        "\\documentclass{article}
+  \\usepackage[usenames]{color}
+  [PACKAGES]
+  [DEFAULT-PACKAGES]
+  \\pagestyle{empty}             % do not remove
+  \\usemintedstyle{borland}
+  \\renewcommand{\\labelitemi}{{--}}
+  \\renewcommand{\\labelitemii}{{--}}
+  \\renewcommand{\\labelitemiii}{{--}}
+  \\renewcommand{\\labelitemiv}{{--}}
+  \\clearpairofpagestyles{}
+  \\setkomafont{pagehead}{\\normalfont}")
 
   (setq org-goto-interface 'outline-path-completion)
 
