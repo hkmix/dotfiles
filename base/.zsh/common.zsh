@@ -55,6 +55,7 @@ export WORDCHARS='_'
 
 # Aliases.
 alias bc="bc -l"
+alias cb="cmake --build \"\$(git rev-parse --show-toplevel)/build\""
 alias df="df -h"
 alias dog="vimcat"
 alias dotcd="cd ~/.dotfiles && git fetch"
