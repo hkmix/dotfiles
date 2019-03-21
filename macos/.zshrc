@@ -22,7 +22,7 @@ alias brewup="brew update && brew upgrade && brew cask upgrade && brew cleanup"
 # MacPorts.
 export PATH="/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
-alias portup="sudo port selfupdate && sudo port upgrade outdated"
+alias portup="sudo port selfupdate && sudo port upgrade outdated && port list requested > $HOME/.port_packages 2>/dev/null"
 alias ports="port search --name --regex"
 
 # Other PATH variables.
