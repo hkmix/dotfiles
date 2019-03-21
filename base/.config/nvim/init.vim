@@ -40,6 +40,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'rhysd/vim-clang-format'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
@@ -186,6 +187,8 @@ nnoremap <silent> <Leader>gB :BufExplorerVerticalSplit<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+nmap <silent> gf :ClangFormat<CR>
+
 nnoremap <silent> gC gc
 nnoremap <silent> gc gC
 xnoremap <silent> gC gc
@@ -196,6 +199,8 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
+let g:clang_format#detect_style_file = 1
+let g:clang_format#extra_args = "-assume-filename=file.cc"
 let g:delimitMate_balance_matchpairs = 1
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
@@ -274,6 +279,7 @@ augroup filetype_c
     autocmd FileType c nnoremap <buffer> <Leader>vc :vsp %<.c<CR>
     autocmd FileType c nnoremap <buffer> <Leader>xc :sp %<.c<CR>
     autocmd FileType c nnoremap <buffer> <Leader>ec :e %<.c<CR>
+    autocmd FileType c ClangFormatAutoEnable
 augroup END
 
 augroup filetype_cpp
@@ -292,6 +298,7 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>eC :e %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
     autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
+    autocmd FileType cpp ClangFormatAutoEnable
 augroup END
 
 augroup filetype_go
@@ -332,6 +339,12 @@ augroup filetype_tex
     autocmd FileType tex nnoremap <buffer> ][ <Plug>(vimtex-][)
     autocmd FileType tex nnoremap <buffer> [] <Plug>(vimtex-[])
     autocmd FileType tex nnoremap <buffer> [[ <Plug>(vimtex-[[)
+augroup END
+
+augroup filetype_yaml
+    autocmd!
+    autocmd BufEnter *.clang-format setlocal filetype=yaml
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 augroup END
 
 if s:nvim

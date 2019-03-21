@@ -3,13 +3,15 @@ BasedOnStyle: Mozilla
 IndentWidth: 4
 ---
 Language: Cpp
+
 AccessModifierOffset: -4
 AlignAfterOpenBracket: AlwaysBreak
 BreakBeforeBraces: Stroustrup
-ContinuationIndentWidth: 4
 ConstructorInitializerIndentWidth: 4
-Cpp11BracedListStyle: true
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: false
 FixNamespaceComments: true
 IndentCaseLabels: false
+IndentPPDirectives: AfterHash
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: true
