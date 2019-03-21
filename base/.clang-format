@@ -9,7 +9,7 @@ AlignAfterOpenBracket: AlwaysBreak
 BreakBeforeBraces: Stroustrup
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
-Cpp11BracedListStyle: false
+Cpp11BracedListStyle: true
 FixNamespaceComments: true
 IndentCaseLabels: false
 IndentPPDirectives: AfterHash
