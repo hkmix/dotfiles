@@ -24,7 +24,6 @@ endif
 call plug#begin(s:path . '/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -41,6 +40,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/vim-clang-format'
+Plug 'rstacruz/vim-closer'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
@@ -201,10 +201,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:clang_format#detect_style_file = 1
 let g:clang_format#extra_args = "-assume-filename=file.cc"
-let g:delimitMate_balance_matchpairs = 1
-let g:delimitMate_expand_cr = 2
-let g:delimitMate_expand_space = 1
-let g:delimitMate_matchpairs = "(:),[:],{:}"
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
@@ -315,12 +311,6 @@ augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell
     autocmd FileType markdown setlocal sts=4 sw=4 ts=4
-    autocmd Filetype markdown let delimitMate_quotes="\" '"
-augroup END
-
-augroup filetype_python
-    autocmd!
-    autocmd Filetype python let delimitMate_quotes="'"
 augroup END
 
 augroup filetype_tex
@@ -330,8 +320,6 @@ augroup filetype_tex
     autocmd FileType tex setlocal colorcolumn=80 spell
     autocmd FileType tex nnoremap <buffer> <F8> :VimtexTocToggle<CR>
     autocmd FileType tex nnoremap <buffer> <Leader>tw gqip
-    autocmd FileType tex let delimitMate_matchpairs="(:),[:],{:},`:'"
-    autocmd Filetype tex let delimitMate_quotes="\" '"
     autocmd FileType tex imap <buffer> ]] <Plug>(vimtex-delim-close)
     autocmd FileType tex nnoremap <buffer> )) <Plug>(vimtex-delim-toggle-modifier)
     autocmd FileType tex nnoremap <buffer> cE <Plug>(vimtex-env-change)
