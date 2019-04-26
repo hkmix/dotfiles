@@ -39,7 +39,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format', {'for': ['c', 'cpp']}
 Plug 'rstacruz/vim-closer'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
@@ -188,6 +188,7 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
 nmap <silent> gf :ClangFormat<CR>
+nmap <silent> gF :ClangFormatAutoToggle<CR>
 
 nnoremap <silent> gC gc
 nnoremap <silent> gc gC
@@ -200,7 +201,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:clang_format#detect_style_file = 1
-let g:clang_format#extra_args = "-assume-filename=file.cc"
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']

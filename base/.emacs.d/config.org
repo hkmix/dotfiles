@@ -1,5 +1,12 @@
 #+TITLE: Org-Babel Emacs Configuration
 
+* Server
+
+#+BEGIN_SRC emacs-lisp
+  (require 'server)
+  (unless (server-running-p) (server-start))
+#+END_SRC
+
 * Packages
 
 Initialize:
@@ -44,6 +51,10 @@ Package list:
 
 #+BEGIN_SRC emacs-lisp
   ;; Package list.
+  (use-package clang-format
+    :config
+    (setq clang-format-style-option "mozilla"))
+
   (use-package column-enforce-mode)
 
   (use-package company
@@ -53,6 +64,7 @@ Package list:
         :config
         (company-flx-mode +1))
       (use-package company-lsp
+        :commands company-lsp
         :config
         (push 'company-lsp company-backends))
       ;; (global-company-mode)
@@ -75,7 +87,6 @@ Package list:
        (editorconfig-mode nil editorconfig)
        (eldoc-mode nil eldoc)
        (evil-commentary-mode nil evil-commentary)
-       (flycheck-mode " fc" flycheck)
        (flyspell-mode " fs" flyspell)
        (git-gutter-mode nil git-gutter)
        (isend-mode " is" isend-mode)
@@ -134,7 +145,6 @@ Package list:
             "c"   'recompile
             "d"   'dired
             "e"   'evil-emacs-state
-            "f"   'find-file
 
             ;; Git-Gutter.
             "g s" 'git-gutter:stage-hunk
@@ -153,9 +163,9 @@ Package list:
             "m"   'magit-status
 
             ;; Open files.
-            "o C" 'my/edit-config
-            "o I" 'my/edit-init
-            "o A" 'my/open-planner
+            "o c" 'my/edit-config
+            "o i" 'my/edit-init
+            "o a" 'my/open-planner
 
             ;; Projectile.
             "p g" 'projectile-grep
@@ -177,7 +187,9 @@ Package list:
             "x"   'smex)
 
           (evil-leader/set-key-for-mode 'c++-mode
-            "A"   'ff-find-alternate-file)
+            "A"   'ff-find-alternate-file
+            "f"   'clang-format-buffer
+            "F"   'clang-format-region)
 
           (evil-leader/set-key-for-mode 'latex-mode
             "]"   'latex-close-block
@@ -196,7 +208,6 @@ Package list:
             "<SPC> l" 'my/update-latex-preview-org
             "<SPC> N" 'org-babel-next-src-block
             "<SPC> n" 'org-next-visible-heading
-            "<SPC> o" 'my/open-at-point
             "<SPC> P" 'org-babel-previous-src-block
             "<SPC> p" 'org-previous-visible-heading
             "<SPC> r" 'org-reveal
@@ -238,13 +249,6 @@ Package list:
         (setq exec-path-from-shell-check-startup-files nil)
         (exec-path-from-shell-initialize))))
 
-  (use-package flycheck
-    :defer t
-    :config
-    (progn
-      (use-package flycheck-mypy)
-      (global-flycheck-mode)))
-
   (use-package git-gutter
     :defer t
     :bind
@@ -256,6 +260,8 @@ Package list:
     (progn
       (global-git-gutter-mode t)
       (git-gutter:linum-setup)))
+
+  (use-package graphviz-dot-mode)
 
   (use-package ido
     :config
@@ -298,8 +304,7 @@ Package list:
         :init
         (setq ccls-executable "/usr/local/bin/ccls"))
       (use-package lsp-ui)
-      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-      (add-hook 'lsp-mode-hook 'flycheck-mode)))
+      (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
 
   (use-package magit
     :bind
@@ -553,6 +558,10 @@ Functions should come after packages.
   (setq-default fill-column 79)
   (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
+  ;; C/C++ defaults.
+  (setq-default c-basic-offset 4)
+  (setq c-default-style "stroustrup")
+
   (electric-pair-mode)
   (global-visual-line-mode)
 
@@ -694,6 +703,7 @@ Functions should come after packages.
      (haskell . t)
      (latex . t)
      (python . t)
+     (dot . t)
      (shell . t)))
 
   ;; Hooks.

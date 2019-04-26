@@ -47,7 +47,7 @@ export FZF_DEFAULT_OPTS='
     --color dark,hl:33,hl+:33,fg+:235,bg+:0,fg+:7
     --color info:254,prompt:37,spinner:108,pointer:14,marker:14
 '
-export FZF_DEFAULT_COMMAND='rg --files'
+command -v 'rg' >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='rg --files 2>/dev/null'
 
 # Other settings.
 export EDITOR=vim
