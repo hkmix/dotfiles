@@ -35,6 +35,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
+Plug 'kassio/neoterm'
 Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
@@ -50,11 +51,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-
-" Neovim-specific plugins.
-if s:nvim
-    Plug 'kassio/neoterm'
-end
 
 " Platform-specific.
 let s:platform_rc = '~/.platform.vim'
@@ -187,6 +183,9 @@ nnoremap <silent> <Leader>gB :BufExplorerVerticalSplit<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+nnoremap <Leader>s :TREPLSendFile<CR>
+xnoremap <Leader>s :TREPLSendSelection<CR>
+
 function! ToggleAutoformat()
     if !exists('#AutoformatGroup#BufWrite')
         augroup AutoformatGroup
@@ -214,10 +213,10 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
-let g:clang_format#detect_style_file = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
+let g:neoterm_default_mod = 'vertical'
 let g:rooter_manual_only = 1
 let g:rustfmt_autosave = 1
 let g:table_mode_corner_corner = '+'
