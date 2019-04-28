@@ -24,6 +24,7 @@ endif
 call plug#begin(s:path . '/plugged')
 let g:plug_url_format = 'git@github.com:%s.git'
 
+Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -39,7 +40,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rhysd/vim-clang-format', {'for': ['c', 'cpp']}
 Plug 'rstacruz/vim-closer'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
@@ -123,7 +123,7 @@ endif
 set termguicolors
 set background=dark
 set colorcolumn=80,100
-set fillchars=vert:\ 
+set fillchars=vert:\  " Intentional trailing escaped space.
 let &showbreak = '↳ '
 let g:solarized_extra_hi_groups = 1
 let g:solarized_termtrans = 1
@@ -187,8 +187,22 @@ nnoremap <silent> <Leader>gB :BufExplorerVerticalSplit<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-nmap <silent> gf :ClangFormat<CR>
-nmap <silent> gF :ClangFormatAutoToggle<CR>
+function! ToggleAutoformat()
+    if !exists('#AutoformatGroup#BufWrite')
+        augroup AutoformatGroup
+            autocmd!
+            autocmd BufWritePre <buffer> :Autoformat
+        augroup END
+        echo 'Autoformat enabled.'
+    else
+        augroup AutoformatGroup
+            autocmd!
+        augroup END
+        echo 'Autoformat disabled.'
+    endif
+endfunction
+nmap <silent> gf :Autoformat<CR>
+nmap <silent> gF :call ToggleAutoformat()<CR>
 
 nnoremap <silent> gC gc
 nnoremap <silent> gc gC
@@ -275,7 +289,6 @@ augroup filetype_c
     autocmd FileType c nnoremap <buffer> <Leader>vc :vsp %<.c<CR>
     autocmd FileType c nnoremap <buffer> <Leader>xc :sp %<.c<CR>
     autocmd FileType c nnoremap <buffer> <Leader>ec :e %<.c<CR>
-    autocmd FileType c ClangFormatAutoEnable
 augroup END
 
 augroup filetype_cpp
@@ -293,8 +306,6 @@ augroup filetype_cpp
     autocmd FileType cpp nnoremap <buffer> <Leader>xC :sp %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>eC :e %<.cpp<CR>
     autocmd FileType cpp nnoremap <buffer> <Leader>mh yy2pkI#ifndef <Esc>jI#define <Esc>jI#endif // <Esc>2O<Esc>O<Esc>
-    autocmd FileType cpp nnoremap <buffer> <Leader>cf :ClangFormat<CR>
-    autocmd FileType cpp ClangFormatAutoEnable
 augroup END
 
 augroup filetype_go
