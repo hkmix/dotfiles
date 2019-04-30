@@ -17,6 +17,7 @@ general {
 
 order += "volume master"
 order += "wireless _first_"
+order += "path_exists tun0"
 order += "battery all"
 order += "tztime date"
 order += "tztime local"
@@ -29,6 +30,12 @@ volume master {
 wireless _first_ {
     format_up = "  %essid"
     format_down = "  down"
+}
+
+path_exists tun0 {
+    path = "/proc/sys/net/ipv4/conf/tun0"
+    format = "  VPN"
+    format_down = ""
 }
 
 battery all {
