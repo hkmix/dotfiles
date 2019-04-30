@@ -83,6 +83,7 @@ endif
 set complete-=1
 set completeopt=noinsert,menuone,noselect
 set cursorline
+set encoding=utf-8
 set foldmarker={{{{{,}}}}}
 set foldmethod=manual
 set ignorecase

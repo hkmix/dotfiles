@@ -1,6 +1,6 @@
 #!/bin/bash
 
-i3lock -n -d -c 111111 -i $HOME/Pictures/solarwall_cbp.png
+i3lock -n -d -c 111111 -i $HOME/Pictures/solarwall_mbp.png
 xset -dpms
 xset s noblank
 xset s off

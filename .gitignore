@@ -1,5 +1,8 @@
-# Ignore temp files
+# Ignore temp files.
 **/*.swp
 **/*.swo
 **/*~
 **/#*#
+
+# Ignore history files.
+**/.netrwhist
