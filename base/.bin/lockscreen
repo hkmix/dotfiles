@@ -1,7 +1,9 @@
 #!/bin/bash
 
-i3lock -n -d -c 111111 -i $HOME/Pictures/solarwall_mbp.png
+xset dpms force suspend
+i3lock -n -c 111111 -i $HOME/Pictures/solarwall_mbp.png
 xset -dpms
 xset s noblank
 xset s off
 xset m 0 0
+xset r rate 300 30
