@@ -8,6 +8,5 @@ xset r rate 300 30 &
 insync-headless start &
 ~/.fehbg &
 redshift -l 43.5:-80 -t 6500K:3500K &
-compton -b &
 
 exec i3
