@@ -40,6 +40,7 @@ Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
+Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rstacruz/vim-closer'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
@@ -216,6 +217,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
+let g:haskell_classic_highlighting = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
 let g:neoterm_default_mod = 'vertical'
 let g:rooter_manual_only = 1
