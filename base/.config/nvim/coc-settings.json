@@ -1,4 +1,9 @@
 {
+    "coc": {
+        "preferences": {
+            "formatOnSaveFiletypes": ["json", "rust"]
+        }
+    },
     "languageserver": {
         "ccls": {
             "command": "ccls",
