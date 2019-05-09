@@ -11,6 +11,8 @@ export GOPATH="$HOME/.go"
 
 export EDITOR=vim
 
+export FZF_DEFAULT_COMMAND="rg --files"
+
 # Misc appearance settings
 export GDK_SCALE=1.75
 export QT_QPA_PLATFORMTHEME='qt5ct'
