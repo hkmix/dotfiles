@@ -6,8 +6,8 @@
       Driver "synaptics"
       MatchIsTouchpad "on"
 
-      Option "FingerLow" "5"
-      Option "FingerHigh" "10"
+      Option "FingerLow" "50"
+      Option "FingerHigh" "70"
 
       Option "TapButton1" "1"
       Option "TapButton2" "3"
@@ -22,7 +22,7 @@
 
       Option "MinSpeed" "0.8"
       Option "MaxSpeed" "1.25"
-      Option "AccelFactor" "0.08"
+      Option "AccelFactor" "0.03"
 
       Option "RTCornerButton" "0"
       Option "RBCornerButton" "0"
