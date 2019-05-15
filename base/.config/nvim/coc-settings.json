@@ -1,9 +1,8 @@
 {
-    "coc": {
-        "preferences": {
-            "formatOnSaveFiletypes": ["json", "rust"]
-        }
-    },
+    "coc.preferences.formatOnSaveFiletypes": ["json", "rust"],
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.warningSign": ">>",
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
