@@ -19,4 +19,4 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [commit]
-	gpgsign = true
+	# gpgsign = true

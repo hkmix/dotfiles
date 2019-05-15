@@ -1,7 +1,7 @@
 numlockx on
 
 xrdb -merge ~/.Xresources
-setxkbmap -device $(~/.bin/get-xinput-id "Apple Inc. Apple Internal Keyboard / Trackpad") -variant hhkb
+setxkbmap -device $(~/.bin/get-xinput-id "AT Translated Set 2 keyboard") -variant hhkb
 
 syndaemon -i 1 -d -t -K &
 xset r rate 300 30 &

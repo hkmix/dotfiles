@@ -14,7 +14,7 @@ export EDITOR=vim
 export FZF_DEFAULT_COMMAND="rg --files"
 
 # Misc appearance settings
-export GDK_SCALE=1.75
+export GDK_DPI_SCALE=1.25
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
