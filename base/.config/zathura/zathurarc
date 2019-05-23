@@ -1,4 +1,4 @@
-set font "Iosevka Slab 11"
+set font "Iosevka Slab 9"
 
 set recolor-keephue true
 set recolor-reverse-video true

@@ -5,7 +5,8 @@
    #+BEGIN_SRC text
    // Custom mapping type
    partial modifier_keys
-   xkb_symbols "hhkb" {include "us(basic)"
+   xkb_symbols "hhkb" {
+       include "us(basic)"
        key <BKSP> { [ backslash, bar ] };
        key <BKSL> { [ BackSpace, BackSpace ] };
 
@@ -19,24 +20,22 @@
    };
    #+END_SRC
 
-2. Add a variant to [[file:/usr/share/X11/xkb/rules/base.xml]]:
-
-   #+BEGIN_SRC xml
-     <variant>
-       <configItem>
-         <name>hhkb</name>
-         <description>English (HHKB-like, for Chromebooks)</description>
-       </configItem>
-     </variant>
-   #+END_SRC
-
-3. Add the same variant to [[file:/usr/share/X11/xkb/rules/base.lst]]:
+   or
 
    #+BEGIN_SRC text
-     hhkb            us: English (HHKB-like, for Chromebooks)
+   partial modifier_keys
+   xkb_symbols "hhkb" {
+   	include "us(basic)"
+       key <BKSP> { [ backslash, bar ] };
+       key <BKSL> { [ BackSpace, BackSpace ] };
+
+       key <LALT> { type[Group1] = "ONE_LEVEL",
+                    symbols[Group1] = [ Super_L ] };
+       key <LWIN> { [ Alt_L, Meta_L ] };
+   };
    #+END_SRC
 
-4. Call =setxkbmap= in [[file:~/.xinitrc]] as follows:
+2. Call =setxkbmap= in [[file:~/.xinitrc]] as follows:
 
    #+BEGIN_SRC sh
      setxkbmap -device $(~/.bin/get-xinput-id "AT Translated Set 2 keyboard") -variant hhkb
@@ -50,4 +49,15 @@
      xinput | grep "$1" | sed -e 's/.*id=\([0-9]\+\).*/\1/'
    #+END_SRC
 
-5. Restart X or call =setxkbmap=, good to go.
+   or use =xorg.conf.d=:
+
+   #+BEGIN_SRC conf
+   Section "InputClass"
+       Identifier "internal-keyboard"
+       MatchProduct "AT Translated Set 2 keyboard"
+       Option "XkbVariant" "hhkb"
+       Option "XkbOptions" "caps:ctrl_modifier"
+   EndSection
+   #+END_SRC
+
+3. Restart X or call =setxkbmap=, good to go.

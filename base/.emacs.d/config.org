@@ -49,6 +49,7 @@ Initialize:
 
 Package list:
 
+#+NAME: General plugins
 #+BEGIN_SRC emacs-lisp
   ;; Package list.
   (use-package clang-format
@@ -261,8 +262,6 @@ Package list:
       (global-git-gutter-mode t)
       (git-gutter:linum-setup)))
 
-  (use-package graphviz-dot-mode)
-
   (use-package ido
     :config
     (progn
@@ -298,19 +297,22 @@ Package list:
   (use-package lsp-mode
     :commands
     lsp
+    :init
+    (use-package yasnippet)
     :config
     (progn
       (use-package ccls
         :init
-        (setq ccls-executable "/usr/local/bin/ccls"))
+        (setq ccls-executable "/usr/bin/ccls"))
       (use-package lsp-ui)
-      (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
+      (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+    :hook
+    (lsp-mode-hook . lsp-ui-mode)
+    (rust-mode . lsp))
 
   (use-package magit
     :bind
     ("C-c m" . magit-status))
-
-  (use-package nasm-mode)
 
   (use-package org-ref)
 
@@ -346,6 +348,8 @@ Package list:
     :init
     ;; Package configurations must be pre-theme setting.
     (progn
+      (setq solarized-emphasize-indicators nil)
+      (setq x-underline-at-descent-line t)
       (setq solarized-use-variable-pitch nil)
       (setq solarized-height-minus-1 1.0)
       (setq solarized-height-plus-1 1.0)
@@ -371,12 +375,21 @@ Package list:
 
 Packages for file types:
 
+#+NAME: Filetype plugins
 #+BEGIN_SRC emacs-lisp
+  (use-package graphviz-dot-mode)
+
   (use-package haskell-mode)
 
   (use-package markdown-mode
     :config
     (use-package markdown-preview-eww))
+
+  (use-package nasm-mode)
+
+  (use-package rust-mode
+    :config
+    (setq rust-format-on-save t))
 
   (use-package tuareg)
 
@@ -461,7 +474,7 @@ Functions should come after packages.
 #+BEGIN_SRC emacs-lisp
   ;; GUI settings.
   ; Enable for macOS to prevent losing focus (emacs-mac port).
-  (menu-bar-mode (eq system-type 'darwin))
+  (menu-bar-mode (if (eq system-type 'darwin) 1 -1))
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
   (blink-cursor-mode 0)

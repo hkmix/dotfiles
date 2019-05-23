@@ -8,10 +8,11 @@
 
 # Path and editor settings.
 export GOPATH="$HOME/.go"
-
 export EDITOR=vim
-
 export FZF_DEFAULT_COMMAND="rg --files"
+
+# Emacs.
+alias emacsr="systemctl --user restart emacs"
 
 # Misc appearance settings
 export GDK_DPI_SCALE=1.25
@@ -20,4 +21,4 @@ export QT_QPA_PLATFORMTHEME='qt5ct'
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
 
 # Start X
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec startx

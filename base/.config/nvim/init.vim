@@ -123,9 +123,12 @@ set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\  " Intentional trailing escaped space.
 let &showbreak = '↳ '
+
+" Solarized theme and tweaks.
 let g:solarized_extra_hi_groups = 1
 let g:solarized_termtrans = 1
 colorscheme solarized8
+hi VertSplit guibg=#073642
 
 if has('gui_running')
     set guifont=Iosevka-Slab:h16
@@ -218,7 +221,7 @@ let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:haskell_classic_highlighting = 1
-let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp']
+let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp', 'rust']
 let g:neoterm_default_mod = 'vertical'
 let g:rooter_manual_only = 1
 let g:rustfmt_autosave = 1

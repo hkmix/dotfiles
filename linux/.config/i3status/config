@@ -45,6 +45,7 @@ battery all {
     hide_seconds = true
     status_chr = "+"
     status_bat = " ~"
+    status_unk = "="
     status_full = "="
 }
 
@@ -53,5 +54,5 @@ tztime date {
 }
 
 tztime local {
-    format = "  %-l:%M %p"
+    format = "  %-l:%M %p "
 }

@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["json", "rust"],
+    "coc.preferences.formatOnSaveFiletypes": ["json"],
     "diagnostic.checkCurrentLine": true,
     "diagnostic.warningSign": ">>",
 

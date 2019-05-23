@@ -70,13 +70,6 @@ alias ls="ls -bh --color=auto"
 alias tmux-new="tmux -2 new-session -s"
 alias vi="vim"
 
-# Emacs aliases.
-alias emacsd="emacs --daemon"
-alias emacsk='emacsclient --eval "(kill-emacs)"'
-alias emacsr="emacsk && emacsd"
-alias emacsc="emacsclient -c"
-alias eee="emacsclient -c"
-
 # Functions.
 ccd() {
     cd ~/Projects/"$1"

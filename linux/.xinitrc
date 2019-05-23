@@ -1,8 +1,12 @@
-numlockx on
+#!/bin/sh
 
 xrdb -merge ~/.Xresources
-setxkbmap -device $(~/.bin/get-xinput-id "AT Translated Set 2 keyboard") -variant hhkb
 
+# GNOME Keyring.
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
+numlockx on
 syndaemon -i 1 -d -t -K &
 xset r rate 300 30 &
 insync-headless start &

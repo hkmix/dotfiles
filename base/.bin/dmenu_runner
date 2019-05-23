@@ -1,4 +1,4 @@
 #!/bin/bash
 
 dmenu_run -i -f -fn "Iosevka Slab-Bold:size=14:bold" -nb "#002b36" -nf "#657b83" -sb "#b58900" -sf "#002b36"
-# rofi -show run -font "Iosevka Slab Regular 14"
+# rofi -show run -font "Iosevka Slab Bold 16" -hide-scrollbar -disable-history
