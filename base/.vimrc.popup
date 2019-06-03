@@ -1,0 +1,15 @@
+"  _ __   ___  _ __  _   _ _ __
+" | '_ \ / _ \| '_ \| | | | '_ \
+" | |_) | (_) | |_) | |_| | |_) |
+" | .__/ \___/| .__/ \__,_| .__/
+" |_|         |_|         |_|
+
+let s:tmp_filename = '/tmp/vim-popup'
+
+source ~/.vimrc
+
+augroup default
+    autocmd!
+    autocmd VimEnter * :silent execute 'edit ' . s:tmp_filename | :startinsert
+    autocmd VimLeave * :%y* | :%y+ | :execute '!rm -f ' . s:tmp_filename
+augroup END

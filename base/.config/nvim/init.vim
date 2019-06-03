@@ -5,6 +5,7 @@
 " |_| \_|\___|\___/ \_/ |_|_| |_| |_|   |_|     \_/ |_|_| |_| |_|  \___/
 
 let s:nvim = has('nvim')
+let s:nvim_beta = has('nvim-0.4')
 
 if s:nvim
     let s:path = '~/.config/nvim'
@@ -26,11 +27,11 @@ let g:plug_url_format = 'git@github.com:%s.git'
 
 Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
+Plug 'hkmix/vim-closer'
 Plug 'itchyny/lightline.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -40,12 +41,13 @@ Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
+Plug 'mhinz/vim-signify'
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rstacruz/vim-closer'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -111,6 +113,10 @@ set splitright
 set timeoutlen=3000
 set wildmenu
 
+if s:nvim_beta
+    set wildoptions=pum
+endif
+
 " Fix true colour issues with tmux.
 if !s:nvim || &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -118,6 +124,12 @@ if !s:nvim || &term =~# '^screen'
 endif
 
 " Appearance.
+if has('gui_running')
+    set guifont=Iosevka-Slab:h16
+    set guicursor=n-v-c:blinkon0
+    set guioptions-=mtTrRlLh
+end
+
 set termguicolors
 set background=dark
 set colorcolumn=80,100
@@ -130,16 +142,16 @@ let g:solarized_termtrans = 1
 colorscheme solarized8
 hi VertSplit guibg=#073642
 
-if has('gui_running')
-    set guifont=Iosevka-Slab:h16
-    set guicursor=n-v-c:blinkon0
-    set guioptions-=mtTrRlLh
-end
+" Show non-ASCII characters.
+highlight nonascii guibg=Red ctermbg=1 term=standout
+autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
 " Autocommands
 augroup general
     autocmd!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType * let b:closer = 1
+    autocmd FileType * call closer#enable()
     autocmd CompleteDone * silent! pclose
 augroup END
 
@@ -176,8 +188,6 @@ nnoremap <Leader>re :diffget REMOTE<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <F8> :TagbarToggle<CR>
 
-nnoremap <Leader>ggr :GitGutterUndoHunk<CR>
-nnoremap <Leader>ggs :GitGutterStageHunk<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 
@@ -218,13 +228,18 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:bufExplorerDisableDefaultKeyMapping = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
 let g:haskell_classic_highlighting = 1
 let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp', 'rust']
 let g:neoterm_default_mod = 'vertical'
 let g:rooter_manual_only = 1
 let g:rustfmt_autosave = 1
+let g:signify_sign_show_count = 0
+let g:signify_sign_add = '+'
+let g:signify_sign_change = '~'
+let g:signify_sign_changedelete = g:signify_sign_change
+let g:signify_sign_delete = '-'
+let g:signify_sign_delete_first_line = '^'
+let g:signify_vcs_list = ['git']
 let g:table_mode_corner_corner = '+'
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
@@ -280,10 +295,6 @@ function! LightLineFilename()
                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-
-" Show non-ASCII characters.
-highlight nonascii guibg=Red ctermbg=1 term=standout
-autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
 " Language-specific groups.
 augroup filetype_c

@@ -31,8 +31,8 @@ floating_modifier $mod
 
 # key bindings
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec alacritty --class "vim-popup" -d 80 24 -e nvim -u ~/.vimrc.popup
 bindsym $mod+q kill
-bindsym $mod+shift+q exec --no-startup-id killall -9 compton
 bindsym $mod+Escape exec lockscreen
 bindsym XF86Tools exec lockscreen
 bindsym $mod+F1 exec thunar
@@ -189,6 +189,7 @@ for_window [class="google-chrome*"] border none
 for_window [class="jetbrains-*"] border none
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Zeal"] floating enable
+for_window [instance="vim-popup"] floating enable
 
 # i3-gaps settings
 smart_gaps on
