@@ -9,10 +9,6 @@
 # Path and editor settings.
 export GOPATH="$HOME/.go"
 export EDITOR=vim
-export FZF_DEFAULT_COMMAND="rg --files"
-
-# Emacs.
-alias emacsr="systemctl --user restart emacs"
 
 # Misc appearance settings
 export GDK_DPI_SCALE=1.25

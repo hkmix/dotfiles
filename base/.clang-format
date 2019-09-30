@@ -1,8 +1,6 @@
 ---
 BasedOnStyle: Mozilla
 IndentWidth: 4
----
-Language: Cpp
 
 AccessModifierOffset: -4
 AlignAfterOpenBracket: AlwaysBreak

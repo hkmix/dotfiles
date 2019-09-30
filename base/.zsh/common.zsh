@@ -47,7 +47,7 @@ export FZF_DEFAULT_OPTS='
     --color dark,hl:33,hl+:33,fg+:235,bg+:0,fg+:7
     --color info:254,prompt:37,spinner:108,pointer:14,marker:14
 '
-command -v 'rg' >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='rg --files 2>/dev/null'
+export FZF_DEFAULT_COMMAND='rg --files'
 
 # Other settings.
 export EDITOR=vim
@@ -106,7 +106,7 @@ precmd() {
     venv=""
     if [ ! -z "$VIRTUAL_ENV" ]; then
         venv=" (${VIRTUAL_ENV##*/})"
-    elif [ ! -z "$CONDA_DEFAULT_ENV" ]; then
+    elif [ ! -z "$CONDA_DEFAULT_ENV" -a "$CONDA_DEFAULT_ENV" != "base" ]; then
         venv=" (${CONDA_DEFAULT_ENV})"
     fi
     PROMPT=$NEWLINE"%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n) %{$fg_bold[blue]%}%~%{$fg_bold[yellow]%}%_$(gitinfo)$venv%{$reset_color%}"$NEWLINE"%{$fg_bold[blue]%}%_$(prompt_char)%{$reset_color%} "
