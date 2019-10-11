@@ -14,5 +14,7 @@
                 }
             }
         }
-    }
+    },
+
+    "python.jediEnabled": false
 }

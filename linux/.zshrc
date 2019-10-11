@@ -10,8 +10,8 @@
 export GOPATH="$HOME/.go"
 export EDITOR=vim
 
-# Misc appearance settings
-export GDK_DPI_SCALE=1.25
+# Misc appearance settings.
+export GDK_DPI_SCALE=1.125
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh

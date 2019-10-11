@@ -173,6 +173,7 @@ nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <Leader><space> zz
 nnoremap n nzz
 nnoremap N Nzz
+nnoremap QQ Q
 nnoremap Q <Nop>
 
 " Terminal mappings.

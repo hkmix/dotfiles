@@ -9,7 +9,7 @@ export SSH_AUTH_SOCK
 numlockx on
 syndaemon -i 2 -d -t -K &
 xset r rate 300 30 &
-insync-headless start &
+insync start &
 ~/.fehbg &
 redshift -l 43.5:-80 -t 6500K:3500K &
 
