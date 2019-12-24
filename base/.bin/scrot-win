@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mkdir -p ~/Picture/Screenshots
+mkdir -p ~/Pictures/Screenshots
 scrot -s -z -e 'mv $f ~/Pictures/Screenshots'
