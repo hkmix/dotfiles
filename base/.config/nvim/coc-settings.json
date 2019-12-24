@@ -16,5 +16,8 @@
         }
     },
 
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+
+    "eslint.quiet": true,
+    "eslint.run": "onSave"
 }

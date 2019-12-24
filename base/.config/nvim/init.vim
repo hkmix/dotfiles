@@ -37,23 +37,26 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
 Plug 'kassio/neoterm'
+Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+Plug 'yuezk/vim-js' | Plug 'peitalin/vim-jsx-typescript'
 
 " Platform-specific.
 let s:platform_rc = '~/.platform.vim'
