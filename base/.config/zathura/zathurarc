@@ -1,12 +1,7 @@
-set font "Iosevka Slab 10"
+set font "Iosevka Slab 11"
 
 set recolor-keephue true
 set recolor-reverse-video true
-
-map <Space> navigate next
-map <S-Space> navigate previous
-map [fullscreen] space navigate next
-map [fullscreen] <S-Space> navigate previous
 
 map F toggle_fullscreen
 map [fullscreen] F toggle_fullscreen

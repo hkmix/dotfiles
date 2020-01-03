@@ -1,0 +1,13 @@
+#!/bin/sh
+
+_reset="\033[0m"
+
+_bold="\033[;1m"
+_black="\033[30m"
+_red="\033[31m"
+_green="\033[32m"
+_yellow="\033[33m"
+_blue="\033[34m"
+_magenta="\033[35m"
+_cyan="\033[36m"
+_white="\033[37m"

@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Iosevka Term Slab 12
+font = Iosevka Slab 10.5
 scrollback_lines = 10000
 search_wrap = true
 

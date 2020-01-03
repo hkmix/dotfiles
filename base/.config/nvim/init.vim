@@ -338,6 +338,11 @@ augroup filetype_go
     autocmd BufWritePost *.go <buffer> :GoFmt
 augroup END
 
+augroup filetype_js
+    autocmd!
+    autocmd FileType javascript setlocal sts=2 sw=2 ts=2
+augroup END
+
 augroup filetype_markdown
     autocmd!
     autocmd FileType markdown setlocal spell

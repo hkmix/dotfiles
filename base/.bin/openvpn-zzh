@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sudo openvpn ~/Documents/client.ovpn
