@@ -1,0 +1,15 @@
+#+TITLE: Chinese input in Linux
+
+* Steps
+
+1. Install =ibus-rime=.
+2. Run =ibus-setup=. If this fails, run with =PATH=/usr/bin=.
+3. Add the following lines to shell rc:
+
+   #+BEGIN_SRC sh
+     export GTK_IM_MODULE=xim
+     export XMODIFIERS=@im=ibus
+     export QT_IM_MODULE=xim
+   #+END_SRC
+
+4. Add =ibus-daemon -drx &= to =.xinitrc=.

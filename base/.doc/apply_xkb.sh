@@ -12,4 +12,12 @@ xkb_symbols "hhkb" {
                  symbols[Group1] = [ Super_L ] };
     key <LWIN> { [ Alt_L, Meta_L ] };
 };
+
+partial modifier_keys
+xkb_symbols "hhkb_nobs" {
+	include "us(basic)"
+    key <LALT> { type[Group1] = "ONE_LEVEL",
+                 symbols[Group1] = [ Super_L ] };
+    key <LWIN> { [ Alt_L, Meta_L ] };
+};
 EOF
