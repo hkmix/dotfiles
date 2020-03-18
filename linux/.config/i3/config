@@ -57,7 +57,6 @@ bindsym $mod+F9 exec --no-startup-id pavol minus
 bindsym $mod+F10 exec --no-startup-id pavol plus
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec /home/jackzhou/.bin/dmenu_runner
 bindsym $mod+d exec /home/jackzhou/.bin/dmenu_runner
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -189,6 +188,7 @@ for_window [class="jetbrains-*"] border none
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Zeal"] floating enable
 for_window [instance="vim-popup"] floating enable
+for_window [class="org.remmina.Remmina" title="Citadel"] fullscreen enable, move container to workspace 9:nine
 
 # i3-gaps settings
 smart_gaps on
