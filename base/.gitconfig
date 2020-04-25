@@ -1,7 +1,7 @@
 [user]
 	name = Jack Zhou
 	email = jack@zzh.ca
-	signingkey = 8F0B0A57F4EA9F9C33C299B3C2E29FDA9C9261E1
+	signingkey = 3FA1780E42438C563F72238BCC6E78C68B836A59
 [push]
 	default = simple
 [git-up "rebase"]
@@ -19,4 +19,4 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [commit]
-	# gpgsign = true
+	gpgsign = true
