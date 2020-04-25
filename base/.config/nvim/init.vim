@@ -4,16 +4,16 @@
 " | |\  |  __/ (_) \ V /| | | | | | | |_   _|  \ V /| | | | | | | | (_) |
 " |_| \_|\___|\___/ \_/ |_|_| |_| |_|   |_|     \_/ |_|_| |_| |_|  \___/
 
-let s:nvim = has('nvim')
-let s:nvim_beta = has('nvim-0.4')
-
-if s:nvim
+if has('nvim')
     let s:path = '~/.config/nvim'
 else
     let s:path = '~/.vim'
     set nocompatible
 end
 
+" +---------+
+" | Plugins |
+" +---------+
 filetype off
 
 if empty(glob(s:path . '/autoload/plug.vim'))
@@ -31,34 +31,26 @@ Plug 'airblade/vim-rooter'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
+Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
 Plug 'itchyny/lightline.vim'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/vim-easy-align'
-Plug 'kassio/neoterm'
-Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
-Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
-Plug 'tmhedberg/matchit'
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-Plug 'yuezk/vim-js' | Plug 'peitalin/vim-jsx-typescript'
 
-" Platform-specific.
+" Platform-specific plugins.
 let s:platform_rc = '~/.platform.vim'
 if !empty(glob(s:platform_rc))
     execute 'source ' . s:platform_rc
@@ -66,9 +58,10 @@ endif
 
 call plug#end()
 
+" +------------------+
+" | General settings |
+" +------------------+
 filetype plugin indent on
-
-" Settings.
 syntax on
 
 set autoindent
@@ -93,7 +86,7 @@ set encoding=utf-8
 set foldmarker={{{{{,}}}}}
 set foldmethod=manual
 set ignorecase
-if s:nvim
+if has('nvim')
     set inccommand=nosplit
 end
 set incsearch
@@ -116,17 +109,19 @@ set splitright
 set timeoutlen=3000
 set wildmenu
 
-if s:nvim_beta
+if has('nvim')
     set wildoptions=pum
 endif
 
 " Fix true colour issues with tmux.
-if !s:nvim || &term =~# '^screen'
+if !has('nvim') || &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-" Appearance.
+" +------------+
+" | Appearance |
+" +------------+
 if has('gui_running')
     set guifont=Iosevka-Slab:h16
     set guicursor=n-v-c:blinkon0
@@ -149,110 +144,9 @@ hi VertSplit guibg=#073642
 highlight nonascii guibg=Red ctermbg=1 term=standout
 autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
-" Autocommands
-augroup general
-    autocmd!
-    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-    autocmd FileType * let b:closer = 1
-    autocmd FileType * call closer#enable()
-    autocmd CompleteDone * silent! pclose
-augroup END
-
-" General mappings
-let mapleader = ' '
-nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
-nnoremap <Leader>h :set invhlsearch<CR>
-nnoremap <Leader>l :set invnumber<CR>
-nnoremap <Leader>p :set invpaste<CR>
-nnoremap <Leader>? :echo expand('%:p')<CR>
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-nnoremap <Up> g<Up>
-nnoremap <Down> g<Down>
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-l> <C-w>l
-nnoremap <silent> <Leader><space> zz
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap QQ Q
-nnoremap Q <Nop>
-
-" Terminal mappings.
-if s:nvim
-    tnoremap <silent> <leader><esc> <C-\><C-n>
-end
-
-" difftool mappings.
-nnoremap <Leader>lo :diffget LOCAL<CR>
-nnoremap <Leader>re :diffget REMOTE<CR>
-
-" Plugin mappings.
-nnoremap <C-p> :FZF<CR>
-nnoremap <F8> :TagbarToggle<CR>
-
-nnoremap <Leader>gp :Gpush<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-
-nnoremap <silent> <Leader>bb :BufExplorer<CR>
-nnoremap <silent> <Leader>gb :BufExplorerHorizontalSplit<CR>
-nnoremap <silent> <Leader>gB :BufExplorerVerticalSplit<CR>
-
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-
-nnoremap <Leader>s :TREPLSendFile<CR>
-xnoremap <Leader>s :TREPLSendSelection<CR>
-
-function! ToggleAutoformat()
-    if !exists('#AutoformatGroup#BufWrite')
-        augroup AutoformatGroup
-            autocmd!
-            autocmd BufWritePre <buffer> :Autoformat
-        augroup END
-        echo 'Autoformat enabled.'
-    else
-        augroup AutoformatGroup
-            autocmd!
-        augroup END
-        echo 'Autoformat disabled.'
-    endif
-endfunction
-nmap <silent> gf :Autoformat<CR>
-nmap <silent> gF :call ToggleAutoformat()<CR>
-
-nnoremap <silent> gC gc
-nnoremap <silent> gc gC
-xnoremap <silent> gC gc
-xnoremap <silent> gc gC
-
-" Plugin settings.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:bufExplorerDisableDefaultKeyMapping = 1
-let g:haskell_classic_highlighting = 1
-let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp', 'rust']
-let g:neoterm_default_mod = 'vertical'
-let g:rooter_manual_only = 1
-let g:rustfmt_autosave = 1
-let g:signify_sign_show_count = 0
-let g:signify_sign_add = '+'
-let g:signify_sign_change = '~'
-let g:signify_sign_changedelete = g:signify_sign_change
-let g:signify_sign_delete = '-'
-let g:signify_sign_delete_first_line = '^'
-let g:signify_vcs_list = ['git']
-let g:table_mode_corner_corner = '+'
-let g:tagbar_compact = 1
-let g:tagbar_iconchars = ['▸', '▾']
-let g:tagbar_show_visibility = 1
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:vimtex_fold_enabled = 0
-let g:vimtex_imaps_enabled = 0
-
-" LightLine settings.
+" +-----------+
+" | LightLine |
+" +-----------+
 let g:lightline = {
             \ 'colorscheme': 'solarized',
             \ 'active': {
@@ -296,11 +190,104 @@ endfunction
 
 function! LightLineFilename()
     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != expand('%:t') ? expand('%:t') : '[No name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-" Language-specific groups.
+" +-----------------+
+" | Plugin settings |
+" +-----------------+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:haskell_classic_highlighting = 1
+let g:markdown_fenced_languages = ['cpp', 'objc', 'objcpp', 'rust']
+let g:rooter_manual_only = 1
+let g:rustfmt_autosave = 1
+let g:signify_sign_show_count = 0
+let g:signify_sign_add = '+'
+let g:signify_sign_change = '~'
+let g:signify_sign_changedelete = g:signify_sign_change
+let g:signify_sign_delete = '-'
+let g:signify_sign_delete_first_line = '^'
+let g:signify_vcs_list = ['git']
+let g:table_mode_corner_corner = '+'
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:vimtex_fold_enabled = 0
+let g:vimtex_imaps_enabled = 0
+
+" +--------------+
+" | Key mappings |
+" +--------------+
+let mapleader = ' '
+nnoremap <Leader>box I<bar> <esc>A <bar><esc>yyPr+lv$hr-$r+yyjp
+nnoremap <Leader>h :set invhlsearch<CR>
+nnoremap <Leader>l :set invnumber<CR>
+nnoremap <Leader>p :set invpaste<CR>
+nnoremap <Leader>? :echo expand('%:p')<CR>
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+nnoremap <Up> g<Up>
+nnoremap <Down> g<Down>
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
+nnoremap <silent> <Leader><space> zz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap QQ Q
+nnoremap Q <Nop>
+
+" Terminal mappings.
+if has('nvim')
+    tnoremap <silent> <leader><esc> <C-\><C-n>
+end
+
+" difftool mappings.
+nnoremap <Leader>lo :diffget LOCAL<CR>
+nnoremap <Leader>re :diffget REMOTE<CR>
+
+" Plugin mappings.
+nnoremap <C-p> :FZF<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+function! ToggleAutoformat()
+    if !exists('#AutoformatGroup#BufWrite')
+        augroup AutoformatGroup
+            autocmd!
+            autocmd BufWritePre <buffer> :Autoformat
+        augroup END
+        echo 'Autoformat enabled.'
+    else
+        augroup AutoformatGroup
+            autocmd!
+        augroup END
+        echo 'Autoformat disabled.'
+    endif
+endfunction
+nmap <silent> gf :Autoformat<CR>
+nmap <silent> gF :call ToggleAutoformat()<CR>
+
+nnoremap <silent> gC gc
+nnoremap <silent> gc gC
+xnoremap <silent> gC gc
+xnoremap <silent> gc gC
+
+" +--------------+
+" | Autocommands |
+" +--------------+
+augroup general
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType * let b:closer = 1
+    autocmd FileType * call closer#enable()
+    autocmd CompleteDone * silent! pclose
+augroup END
+
 augroup filetype_c
     autocmd!
     autocmd FileType c nnoremap <buffer> <Leader>vh :vsp %<.h<CR>
@@ -371,10 +358,12 @@ augroup filetype_yaml
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 augroup END
 
-if s:nvim
+if has('nvim')
     augroup terminal
         autocmd!
         autocmd TermOpen * setlocal nonumber norelativenumber
         autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
     augroup END
 end
+
+" vim: sw=4
