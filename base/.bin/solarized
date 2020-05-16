@@ -1,0 +1,19 @@
+#!/bin/bash
+
+_reset=$'\e[0m'
+echo -e "base03:  \x1b[48;2;131;148;150m\x1b[38;2;0;43;54m002b36$_reset"
+echo -e "base02:  \x1b[48;2;131;148;150m\x1b[38;2;7;54;66m073642$_reset"
+echo -e "base01:  \x1b[38;2;88;110;117m586e75$_reset"
+echo -e "base00:  \x1b[38;2;101;123;131m657b83$_reset"
+echo -e "base0:   \x1b[38;2;131;148;150m839496$_reset"
+echo -e "base1:   \x1b[38;2;147;161;161m93a1a1$_reset"
+echo -e "base2:   \x1b[38;2;238;232;213meee8d5$_reset"
+echo -e "base3:   \x1b[38;2;253;246;227mfdf6e3$_reset"
+echo -e "yellow:  \x1b[38;2;181;137;0mb58900$_reset"
+echo -e "orange:  \x1b[38;2;203;75;22mcb4b16$_reset"
+echo -e "red:     \x1b[38;2;220;50;47mdc322f$_reset"
+echo -e "magenta: \x1b[38;2;211;54;130md33682$_reset"
+echo -e "violet:  \x1b[38;2;108;113;196m6c71c4$_reset"
+echo -e "blue:    \x1b[38;2;38;139;210m268bd2$_reset"
+echo -e "cyan:    \x1b[38;2;42;161;152m2aa198$_reset"
+echo -e "green:   \x1b[38;2;133;153;0m859900$_reset"
