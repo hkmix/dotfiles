@@ -16,6 +16,6 @@ check_run xset r rate 300 30 &
 check_run ibus-daemon -drx
 check_run insync start &
 check_run ~/.fehbg &
-check_run redshift -l 43.5:-80 -t 6500K:3500K &
+check_run redshift -m wayland -l 43.5:-80 -t 6500K:3500K &
 
 exec i3

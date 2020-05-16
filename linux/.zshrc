@@ -17,4 +17,4 @@ export QT_QPA_PLATFORMTHEME='qt5ct'
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
 
 # Start X
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec sway

@@ -3,6 +3,11 @@
     "diagnostic.checkCurrentLine": true,
     "diagnostic.warningSign": ">>",
 
+    "python.jediEnabled": false,
+
+    "eslint.quiet": true,
+    "eslint.run": "onSave",
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
@@ -14,10 +19,5 @@
                 }
             }
         }
-    },
-
-    "python.jediEnabled": false,
-
-    "eslint.quiet": true,
-    "eslint.run": "onSave"
+    }
 }
