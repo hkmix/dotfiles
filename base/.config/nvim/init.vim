@@ -34,7 +34,7 @@ Plug 'google/vim-searchindex'
 Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install --no-update-rc'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'lifepillar/vim-solarized8'
