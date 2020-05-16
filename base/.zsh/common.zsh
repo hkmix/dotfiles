@@ -67,6 +67,7 @@ alias l="ls -a"
 alias la="ls -a"
 alias ll="ls -la"
 alias ls="ls -bh --color=auto"
+alias stow="stow --no-folding -vR"
 alias tmux-new="tmux -2 new-session -s"
 alias vi="vim"
 
