@@ -16,5 +16,8 @@ export QT_QPA_PLATFORMTHEME='qt5ct'
 
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
 
+# Disable flow control on interactive terminals.
+[[ $- == *i* ]] && stty -ixon
+
 # Start X
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec sway
