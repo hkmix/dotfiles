@@ -228,7 +228,6 @@ exec {
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
     insync start
     ibus-daemon -drx
-    zeal
 }
 
 # Start i3bar to display a workspace bar (plus the system information i3status
