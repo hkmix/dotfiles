@@ -47,17 +47,16 @@ Package list:
 
   (use-package company
     :config
-    (progn
-      (use-package company-flx
-        :config
-        (company-flx-mode +1))
-      (use-package company-lsp
-        :commands company-lsp
-        :config
-        (push 'company-lsp company-backends))
-      ;; (global-company-mode)
-      (setq company-idle-delay 0.3)
-      (setq company-tooltip-limit 10)))
+    (use-package company-flx
+      :config
+      (company-flx-mode +1))
+    (use-package company-lsp
+      :commands company-lsp
+      :config
+      (push 'company-lsp company-backends))
+    ;; (global-company-mode)
+    (setq company-idle-delay 0.3)
+    (setq company-tooltip-limit 10))
 
   (use-package delight
     :config
@@ -105,138 +104,135 @@ Package list:
 
   (use-package evil
     :config
-    (progn
-      (setq evil-vsplit-window-right t)
-      (setq evil-split-window-below t)
-      (defalias #'forward-evil-word #'forward-evil-symbol)
-      (define-key evil-normal-state-map "j" 'evil-next-visual-line)
-      (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+    (setq evil-vsplit-window-right t)
+    (setq evil-split-window-below t)
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    (define-key evil-normal-state-map "j" 'evil-next-visual-line)
+    (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 
-      (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
-      (add-to-list 'evil-normal-state-modes 'recentf-dialog-mode)
+    (add-to-list 'evil-motion-state-modes 'org-agenda-mode)
+    (add-to-list 'evil-normal-state-modes 'recentf-dialog-mode)
 
-      (evil-define-key 'normal dired-mode-map
-        "h" 'dired-up-directory
-        "j" 'dired-next-line
-        "k" 'dired-previous-line
-        "l" 'dired-find-alternate-file)
-      (use-package evil-leader
-        :init
-        (progn
-          (global-evil-leader-mode)
-          (evil-leader/set-leader "<SPC>")
-          (evil-leader/set-key
-            ;; Global.
-            "<SPC>" 'smex
+    (evil-define-key 'normal dired-mode-map
+      "h" 'dired-up-directory
+      "j" 'dired-next-line
+      "k" 'dired-previous-line
+      "l" 'dired-find-alternate-file)
+    (use-package evil-leader
+      :init
+      (progn
+        (global-evil-leader-mode)
+        (evil-leader/set-leader "<SPC>")
+        (evil-leader/set-key
+          ;; Global.
+          "<SPC>" 'smex
 
-            "a"   'align-regexp
-            "b"   'switch-to-buffer
-            "C"   'compile
-            "c"   'recompile
-            "d"   'dired
-            "e"   'evil-emacs-state
+          "a"   'align-regexp
+          "b"   'switch-to-buffer
+          "C"   'compile
+          "c"   'recompile
+          "d"   'dired
+          "e"   'evil-emacs-state
 
-            ;; Git-Gutter.
-            "g s" 'git-gutter:stage-hunk
-            "g r" 'git-gutter:revert-hunk
-            "g n" 'git-gutter:next-hunk
-            "g p" 'git-gutter:previous-hunk
+          ;; Git-Gutter.
+          "g s" 'git-gutter:stage-hunk
+          "g r" 'git-gutter:revert-hunk
+          "g n" 'git-gutter:next-hunk
+          "g p" 'git-gutter:previous-hunk
 
-            "h"   'recentf-open-files
+          "h"   'recentf-open-files
 
-            ;; Isend-mode.
-            "i a" 'isend-associate
-            "i s" 'isend-send
-            "i S" 'isend-send-buffer
+          ;; Isend-mode.
+          "i a" 'isend-associate
+          "i s" 'isend-send
+          "i S" 'isend-send-buffer
 
-            "k b" 'kill-buffer
-            "m"   'magit-status
+          "k b" 'kill-buffer
+          "m"   'magit-status
 
-            ;; Open files.
-            "o c" 'my/edit-config
-            "o i" 'my/edit-init
-            "o a" 'my/open-planner
+          ;; Open files.
+          "o c" 'my/edit-config
+          "o i" 'my/edit-init
+          "o a" 'my/open-planner
 
-            ;; Projectile.
-            "p g" 'projectile-grep
-            "p h" 'projectile-recentf
-            "p b" 'projectile-switch-to-buffer
-            "p p" 'my/projectile-find-file-or-switch-project
-            "p s" 'projectile-run-shell
+          ;; Projectile.
+          "p g" 'projectile-grep
+          "p h" 'projectile-recentf
+          "p b" 'projectile-switch-to-buffer
+          "p p" 'my/projectile-find-file-or-switch-project
+          "p s" 'projectile-run-shell
 
-            ;; Tabs.
-            "t n" 'elscreen-create
-            "t d" 'elscreen-kill
-            "T"   'elscreen-toggle-display-tab
+          ;; Tabs.
+          "t n" 'elscreen-create
+          "t d" 'elscreen-kill
+          "T"   'elscreen-toggle-display-tab
 
-            "r"   'revert-buffer
-            "R"   'ruler-mode
-            "q q" 'fill-paragraph
-            "w w" 'window-configuration-to-register
-            "w r" 'jump-to-register
-            "x"   'smex)
+          "r"   'revert-buffer
+          "R"   'ruler-mode
+          "q q" 'fill-paragraph
+          "w w" 'window-configuration-to-register
+          "w r" 'jump-to-register
+          "x"   'smex)
 
-          (evil-leader/set-key-for-mode 'c++-mode
-            "A"   'ff-find-alternate-file
-            "f"   'clang-format-buffer
-            "F"   'clang-format-region)
+        (evil-leader/set-key-for-mode 'c++-mode
+          "A"   'ff-find-alternate-file
+          "f"   'clang-format-buffer
+          "F"   'clang-format-region)
 
-          (evil-leader/set-key-for-mode 'latex-mode
-            "]"   'latex-close-block
-            "L"   'latex-preview-pane-mode
-            "l"   'my/update-latex-preview)
+        (evil-leader/set-key-for-mode 'latex-mode
+          "]"   'latex-close-block
+          "L"   'latex-preview-pane-mode
+          "l"   'my/update-latex-preview)
 
-          (evil-leader/set-key-for-mode 'org-mode
-            "<SPC> TAB" 'outline-show-all
-            "<SPC> <backtab>" 'org-shifttab
-            "<SPC> a" 'org-agenda
-            "<SPC> b" 'org-backward-heading-same-level
-            "<SPC> c" 'org-ctrl-c-ctrl-c
-            "<SPC> d" 'org-deadline
-            "<SPC> e" 'org-export-dispatch
-            "<SPC> f" 'org-forward-heading-same-level
-            "<SPC> l" 'my/update-latex-preview-org
-            "<SPC> N" 'org-babel-next-src-block
-            "<SPC> n" 'org-next-visible-heading
-            "<SPC> P" 'org-babel-previous-src-block
-            "<SPC> p" 'org-previous-visible-heading
-            "<SPC> r" 'org-reveal
-            "<SPC> s" 'my/org-sorter)
+        (evil-leader/set-key-for-mode 'org-mode
+          "<SPC> TAB" 'outline-show-all
+          "<SPC> <backtab>" 'org-shifttab
+          "<SPC> a" 'org-agenda
+          "<SPC> b" 'org-backward-heading-same-level
+          "<SPC> c" 'org-ctrl-c-ctrl-c
+          "<SPC> d" 'org-deadline
+          "<SPC> e" 'org-export-dispatch
+          "<SPC> f" 'org-forward-heading-same-level
+          "<SPC> l" 'my/update-latex-preview-org
+          "<SPC> N" 'org-babel-next-src-block
+          "<SPC> n" 'org-next-visible-heading
+          "<SPC> P" 'org-babel-previous-src-block
+          "<SPC> p" 'org-previous-visible-heading
+          "<SPC> r" 'org-reveal
+          "<SPC> s" 'my/org-sorter)
 
-          (evil-leader/set-key-for-mode 'rust-mode
-            "F"   'rust-enable-format-on-save
-            "f"   'rust-format-buffer)))
-      (use-package evil-commentary
-        :config
-        (evil-commentary-mode 1))
-      (use-package evil-magit)
-      (use-package evil-matchit
-        :config
-        (global-evil-matchit-mode 1))
-      (use-package evil-surround
-        :config
-        (global-evil-surround-mode 1))
-      (use-package evil-tabs
-        :config
-        (progn
-          (global-evil-tabs-mode t)
-          (setq elscreen-tab-display-control nil)
-          (setq elscreen-tab-display-kill-screen nil)
-          (elscreen-toggle-display-tab)))
-      (evil-mode 1)))
+        (evil-leader/set-key-for-mode 'rust-mode
+          "F"   'rust-enable-format-on-save
+          "f"   'rust-format-buffer)))
+    (use-package evil-commentary
+      :config
+      (evil-commentary-mode 1))
+    (use-package evil-magit)
+    (use-package evil-matchit
+      :config
+      (global-evil-matchit-mode 1))
+    (use-package evil-surround
+      :config
+      (global-evil-surround-mode 1))
+    (use-package evil-tabs
+      :config
+      (progn
+        (global-evil-tabs-mode t)
+        (setq elscreen-tab-display-control nil)
+        (setq elscreen-tab-display-kill-screen nil)
+        (elscreen-toggle-display-tab)))
+    (evil-mode 1))
 
   (use-package eyebrowse
     :config
-    (progn
-      (eyebrowse-mode t)
-      (eyebrowse-setup-opinionated-keys)))
+    (eyebrowse-mode t)
+    (eyebrowse-setup-opinionated-keys))
 
   (use-package exec-path-from-shell
     :config
-    (progn
-      (when (memq window-system '(mac ns x))
-        (setq exec-path-from-shell-check-startup-files nil)
-        (exec-path-from-shell-initialize))))
+    (when (memq window-system '(mac ns x))
+      (setq exec-path-from-shell-check-startup-files nil)
+      (exec-path-from-shell-initialize)))
 
   (use-package git-gutter
     :defer t
@@ -246,36 +242,32 @@ Package list:
      ("C-c g n" . git-gutter:next-hunk)
      ("C-c g p" . git-gutter:previous-hunk))
     :config
-    (progn
-      (global-git-gutter-mode t)
-      (git-gutter:linum-setup)))
+    (global-git-gutter-mode t)
+    (git-gutter:linum-setup))
 
   (use-package ido
     :config
-    (progn
-      (ido-mode 1)
-      (ido-everywhere 1)
-      (use-package flx-ido
-        :config
-        (progn
-          (flx-ido-mode 1)
-          (setq ido-enable-flex-matching t)
-          (setq ido-use-faces nil)))
-      (use-package ido-completing-read+
-        :config
-        (ido-ubiquitous-mode 1))
-      (use-package ido-vertical-mode
-        :config
-        (progn
-          (ido-vertical-mode 1)
-          (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
-      (use-package smex
-        :bind
-        (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c M-x" . execute-extended-command))
-        :config
-        (smex-initialize))))
+    (ido-mode 1)
+    (ido-everywhere 1)
+    (use-package flx-ido
+      :config
+      (flx-ido-mode 1)
+      (setq ido-enable-flex-matching t)
+      (setq ido-use-faces nil))
+    (use-package ido-completing-read+
+      :config
+      (ido-ubiquitous-mode 1))
+    (use-package ido-vertical-mode
+      :config
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+    (use-package smex
+      :bind
+      (("M-x" . smex)
+       ("M-X" . smex-major-mode-commands)
+       ("C-c M-x" . execute-extended-command))
+      :config
+      (smex-initialize)))
 
   (use-package isend-mode)
 
@@ -288,12 +280,11 @@ Package list:
     :init
     (use-package yasnippet)
     :config
-    (progn
-      (use-package ccls
-        :init
-        (setq ccls-executable "/usr/bin/ccls"))
-      (use-package lsp-ui)
-      (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+    (use-package ccls
+      :init
+      (setq ccls-executable "/usr/bin/ccls"))
+    (use-package lsp-ui)
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
     :hook
     (lsp-mode-hook . lsp-ui-mode)
     (rust-mode . lsp))
@@ -306,12 +297,11 @@ Package list:
 
   (use-package pdf-tools
     :init
-    (progn
-      (setq my/pdf-tools-bin-dir
-            (substitute-in-file-name "$HOME/.emacs.d/bin"))
-      (make-directory my/pdf-tools-bin-dir t)
-      (setq pdf-info-epdfinfo-program (concat my/pdf-tools-bin-dir "/epdfinfo"))
-      (pdf-tools-install)))
+    (setq my/pdf-tools-bin-dir
+          (substitute-in-file-name "$HOME/.emacs.d/bin"))
+    (make-directory my/pdf-tools-bin-dir t)
+    (setq pdf-info-epdfinfo-program (concat my/pdf-tools-bin-dir "/epdfinfo"))
+    (pdf-tools-install))
 
   (use-package projectile)
 
@@ -324,15 +314,14 @@ Package list:
   (use-package solarized-theme
     :init
     ;; Package configurations must be pre-theme setting.
-    (progn
-      (setq solarized-emphasize-indicators nil)
-      (setq x-underline-at-descent-line t)
-      (setq solarized-use-variable-pitch nil)
-      (setq solarized-height-minus-1 1.0)
-      (setq solarized-height-plus-1 1.0)
-      (setq solarized-height-plus-2 1.0)
-      (setq solarized-height-plus-3 1.0)
-      (setq solarized-height-plus-4 1.0)))
+    (setq solarized-emphasize-indicators nil)
+    (setq x-underline-at-descent-line t)
+    (setq solarized-use-variable-pitch nil)
+    (setq solarized-height-minus-1 1.0)
+    (setq solarized-height-plus-1 1.0)
+    (setq solarized-height-plus-2 1.0)
+    (setq solarized-height-plus-3 1.0)
+    (setq solarized-height-plus-4 1.0))
 
   (use-package try)
 
@@ -342,10 +331,9 @@ Package list:
 
   (use-package ws-butler
     :init
-    (progn
-      (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
-        (lambda ()
-          (ws-butler-mode t))))
+    (define-globalized-minor-mode global-ws-butler-mode ws-butler-mode
+      (lambda ()
+        (ws-butler-mode t)))
     :config
     (global-ws-butler-mode t))
 #+END_SRC
