@@ -13,38 +13,25 @@ Initialize:
 
 #+BEGIN_SRC emacs-lisp
   ;; Initialize packaging.
-  (package-initialize)
-
-  (require 'package)
-  (add-to-list 'package-archives
-              '("melpa" . "https://melpa.org/packages/")
-              '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (when (< emacs-major-version 24)
-   ;; For important compatibility libraries like cl-lib.
-   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-  (package-initialize)
-
-  ;; Automatic package installation.
-  (unless (package-installed-p 'use-package)
-   (package-refresh-contents)
-   (package-install 'use-package))
-
-  (eval-when-compile (require 'use-package))
-  (require 'bind-key)
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
 
   ;; Always download packages if needed.
-  (setq use-package-always-ensure t)
+  (setq straight-use-package-by-default t)
 
-  ;; Enable Quelpa.
-  (use-package quelpa
-    :init
-    (progn
-      (setq quelpa-update-melpa-p nil)))
-  (quelpa
-   '(quelpa-use-package
-     :fetcher git
-     :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-  (require 'quelpa-use-package)
+  (straight-use-package 'use-package)
+  (eval-when-compile (require 'use-package))
+  (require 'bind-key)
 #+END_SRC
 
 Package list:
@@ -140,6 +127,8 @@ Package list:
           (evil-leader/set-leader "<SPC>")
           (evil-leader/set-key
             ;; Global.
+            "<SPC>" 'smex
+
             "a"   'align-regexp
             "b"   'switch-to-buffer
             "C"   'compile
@@ -227,7 +216,6 @@ Package list:
       (use-package evil-surround
         :config
         (global-evil-surround-mode 1))
-      (quelpa '(evil-tabs :fetcher github :repo "hkmix/evil-tabs"))
       (use-package evil-tabs
         :config
         (progn
@@ -316,17 +304,6 @@ Package list:
 
   (use-package org-ref)
 
-  (quelpa
-   '(pdf-tools
-     :fetcher github
-     :repo "seanfarley/pdf-tools"
-     :branch "retina"
-     :files
-     ("lisp/*.el"
-      "README"
-      ("build" "Makefile")
-      ("build" "server")
-      (:exclude "lisp/tablist.el" "lisp/tablist-filter.el"))))
   (use-package pdf-tools
     :init
     (progn
@@ -609,11 +586,6 @@ Functions should come after packages.
               (linum-mode 1)
               (company-mode 1)
               (80-column-rule)))
-
-  ;; All text-editing modes.
-  (add-hook 'text-mode-hook
-            (lambda ()
-              (flyspell-mode 1)))
 
   ;; Org-mode key bindings.
   (require 'org)
