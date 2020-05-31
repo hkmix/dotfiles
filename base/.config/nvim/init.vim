@@ -100,7 +100,7 @@ set nospell
 set nottimeout
 set ruler
 set scrolljump=-50
-set scrolloff=4
+set scrolloff=0
 set showcmd
 set shortmess+=mnrc
 set smartcase
