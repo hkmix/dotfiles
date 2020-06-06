@@ -46,14 +46,14 @@ Package list:
   (use-package column-enforce-mode)
 
   (use-package company
+    :bind
+    (:map company-active-map
+          ("C-n" . company-select-next)
+          ("C-p" . company-select-previous))
     :config
     (use-package company-flx
       :config
       (company-flx-mode +1))
-    (use-package company-lsp
-      :commands company-lsp
-      :config
-      (push 'company-lsp company-backends))
     ;; (global-company-mode)
     (setq company-idle-delay 0.3)
     (setq company-tooltip-limit 10))
@@ -65,9 +65,9 @@ Package list:
        (lisp-interaction-mode "EL-I" :major)
        ;; Minor modes.
        (abbrev-mode nil abbrev)
-       (auto-revert-mode " ar" autorevert)
+       (auto-revert-mode nil autorevert)
        (column-enforce-mode nil column-enforce-mode)
-       (company-mode " cp" company)
+       (company-mode nil company)
        (defining-kbd-macro " q..." t)
        (dtrt-indent-mode nil dtrt-indent)
 
@@ -79,8 +79,10 @@ Package list:
        (isend-mode " is" isend-mode)
        (latex-preview-pane-mode nil latex-preview-pane)
        (lsp-mode " lsp" lsp-mode)
+       (org-src-mode nil org)
        (pdf-view-midnight-minor-mode nil pdf-tools)
-       (projectile-mode " pj" projectile)
+       (flycheck-mode nil flycheck)
+       (projectile-mode nil projectile)
        (undo-tree-mode nil undo-tree)
        (visual-line-mode nil t)
        (which-key-mode nil which-key)
@@ -278,12 +280,17 @@ Package list:
     :commands
     lsp
     :init
+    (use-package flycheck
+      :init
+      (global-flycheck-mode))
     (use-package yasnippet)
     :config
     (use-package ccls
       :init
       (setq ccls-executable "/usr/bin/ccls"))
-    (use-package lsp-ui)
+    (use-package lsp-ui
+      :init
+      (setq lsp-ui-doc-enable nil))
     (add-hook 'lsp-mode-hook 'lsp-ui-mode)
     :hook
     (lsp-mode-hook . lsp-ui-mode)
@@ -322,8 +329,6 @@ Package list:
     (setq solarized-height-plus-2 1.0)
     (setq solarized-height-plus-3 1.0)
     (setq solarized-height-plus-4 1.0))
-
-  (use-package try)
 
   (use-package which-key
     :config
