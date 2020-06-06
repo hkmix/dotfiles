@@ -89,6 +89,15 @@ Package list:
        (with-editor-mode nil with-editor)
        (ws-butler-mode nil ws-butler))))
 
+  (use-package display-line-numbers
+    :init
+    (global-display-line-numbers-mode)
+    :config
+    (set-face-attribute 'line-number
+                        nil
+                        :weight 'normal
+                        :height 110))
+
   (use-package dtrt-indent)
 
   (use-package editorconfig
@@ -136,6 +145,9 @@ Package list:
           "d"   'dired
           "e"   'evil-emacs-state
 
+          ;; Commentary.
+          "g c" 'evil-commentary
+
           ;; Git-Gutter.
           "g s" 'git-gutter:stage-hunk
           "g r" 'git-gutter:revert-hunk
@@ -158,11 +170,11 @@ Package list:
           "o a" 'my/open-planner
 
           ;; Projectile.
-          "p g" 'projectile-grep
-          "p h" 'projectile-recentf
-          "p b" 'projectile-switch-to-buffer
-          "p p" 'my/projectile-find-file-or-switch-project
-          "p s" 'projectile-run-shell
+          "P g" 'projectile-grep
+          "P h" 'projectile-recentf
+          "P b" 'projectile-switch-to-buffer
+          "p"   'my/projectile-find-file-or-switch-project
+          "P s" 'projectile-run-shell
 
           ;; Tabs.
           "t n" 'elscreen-create
@@ -208,7 +220,7 @@ Package list:
           "f"   'rust-format-buffer)))
     (use-package evil-commentary
       :config
-      (evil-commentary-mode 1))
+      (evil-commentary-mode))
     (use-package evil-magit)
     (use-package evil-matchit
       :config
@@ -282,7 +294,11 @@ Package list:
     :init
     (use-package flycheck
       :init
-      (global-flycheck-mode))
+      (global-flycheck-mode)
+      :config
+      (use-package flycheck-pos-tip
+        :hook
+        (flycheck-mode . flycheck-pos-tip-mode)))
     (use-package yasnippet)
     :config
     (use-package ccls
@@ -290,11 +306,12 @@ Package list:
       (setq ccls-executable "/usr/bin/ccls"))
     (use-package lsp-ui
       :init
-      (setq lsp-ui-doc-enable nil))
-    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      (setq lsp-ui-doc-enable t)
+      (setq lsp-ui-doc-use-webkit t)
+      (setq lsp-ui-sideline-enable nil))
     :hook
     (lsp-mode-hook . lsp-ui-mode)
-    (rust-mode . lsp))
+    (prog-mode . lsp))
 
   (use-package magit
     :bind
@@ -576,7 +593,6 @@ Functions should come after packages.
   ;; All coding modes.
   (add-hook 'prog-mode-hook
             (lambda ()
-              (linum-mode 1)
               (company-mode 1)
               (80-column-rule)))
 
@@ -591,7 +607,6 @@ Functions should come after packages.
   (add-hook 'c-mode-common-hook
             (lambda ()
               (local-set-key (kbd "C-c o") 'ff-find-other-file)
-              (lsp)
               (dtrt-indent-mode 1)
               (eldoc-mode 1)))
 
@@ -611,7 +626,6 @@ Functions should come after packages.
   ;; Prevent pairing for $.
   (add-hook 'latex-mode-hook
             (lambda ()
-              (linum-mode 1)
               (setq-default electric-pair-inhibit-predicate
                             (lambda (c)
                               (if (eq "$" c)
@@ -683,11 +697,6 @@ Functions should come after packages.
      (python . t)
      (dot . t)
      (shell . t)))
-
-  ;; Hooks.
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (linum-mode 1)))
 
   ;; Agenda settings.
   ;; Start on Sunday.
