@@ -195,14 +195,27 @@ bindsym $mod+g gaps inner current set 4
 bindsym $mod+shift+g gaps inner current set 0
 
 # Input settings.
-input "1:1:AT_Translated_Set_2_keyboard" xkb_layout "us"
-input "1:1:AT_Translated_Set_2_keyboard" xkb_variant "hhkb_nobs"
-input "1:1:AT_Translated_Set_2_keyboard" xkb_options "ctrl:nocaps"
-input "1:1:AT_Translated_Set_2_keyboard" repeat_delay 250
-input "1:1:AT_Translated_Set_2_keyboard" repeat_rate 30
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout "us"
+    xkb_variant "hhkb_nobs"
+    xkb_options "ctrl:nocaps"
+    repeat_delay 250
+    repeat_rate 30
+}
 
-input "2:10:TPPS/2_IBM_TrackPoint" accel_profile adaptive
-input "2:10:TPPS/2_IBM_TrackPoint" pointer_accel -0.3
+input "2:10:TPPS/2_IBM_TrackPoint" {
+    accel_profile adaptive
+    pointer_accel -0.3
+}
+
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    click_method clickfinger
+    drag_lock enabled
+    middle_emulation enabled
+    pointer_accel 0.5
+    tap enabled
+    tap_button_map lrm
+}
 
 # Output settings.
 output "*" bg ~/Pictures/solarwall.png fill
