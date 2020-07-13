@@ -185,6 +185,7 @@ for_window [class="jetbrains-*"] border none
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Zeal"] floating enable
 for_window [instance="vim-popup"] floating enable
+for_window [instance="Godot_Engine"] floating enable
 for_window [class="org.remmina.Remmina" title="Citadel"] fullscreen enable, move container to workspace 9:nine
 
 # Gaps settings.
@@ -225,7 +226,7 @@ seat seat0 xcursor_theme default 32
 
 exec {
     gsettings set org.gnome.desktop.interface gtk-theme 'Adapta-Nokto'
-    gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+    gsettings set org.gnome.desktop.interface icon-theme 'Vimix-Black-dark'
     gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
 
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
