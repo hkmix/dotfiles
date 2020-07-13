@@ -95,6 +95,7 @@ set mouse=a
 set nofoldenable
 set nohidden
 set nohlsearch
+set nojoinspaces
 set noshowmode
 set nospell
 set nottimeout
