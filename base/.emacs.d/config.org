@@ -58,36 +58,36 @@ Package list:
     (setq company-idle-delay 0.3)
     (setq company-tooltip-limit 10))
 
-  (use-package delight
+  (use-package dim
     :config
-    (delight
-     '((emacs-lisp-mode "EL" :major)
-       (lisp-interaction-mode "EL-I" :major)
-       ;; Minor modes.
-       (abbrev-mode nil abbrev)
-       (auto-revert-mode nil autorevert)
-       (column-enforce-mode nil column-enforce-mode)
-       (company-mode nil company)
-       (defining-kbd-macro " q..." t)
-       (dtrt-indent-mode nil dtrt-indent)
+    (dim-major-names
+     '((emacs-lisp-mode "EL")
+       (lisp-interaction-mode "EL-I")))
+    (dim-minor-names
+     '((abbrev-mode "" abbrev)
+       (auto-revert-mode "" autorevert)
+       (column-enforce-mode "" column-enforce-mode)
+       (company-mode "" company)
+       (defining-kbd-macro " q...")
+       (dtrt-indent-mode "" dtrt-indent)
 
-       (editorconfig-mode nil editorconfig)
-       (eldoc-mode nil eldoc)
-       (evil-commentary-mode nil evil-commentary)
+       (editorconfig-mode "" editorconfig)
+       (eldoc-mode "" eldoc)
+       (evil-commentary-mode "" evil-commentary)
        (flyspell-mode " fs" flyspell)
-       (git-gutter-mode nil git-gutter)
+       (git-gutter-mode "" git-gutter)
        (isend-mode " is" isend-mode)
-       (latex-preview-pane-mode nil latex-preview-pane)
+       (latex-preview-pane-mode "" latex-preview-pane)
        (lsp-mode " lsp" lsp-mode)
-       (org-src-mode nil org)
-       (pdf-view-midnight-minor-mode nil pdf-tools)
-       (flycheck-mode nil flycheck)
-       (projectile-mode nil projectile)
-       (undo-tree-mode nil undo-tree)
-       (visual-line-mode nil t)
-       (which-key-mode nil which-key)
-       (with-editor-mode nil with-editor)
-       (ws-butler-mode nil ws-butler))))
+       (org-src-mode "" org)
+       (pdf-view-midnight-minor-mode "" pdf-tools)
+       (flycheck-mode "" flycheck)
+       (projectile-mode "" projectile)
+       (undo-tree-mode "" undo-tree)
+       (visual-line-mode "" simple)
+       (which-key-mode "" which-key)
+       (with-editor-mode "" with-editor)
+       (ws-butler-mode "" ws-butler))))
 
   (use-package display-line-numbers
     :init
