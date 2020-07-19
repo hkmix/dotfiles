@@ -498,7 +498,6 @@ Functions should come after packages.
   ;; Editing area settings.
   (show-paren-mode t)
   (global-hl-line-mode t)
-  (setq scroll-margin 6)
 
   ;; Disable start-up screen.
   (setq inhibit-startup-screen t)
