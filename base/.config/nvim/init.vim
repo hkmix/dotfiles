@@ -253,7 +253,7 @@ nnoremap <Leader>re :diffget REMOTE<CR>
 " Plugin mappings.
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>gp :Gpush<CR>
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :G<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
