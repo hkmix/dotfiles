@@ -185,7 +185,7 @@ for_window [class="jetbrains-*"] border none
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Zeal"] floating enable
 for_window [app_id="vim-popup"] floating enable
-for_window [app_id="Godot_Engine"] floating enable
+for_window [instance="Godot_Engine"] floating enable
 for_window [app_id="org.remmina.Remmina" title="Citadel"] fullscreen enable, move container to workspace 9:nine
 
 # Gaps settings.
