@@ -210,7 +210,7 @@ input "2:10:TPPS/2_IBM_TrackPoint" {
 }
 
 input "2:7:SynPS/2_Synaptics_TouchPad" {
-    click_method clickfinger
+    click_method none
     drag_lock enabled
     middle_emulation enabled
     pointer_accel 0.5
