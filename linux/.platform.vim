@@ -1,6 +1,6 @@
 " Language server protocol.
 Plug 'ervandew/supertab'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 set signcolumn=yes
 
