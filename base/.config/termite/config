@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Iosevka Slab 10.5
+font = Iosevka Curly Slab 11
 scrollback_lines = 10000
 search_wrap = true
 

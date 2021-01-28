@@ -114,6 +114,8 @@ Package list:
     :defer t)
 
   (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
     :config
     (setq evil-vsplit-window-right t)
     (setq evil-split-window-below t)
@@ -218,10 +220,12 @@ Package list:
         (evil-leader/set-key-for-mode 'rust-mode
           "F"   'rust-enable-format-on-save
           "f"   'rust-format-buffer)))
+    (use-package evil-collection
+      :init
+      (setq evil-want-keybinding nil))
     (use-package evil-commentary
       :config
       (evil-commentary-mode))
-    (use-package evil-magit)
     (use-package evil-matchit
       :config
       (global-evil-matchit-mode 1))
@@ -479,7 +483,7 @@ Functions should come after packages.
         (add-to-frame-lists '(ns-transparent-titlebar . t))
         (add-to-frame-lists '(ns-appearance . dark))
         (defconst ns-use-proxy-icon nil))
-    (defconst default-font "Iosevka Slab-12"))
+    (defconst default-font "Iosevka Slab-14"))
   (set-face-attribute 'default nil :font default-font)
   (add-to-frame-lists (cons 'font default-font))
   (add-to-frame-lists '(height . 24))
