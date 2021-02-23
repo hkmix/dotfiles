@@ -206,7 +206,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 
 input "2:10:TPPS/2_IBM_TrackPoint" {
     accel_profile adaptive
-    pointer_accel -0.3
 }
 
 input "2:7:SynPS/2_Synaptics_TouchPad" {
