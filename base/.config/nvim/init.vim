@@ -28,17 +28,18 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-rooter'
-Plug 'calviken/vim-gdscript3'
+Plug 'calviken/vim-gdscript3', {'for': ['gdscript']}
+Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
+Plug 'hkmix/vim-colors-solarized-simple'
 Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install --no-update-rc'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex', {'for': ['tex']}
-Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'mhinz/vim-signify'
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
@@ -84,7 +85,6 @@ set complete-=1
 set completeopt=noinsert,menuone,noselect
 set cursorline
 set encoding=utf-8
-set foldmarker={{{{{,}}}}}
 set foldmethod=manual
 set ignorecase
 if has('nvim')
@@ -130,16 +130,14 @@ if has('gui_running')
     set guioptions-=mtTrRlLh
 end
 
-set termguicolors
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\  " Intentional trailing escaped space.
 let &showbreak = '↳ '
 
 " Solarized theme and tweaks.
-let g:solarized_extra_hi_groups = 1
-let g:solarized_termtrans = 1
-colorscheme solarized8
+let g:solarized_termtrans=1
+colorscheme solarized
 hi VertSplit guibg=#073642
 
 " Show non-ASCII characters.
@@ -368,4 +366,16 @@ if has('nvim')
     augroup END
 end
 
+" +--------------+
+" | Misc helpers |
+" +--------------+
+function! SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+nnoremap <silent> <Leader>cc :call SynStack()<CR>
+nnoremap <silent> <Leader>cs :colo solarized<CR>
+nnoremap <silent> <Leader>cT :so $VIMRUNTIME/syntax/hitest.vim<CR>
 " vim: sw=4
