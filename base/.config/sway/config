@@ -238,7 +238,7 @@ exec {
     gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
 
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
-    insync-headless start
+    insync start
     ibus-daemon -drx
 }
 
