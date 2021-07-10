@@ -33,9 +33,9 @@ Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'google/vim-searchindex'
-Plug 'hkmix/vim-colors-solarized-simple'
 Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
+Plug 'hkmix/vim-colors-solarized-simple'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install --no-update-rc'}
 Plug 'junegunn/vim-easy-align'
