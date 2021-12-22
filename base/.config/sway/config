@@ -245,7 +245,7 @@ exec {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:Iosevka Curly Slab, Font Awesome 5 Free Solid Bold 14
+    font pango:Iosevka Curly Slab, Font Awesome 5 Free Solid Bold 13.5
     tray_output none
     tray_padding 8
     status_command i3status
