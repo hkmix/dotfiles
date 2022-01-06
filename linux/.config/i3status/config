@@ -40,7 +40,7 @@ wireless _first_ {
 
 path_exists tun0 {
     path = "/proc/sys/net/ipv4/conf/tun0"
-    format = "  VPN"
+    format = "  up"
     format_down = ""
 }
 

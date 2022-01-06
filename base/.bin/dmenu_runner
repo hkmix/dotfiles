@@ -5,4 +5,4 @@ dmenu_run \
     -p "$" \
     -fn "Iosevka Curly Slab-Bold:size=12:bold" \
     -nb "#000000" -nf "#93a1a1" -sb "#b58900" -sf "#002b36"
-# rofi -show run -matching regex -font "Iosevka Slab Bold 14" -hide-scrollbar -disable-history -lines 5
+# rofi -show run -matching regex -font "Iosevka Slab Bold 12" -hide-scrollbar -disable-history -lines 5
