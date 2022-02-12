@@ -269,8 +269,8 @@ function! ToggleAutoformat()
         echo 'Autoformat disabled.'
     endif
 endfunction
-nmap <silent> gf :Autoformat<CR>
-nmap <silent> gF :call ToggleAutoformat()<CR>
+nmap <silent> <leader>gf :Autoformat<CR>
+nmap <silent> <leader>gF :call ToggleAutoformat()<CR>
 
 nnoremap <silent> gC gc
 nnoremap <silent> gc gC
