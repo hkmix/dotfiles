@@ -204,28 +204,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     repeat_rate 30
 }
 
-input "2:10:TPPS/2_IBM_TrackPoint" {
-    accel_profile adaptive
-}
-
-input "2:7:SynPS/2_Synaptics_TouchPad" {
-    click_method none
-    drag_lock enabled
-    middle_emulation enabled
-    pointer_accel 0.5
-    tap enabled
-    tap_button_map lrm
-}
-
-input "1739:52602:DLL08B0:01_06CB:CD7A_Touchpad" {
-    click_method clickfinger
-    middle_emulation enabled
-    drag_lock enabled
-    pointer_accel 0.4
-    tap enabled
-    tap_button_map lrm
-}
-
 input "1267:12734:MSFT0004:00_04F3:31BE_Touchpad" {
     click_method clickfinger
     middle_emulation enabled
