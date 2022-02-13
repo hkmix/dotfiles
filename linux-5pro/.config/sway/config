@@ -196,19 +196,20 @@ bindsym $mod+g gaps inner current set 4
 bindsym $mod+shift+g gaps inner current set 0
 
 # Input settings.
-input "1:1:AT_Translated_Set_2_keyboard" {
+input type:keyboard {
     xkb_layout "us"
     xkb_variant "hhkb_nobs"
     xkb_options "ctrl:nocaps"
+    xkb_numlock enabled
     repeat_delay 250
     repeat_rate 30
 }
 
-input "1267:12734:MSFT0004:00_04F3:31BE_Touchpad" {
+input type:touchpad {
     click_method clickfinger
     middle_emulation enabled
     drag_lock enabled
-    pointer_accel 0.4
+    pointer_accel 0.3
     tap enabled
     tap_button_map lrm
 }
