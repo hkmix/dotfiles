@@ -218,12 +218,13 @@ input type:touchpad {
 output "*" bg ~/Pictures/solarwall.png fill
 
 # Other settings.
-seat seat0 xcursor_theme default 32
+seat seat0 xcursor_theme Paper 32
 
 exec {
     gsettings set org.gnome.desktop.interface gtk-theme 'Adapta-Nokto'
-    gsettings set org.gnome.desktop.interface icon-theme 'Vimix-Black-dark'
-    gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
+    gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Paper'
+    gsettings set org.gnome.desktop.interface font-name 'Cantarell 12'
 
     mako
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
