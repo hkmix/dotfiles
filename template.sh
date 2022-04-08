@@ -15,11 +15,13 @@ fi
 vars_file="$1"
 source $vars_file
 
+valid_vars="$(env | grep jz_ | awk -F= '{ print "${" $1 "}" }' | xargs)"
+
 shift
 while [ $# -gt 0 ]; do
     file="$1"
     output_file="$(dirname "$file")/$(basename "$file" ".jztmpl")"
     echo "Expanding $file into $output_file"
-    envsubst < "$file" > "$output_file"
+    envsubst "$valid_vars" < "$file" > "$output_file"
     shift
 done

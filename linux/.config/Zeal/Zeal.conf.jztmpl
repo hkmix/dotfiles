@@ -8,12 +8,12 @@ start_minimized=true
 [content]
 custom_css_file=
 dark_mode=true
-default_fixed_font_size=12
+default_fixed_font_size=${jz_font_size_small}
 default_font_family=sans-serif
 default_font_size=14
 disable_ad=true
 external_link_policy=@Variant(\0\0\0\x7f\0\0\0)Zeal::Core::Settings::ExternalLinkPolicy\0\0\0\0\x1)
-fixed_font_family=Iosevka Term Slab
+fixed_font_family=${jz_font}
 highlight_on_navigate=true
 minimum_font_size=18
 sans_serif_font_family=Cantarell

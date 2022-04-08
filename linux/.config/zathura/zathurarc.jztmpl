@@ -1,4 +1,4 @@
-set font "Iosevka Slab 11"
+set font "${jz_font} ${jz_font_size_small}"
 
 set recolor-keephue true
 set recolor-reverse-video true

@@ -8,5 +8,5 @@ fi
 config_file="$1"
 shift
 
-find $@ -iname *.jztmpl -exec ./template.sh "$config_file" {} \;
+find $@ -iname *.jztmpl | xargs ./template.sh "$config_file"
 stow -v --no-folding --ignore='.*\.jztmpl' $@
