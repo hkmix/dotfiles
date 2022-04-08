@@ -23,5 +23,6 @@ while [ $# -gt 0 ]; do
     output_file="$(dirname "$file")/$(basename "$file" ".jztmpl")"
     echo "Expanding $file into $output_file"
     envsubst "$valid_vars" < "$file" > "$output_file"
+    test -x "$file" && chmod -v +x "$output_file"
     shift
 done
