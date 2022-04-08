@@ -124,12 +124,6 @@ endif
 " +------------+
 " | Appearance |
 " +------------+
-if has('gui_running')
-    set guifont=Iosevka-Slab:h16
-    set guicursor=n-v-c:blinkon0
-    set guioptions-=mtTrRlLh
-end
-
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\  " Intentional trailing escaped space.

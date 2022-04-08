@@ -1,3 +1,4 @@
+base/.bin/dmenu_runner
 linux/.config/alacritty/alacritty.yml
 linux/.config/i3/config
 linux/.config/mako/config
