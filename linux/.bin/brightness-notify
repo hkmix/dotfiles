@@ -1,0 +1,5 @@
+#!/bin/bash
+
+brightnessctl set "$@"
+current_pct=$(brightnessctl -m | cut -d',' -f 4)
+notify-send -a Brightness -h string:x-canonical-private-synchronous:brightness-notify Brightness "$current_pct"
