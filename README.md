@@ -4,7 +4,7 @@ Now organized with GNU Stow.
 
 ## Usage
 
-Avoid stowing files using `stow` directly, and use `stow.sh` in the repo instead as it will expand templates.
+Avoid stowing files using `stow` directly, and use `stower.sh` in the repo instead as it will expand templates.
 
 Run `update_gitignore.sh` to update the `.gitignore` file for templated files.
 
