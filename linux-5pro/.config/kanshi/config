@@ -1,8 +1,0 @@
-profile {
-    output eDP-1 mode 1920x1080 position 0,120
-    output "Dell Inc. DELL U2412M YMYH14AP11FS" mode 1920x1200 position 1920,0
-    exec swaymsg workspace 1:one, move workspace to output '"Dell Inc. DELL U2412M YMYH14AP11FS"'
-    exec swaymsg workspace 2:two, move workspace to output '"Dell Inc. DELL U2412M YMYH14AP11FS"'
-    exec swaymsg workspace 3:three, move workspace to eDP-1
-    exec swaymsg workspace 4:four, move workspace to eDP-1
-}
