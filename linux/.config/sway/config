@@ -246,6 +246,7 @@ exec {
     gsettings set org.gnome.desktop.interface icon-theme 'Vimix-Black-dark'
     gsettings set org.gnome.desktop.interface font-name 'Cantarell 12'
 
+    mako
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
     insync start
     ibus-daemon -drx
