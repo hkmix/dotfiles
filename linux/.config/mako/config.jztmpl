@@ -1,7 +1,7 @@
-font=Iosevka Curly Slab Semibold 12
+font=${jz_font_semibold} ${jz_font_size_small}
 background-color=#000000ee
 border-radius=5
-text-color=#93a1a1
+text-color=#${jz_solarized_base1}
 width=200
 border-size=0
 default-timeout=1500

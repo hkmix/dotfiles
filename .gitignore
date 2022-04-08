@@ -1,8 +1,1 @@
-# Ignore temp files.
-**/*.swp
-**/*.swo
-**/*~
-**/#*#
-
-# Ignore history files.
-**/.netrwhist
+linux/.config/mako/config
