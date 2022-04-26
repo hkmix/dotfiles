@@ -3,13 +3,13 @@
 # dmenu_run \
 #     -b -i \
 #     -p "$" \
-#     -fn "${jz_font}:size=${jz_font_size_small}:semibold" \
+#     -fn "${jz_font}:size=${jz_font_size_medium}:semibold" \
 #     -nb "#000000" -nf "#93a1a1" -sb "#b58900" -sf "#002b36"
 
 rofi \
     -show run \
     -matching regex \
-    -font "${jz_font_semibold} ${jz_font_size_small}" \
+    -font "${jz_font_semibold} ${jz_font_size_medium}" \
     -hide-scrollbar \
     -disable-history \
     -theme solarized \
