@@ -10,7 +10,7 @@ let g:coc_global_extensions = [
             \ 'coc-tsserver',
             \ 'coc-tslint-plugin',
             \ 'coc-rust-analyzer',
-            \ 'coc-python',
+            \ 'coc-pyright',
             \ 'coc-json',
             \ ]
 let g:coc_snippet_next="<TAB>"

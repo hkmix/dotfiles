@@ -223,10 +223,6 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <Leader><space> zz
 nnoremap n nzz
 nnoremap N Nzz

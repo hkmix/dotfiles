@@ -34,3 +34,8 @@ export jz_font_size_small='12'
 export jz_font_size_medium='14'
 export jz_font_size_large='16'
 export jz_font_size_xlarge='18'
+
+# +----------------+
+# | Other settings |
+# +----------------+
+export jz_bar_height='24'

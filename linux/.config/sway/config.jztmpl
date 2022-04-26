@@ -218,6 +218,7 @@ bar {
     font pango:${jz_font}, Font Awesome 6 Free Semibold ${jz_font_size_medium}
     tray_output none
     tray_padding 8
+    height ${jz_bar_height}
     status_command i3status
     strip_workspace_numbers yes
     separator_symbol "  "
