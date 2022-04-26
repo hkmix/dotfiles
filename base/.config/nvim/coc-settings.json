@@ -1,18 +1,29 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["json"],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json"
+    ],
     "diagnostic.checkCurrentLine": true,
     "diagnostic.warningSign": ">>",
-
-    "python.jediEnabled": false,
-
+    "rust-analyzer.inlayHints.enable": false,
     "eslint.quiet": true,
     "eslint.run": "onSave",
-
     "languageserver": {
         "ccls": {
             "command": "ccls",
-            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "filetypes": [
+                "c",
+                "cpp",
+                "cuda",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": ".ccls-cache"
