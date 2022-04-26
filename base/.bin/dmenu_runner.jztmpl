@@ -1,8 +1,16 @@
 #!/bin/bash
 
-dmenu_run \
-    -b -i \
-    -p "$" \
-    -fn "${jz_font}:size=${jz_font_size_small}:semibold" \
-    -nb "#000000" -nf "#93a1a1" -sb "#b58900" -sf "#002b36"
-# rofi -show run -matching regex -font "${jz_font_semibold} ${jz_font_size_small}" -hide-scrollbar -disable-history -lines 5
+# dmenu_run \
+#     -b -i \
+#     -p "$" \
+#     -fn "${jz_font}:size=${jz_font_size_small}:semibold" \
+#     -nb "#000000" -nf "#93a1a1" -sb "#b58900" -sf "#002b36"
+
+rofi \
+    -show run \
+    -matching regex \
+    -font "${jz_font_semibold} ${jz_font_size_small}" \
+    -hide-scrollbar \
+    -disable-history \
+    -theme solarized \
+    -lines 5
