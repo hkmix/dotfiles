@@ -50,7 +50,8 @@ export FZF_DEFAULT_OPTS='
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 # Other settings.
-export EDITOR=vim
+export VISUAL=vim
+export EDITOR=${VISUAL}
 export WORDCHARS='_'
 export GPG_TTY=$(tty)
 
