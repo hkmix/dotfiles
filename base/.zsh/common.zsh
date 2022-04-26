@@ -52,6 +52,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 # Other settings.
 export EDITOR=vim
 export WORDCHARS='_'
+export GPG_TTY=$(tty)
 
 # Aliases.
 alias bc="bc -l"
