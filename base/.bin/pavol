@@ -18,6 +18,15 @@ percent() {
 
 notify() {
     sink=$(pamixer --get-default-sink | tail -n1 | cut -f3- -d' ' | tr -d '"')
+    case "$sink" in
+        *Anker\ Lightning*)
+            sink="Audeze LCD-i4"
+            ;;
+        *Speaker*)
+            sink="Speakers"
+            ;;
+    esac
+
     muted=""
     if [[ "$(pamixer --get-mute)" == "true" ]]; then
         muted=" (muted)"
