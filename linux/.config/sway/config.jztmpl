@@ -197,6 +197,10 @@ bindsym $mod+shift+g gaps inner current set 0
 
 ${jz_sway_config_extra}
 
+input "type:pointer" {
+    accel_profile flat
+}
+
 # Other settings.
 seat seat0 xcursor_theme default 32
 
