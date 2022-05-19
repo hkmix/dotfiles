@@ -1,8 +1,8 @@
-font=${jz_font_semibold} ${jz_font_size_small}
+font=${jz_font_sans} ${jz_font_size_medium}
 background-color=#000000ee
 border-radius=5
 text-color=#${jz_solarized_base1}
-width=300
+width=400
 border-size=0
 default-timeout=1500
 anchor=top-right

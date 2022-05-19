@@ -17,11 +17,14 @@ percent() {
 }
 
 notify() {
+    sink=$(pamixer --get-default-sink | tail -n1 | cut -f3- -d' ' | tr -d '"')
     muted=""
     if [[ "$(pamixer --get-mute)" == "true" ]]; then
         muted=" (muted)"
     fi
-    notify-send -a Volume -h string:x-canonical-private-synchronous:pavol Volume "$(percent)%$muted"
+    notify-send -a Volume -h string:x-canonical-private-synchronous:pavol \
+        "Volume" \
+        "$(percent)%$muted\n$sink"
 }
 
 case "$1" in
