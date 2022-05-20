@@ -28,6 +28,7 @@ bindsym $mod+F1 exec thunar
 bindsym Print exec grimshot save screen
 bindsym Shift+Print exec grimshot save area
 bindsym $mod+Print exec grimshot save window
+bindsym $mod+Shift+s exec grimshot copy area
 
 # media
 bindsym XF86AudioLowerVolume exec --no-startup-id pavol minus
@@ -40,12 +41,8 @@ bindsym XF86Launch5 exec --no-startup-id exec brightness-notify 3%-
 bindsym XF86Launch6 exec --no-startup-id exec brightness-notify 3%+
 bindsym $mod+z exec --no-startup-id exec brightness-notify 3%-
 bindsym $mod+x exec --no-startup-id exec brightness-notify 3%+
-
-bindsym $mod+F6 exec --no-startup-id exec brightness-notify 3%-
-bindsym $mod+F7 exec --no-startup-id exec brightness-notify 3%+
-bindsym $mod+F8 exec --no-startup-id pavol mute
-bindsym $mod+F9 exec --no-startup-id pavol minus
-bindsym $mod+F10 exec --no-startup-id pavol plus
+bindsym $mod+Shift+z exec --no-startup-id exec pavol minus
+bindsym $mod+Shift+x exec --no-startup-id exec pavol plus
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec /home/jackzhou/.bin/dmenu_runner
