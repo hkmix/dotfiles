@@ -1,11 +1,11 @@
 #!/bin/bash
 
 plus() {
-    pamixer -i 5
+    pamixer -i 3
 }
 
 minus() {
-    pamixer -d 5
+    pamixer -d 3
 }
 
 mute() {

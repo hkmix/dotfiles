@@ -25,6 +25,7 @@ bindsym $mod+q kill
 bindsym $mod+Escape exec lockscreen
 bindsym XF86Tools exec lockscreen
 bindsym $mod+F1 exec thunar
+bindsym $mod+F2 exec pavucontrol
 bindsym Print exec grimshot save screen
 bindsym Shift+Print exec grimshot save area
 bindsym $mod+Print exec grimshot save window
