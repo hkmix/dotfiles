@@ -12,7 +12,7 @@ export EDITOR=vim
 
 # Misc appearance settings.
 export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME='qt6ct'
 
 [[ -f ~/.zsh/common_post.zsh ]] && source ~/.zsh/common_post.zsh
 
@@ -20,4 +20,4 @@ export QT_QPA_PLATFORMTHEME='qt5ct'
 [[ $- == *i* ]] && stty -ixon
 
 # Start X
-[[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec sway
+[[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec startx i3

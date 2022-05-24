@@ -9,9 +9,9 @@ Xft.antialias: true
 Xft.rgba:      none
 Xft.hinting:   true
 Xft.hintstyle: hintslight
-Xft.dpi:       96
+Xft.dpi:       ${jz_x11_dpi}
 
-Xcursor.size:  32
+Xcursor.size:  ${jz_x11_cursor_size}
 
 rofi.color-enabled: true
 rofi.color-window: #002b36, #93a1a1, #003642

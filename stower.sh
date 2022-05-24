@@ -10,3 +10,4 @@ shift
 
 find $@ -iname *.jztmpl | xargs ./template.sh "$config_file"
 stow -v --no-folding --ignore='.*\.jztmpl' $@
+./update_gitignore.sh

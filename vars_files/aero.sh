@@ -17,12 +17,16 @@ this_dir="$(dirname "$this_script")"
 # | End preamble |
 # +--------------+
 
+dpi_scale=1.5
+
 export jz_font_size_small='11'
 export jz_font_size_medium='13'
 export jz_font_size_large='15'
 export jz_font_size_xlarge='17'
 
 export jz_bar_height='32'
+export jz_x11_dpi=$(calc -p "$dpi_scale * 96")
+export jz_x11_cursor_size=$(calc -p "$dpi_scale * 32")
 
 export jz_sway_config_extra=$(cat <<-ENDJZVAR
 # Input settings.

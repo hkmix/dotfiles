@@ -1,5 +1,7 @@
 base/.bin/dmenu_runner
+base/.bin/dmenu_runner_x11
 linux/.config/alacritty/alacritty.yml
+linux/.config/dunst/dunstrc
 linux/.config/i3/config
 linux/.config/mako/config
 linux/.config/qterminal.org/qterminal.ini
@@ -7,3 +9,4 @@ linux/.config/sway/config
 linux/.config/termite/config
 linux/.config/zathura/zathurarc
 linux/.config/Zeal/Zeal.conf
+linux/.Xresources
