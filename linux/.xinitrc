@@ -19,5 +19,6 @@ check_run ~/.fehbg &
 check_run dunst &
 check_run redshift -l 43.5:-80 -t 6500K:3500K &
 check_run solaar -w hide &
+check_run picom &
 
 exec i3
