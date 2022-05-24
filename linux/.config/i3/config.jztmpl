@@ -36,6 +36,7 @@ bindsym $mod+q kill
 bindsym $mod+Escape exec lockscreen
 bindsym XF86Tools exec lockscreen
 bindsym $mod+F1 exec thunar
+bindsym $mod+F2 exec pavucontrol
 bindsym Print exec scrot-full
 bindsym Shift+Print exec scrot-win
 
