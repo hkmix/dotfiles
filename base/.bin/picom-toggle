@@ -1,0 +1,63 @@
+#!/bin/bash
+
+notify() {
+    notify-send \
+        -a "Picom Toggle" \
+        -h string:x-canonical-private-synchronous:picom-notify \
+        "$@"
+}
+
+picom_status() {
+    pgrep -x picom >/dev/null 2>&1 && echo on || echo off
+}
+
+picom_off() {
+    local _status=$(picom_status)
+    if [[ $_status == "off" ]]; then
+        notify "Picom already off"
+        return
+    fi
+
+    local _output=$(pkill -x picom)
+    if [[ $? -ne 0 ]]; then
+        notify "Error: $_output"
+    else
+        notify "Picom toggled off"
+    fi
+}
+
+picom_on() {
+    local _status=$(picom_status)
+    if [[ $_status == "on" ]]; then
+        notify "Picom already on"
+        return
+    fi
+
+    picom & disown
+    if [[ $? -ne 0 ]]; then
+        notify "Error: $_output"
+    else
+        notify "Picom toggled on"
+    fi
+}
+
+picom_toggle() {
+    local _status=$(picom_status)
+    if [[ $_status == "on" ]]; then
+        picom_off
+    else
+        picom_on
+    fi
+}
+
+case "$1" in
+    off)
+        picom_off
+        ;;
+    on)
+        picom_on
+        ;;
+    *)
+        picom_toggle
+        ;;
+esac
