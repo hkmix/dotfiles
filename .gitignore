@@ -1,5 +1,6 @@
 base/.bin/dmenu_runner
 base/.bin/dmenu_runner_x11
+base/.bin/lockscreen-x11
 linux/.config/alacritty/alacritty.yml
 linux/.config/dunst/dunstrc
 linux/.config/i3/config

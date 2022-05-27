@@ -40,4 +40,5 @@ export jz_font_size_xlarge='18'
 # +----------------+
 export jz_x11_dpi='96'
 export jz_x11_cursor_size='32'
+export jz_wallpaper_file='solarwall.png'
 export jz_bar_height='24'

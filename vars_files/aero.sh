@@ -27,6 +27,7 @@ export jz_font_size_xlarge='17'
 export jz_bar_height='32'
 export jz_x11_dpi=$(calc -p "$dpi_scale * 96")
 export jz_x11_cursor_size=$(calc -p "$dpi_scale * 32")
+export jz_wallpaper_file='solarwall_1600p.png'
 
 export jz_sway_config_extra=$(cat <<-ENDJZVAR
 # Input settings.
