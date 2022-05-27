@@ -33,12 +33,13 @@ floating_modifier $mod
 # key bindings
 bindsym $mod+Return exec $terminal
 bindsym $mod+q kill
-bindsym $mod+Escape exec lockscreen
-bindsym XF86Tools exec lockscreen
+bindsym $mod+Escape exec lockscreen-x11
+bindsym XF86Tools exec lockscreen-x11
 bindsym $mod+F1 exec thunar
 bindsym $mod+F2 exec pavucontrol
-bindsym Print exec scrot-full
-bindsym Shift+Print exec scrot-win
+bindsym Print exec --no-startup-id scrot-full
+bindsym Shift+Print exec --no-startup-id scrot-win
+bindsym $mod+Print exec --no-startup-id partial-shot
 
 # media
 bindsym XF86AudioLowerVolume exec --no-startup-id pavol minus
