@@ -24,3 +24,5 @@
 	rebase = false
 [advice]
 	statusHints = false
+[gpg]
+	program = fugitive-gpg
