@@ -39,7 +39,7 @@ bindsym $mod+F1 exec thunar
 bindsym $mod+F2 exec pavucontrol
 bindsym Print exec --no-startup-id scrot-full
 bindsym Shift+Print exec --no-startup-id scrot-win
-bindsym $mod+Print exec --no-startup-id partial-shot
+bindsym $mod+Shift+s exec --no-startup-id partial-shot
 
 # media
 bindsym XF86AudioLowerVolume exec --no-startup-id pavol minus
