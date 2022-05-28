@@ -3,7 +3,7 @@ set $terminal alacritty
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:${jz_font_alt_bold} ${jz_font_size_small}
+font pango:${jz_font_sans_bold} ${jz_font_size_xsmall}
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -174,7 +174,7 @@ client.urgent           #b58900 #b58900 #eee8d5 #b58900
 
 # Other settings.
 default_border pixel 3
-default_floating_border normal
+default_floating_border pixel 1
 focus_follows_mouse no
 
 # Application-specific settings.

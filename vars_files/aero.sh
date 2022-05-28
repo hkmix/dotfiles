@@ -19,6 +19,7 @@ this_dir="$(dirname "$this_script")"
 
 dpi_scale=1.5
 
+export jz_font_size_xsmall='9'
 export jz_font_size_small='11'
 export jz_font_size_medium='13'
 export jz_font_size_large='15'
