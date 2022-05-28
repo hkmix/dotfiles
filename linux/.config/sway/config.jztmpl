@@ -1,5 +1,6 @@
 set $mod Mod4
 set $terminal alacritty
+set $explorer nautilus
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -24,7 +25,7 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+q kill
 bindsym $mod+Escape exec lockscreen
 bindsym XF86Tools exec lockscreen
-bindsym $mod+F1 exec thunar
+bindsym $mod+F1 exec $explorer
 bindsym $mod+F2 exec pavucontrol
 bindsym Print exec grimshot save screen
 bindsym Shift+Print exec grimshot save area
