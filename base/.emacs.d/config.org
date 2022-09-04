@@ -9,31 +9,6 @@
 
 * Packages
 
-Initialize:
-
-#+BEGIN_SRC emacs-lisp
-  ;; Initialize packaging.
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
-
-  ;; Always download packages if needed.
-  (setq straight-use-package-by-default t)
-
-  (straight-use-package 'use-package)
-  (eval-when-compile (require 'use-package))
-  (require 'bind-key)
-#+END_SRC
-
 Package list:
 
 #+NAME: General plugins
@@ -305,6 +280,7 @@ Package list:
         (flycheck-mode . flycheck-pos-tip-mode)))
     (use-package yasnippet)
     :config
+    (setq lsp-warn-no-matched-clients nil)
     (use-package ccls
       :init
       (setq ccls-executable "/usr/bin/ccls"))
@@ -600,7 +576,6 @@ Functions should come after packages.
               (80-column-rule)))
 
   ;; Org-mode key bindings.
-  (require 'org)
   (add-hook 'org-mode-hook
             (lambda ()
               (local-set-key (kbd "C-c l") 'org-store-link)
@@ -682,7 +657,6 @@ Functions should come after packages.
 * Org-mode
 
 #+BEGIN_SRC emacs-lisp
-  (require 'org)
   (require 'ox-latex)
 
   ;; General appearance.

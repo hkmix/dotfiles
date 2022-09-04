@@ -4,8 +4,30 @@
 
 ;;; Code:
 
+;; Bootstrap straight.el.
+(defvar bootstrap-version)
+(let ((bootstrap-file
+        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+    (bootstrap-version 5))
+(unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+(load bootstrap-file nil 'nomessage))
+
+;; Always download packages if needed.
+(setq straight-use-package-by-default t)
+
+;; Configure use-package to reroute to straight.el.
+(straight-use-package 'org)
+(straight-use-package 'use-package)
+(eval-when-compile (require 'use-package))
+(require 'bind-key)
+
 ;; Load configuration
-(require 'org)
 (setq vc-follow-symlinks t)
 (org-babel-load-file
  (expand-file-name (concat user-emacs-directory "config.org")))
