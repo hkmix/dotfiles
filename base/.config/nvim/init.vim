@@ -127,6 +127,8 @@ endif
 set background=dark
 set colorcolumn=80,100
 set fillchars=vert:\  " Intentional trailing escaped space.
+set listchars=tab:>\  " Intentional trailing escaped space.
+set list
 let &showbreak = '↳ '
 
 " Solarized theme and tweaks.
