@@ -1,10 +1,11 @@
 #!/bin/sh
 
+_block_header='HHKB XKB BLOCK'
 _target_file=/usr/share/X11/xkb/symbols/us
 
-grep -o 'BEGIN XKB BLOCK' $_target_file >/dev/null && echo "Nothing to be done." || sudo cat >>$_target_file <<EOF
+grep -o "$_block_header" "$_target_file" >/dev/null && echo "Nothing to be done." || sudo cat >>"$_target_file" <<EOF
 
-// BEGIN XKB BLOCK.
+// BEGIN $_block_header
 partial modifier_keys
 xkb_symbols "hhkb" {
     include "us(basic)"
@@ -25,5 +26,5 @@ xkb_symbols "hhkb_nobs" {
                  symbols[Group1] = [ Super_L ] };
     key <LWIN> { [ Alt_L, Meta_L ] };
 };
-// END XKB BLOCK.
+// END $_block_header
 EOF
