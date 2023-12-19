@@ -50,6 +50,7 @@ input "1267:12725:ELAN074E:00_04F3:31B5_Touchpad" {
 
 # Output settings.
 output "*" bg ~/Pictures/solarwall.png fill
+output "*" adaptive_sync on
 
 output "eDP-1" {
     scale 1.5
