@@ -211,7 +211,7 @@ exec {
     mako
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
     insync start
-    ibus-daemon -drx
+    # IBus start with ibus-autostart/systemd job.
     kanshi
     solaar -w hide
 }
