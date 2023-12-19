@@ -52,6 +52,12 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
+if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'nvim-treesitter/playground'
+endif
+
 " Platform-specific plugins.
 let s:platform_rc = '~/.platform.vim'
 if !empty(glob(s:platform_rc))
@@ -367,7 +373,26 @@ function! SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-nnoremap <silent> <Leader>cc :call SynStack()<CR>
+if has('nvim')
+    nnoremap <silent> <Leader>cc :Inspect<CR>
+else
+    nnoremap <silent> <Leader>cc :call SynStack()<CR>
+endif
 nnoremap <silent> <Leader>cs :colo solarized<CR>
 nnoremap <silent> <Leader>cT :so $VIMRUNTIME/syntax/hitest.vim<CR>
+
+" +------------+
+" | Treesitter |
+" +------------+
+if has('nvim') && !&diff
+    lua require'nvim-treesitter.configs'.setup {
+                \ highlight = { enable = true },
+                \ indent = { enable = true },
+                \ playground = { enable = true }
+                \ }
+    lua require'treesitter-context'.setup {
+                \ mode = 'topline',
+                \ }
+endif
+
 " vim: sw=4

@@ -21,3 +21,4 @@ export QT_QPA_PLATFORMTHEME='qt6ct'
 
 # Start X
 [[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec startx i3
+[[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 2 && -z $TMUX ]] && exec sway
