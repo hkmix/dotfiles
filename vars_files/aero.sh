@@ -34,7 +34,7 @@ export jz_sway_config_extra=$(cat <<-ENDJZVAR
 # Input settings.
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "us"
-    xkb_variant "hhkb_nobs"
+    xkb_variant "hhkb"
     xkb_options "ctrl:nocaps"
     repeat_delay 250
     repeat_rate 30

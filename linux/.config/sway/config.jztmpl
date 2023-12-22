@@ -204,8 +204,9 @@ input "type:pointer" {
 seat seat0 xcursor_theme default 32
 
 exec {
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adapta-Nokto'
-    gsettings set org.gnome.desktop.interface icon-theme 'Vimix-Black-dark'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'Paper'
     gsettings set org.gnome.desktop.interface font-name '${jz_font_sans} ${jz_font_size_small}'
 
     mako
