@@ -1,7 +1,7 @@
 base/.bin/dmenu_runner
 base/.bin/dmenu_runner_x11
 base/.bin/lockscreen-x11
-linux/.config/alacritty/alacritty.yml
+linux/.config/alacritty/alacritty.toml
 linux/.config/dunst/dunstrc
 linux/.config/gtk-3.0/settings.ini
 linux/.config/i3/config
