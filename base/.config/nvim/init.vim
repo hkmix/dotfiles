@@ -28,6 +28,7 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-rooter'
+Plug 'aymericbeaumet/vim-symlink'
 Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
@@ -42,6 +43,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript', 'php']}
 Plug 'mhinz/vim-signify'
+Plug 'moll/vim-bbye'
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
