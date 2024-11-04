@@ -28,7 +28,6 @@ let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-rooter'
-Plug 'calviken/vim-gdscript3', {'for': ['gdscript']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'editorconfig/editorconfig-vim'
@@ -37,6 +36,7 @@ Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
 Plug 'hkmix/vim-colors-solarized-simple'
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-qfedit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install --no-update-rc'}
 Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex', {'for': ['tex']}
