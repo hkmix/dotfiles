@@ -24,8 +24,8 @@ order += "tztime date"
 order += "tztime local"
 
 volume master {
-    format = "  %volume"
-    format_muted = "  %volume (muted)"
+    format = "  %volume"
+    format_muted = "  %volume (muted)"
 }
 
 ethernet _first_ {
@@ -60,5 +60,5 @@ tztime date {
 }
 
 tztime local {
-    format = "  %-l:%M %p "
+    format = " %-l:%M %p "
 }

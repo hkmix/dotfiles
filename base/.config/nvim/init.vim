@@ -36,7 +36,6 @@ Plug 'google/vim-searchindex'
 Plug 'hkmix/jzwiki.vim'
 Plug 'hkmix/vim-closer'
 Plug 'hkmix/vim-colors-solarized-simple'
-Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-qfedit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install --no-update-rc'}
 Plug 'junegunn/vim-easy-align'
@@ -57,7 +56,9 @@ Plug 'wellle/targets.vim'
 if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
-    Plug 'nvim-treesitter/playground'
+    Plug 'nvim-lualine/lualine.nvim'
+else
+    Plug 'itchyny/lightline.vim'
 endif
 
 " Platform-specific plugins.
@@ -383,15 +384,30 @@ endif
 nnoremap <silent> <Leader>cs :colo solarized<CR>
 nnoremap <silent> <Leader>cT :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
+" +---------+
+" | lualine |
+" +---------+
+if has('nvim')
+    lua require'lualine'.setup {
+                \ options = {
+                \   icons_enabled = false,
+                \   theme = 'solarized_dark',
+                \   section_separators = '',
+                \   component_separators = {
+                \     left = '|',
+                \     right = '|',
+                \   },
+                \ },
+                \ sections = {
+                \   lualine_b = {'branch', 'diagnostics'},
+                \ }
+                \ }
+endif
+
 " +------------+
 " | Treesitter |
 " +------------+
 if has('nvim') && !&diff
-    lua require'nvim-treesitter.configs'.setup {
-                \ highlight = { enable = true },
-                \ indent = { enable = true },
-                \ playground = { enable = true }
-                \ }
     lua require'treesitter-context'.setup {
                 \ mode = 'topline',
                 \ }

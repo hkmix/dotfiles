@@ -21,9 +21,9 @@ dpi_scale=1.5
 
 export jz_font_size_xsmall='9'
 export jz_font_size_small='11'
-export jz_font_size_medium='13'
-export jz_font_size_large='15'
-export jz_font_size_xlarge='17'
+export jz_font_size_medium='12'
+export jz_font_size_large='14'
+export jz_font_size_xlarge='16'
 
 export jz_bar_height='32'
 export jz_x11_dpi=$(calc -p "$dpi_scale * 96")
