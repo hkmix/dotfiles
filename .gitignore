@@ -8,6 +8,7 @@ linux/.config/gtk-3.0/settings.ini
 linux/.config/i3/config
 linux/.config/mako/config
 linux/.config/qterminal.org/qterminal.ini
+linux/.config/rofi/config.rasi
 linux/.config/sway/config
 linux/.config/termite/config
 linux/.config/zathura/zathurarc
