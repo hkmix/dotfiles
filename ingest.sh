@@ -5,6 +5,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
+file_suffix=$(test $(basename "$0") = "ingest_as_jztmpl.sh" && echo ".jztmpl" || echo "")
 config_dir="$1"
 shift
 
@@ -29,5 +30,7 @@ for file in "$@"; do
         echo "Warning: $file is a symlink, copying as-is." >&2
     fi
 
-    cp -v "$file" "$current_dir/$config_dir/$(realpath -s --relative-to "$HOME" "$file")"
+    copied_path="$current_dir/$config_dir/$(realpath -s --relative-to "$HOME" "$file")$file_suffix"
+    mkdir -p "$(dirname "$copied_path")"
+    cp -v "$file" "$copied_path"
 done
