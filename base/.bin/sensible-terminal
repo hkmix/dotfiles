@@ -1,0 +1,14 @@
+#!/bin/sh
+
+try_next() {
+    command -v $1 >/dev/null 2>&1 && exec $1
+}
+
+try_next ghostty
+try_next alacritty
+try_next urxvt
+try_next gnome-terminal
+try_next xterm
+
+echo "No sensible terminal found, aborting" >&2
+exit 1

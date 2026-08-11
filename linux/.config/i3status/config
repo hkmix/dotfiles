@@ -53,6 +53,7 @@ battery all {
     status_bat = " ~"
     status_unk = "="
     status_full = "="
+    status_idle = "="
 }
 
 tztime date {
@@ -60,5 +61,5 @@ tztime date {
 }
 
 tztime local {
-    format = " %-l:%M %p "
+    format = "  %-l:%M %p "
 }
