@@ -242,3 +242,6 @@ bar {
         binding_mode       #000000 #000000 #eee8d5
     }
 }
+
+# Required to ensure that vars such as the portal are set up correctly.
+include /etc/sway/config.d/*
