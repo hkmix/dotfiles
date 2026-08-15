@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -euo pipefail
+
 if [ $# -lt 2 ]; then
     echo "Usage: $0 config_dir file_or_dir [file_or_dir ...]" >&2
     exit 1
@@ -32,5 +34,6 @@ for file in "$@"; do
 
     copied_path="$current_dir/$config_dir/$(realpath -s --relative-to "$HOME" "$file")$file_suffix"
     mkdir -p "$(dirname "$copied_path")"
-    cp -v "$file" "$copied_path"
+    mv -v "$file" "$copied_path"
+    ln -sv "$copied_path" "$file"
 done

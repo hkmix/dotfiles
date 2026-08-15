@@ -20,5 +20,5 @@ export QT_QPA_PLATFORMTHEME='qt6ct'
 [[ $- == *i* ]] && stty -ixon
 
 # Start WM.
-[[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && WLR_DRM_NO_ATOMIC=1 exec sway
+[[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 1 && -z $TMUX ]] && exec sway
 [[ -z $DISPLAY && -z $WAYLAND_DISPLAY && $XDG_VTNR -eq 2 && -z $TMUX ]] && exec startx i3

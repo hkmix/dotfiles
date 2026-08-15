@@ -1,5 +1,17 @@
 profile {
-    output eDP-1 disable
+    output "AU Optronics 0x329F Unknown"
     output "DO NOT USE - RTK NG16UFG-S 0x00000101" mode 2560x1600 position 0,0 scale 1.25
+
     exec swaymsg workspace 1:one, move workspace to output '"DO NOT USE - RTK NG16UFG-S 0x00000101"'
+}
+
+profile {
+    output "AU Optronics 0x329F Unknown" position 0,2304
+    output "LG Electronics LG SDQHD 206NTEP1C412" mode 2560x2880 position 0,0 scale 1.25
+
+    exec swaymsg workspace 1:one, move workspace to output '"LG Electronics LG SDQHD 206NTEP1C412"'
+}
+
+profile {
+    output "LG Electronics LG SDQHD 206NTEP1C412" mode 2560x2880 scale 1.25
 }
