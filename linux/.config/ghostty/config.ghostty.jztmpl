@@ -5,6 +5,9 @@ shell-integration-features=no-cursor
 bold-color=bright
 adjust-cell-width=-1
 resize-overlay=never
+window-decoration=none
+copy-on-select=clipboard
+app-notifications=no-clipboard-copy
 
 background=002b36
 foreground=839496
