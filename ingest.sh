@@ -33,7 +33,11 @@ for file in "$@"; do
     fi
 
     copied_path="$current_dir/$config_dir/$(realpath -s --relative-to "$HOME" "$file")$file_suffix"
+    linked_path="$(realpath -s --relative-to "$(dirname $file)" $copied_path)"
     mkdir -p "$(dirname "$copied_path")"
     mv -v "$file" "$copied_path"
-    ln -sv "$copied_path" "$file"
+
+    if test -n "$file_suffix"; then
+        ln -sv "$linked_path" "$file"
+    fi
 done
