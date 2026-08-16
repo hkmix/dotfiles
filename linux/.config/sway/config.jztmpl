@@ -23,7 +23,7 @@ floating_modifier $mod
 # key bindings
 bindsym $mod+Return exec $terminal
 bindsym $mod+q kill
-bindsym $mod+Escape exec lockscreen
+bindsym $mod+Escape exec systemctl suspend
 bindsym XF86Tools exec lockscreen
 bindsym $mod+F1 exec $explorer
 bindsym $mod+F2 exec pavucontrol
@@ -212,11 +212,15 @@ exec {
     gsettings set org.gnome.desktop.interface icon-theme 'Paper'
     gsettings set org.gnome.desktop.interface font-name '${jz_font_sans} ${jz_font_size_small}'
 
+    # Core.
     mako
+    swayidle -w
+    kanshi
+
+    # Auxiliary.
     redshift -m wayland -l 43.5:-80 -t 6500K:3500K
     insync start
     fcitx5 -d
-    kanshi
 }
 
 exec_always {

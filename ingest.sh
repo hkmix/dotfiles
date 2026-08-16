@@ -37,7 +37,7 @@ for file in "$@"; do
     mkdir -p "$(dirname "$copied_path")"
     mv -v "$file" "$copied_path"
 
-    if test -n "$file_suffix"; then
+    if ! test -n "$file_suffix"; then
         ln -sv "$linked_path" "$file"
     fi
 done
