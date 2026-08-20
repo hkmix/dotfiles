@@ -48,6 +48,10 @@ input "1267:12725:ELAN074E:00_04F3:31B5_Touchpad" {
     tap_button_map lrm
 }
 
+# Laptop lid.
+bindswitch lid:on output eDP-1 enable
+bindswitch lid:off output eDP-1 disable
+
 # Output settings.
 output "*" bg ~/Pictures/solarwall.png fill
 output "*" adaptive_sync on
